@@ -43,13 +43,6 @@ before_install:
       export R_RSP_COMPILELATEX_FALLBACK="copy-force";
     fi
 
-install:
-
-
-
-
-
-
 
 script:
   - $RENV run_build
