@@ -1,0 +1,9 @@
+Package: globals
+================
+
+Version: 0.2.0 [2015-05-19]
+o Moved globals function from an in-house package to this package.
+
+
+Version: 0.1.0 [2015-02-07]
+o Created.
