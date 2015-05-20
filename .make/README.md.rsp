@@ -92,6 +92,11 @@ coveralls <- function() {
   if (!file.exists(".coveralls.R")) return("")
   sprintf('<a href="https://coveralls.io/r/%s"><img src="https://coveralls.io/repos/%s/badge.png?branch=develop" alt="Coverage Status"/></a>', github_repos(), github_repos())
 }
+
+codecov <- function() {
+  if (!file.exists(".coveralls.R")) return("")
+  sprintf('<a href="http://codecov.io/github/%s?branch=develop"><img src="http://codecov.io/github/%s/coverage.svg?branch=develop" alt="Coverage Status"/></a>', github_repos(), github_repos())
+}
 %>
 # <%=pkg()%>: <%=pkg_title()%>
 
@@ -124,4 +129,4 @@ source('http://callr.org/install#<%=github_repos()%>')
 | ------------- | ------------------- | ---------------- | ---------------- |
 | _Platforms:_  | _Multiple_          | _Linux_          | _Windows_        |
 | R CMD check   | <%=repos_status()%> | <%=travis()%>    | <%=appveyor() %> |
-| Test coverage |                     | <%=coveralls()%> |                  |
+| Test coverage |                     | <%=codecov()%>   |                  |
