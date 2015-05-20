@@ -62,7 +62,7 @@ square <- function(x) x^2
 filename <- "index.html"
 # Yes, pretend we forget 'url'
 
-message("Find for globals")
+message("Find globals")
 for (kk in seq_along(exprs)) {
   key <- names(exprs)[kk]
   expr <- exprs[[key]]
@@ -82,6 +82,9 @@ for (kk in seq_along(exprs)) {
 
   cat("\n")
 }
+
+names <- findGlobals(exprs, unlist=TRUE)
+cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse=", ")))
 
 
 ## Cleanup
