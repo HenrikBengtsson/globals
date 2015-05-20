@@ -1,6 +1,6 @@
 findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, unlist=TRUE) {
   if (is.list(expr)) {
-    names <- lapply(expr, FUN=findGlobals, envir=envir, ...)
+    names <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, unlist=FALSE)
     if (unlist) {
       names <- unlist(names, use.names=TRUE)
       names <- sort(unique(names))
