@@ -43,6 +43,9 @@ before_install:
       export R_RSP_COMPILELATEX_FALLBACK="copy-force";
     fi
 
+install:
+ - $RENV install_r R.methodsS3
+
 
 script:
   - $RENV run_build
