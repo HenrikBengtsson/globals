@@ -1,5 +1,5 @@
 Package: globals
-Version: 0.2.0
+Version: 0.2.0-9000
 Depends:
   R (>= 3.1.2)
 Imports:
@@ -8,7 +8,7 @@ Title: Identify Global Objects in R Expressions
 Authors@R: c(
   person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
          email="henrikb@braju.com"))
-Description: Identifies global ("unknown") variables and objects in R expressions by code inspection. 
+Description: Identifies global ("unknown") variables and objects in R expressions by code inspection.
 License: LGPL (>= 2.1)
 LazyLoad: TRUE
 ByteCompile: TRUE
