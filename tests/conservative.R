@@ -69,12 +69,12 @@ for (kk in seq_along(exprs)) {
   cat(sprintf("Expression #%d ('%s'):\n", kk, key))
   print(expr)
 
-  names <- findGlobals(expr)
+  names <- findGlobals(expr, method="conservative")
   cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse=", ")))
   stopifnot(all(atleast[[key]] %in% names))
   stopifnot(!any(names %in% not[[key]]))
 
-  globals <- getGlobals(expr)
+  globals <- getGlobals(expr, method="conservative")
   cat(sprintf("Globals: %s\n", paste(sQuote(names(globals)), collapse=", ")))
   stopifnot(all(atleast[[key]] %in% names(globals)))
   stopifnot(!any(names(globals) %in% not[[key]]))
@@ -83,7 +83,7 @@ for (kk in seq_along(exprs)) {
   cat("\n")
 }
 
-names <- findGlobals(exprs, unlist=TRUE)
+names <- findGlobals(exprs, method="conservative", unlist=TRUE)
 cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse=", ")))
 
 
