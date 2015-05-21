@@ -5,8 +5,9 @@
 \alias{getGlobals}
 \title{Get all global objects for one or more R expressions}
 \usage{
-getGlobals(expr, envir = parent.frame(), ..., primitive = FALSE,
-  base = FALSE, tweak = NULL, unlist = TRUE)
+getGlobals(expr, envir = parent.frame(), ..., method = c("conservative",
+  "liberal"), primitive = FALSE, base = FALSE, tweak = NULL,
+  mustExist = TRUE, unlist = TRUE)
 }
 \arguments{
 \item{expr}{An R expression or a a list of R expressions.}
@@ -15,6 +16,8 @@ getGlobals(expr, envir = parent.frame(), ..., primitive = FALSE,
 
 \item{...}{Not used.}
 
+\item{method}{A character string specifying what type of search algorithm to use.}
+
 \item{primitive}{If TRUE, primitive globals are returned, otherwise not.}
 
 \item{base}{If TRUE, globals part of "base" packages are returned, otherwise not.}
@@ -22,14 +25,50 @@ getGlobals(expr, envir = parent.frame(), ..., primitive = FALSE,
 \item{tweak}{An optional function that takes an expression
 and returns a tweaked expression.}
 
+\item{mustExist}{If TRUE, an error is thrown if the object of the
+identified global cannot be located.  Otherwise, the global
+is not returned.}
+
 \item{unlist}{If TRUE, a list of unique objects is returned.
        If FALSE, a list of \code{length(expr)} sublists.}
 }
 \value{
-A named list of variables.
+A named list of objects.
 }
 \description{
 Get all global objects for one or more R expressions
+}
+\details{
+There currently two methods for identifying global objects.
+
+The \code{"conservative"} search method tries to keep the number
+of false positive to a minimum, i.e. the identified objects are
+most likely true global objects.  At the same time, there is
+a risk that some true globals are not identified (see example).
+This search method returns the exact same result as the
+\code{\link[codetools]{findGlobals}()} function of the
+\pkg{codetools} package.
+
+The \code{"liberal"} search method tries to keep the
+true-positive ratio as high as possible, i.e. the true globals
+are most likely among the identified ones.  At the same, there is
+a risk that some false positives are also identified.
+}
+\examples{
+b <- 2
+expr <- substitute({ a <- b; b <- 1 })
+
+## Will _not_ identify 'b' (because it's also a local)
+globalsC <- getGlobals(expr, method="conservative")
+print(globalsC)
+
+## Will identify 'b'
+globalsL <- getGlobals(expr, method="liberal")
+print(globalsL)
+}
+\seealso{
+Internally, the \pkg{\link{codetools}} package is utilized for
+code inspections.
 }
 \keyword{internal}
 

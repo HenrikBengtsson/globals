@@ -16,3 +16,8 @@ findBasePkgs <- local({
 isBasePkgs <- function(pkgs) {
   pkgs %in% findBasePkgs()
 }
+
+# cf. is.primitive()
+is.base <- function(x) {
+  isBasePkgs(environmentName(environment(x)))
+}
