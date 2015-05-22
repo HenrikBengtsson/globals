@@ -1,7 +1,7 @@
 library("globals")
 
 b <- 2
-expr <- substitute({ a <- b; b <- 1 })
+expr <- substitute({ a <- b; b <- 1 }, env=list())
 
 message("*** findGlobals():")
 globalsC <- findGlobals(expr, method="conservative")
