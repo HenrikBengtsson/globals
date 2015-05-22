@@ -1,6 +1,10 @@
 Package: globals
 ================
 
+Version: 0.2.1-9000 [2015-05-20]
+o Added class Globals with methods cleanup() and packagesOf().
+
+
 Version: 0.2.1 [2015-05-20]
 o getGlobals() gained argument 'mustExist' for controlling whether
   to give an error when the corresponding object for an identified
