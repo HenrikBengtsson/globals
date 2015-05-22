@@ -39,7 +39,6 @@
 #' @aliases findGlobals
 #' @export
 #' @export findGlobals
-#' @keywords internal
 getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal"), tweak=NULL, mustExist=TRUE, unlist=TRUE) {
   method <- match.arg(method)
   names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, unlist=unlist)
@@ -55,3 +54,29 @@ getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative",
 
   globals
 }
+
+#' Coerce to a Globals object
+#' @param x The object to be coerced to a Globals object.
+#' @param ... Not used.
+#'
+#' @return A Globals object
+#'
+#' @aliases as.Globals.list as.Globals.Globals
+#' @export
+as.Globals <- function(x, ...) UseMethod("as.Globals")
+
+#' @export
+as.Globals.Globals <- function(x, ...) x
+
+#' @export
+as.Globals.list <- function(x, ...) {
+  names <- names(x)
+  if (is.null(names)) {
+    stop("Cannot coerce %s to Globals, because the elements does not have names.")
+  } else if (!all(nzchar(names))) {
+    stop("Cannot coerce %s to Globals, because some elements have empty names.")
+  }
+
+  structure(x, class=c("Globals", class(x)))
+}
+

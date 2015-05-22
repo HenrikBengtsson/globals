@@ -27,6 +27,12 @@ message("*** cleanup() & packagesOf():")
 globals <- getGlobals(expr, method="conservative")
 print(globals)
 
+globals <- as.Globals(globals)
+print(globals)
+
+globals <- as.Globals(unclass(globals))
+print(globals)
+
 pkgs <- packagesOf(globals)
 print(pkgs)
 
@@ -36,5 +42,4 @@ stopifnot(length(globals) == 0L)
 
 pkgs <- packagesOf(globals)
 print(pkgs)
-
 

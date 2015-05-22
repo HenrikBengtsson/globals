@@ -65,5 +65,4 @@ print(globalsL)
 Internally, the \pkg{\link{codetools}} package is utilized for
 code inspections.
 }
-\keyword{internal}
 

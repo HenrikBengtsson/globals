@@ -2,7 +2,8 @@ Package: globals
 ================
 
 Version: 0.2.1-9000 [2015-05-20]
-o Added class Globals with methods cleanup() and packagesOf().
+o Added Globals class with methods cleanup() and packagesOf().
+  Added as.Globals() to coerce lists to Globals objects.
 
 
 Version: 0.2.1 [2015-05-20]
