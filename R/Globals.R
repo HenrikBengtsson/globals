@@ -1,0 +1,82 @@
+#' Get all global objects for one or more R expressions
+#'
+#' @param expr An R expression or a a list of R expressions.
+#' @param envir The environment where to search for globals.
+#' @param ... Not used.
+#' @param method A character string specifying what type of search algorithm to use.
+#' @param tweak An optional function that takes an expression
+#'        and returns a tweaked expression.
+#' @param mustExist If TRUE, an error is thrown if the object of the
+#'        identified global cannot be located.  Otherwise, the global
+#'        is not returned.
+#' @param unlist If TRUE, a list of unique objects is returned.
+#'        If FALSE, a list of \code{length(expr)} sublists.
+#'
+#' @return A named 'Globals' list of global objects.
+#'
+#' @details
+#' There currently two methods for identifying global objects.
+#'
+#' The \code{"conservative"} search method tries to keep the number
+#' of false positive to a minimum, i.e. the identified objects are
+#' most likely true global objects.  At the same time, there is
+#' a risk that some true globals are not identified (see example).
+#' This search method returns the exact same result as the
+#' \code{\link[codetools]{findGlobals}()} function of the
+#' \pkg{codetools} package.
+#'
+#' The \code{"liberal"} search method tries to keep the
+#' true-positive ratio as high as possible, i.e. the true globals
+#' are most likely among the identified ones.  At the same, there is
+#' a risk that some false positives are also identified.
+#'
+#' @example incl/findGlobals.R
+#'
+#' @seealso
+#' Internally, the \pkg{\link{codetools}} package is utilized for
+#' code inspections.
+#'
+#' @aliases findGlobals
+#' @export
+#' @export findGlobals
+getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal"), tweak=NULL, mustExist=TRUE, unlist=TRUE) {
+  method <- match.arg(method)
+  names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, unlist=unlist)
+
+  globals <- structure(list(), class=c("Globals", "list"))
+  for (name in names) {
+    if (exists(name, envir=envir, inherits=TRUE)) {
+      globals[[name]] <- get(name, envir=envir, inherits=TRUE)
+    } else if (mustExist) {
+      stop("Identified a global by static code inspection, but failed to locate the corresponding object in the relevant environments: ", sQuote(name))
+    }
+  }
+
+  globals
+}
+
+#' Coerce to a Globals object
+#' @param x The object to be coerced to a Globals object.
+#' @param ... Not used.
+#'
+#' @return A Globals object
+#'
+#' @aliases as.Globals.list as.Globals.Globals
+#' @export
+as.Globals <- function(x, ...) UseMethod("as.Globals")
+
+#' @export
+as.Globals.Globals <- function(x, ...) x
+
+#' @export
+as.Globals.list <- function(x, ...) {
+  names <- names(x)
+  if (is.null(names)) {
+    stop("Cannot coerce %s to Globals, because the elements does not have names.")
+  } else if (!all(nzchar(names))) {
+    stop("Cannot coerce %s to Globals, because some elements have empty names.")
+  }
+
+  structure(x, class=c("Globals", class(x)))
+}
+
