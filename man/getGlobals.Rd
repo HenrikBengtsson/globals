@@ -6,7 +6,8 @@
 \title{Get all global objects for one or more R expressions}
 \usage{
 getGlobals(expr, envir = parent.frame(), ..., method = c("conservative",
-  "liberal"), tweak = NULL, mustExist = TRUE, unlist = TRUE)
+  "liberal"), tweak = NULL, substitute = FALSE, mustExist = TRUE,
+  unlist = TRUE)
 }
 \arguments{
 \item{expr}{An R expression or a a list of R expressions.}
@@ -19,6 +20,9 @@ getGlobals(expr, envir = parent.frame(), ..., method = c("conservative",
 
 \item{tweak}{An optional function that takes an expression
 and returns a tweaked expression.}
+
+\item{substitute}{If TRUE, the expression is \code{substitute()}:ed,
+otherwise not.}
 
 \item{mustExist}{If TRUE, an error is thrown if the object of the
 identified global cannot be located.  Otherwise, the global

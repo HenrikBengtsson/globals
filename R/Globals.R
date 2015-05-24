@@ -6,6 +6,8 @@
 #' @param method A character string specifying what type of search algorithm to use.
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
+#' @param substitute If TRUE, the expression is \code{substitute()}:ed,
+#'        otherwise not.
 #' @param mustExist If TRUE, an error is thrown if the object of the
 #'        identified global cannot be located.  Otherwise, the global
 #'        is not returned.
@@ -39,9 +41,12 @@
 #' @aliases findGlobals
 #' @export
 #' @export findGlobals
-getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal"), tweak=NULL, mustExist=TRUE, unlist=TRUE) {
+getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
   method <- match.arg(method)
-  names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, unlist=unlist)
+
+  if (substitute) expr <- substitute(expr)
+
+  names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
 
   globals <- structure(list(), class=c("Globals", "list"))
   for (name in names) {

@@ -19,5 +19,13 @@ isBasePkgs <- function(pkgs) {
 
 # cf. is.primitive()
 is.base <- function(x) {
+  if (typeof(x) != "closure") return(FALSE)
   isBasePkgs(environmentName(environment(x)))
+}
+
+# cf. is.primitive()
+is.internal <- function(x) {
+  if (typeof(x) != "closure") return(FALSE)
+  body <- deparse(body(x))
+  any(grepl(".Internal", body, fixed=TRUE))
 }

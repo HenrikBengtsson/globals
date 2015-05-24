@@ -27,8 +27,10 @@ findGlobals_liberal <- function(expr, envir, ...) {
 }
 
 
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, method=c("conservative", "liberal"), unlist=TRUE) {
+findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
+
+  if (substitute) expr <- substitute(expr)
 
   if (is.list(expr)) {
     names <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, unlist=FALSE)
