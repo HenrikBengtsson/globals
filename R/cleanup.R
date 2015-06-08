@@ -24,7 +24,7 @@ cleanup.Globals <- function(globals, drop=c("primitives", "internals", "base-pac
     }
   }
 
-  ## Drop objects that are primitive functions
+  ## Drop objects that are part of one of the "base" packages
   if ("base-packages" %in% drop) {
     for (name in names(globals)) {
       if (is.base(globals[[name]])) globals[[name]] <- NULL
