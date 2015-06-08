@@ -1,7 +1,8 @@
 Package: globals
 ================
 
-Version: 0.2.2-9000 [2015-05-23]
+Version: 0.2.2-9000 [2015-06-07]
+o Added [() for Globals.
 o findGlobals() and getGlobals() gained argument 'substitute'.
 o Added cleanup(..., method="internals").
 

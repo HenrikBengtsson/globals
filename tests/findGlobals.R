@@ -9,6 +9,11 @@ print(globalsC)
 globalsL <- findGlobals(expr, method="liberal")
 print(globalsL)
 
+message("*** Subsetting:")
+globalsS <- globalsL[-1]
+stopifnot(length(globalsS) == length(globalsL) - 1L)
+stopifnot(identical(class(globalsS), class(globalsL)))
+
 message("*** getGlobals():")
 globalsC <- getGlobals(expr, method="conservative")
 print(globalsC)
@@ -21,7 +26,6 @@ globalsL <- cleanup(globalsL)
 print(globalsL)
 stopifnot(length(globalsL) == 1L)
 stopifnot(names(globalsL) == "b")
-
 
 message("*** cleanup() & packagesOf():")
 globals <- getGlobals(expr, method="conservative")

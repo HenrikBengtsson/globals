@@ -85,3 +85,10 @@ as.Globals.list <- function(x, ...) {
   structure(x, class=c("Globals", class(x)))
 }
 
+
+#' @export
+`[.Globals` <- function(x, i) {
+  res <- NextMethod("[")
+  class(res) <- class(x)
+  res
+}
