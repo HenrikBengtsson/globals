@@ -74,7 +74,7 @@ for (kk in seq_along(exprs)) {
   stopifnot(all(atleast[[key]] %in% names))
   stopifnot(!any(names %in% not[[key]]))
 
-  globals <- getGlobals(expr, method="liberal", mustExist=FALSE)
+  globals <- globalsOf(expr, method="liberal", mustExist=FALSE)
   cat(sprintf("Globals: %s\n", paste(sQuote(names(globals)), collapse=", ")))
   stopifnot(all(atleast[[key]] %in% names(globals)))
   stopifnot(!any(names(globals) %in% not[[key]]))

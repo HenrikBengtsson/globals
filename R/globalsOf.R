@@ -1,7 +1,7 @@
-#' Get all global objects for one or more R expressions
+#' Get all global objects of an expression
 #'
-#' @param expr An R expression or a a list of R expressions.
-#' @param envir The environment where to search for globals.
+#' @param expr An R expression.
+#' @param envir The environment from where to search for globals.
 #' @param ... Not used.
 #' @param method A character string specifying what type of search algorithm to use.
 #' @param tweak An optional function that takes an expression
@@ -14,7 +14,7 @@
 #' @param unlist If TRUE, a list of unique objects is returned.
 #'        If FALSE, a list of \code{length(expr)} sublists.
 #'
-#' @return A named 'Globals' list of global objects.
+#' @return A a \link{Globals}.
 #'
 #' @details
 #' There currently two methods for identifying global objects.
@@ -32,7 +32,7 @@
 #' are most likely among the identified ones.  At the same, there is
 #' a risk that some false positives are also identified.
 #'
-#' @example incl/findGlobals.R
+#' @example incl/globalsOf.R
 #'
 #' @seealso
 #' Internally, the \pkg{\link{codetools}} package is utilized for
@@ -40,8 +40,7 @@
 #'
 #' @aliases findGlobals
 #' @export
-#' @export findGlobals
-getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
+globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
@@ -58,37 +57,4 @@ getGlobals <- function(expr, envir=parent.frame(), ..., method=c("conservative",
   }
 
   globals
-}
-
-#' Coerce to a Globals object
-#' @param x The object to be coerced to a Globals object.
-#' @param ... Not used.
-#'
-#' @return A Globals object
-#'
-#' @aliases as.Globals.list as.Globals.Globals
-#' @export
-as.Globals <- function(x, ...) UseMethod("as.Globals")
-
-#' @export
-as.Globals.Globals <- function(x, ...) x
-
-#' @export
-as.Globals.list <- function(x, ...) {
-  names <- names(x)
-  if (is.null(names)) {
-    stop("Cannot coerce %s to Globals, because the elements does not have names.")
-  } else if (!all(nzchar(names))) {
-    stop("Cannot coerce %s to Globals, because some elements have empty names.")
-  }
-
-  structure(x, class=c("Globals", class(x)))
-}
-
-
-#' @export
-`[.Globals` <- function(x, i) {
-  res <- NextMethod("[")
-  class(res) <- class(x)
-  res
 }

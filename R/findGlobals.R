@@ -27,6 +27,7 @@ findGlobals_liberal <- function(expr, envir, ...) {
 }
 
 
+#' @export
 findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
 
