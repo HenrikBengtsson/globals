@@ -5,8 +5,8 @@
 \alias{cleanup.Globals}
 \title{Drop certain types of globals}
 \usage{
-\method{cleanup}{Globals}(globals, drop = c("primitives", "base-packages"),
-  ...)
+\method{cleanup}{Globals}(globals, drop = c("primitives", "internals",
+  "base-packages"), ...)
 }
 \arguments{
 \item{globals}{A Globals object.}

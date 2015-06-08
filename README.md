@@ -10,8 +10,8 @@ source('http://callr.org/install#HenrikBengtsson/globals')
 
 ## Software quality
 
-| Resource:     | GitHub        | Travis CI        | Appveyor         |
-| ------------- | ------------------- | ---------------- | ---------------- |
-| _Platforms:_  | _Multiple_          | _Linux_          | _Windows_        |
-| R CMD check   |  | <a href="https://travis-ci.org/HenrikBengtsson/globals"><img src="https://travis-ci.org/HenrikBengtsson/globals.svg" alt="Build status"></a>    | <a href="https://ci.appveyor.com/project/HenrikBengtsson/globals"><img src="https://ci.appveyor.com/api/projects/status/github/HenrikBengtsson/globals" alt="Build status"></a> |
-| Test coverage |                     | <a href="http://codecov.io/github/HenrikBengtsson/globals?branch=develop"><img src="http://codecov.io/github/HenrikBengtsson/globals/coverage.svg?branch=develop" alt="Coverage Status"/></a>   |                  |
+| Resource:     | GitHub        | Travis CI     | Appveyor         |
+| ------------- | ------------------- | ------------- | ---------------- |
+| _Platforms:_  | _Multiple_          | _Linux_       | _Windows_        |
+| R CMD check   |  | <a href="https://travis-ci.org/HenrikBengtsson/globals"><img src="https://travis-ci.org/HenrikBengtsson/globals.svg" alt="Build status"></a> | <a href="https://ci.appveyor.com/project/HenrikBengtsson/globals"><img src="https://ci.appveyor.com/api/projects/status/github/HenrikBengtsson/globals?svg=true" alt="Build status"></a> |
+| Test coverage |                     | <a href="https://coveralls.io/r/HenrikBengtsson/globals"><img src="https://coveralls.io/repos/HenrikBengtsson/globals/badge.svg?branch=develop" alt="Coverage Status"/></a>   |                  |

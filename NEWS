@@ -1,6 +1,12 @@
 Package: globals
 ================
 
+Version: 0.2.3 [2015-06-08]
+o Added [() for Globals.
+o findGlobals() and getGlobals() gained argument 'substitute'.
+o Added cleanup(..., method="internals").
+
+
 Version: 0.2.2 [2015-05-20]
 o Added Globals class with methods cleanup() and packagesOf().
   Added as.Globals() to coerce lists to Globals objects.
