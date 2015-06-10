@@ -1,6 +1,10 @@
 Package: globals
 ================
 
+Version: 0.3.1 [2015-06-10]
+o More test coverage.
+
+
 Version: 0.3.0 [2015-06-08]
 o Renamed getGlobals() to globalsOf().
 
