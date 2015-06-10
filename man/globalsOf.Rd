@@ -50,8 +50,8 @@ This search method returns the exact same result as the
 
 The \code{"liberal"} search method tries to keep the
 true-positive ratio as high as possible, i.e. the true globals
-are most likely among the identified ones.  At the same, there is
-a risk that some false positives are also identified.
+are most likely among the identified ones.  At the same time,
+there is a risk that some false positives are also identified.
 }
 \examples{
 b <- 2
