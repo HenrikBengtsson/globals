@@ -8,7 +8,7 @@ install.packages('globals')
 ```
 
 
-## Software quality
+## Software status
 
 | Resource:     | CRAN        | Travis CI     | Appveyor         |
 | ------------- | ------------------- | ------------- | ---------------- |
