@@ -1,6 +1,10 @@
 Package: globals
 ================
 
+Version: 0.3.1-9000 [2015-06-30]
+o Explicit namespace imports also from 'utils' package.
+
+
 Version: 0.3.1 [2015-06-10]
 o More test coverage.
 

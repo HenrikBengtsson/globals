@@ -2,6 +2,7 @@ asFunction <- function(expr, envir=parent.frame(), ...) {
   eval(substitute(function() x, list(x=expr)), envir=envir, ...)
 }
 
+#' @importFrom utils installed.packages
 findBasePkgs <- local({
   pkgs <- NULL
   function() {
