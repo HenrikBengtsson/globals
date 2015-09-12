@@ -94,7 +94,7 @@ for (name in names(exprs)) {
     stopifnot(all.equal(names(globals), c("sum", "x")))
   } else {
     stopifnot(all.equal(names(globals), c("sum", "x", "...")))
-    stopifnot(is.na(globals$`...`))
+    stopifnot(!is.list(globals$`...`) && is.na(globals$`...`))
   }
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
