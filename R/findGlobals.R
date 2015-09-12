@@ -35,12 +35,23 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
   if (substitute) expr <- substitute(expr)
 
   if (is.list(expr)) {
-    names <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, unlist=FALSE)
+    globals <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, dotdotdot=dotdotdot, unlist=FALSE)
     if (unlist) {
-      names <- unlist(names, use.names=TRUE)
-      names <- sort(unique(names))
+      needsDotdotdot <- FALSE
+      for (kk in seq_along(globals)) {
+        s <- globals[[kk]]
+        n <- length(s)
+        if (identical(s[n], "...")) {
+          needsDotdotdot <- TRUE
+          s <- s[-n]
+          globals[[kk]] <- s
+        }
+      }
+      globals <- unlist(globals, use.names=TRUE)
+      globals <- sort(unique(globals))
+      if (needsDotdotdot) globals <- c(globals, "...")
     }
-    return(names)
+    return(globals)
   }
 
   if (is.function(tweak)) expr <- tweak(expr)
