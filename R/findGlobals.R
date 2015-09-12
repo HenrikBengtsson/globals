@@ -28,8 +28,9 @@ findGlobals_liberal <- function(expr, envir, ...) {
 
 
 #' @export
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
+findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
+  dotdotdot <- match.arg(dotdotdot)
 
   if (substitute) expr <- substitute(expr)
 
@@ -44,9 +45,38 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, method=c("c
 
   if (is.function(tweak)) expr <- tweak(expr)
 
-  if (method == "conservative") {
-    findGlobals_conservative(expr, envir=envir)
-  } else if (method == "liberal") {
-    findGlobals_liberal(expr, envir=envir)
+  if (dotdotdot %in% c("return", "ignore", "error")) {
+    needsDotdotdot <- FALSE
+    globals <- withCallingHandlers({
+      oopts <- options(warn=0L)
+      on.exit(options(oopts))
+      if (method == "conservative") {
+        findGlobals_conservative(expr, envir=envir)
+      } else if (method == "liberal") {
+        findGlobals_liberal(expr, envir=envir)
+      }
+    }, warning=function(w) {
+      ## Warned about '...'?
+      pattern <- "... may be used in an incorrect context"
+      if (grepl(pattern, w$message, fixed=TRUE)) {
+        if (dotdotdot == "return") {
+          needsDotdotdot <<- TRUE
+          ## FIXME: How can I void this warning? /HB 2015-09-12
+        } else if (dotdotdot == "ignore") {
+          ## FIXME: How can I void this warning? /HB 2015-09-12
+        } else if (dotdotdot == "error") {
+          e <- simpleError(w$message, w$call)
+          stop(e)
+        }
+      }
+    })
+    if (needsDotdotdot) globals <- c(globals, "...")
+    globals
+  } else {
+    if (method == "conservative") {
+      findGlobals_conservative(expr, envir=envir)
+    } else if (method == "liberal") {
+      findGlobals_liberal(expr, envir=envir)
+    }
   }
 }
