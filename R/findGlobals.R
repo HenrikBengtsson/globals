@@ -51,30 +51,32 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
     findGlobalsT <- findGlobals_conservative
   }
 
-  if (dotdotdot %in% c("return", "ignore", "error")) {
-    needsDotdotdot <- FALSE
-    globals <- withCallingHandlers({
-      oopts <- options(warn=0L)
-      on.exit(options(oopts))
-      findGlobalsT(expr, envir=envir)
-    }, warning=function(w) {
-      ## Warned about '...'?
-      pattern <- "... may be used in an incorrect context"
-      if (grepl(pattern, w$message, fixed=TRUE)) {
-        if (dotdotdot == "return") {
-          needsDotdotdot <<- TRUE
-          ## FIXME: How can I void this warning? /HB 2015-09-12
-        } else if (dotdotdot == "ignore") {
-          ## FIXME: How can I void this warning? /HB 2015-09-12
-        } else if (dotdotdot == "error") {
-          e <- simpleError(w$message, w$call)
-          stop(e)
-        }
-      }
-    })
-    if (needsDotdotdot) globals <- c(globals, "...")
-    globals
-  } else {
+  ## Is there a need for global '...' variables?
+  needsDotdotdot <- FALSE
+  globals <- withCallingHandlers({
+    oopts <- options(warn=0L)
+    on.exit(options(oopts))
     findGlobalsT(expr, envir=envir)
-  }
+  }, warning=function(w) {
+    ## Warned about '...'?
+    pattern <- "... may be used in an incorrect context"
+    if (grepl(pattern, w$message, fixed=TRUE)) {
+      needsDotdotdot <<- TRUE
+      if (dotdotdot == "return") {
+        ## Consume / muffle warning
+        invokeRestart("muffleWarning")
+      } else if (dotdotdot == "ignore") {
+        needsDotdotdot <<- FALSE
+        ## Consume / muffle warning
+        invokeRestart("muffleWarning")
+      } else if (dotdotdot == "error") {
+        e <- simpleError(w$message, w$call)
+        stop(e)
+      }
+    }
+  })
+
+  if (needsDotdotdot) globals <- c(globals, "...")
+
+  globals
 }
