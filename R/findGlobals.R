@@ -45,16 +45,18 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
 
   if (is.function(tweak)) expr <- tweak(expr)
 
+  if (method == "liberal") {
+    findGlobalsT <- findGlobals_liberal
+  } else {
+    findGlobalsT <- findGlobals_conservative
+  }
+
   if (dotdotdot %in% c("return", "ignore", "error")) {
     needsDotdotdot <- FALSE
     globals <- withCallingHandlers({
       oopts <- options(warn=0L)
       on.exit(options(oopts))
-      if (method == "conservative") {
-        findGlobals_conservative(expr, envir=envir)
-      } else if (method == "liberal") {
-        findGlobals_liberal(expr, envir=envir)
-      }
+      findGlobalsT(expr, envir=envir)
     }, warning=function(w) {
       ## Warned about '...'?
       pattern <- "... may be used in an incorrect context"
@@ -73,10 +75,6 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
     if (needsDotdotdot) globals <- c(globals, "...")
     globals
   } else {
-    if (method == "conservative") {
-      findGlobals_conservative(expr, envir=envir)
-    } else if (method == "liberal") {
-      findGlobals_liberal(expr, envir=envir)
-    }
+    findGlobalsT(expr, envir=envir)
   }
 }
