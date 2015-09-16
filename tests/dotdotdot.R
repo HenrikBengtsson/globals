@@ -60,6 +60,12 @@ for (name in names(exprs)) {
   }
 } # for (name ...)
 
+message("\n*** findGlobals(<exprs>, dotdotdot='return'):")
+print(exprs)
+globals <- findGlobals(exprs, dotdotdot="return")
+print(globals)
+
+
 message("*** findGlobals() ... DONE")
 
 
@@ -121,6 +127,12 @@ for (name in names(exprs)) {
   }
 } # for (name ...)
 
+message("\n*** globalsOf(<exprs>, dotdotdot='return'):")
+print(exprs)
+globals <- globalsOf(exprs, dotdotdot="return")
+print(globals)
+
+
 message("*** globalsOf() ... DONE")
 
 
@@ -181,6 +193,11 @@ for (name in names(exprs)) {
     stopifnot(inherits(globals, "try-error"))
   }
 } # for (name ...)
+
+message("\n*** globalsOf(<exprs>, dotdotdot='return'):")
+print(exprs)
+globals <- globalsOf(exprs, dotdotdot="return")
+print(globals)
 
 } # aux()
 
