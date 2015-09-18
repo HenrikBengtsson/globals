@@ -28,25 +28,66 @@ findGlobals_liberal <- function(expr, envir, ...) {
 
 
 #' @export
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
+findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
+  dotdotdot <- match.arg(dotdotdot)
 
   if (substitute) expr <- substitute(expr)
 
   if (is.list(expr)) {
-    names <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, unlist=FALSE)
+    globals <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, dotdotdot=dotdotdot, unlist=FALSE)
     if (unlist) {
-      names <- unlist(names, use.names=TRUE)
-      names <- sort(unique(names))
+      needsDotdotdot <- FALSE
+      for (kk in seq_along(globals)) {
+        s <- globals[[kk]]
+        n <- length(s)
+        if (identical(s[n], "...")) {
+          needsDotdotdot <- TRUE
+          s <- s[-n]
+          globals[[kk]] <- s
+        }
+      }
+      globals <- unlist(globals, use.names=TRUE)
+      globals <- sort(unique(globals))
+      if (needsDotdotdot) globals <- c(globals, "...")
     }
-    return(names)
+    return(globals)
   }
 
   if (is.function(tweak)) expr <- tweak(expr)
 
-  if (method == "conservative") {
-    findGlobals_conservative(expr, envir=envir)
-  } else if (method == "liberal") {
-    findGlobals_liberal(expr, envir=envir)
+  if (method == "liberal") {
+    findGlobalsT <- findGlobals_liberal
+  } else {
+    findGlobalsT <- findGlobals_conservative
   }
+
+  ## Is there a need for global '...' variables?
+  needsDotdotdot <- FALSE
+  globals <- withCallingHandlers({
+    oopts <- options(warn=0L)
+    on.exit(options(oopts))
+    findGlobalsT(expr, envir=envir)
+  }, warning=function(w) {
+    ## Warned about '...'?
+    pattern <- "... may be used in an incorrect context"
+    if (grepl(pattern, w$message, fixed=TRUE)) {
+      needsDotdotdot <<- TRUE
+      if (dotdotdot == "return") {
+        ## Consume / muffle warning
+        invokeRestart("muffleWarning")
+      } else if (dotdotdot == "ignore") {
+        needsDotdotdot <<- FALSE
+        ## Consume / muffle warning
+        invokeRestart("muffleWarning")
+      } else if (dotdotdot == "error") {
+        e <- simpleError(w$message, w$call)
+        stop(e)
+      }
+    }
+  })
+
+  if (needsDotdotdot) globals <- c(globals, "...")
+
+  globals
 }

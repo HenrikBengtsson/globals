@@ -6,6 +6,8 @@
 #' @param method A character string specifying what type of search algorithm to use.
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
+## @param dotdotdot A @character string specifying how to handle a
+##        \emph{global} \code{...} if one is discovered.
 #' @param substitute If TRUE, the expression is \code{substitute()}:ed,
 #'        otherwise not.
 #' @param mustExist If TRUE, an error is thrown if the object of the
@@ -47,6 +49,10 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", 
 
   names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
 
+  n <- length(names)
+  needsDotdotdot <- (identical(names[n], "..."))
+  if (needsDotdotdot) names <- names[-n]
+
   globals <- structure(list(), class=c("Globals", "list"))
   for (name in names) {
     if (exists(name, envir=envir, inherits=TRUE)) {
@@ -54,6 +60,16 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", 
     } else if (mustExist) {
       stop("Identified a global by static code inspection, but failed to locate the corresponding object in the relevant environments: ", sQuote(name))
     }
+  }
+
+  if (needsDotdotdot) {
+    if (exists("...", envir=envir, inherits=TRUE)) {
+      ddd <- evalq(list(...), envir=envir, enclos=envir)
+    } else {
+      ddd <- NA
+    }
+    class(ddd) <- c("DotDotDotList", class(ddd))
+    globals[["..."]] <- ddd
   }
 
   globals

@@ -1,6 +1,11 @@
 Package: globals
 ================
 
+Version: 0.4.0 [2015-09-12]
+o findGlobals() and globalsOf() gained argument 'dotdotdot'.
+o Explicit namespace imports also from 'utils' package.
+
+
 Version: 0.3.1 [2015-06-10]
 o More test coverage.
 

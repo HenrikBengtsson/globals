@@ -28,7 +28,16 @@ README[.]md
 ^incl
 ^NAMESPACE,.*[.]txt$
 ^nohup.*$
+^[.]R
+^[.]benchmark
 ^[.]devel
 ^[.]test
 ^[.]check
 ^.*[.]tar[.]gz$
+
+#----------------------------
+# Package specific
+#----------------------------
+^[.]BatchJobs[.]R$
+[.]async
+
