@@ -56,7 +56,12 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", 
   globals <- structure(list(), class=c("Globals", "list"))
   for (name in names) {
     if (exists(name, envir=envir, inherits=TRUE)) {
-      globals[[name]] <- get(name, envir=envir, inherits=TRUE)
+      value <- get(name, envir=envir, inherits=TRUE)
+      if (is.null(value)) {
+        globals[name] <- list(NULL)
+      } else {
+        globals[[name]] <- value
+      }
     } else if (mustExist) {
       stop("Identified a global by static code inspection, but failed to locate the corresponding object in the relevant environments: ", sQuote(name))
     }
