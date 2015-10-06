@@ -1,6 +1,11 @@
 Package: globals
 ================
 
+Version: 0.4.0-9000 [2015-10-05]
+o BUG FIX: globalsOf() failed to return global variables
+  with value NULL.  They were identified by silently dropped.
+
+
 Version: 0.4.0 [2015-09-12]
 o findGlobals() and globalsOf() gained argument 'dotdotdot'.
 o Explicit namespace imports also from 'utils' package.
