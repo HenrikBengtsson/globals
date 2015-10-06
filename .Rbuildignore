@@ -4,6 +4,7 @@
 ^.svn
 ^.git
 ^.make
+INSTALL[.]md
 OVERVIEW[.]md
 README[.]md
 
@@ -34,10 +35,3 @@ README[.]md
 ^[.]test
 ^[.]check
 ^.*[.]tar[.]gz$
-
-#----------------------------
-# Package specific
-#----------------------------
-^[.]BatchJobs[.]R$
-[.]async
-
