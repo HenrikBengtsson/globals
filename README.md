@@ -8,6 +8,8 @@ install.packages('globals')
 ```
 
 
+
+
 ## Software status
 
 | Resource:     | CRAN        | Travis CI     | Appveyor         |

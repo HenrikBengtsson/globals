@@ -1,9 +1,5 @@
-# CRAN submission globals 0.4.0
-on 2015-09-17
-
-This release addresses one R/CRAN related issue:
-
-* Explicit import of 'utils' functions.
+# CRAN submission globals 0.4.1
+on 2015-10-06
 
 Thanks in advance
 
@@ -15,7 +11,7 @@ PSCBS have been verified using `R CMD check --as-cran` on:
   - R version 3.1.2 (2014-10-31)
   - R version 3.1.3 (2015-03-09)
   - R version 3.2.2 (2015-08-14)
-  - R version 3.2.2 Patched (2015-09-13 r69384)
+  - R version 3.2.2 Patched (2015-10-02 r69450)
 
 * Platform: x86_64-apple-darwin13.4.0 (64-bit):
   - R version 3.2.2 Patched (2015-09-05 r69301)
@@ -29,4 +25,4 @@ It has also verified using the <http://win-builder.r-project.org/> service.
 
 Moreover, the updates cause no issues for any of the following
 1 reverse dependency on CRAN, which have been tested with
-`R CMD check --as-cran`: future 0.4.0
+`R CMD check --as-cran`: future 0.8.1
