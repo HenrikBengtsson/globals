@@ -55,8 +55,9 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", 
 
   globals <- structure(list(), class=c("Globals", "list"))
   for (name in names) {
-    if (exists(name, envir=envir, inherits=TRUE)) {
-      value <- get(name, envir=envir, inherits=TRUE)
+    env <- where(name, envir=envir, inherits=TRUE)
+    if (!is.null(env)) {
+      value <- get(name, envir=env, inherits=FALSE)
       if (is.null(value)) {
         globals[name] <- list(NULL)
       } else {

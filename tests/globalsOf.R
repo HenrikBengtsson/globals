@@ -62,3 +62,29 @@ stopifnot(all(names(globals) %in% c("c", "d")))
 pkgs <- packagesOf(globals)
 print(pkgs)
 stopifnot(length(pkgs) == 0L)
+
+
+message("*** globalsOf() and package functions:")
+foo <- globals::Globals
+expr <- substitute({ foo(list(a=1)) })
+globals <- globalsOf(expr)
+str(globals)
+stopifnot(identical(sort(names(globals)), sort(c("{", "foo", "list"))))
+
+globals <- cleanup(globals)
+str(globals)
+stopifnot(identical(names(globals), c("foo")))
+pkgs <- packagesOf(globals)
+stopifnot(pkgs == "globals")
+
+
+message("*** globalsOf() and core-package functions:")
+sample2 <- base::sample
+expr <- substitute({ x <- sample(10); y <- sample2(10) }, env=list())
+globals <- globalsOf(expr)
+str(globals)
+stopifnot(identical(sort(names(globals)), sort(c("{", "<-", "sample", "sample2"))))
+
+globals <- cleanup(globals)
+str(globals)
+stopifnot(length(globals) == 0L)
