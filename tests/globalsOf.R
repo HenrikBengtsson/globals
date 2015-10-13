@@ -69,11 +69,11 @@ foo <- globals::Globals
 expr <- substitute({ foo(list(a=1)) })
 globals <- globalsOf(expr)
 str(globals)
-stopifnot(identical(sort(names(globals)), sort(c("{", "foo", "list"))))
+#stopifnot(all(names(globals) %in% c("{", "foo", "list")))
 
 globals <- cleanup(globals)
 str(globals)
-stopifnot(identical(names(globals), c("foo")))
+stopifnot(all(names(globals) %in% c("foo")))
 pkgs <- packagesOf(globals)
 stopifnot(pkgs == "globals")
 
@@ -83,7 +83,7 @@ sample2 <- base::sample
 expr <- substitute({ x <- sample(10); y <- sample2(10) }, env=list())
 globals <- globalsOf(expr)
 str(globals)
-stopifnot(identical(sort(names(globals)), sort(c("{", "<-", "sample", "sample2"))))
+stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2")))
 
 globals <- cleanup(globals)
 str(globals)
