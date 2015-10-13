@@ -7,6 +7,12 @@ is.base <- globals:::is.base
 is.internal <- globals:::is.internal
 where <- globals:::where
 
+## WORKAROUND: Make sure tests also work with 'covr' package
+if ("covr" %in% loadedNamespaces()) {
+  globalenv <- function() parent.frame()
+  baseenv <- function() environment(base::sample)
+}
+
 
 message("* asFunction() ...")
 fcn <- asFunction({ 1 })
@@ -39,6 +45,8 @@ message("- where('sample') ...")
 env <- where("sample", mode="function")
 print(env)
 stopifnot(identical(env, baseenv()))
+obj <- get("sample", mode="function", envir=env, inherits=FALSE)
+stopifnot(identical(obj, base::sample))
 
 
 message("- where('sample', mode='integer') ...")
@@ -52,6 +60,8 @@ sample2 <- base::sample
 env <- where("sample2", mode="function")
 print(env)
 stopifnot(identical(env, environment()))
+obj <- get("sample2", mode="function", envir=env, inherits=FALSE)
+stopifnot(identical(obj, sample2))
 
 
 message("- where() - local objects of functions ...")
@@ -68,7 +78,7 @@ stopifnot(identical(envs$aa, globalenv()))
 stopifnot(identical(envs$bb, envs$envir))
 stopifnot(is.null(envs$cc))
 
-rm(list=c("aa", "envs", "foo", "where"))
+rm(list=c("aa", "envs", "foo", "env", "obj", "where"))
 
 message("* where() ... DONE")
 
