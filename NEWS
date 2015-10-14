@@ -1,7 +1,7 @@
 Package: globals
 ================
 
-Version: 0.4.1-9000 [2015-10-13]
+Version: 0.4.9-9000 [2015-10-13]
 o globalsOf() now returns attribute 'where' specifying where
   each global object is located.
 o BUG FIX: cleanup() now only drops objects that are *located* 
