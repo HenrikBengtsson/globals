@@ -125,6 +125,9 @@ stopifnot(
 
 globals <- cleanup(globals)
 str(globals)
-stopifnot(length(globals) == 0L)
+stopifnot(all(names(globals) %in% c("sample2")))
 where <- attr(globals, "where")
-stopifnot(length(where) == length(globals))
+stopifnot(
+  length(where) == length(globals),
+  covr || identical(where$sample2, globalenv())
+)
