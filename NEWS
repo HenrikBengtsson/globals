@@ -1,6 +1,14 @@
 Package: globals
 ================
 
+Version: 0.4.1-9000 [2015-10-13]
+o globalsOf() now returns attribute 'where' specifying where
+  each global object is located.
+o BUG FIX: cleanup() now only drops objects that are *located* 
+  in one of the "base" packages; previously it would also drop
+  copies of such objects, e.g. FUN <- base::sample.
+
+
 Version: 0.4.1 [2015-10-05]
 o BUG FIX: globalsOf() failed to return global variables
   with value NULL.  They were identified but silently dropped.
