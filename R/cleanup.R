@@ -39,7 +39,6 @@ cleanup.Globals <- function(globals, drop=c("base-packages"), ...) {
 
   if (!all(keep)) {
     globals <- globals[keep]
-    attr(globals, "where") <- where[keep]
   }
 
   globals
