@@ -32,7 +32,7 @@ is not returned.}
        If FALSE, a list of \code{length(expr)} sublists.}
 }
 \value{
-A a \link{Globals}.
+A \link{Globals} object.
 }
 \description{
 Get all global objects of an expression

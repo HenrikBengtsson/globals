@@ -42,7 +42,9 @@ as.Globals.list <- function(x, ...) {
 
 #' @export
 `[.Globals` <- function(x, i) {
+  where <- attr(x, "where")
   res <- NextMethod("[")
+  attr(res, "where") <- where[i]
   class(res) <- class(x)
   res
 }
