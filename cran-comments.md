@@ -1,5 +1,5 @@
-# CRAN submission globals 0.4.1
-on 2015-10-06
+# CRAN submission globals 0.5.0
+on 2015-10-14
 
 Thanks in advance
 
@@ -11,15 +11,15 @@ PSCBS have been verified using `R CMD check --as-cran` on:
   - R version 3.1.2 (2014-10-31)
   - R version 3.1.3 (2015-03-09)
   - R version 3.2.2 (2015-08-14)
-  - R version 3.2.2 Patched (2015-10-02 r69450)
+  - R version 3.2.2 Patched (2015-10-11 r69509)
 
 * Platform: x86_64-apple-darwin13.4.0 (64-bit):
   - R version 3.2.2 Patched (2015-09-05 r69301)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit):
   - R version 3.1.3 (2015-03-09)
-  - R version 3.2.2 Patched (2015-09-13 r69380)
-  - R Under development (unstable) (2015-09-16 r69392)
+  - R version 3.2.2 Patched (2015-10-11 r69509)
+  - R Under development (unstable) (2015-10-12 r69509)
 
 It has also verified using the <http://win-builder.r-project.org/> service.
 
