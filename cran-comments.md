@@ -5,7 +5,7 @@ Thanks in advance
 
 
 ## Notes not sent to CRAN
-PSCBS have been verified using `R CMD check --as-cran` on:
+The package has been verified using `R CMD check --as-cran` on:
 
 * Platform x86_64-pc-linux-gnu (64-bit):
   - R version 3.1.2 (2014-10-31)
