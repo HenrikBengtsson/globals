@@ -16,7 +16,7 @@
 #' @param unlist If TRUE, a list of unique objects is returned.
 #'        If FALSE, a list of \code{length(expr)} sublists.
 #'
-#' @return A a \link{Globals}.
+#' @return A \link{Globals} object.
 #'
 #' @details
 #' There currently two methods for identifying global objects.
@@ -54,29 +54,38 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", 
   if (needsDotdotdot) names <- names[-n]
 
   globals <- structure(list(), class=c("Globals", "list"))
+  where <- list()
   for (name in names) {
     env <- where(name, envir=envir, inherits=TRUE)
     if (!is.null(env)) {
+      where[[name]] <- env
       value <- get(name, envir=env, inherits=FALSE)
       if (is.null(value)) {
         globals[name] <- list(NULL)
       } else {
         globals[[name]] <- value
       }
-    } else if (mustExist) {
-      stop("Identified a global by static code inspection, but failed to locate the corresponding object in the relevant environments: ", sQuote(name))
+    } else {
+      where[name] <- list(NULL)
+      if (mustExist) {
+        stop("Identified a global by static code inspection, but failed to locate the corresponding object in the relevant environments: ", sQuote(name))
+      }
     }
   }
 
   if (needsDotdotdot) {
     if (exists("...", envir=envir, inherits=TRUE)) {
+      where[["..."]] <- where("...", envir=envir, inherits=TRUE)
       ddd <- evalq(list(...), envir=envir, enclos=envir)
     } else {
+      where["..."] <- list(NULL)
       ddd <- NA
     }
     class(ddd) <- c("DotDotDotList", class(ddd))
     globals[["..."]] <- ddd
   }
+
+  attr(globals, "where") <- where
 
   globals
 }
