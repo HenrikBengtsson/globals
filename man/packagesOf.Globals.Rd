@@ -10,7 +10,7 @@
 \arguments{
 \item{globals}{A Globals object.}
 
-\item{...}{Not used.}
+\item{\dots}{Not used.}
 }
 \value{
 Returns a character vector of package names.

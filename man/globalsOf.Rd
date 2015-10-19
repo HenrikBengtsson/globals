@@ -14,8 +14,6 @@ globalsOf(expr, envir = parent.frame(), ..., method = c("conservative",
 
 \item{envir}{The environment from where to search for globals.}
 
-\item{...}{Not used.}
-
 \item{method}{A character string specifying what type of search algorithm to use.}
 
 \item{tweak}{An optional function that takes an expression
@@ -30,6 +28,8 @@ is not returned.}
 
 \item{unlist}{If TRUE, a list of unique objects is returned.
        If FALSE, a list of \code{length(expr)} sublists.}
+
+\item{\dots}{Not used.}
 }
 \value{
 A \link{Globals} object.

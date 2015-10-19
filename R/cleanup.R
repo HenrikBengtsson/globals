@@ -5,7 +5,7 @@ cleanup <- function(...) UseMethod("cleanup")
 #'
 #' @param globals A Globals object.
 #' @param drop A character vector specifying what type of globals to drop.
-#' @param ... Not used
+#' @param \dots Not used
 #'
 #' @aliases cleanup
 #' @export

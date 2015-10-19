@@ -12,7 +12,7 @@
 
 \item{drop}{A character vector specifying what type of globals to drop.}
 
-\item{...}{Not used}
+\item{\dots}{Not used}
 }
 \description{
 Drop certain types of globals

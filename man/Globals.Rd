@@ -13,7 +13,7 @@ Globals(object, ...)
 \arguments{
 \item{object}{A named list.}
 
-\item{...}{Not used.}
+\item{\dots}{Not used.}
 }
 \value{
 An object of class \code{Future}.

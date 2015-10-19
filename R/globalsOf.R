@@ -2,12 +2,12 @@
 #'
 #' @param expr An R expression.
 #' @param envir The environment from where to search for globals.
-#' @param ... Not used.
+#' @param \dots Not used.
 #' @param method A character string specifying what type of search algorithm to use.
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
 ## @param dotdotdot A @character string specifying how to handle a
-##        \emph{global} \code{...} if one is discovered.
+##        \emph{global} \code{\dots} if one is discovered.
 #' @param substitute If TRUE, the expression is \code{substitute()}:ed,
 #'        otherwise not.
 #' @param mustExist If TRUE, an error is thrown if the object of the
