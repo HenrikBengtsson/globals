@@ -6,7 +6,7 @@
 \title{Get all global objects of an expression}
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("conservative",
-  "liberal", "incremental"), tweak = NULL, substitute = FALSE,
+  "liberal", "ordered"), tweak = NULL, substitute = FALSE,
   mustExist = TRUE, unlist = TRUE)
 }
 \arguments{

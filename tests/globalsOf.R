@@ -24,8 +24,8 @@ globalsL <- findGlobals(expr, method="liberal")
 print(globalsL)
 stopifnot(all(globalsL %in% c("{", "<-", "b", "c", "d")))
 
-message(" ** findGlobals(..., method='incremental'):")
-globalsI <- findGlobals(expr, method="incremental")
+message(" ** findGlobals(..., method='ordered'):")
+globalsI <- findGlobals(expr, method="ordered")
 print(globalsI)
 stopifnot(all(globalsI %in% c("{", "<-", "b", "c", "d")))
 
@@ -64,8 +64,8 @@ stopifnot(
   identical(where$d, globalenv())
 )
 
-message(" ** globalsOf(..., method='incremental'):")
-globalsL <- globalsOf(expr, method="incremental")
+message(" ** globalsOf(..., method='ordered'):")
+globalsL <- globalsOf(expr, method="ordered")
 str(globalsL)
 stopifnot(all(names(globalsL) %in% c("{", "<-", "b", "c", "d")))
 globalsL <- cleanup(globalsL)

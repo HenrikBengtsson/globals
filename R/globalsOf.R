@@ -42,7 +42,7 @@
 #'
 #' @aliases findGlobals
 #' @export
-globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal", "incremental"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
+globalsOf <- function(expr, envir=parent.frame(), ..., method=c("conservative", "liberal", "ordered"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)

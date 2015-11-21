@@ -25,29 +25,6 @@ findGlobals_conservative <- function(expr, envir, ...) {
   unique(objs)
 }
 
-## This function is basically an aggregation of the results of
-## findGlobals_conservative() starting with an empty expression
-## and incrementally growing the expression until the full
-## expression 'expr' is searched.  This has the advantage of
-## handling cases where a local variable is later overwriting
-## a global one with the same name, e.g. { a <- b; b <- 1 }.
-#' @importFrom codetools collectUsage
-findGlobals_incremental <- function(expr, envir, ...) {
-  objs <- character()
-
-  enter <- function(type, v, e, w) {
-    objs <<- c(objs, v)
-  }
-
-  for (n in seq_along(expr)) {
-    exprT <- expr[1:n]
-    fun <- asFunction(exprT, envir=envir, ...)
-    collectUsage(fun, enterGlobal=enter)
-  }
-
-  unique(objs)
-}
-
 
 #' @importFrom codetools makeUsageCollector walkCode
 findGlobals_liberal <- function(expr, envir, ...) {
@@ -64,8 +41,37 @@ findGlobals_liberal <- function(expr, envir, ...) {
   unique(objs)
 }
 
+
+#' @importFrom codetools makeUsageCollector walkCode
+findGlobals_ordered <- function(expr, envir, ...) {
+  class <- name <- character()
+
+  enterLocal <- function(type, v, e, w) {
+    class <<- c(class, "local")
+    name <<- c(name, v)
+  }
+
+  enterGlobal <- function(type, v, e, w) {
+    class <<- c(class, "global")
+    name <<- c(name, v)
+  }
+
+  fun <- asFunction(expr, envir=envir, ...)
+  w <- makeUsageCollector(fun, name="<anonymous>",
+                          enterLocal=enterLocal, enterGlobal=enterGlobal)
+  walkCode(expr, w)
+
+  ## Drop duplicated names
+  dups <- duplicated(name)
+  class <- class[!dups]
+  name <- name[!dups]
+
+  unique(name[class == "global"])
+}
+
+
 #' @export
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal", "incremental"), substitute=FALSE, unlist=TRUE) {
+findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal", "ordered"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
   dotdotdot <- match.arg(dotdotdot)
 
@@ -97,8 +103,8 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
     findGlobalsT <- findGlobals_conservative
   } else if (method == "liberal") {
     findGlobalsT <- findGlobals_liberal
-  } else if (method == "incremental") {
-    findGlobalsT <- findGlobals_incremental
+  } else if (method == "ordered") {
+    findGlobalsT <- findGlobals_ordered
   }
 
   ## Is there a need for global '...' variables?
