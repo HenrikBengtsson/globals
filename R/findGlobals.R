@@ -50,9 +50,34 @@ findGlobals_liberal <- function(expr, envir, ...) {
   sort(unique(c(fnames, vnames)))
 }
 
+findGlobals_incremental <- function(expr, envir, ...) {
+  requireNamespace("codetools")
+
+  vars <- new.env(hash=TRUE, parent=emptyenv())
+  funs <- new.env(hash=TRUE, parent=emptyenv())
+
+  enter <- function(type, v, e, w) {
+    if (type == "function")
+      assign(v, value=TRUE, envir=funs)
+    else
+      assign(v, value=TRUE, envir=vars)
+  }
+
+  for (n in seq_along(expr)) {
+    exprT <- expr[1:n]
+    fun <- asFunction(exprT, envir=envir, ...)
+    w <- codetools::makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
+    codetools::walkCode(expr, w)
+  }
+
+  fnames <- ls(funs, all.names = TRUE)
+  vnames <- ls(vars, all.names = TRUE)
+  sort(unique(c(fnames, vnames)))
+}
+
 
 #' @export
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
+findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal", "incremental"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
   dotdotdot <- match.arg(dotdotdot)
 
@@ -80,10 +105,12 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
 
   if (is.function(tweak)) expr <- tweak(expr)
 
-  if (method == "liberal") {
-    findGlobalsT <- findGlobals_liberal
-  } else {
+  if (method == "conservative") {
     findGlobalsT <- findGlobals_conservative
+  } else if (method == "liberal") {
+    findGlobalsT <- findGlobals_liberal
+  } else if (method == "incremental") {
+    findGlobalsT <- findGlobals_incremental
   }
 
   ## Is there a need for global '...' variables?
