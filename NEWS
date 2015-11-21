@@ -1,7 +1,7 @@
 Package: globals
 ================
 
-Version: 0.5.0-9000 [2015-11-20]
+Version: 0.5.9-9000 [2015-11-20]
 o Add findGlobals(..., method="ordered") to handle the case
   where a local variable is overwriting a global one with the
   same name, e.g. { a <- b; b <- 1 }.  This alternative will
