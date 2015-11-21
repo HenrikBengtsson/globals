@@ -71,7 +71,7 @@ findGlobals_ordered <- function(expr, envir, ...) {
 
 
 #' @export
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("conservative", "liberal", "ordered"), substitute=FALSE, unlist=TRUE) {
+findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("ordered", "conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
   method <- match.arg(method)
   dotdotdot <- match.arg(dotdotdot)
 
@@ -99,12 +99,12 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
 
   if (is.function(tweak)) expr <- tweak(expr)
 
-  if (method == "conservative") {
+  if (method == "ordered") {
+    findGlobalsT <- findGlobals_ordered
+  } else if (method == "conservative") {
     findGlobalsT <- findGlobals_conservative
   } else if (method == "liberal") {
     findGlobalsT <- findGlobals_liberal
-  } else if (method == "ordered") {
-    findGlobalsT <- findGlobals_ordered
   }
 
   ## Is there a need for global '...' variables?

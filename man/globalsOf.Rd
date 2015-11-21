@@ -5,8 +5,8 @@
 \alias{globalsOf}
 \title{Get all global objects of an expression}
 \usage{
-globalsOf(expr, envir = parent.frame(), ..., method = c("conservative",
-  "liberal", "ordered"), tweak = NULL, substitute = FALSE,
+globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
+  "conservative", "liberal"), tweak = NULL, substitute = FALSE,
   mustExist = TRUE, unlist = TRUE)
 }
 \arguments{
@@ -38,7 +38,11 @@ A \link{Globals} object.
 Get all global objects of an expression
 }
 \details{
-There currently two methods for identifying global objects.
+There currently three methods for identifying global objects.
+
+The \code{"ordered"} search method identifies globals such that
+a global variable preceeding a local variable with the same name
+is not dropped (which the \code{"conservative"} method would).
 
 The \code{"conservative"} search method tries to keep the number
 of false positive to a minimum, i.e. the identified objects are
