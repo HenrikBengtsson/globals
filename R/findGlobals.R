@@ -1,7 +1,31 @@
+## This function is equivalent to:
+##    fun <- asFunction(expr, envir=envir, ...)
+##    codetools::findGlobals(fun, merge=TRUE)
+## but we expand it here to make it more explicit
+## what is going on.
 findGlobals_conservative <- function(expr, envir, ...) {
+  requireNamespace("codetools")
+
+  vars <- new.env(hash=TRUE, parent=emptyenv())
+  funs <- new.env(hash=TRUE, parent=emptyenv())
+
+  enter <- function(type, v, e, w) {
+    if (type == "function")
+      assign(v, value=TRUE, envir=funs)
+    else
+      assign(v, value=TRUE, envir=vars)
+  }
+
   fun <- asFunction(expr, envir=envir, ...)
-  names <- codetools::findGlobals(fun, merge=TRUE)
-  names
+  codetools::collectUsage(fun, enterGlobal=enter)
+
+  ## The above becomes equivalent to:
+  # w <- codetools::makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
+  # codetools:::collectUsageFun(NULL, NULL, expr, w)
+
+  fnames <- ls(funs, all.names = TRUE)
+  vnames <- ls(vars, all.names = TRUE)
+  sort(unique(c(fnames, vnames)))
 }
 
 findGlobals_liberal <- function(expr, envir, ...) {
