@@ -6,8 +6,8 @@
 \title{Get all global objects of an expression}
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("conservative",
-  "liberal"), tweak = NULL, substitute = FALSE, mustExist = TRUE,
-  unlist = TRUE)
+  "liberal", "incremental"), tweak = NULL, substitute = FALSE,
+  mustExist = TRUE, unlist = TRUE)
 }
 \arguments{
 \item{expr}{An R expression.}
