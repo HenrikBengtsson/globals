@@ -27,7 +27,7 @@ stopifnot(all(globalsL %in% c("{", "<-", "b", "c", "d")))
 message(" ** findGlobals(..., method='incremental'):")
 globalsI <- findGlobals(expr, method="incremental")
 print(globalsI)
-stopifnot(all(globalsL %in% c("{", "<-", "b", "c", "d")))
+stopifnot(all(globalsI %in% c("{", "<-", "b", "c", "d")))
 
 message("*** findGlobals() ... DONE")
 
