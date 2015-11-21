@@ -3,29 +3,26 @@
 ##    codetools::findGlobals(fun, merge=TRUE)
 ## but we expand it here to make it more explicit
 ## what is going on.
+#' @importFrom codetools makeUsageCollector findLocalsList walkCode
 findGlobals_conservative <- function(expr, envir, ...) {
-  requireNamespace("codetools")
-
-  vars <- new.env(hash=TRUE, parent=emptyenv())
-  funs <- new.env(hash=TRUE, parent=emptyenv())
+  objs <- character()
 
   enter <- function(type, v, e, w) {
-    if (type == "function")
-      assign(v, value=TRUE, envir=funs)
-    else
-      assign(v, value=TRUE, envir=vars)
+    objs <<- c(objs, v)
   }
 
+  ## From codetools::findGlobals():
   fun <- asFunction(expr, envir=envir, ...)
-  codetools::collectUsage(fun, enterGlobal=enter)
+  # codetools::collectUsage(fun, enterGlobal=enter)
 
-  ## The above becomes equivalent to:
-  # w <- codetools::makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
-  # codetools:::collectUsageFun(NULL, NULL, expr, w)
+  ## The latter becomes equivalent to (after cleanup):
+  w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
+  w$env <- new.env(hash=TRUE, parent=w$env)
+  locals <- findLocalsList(list(expr))
+  for (name in locals) assign(name, value=TRUE, envir=w$env)
+  walkCode(expr, w)
 
-  fnames <- ls(funs, all.names = TRUE)
-  vnames <- ls(vars, all.names = TRUE)
-  sort(unique(c(fnames, vnames)))
+  unique(objs)
 }
 
 ## This function is basically an aggregation of the results of
@@ -34,50 +31,37 @@ findGlobals_conservative <- function(expr, envir, ...) {
 ## expression 'expr' is searched.  This has the advantage of
 ## handling cases where a local variable is later overwriting
 ## a global one with the same name, e.g. { a <- b; b <- 1 }.
+#' @importFrom codetools collectUsage
 findGlobals_incremental <- function(expr, envir, ...) {
-  requireNamespace("codetools")
-
-  vars <- new.env(hash=TRUE, parent=emptyenv())
-  funs <- new.env(hash=TRUE, parent=emptyenv())
+  objs <- character()
 
   enter <- function(type, v, e, w) {
-    if (type == "function")
-      assign(v, value=TRUE, envir=funs)
-    else
-      assign(v, value=TRUE, envir=vars)
+    objs <<- c(objs, v)
   }
 
   for (n in seq_along(expr)) {
     exprT <- expr[1:n]
     fun <- asFunction(exprT, envir=envir, ...)
-    codetools::collectUsage(fun, enterGlobal=enter)
+    collectUsage(fun, enterGlobal=enter)
   }
 
-  fnames <- ls(funs, all.names = TRUE)
-  vnames <- ls(vars, all.names = TRUE)
-  sort(unique(c(fnames, vnames)))
+  unique(objs)
 }
 
-findGlobals_liberal <- function(expr, envir, ...) {
-  requireNamespace("codetools")
 
-  vars <- new.env(hash=TRUE, parent=emptyenv())
-  funs <- new.env(hash=TRUE, parent=emptyenv())
+#' @importFrom codetools makeUsageCollector walkCode
+findGlobals_liberal <- function(expr, envir, ...) {
+  objs <- character()
 
   enter <- function(type, v, e, w) {
-    if (type == "function")
-      assign(v, value=TRUE, envir=funs)
-    else
-      assign(v, value=TRUE, envir=vars)
+    objs <<- c(objs, v)
   }
 
   fun <- asFunction(expr, envir=envir, ...)
-  w <- codetools::makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
-  codetools::walkCode(expr, w)
+  w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
+  walkCode(expr, w)
 
-  fnames <- ls(funs, all.names = TRUE)
-  vnames <- ls(vars, all.names = TRUE)
-  sort(unique(c(fnames, vnames)))
+  unique(objs)
 }
 
 #' @export
