@@ -1,7 +1,7 @@
 Package: globals
 ================
 
-Version: 0.5.9-9000 [2015-11-20]
+Version: 0.6.0 [2015-12-12]
 o findGlobals() is updated to handle the case where a local
   variable is overwriting a global one with the same name,
   e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
