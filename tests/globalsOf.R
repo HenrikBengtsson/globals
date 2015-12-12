@@ -12,17 +12,30 @@ c <- 3
 d <- NULL
 expr <- substitute({ x <- b; b <- 1; y <- c; z <- d }, env=list())
 
-message("*** findGlobals():")
+message("*** findGlobals() ...")
+
+message(" ** findGlobals(..., method='conservative'):")
 globalsC <- findGlobals(expr, method="conservative")
 print(globalsC)
 stopifnot(all(globalsC %in% c("{", "<-", "c", "d")))
 
+message(" ** findGlobals(..., method='liberal'):")
 globalsL <- findGlobals(expr, method="liberal")
 print(globalsL)
 stopifnot(all(globalsL %in% c("{", "<-", "b", "c", "d")))
 
+message(" ** findGlobals(..., method='ordered'):")
+globalsI <- findGlobals(expr, method="ordered")
+print(globalsI)
+stopifnot(all(globalsI %in% c("{", "<-", "b", "c", "d")))
 
-message("*** globalsOf():")
+message("*** findGlobals() ... DONE")
+
+
+
+message("*** globalsOf() ...")
+
+message(" ** globalsOf(..., method='conservative'):")
 globalsC <- globalsOf(expr, method="conservative")
 str(globalsC)
 stopifnot(all(names(globalsC) %in% c("{", "<-", "c", "d")))
@@ -36,6 +49,7 @@ stopifnot(
   identical(where$d, globalenv())
 )
 
+message(" ** globalsOf(..., method='liberal'):")
 globalsL <- globalsOf(expr, method="liberal")
 str(globalsL)
 stopifnot(all(names(globalsL) %in% c("{", "<-", "b", "c", "d")))
@@ -49,6 +63,23 @@ stopifnot(
   identical(where$c, globalenv()),
   identical(where$d, globalenv())
 )
+
+message(" ** globalsOf(..., method='ordered'):")
+globalsL <- globalsOf(expr, method="ordered")
+str(globalsL)
+stopifnot(all(names(globalsL) %in% c("{", "<-", "b", "c", "d")))
+globalsL <- cleanup(globalsL)
+str(globalsL)
+stopifnot(all(names(globalsL) %in% c("b", "c", "d")))
+where <- attr(globalsL, "where")
+stopifnot(
+  length(where) == length(globalsL),
+  identical(where$b, globalenv()),
+  identical(where$c, globalenv()),
+  identical(where$d, globalenv())
+)
+
+message("*** globalsOf() ... DONE")
 
 
 message("*** Subsetting of Globals:")

@@ -3,7 +3,7 @@
 #' @usage Globals(object, ...)
 #'
 #' @param object A named list.
-#' @param ... Not used.
+#' @param \dots Not used.
 #'
 #' @return An object of class \code{Future}.
 #'
