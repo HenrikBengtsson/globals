@@ -5,7 +5,7 @@ Version: 0.6.0 [2015-12-12]
 o findGlobals() is updated to handle the case where a local
   variable is overwriting a global one with the same name,
   e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
-  as global object.  Previously it would have been missed.
+  as a global object.  Previously it would have been missed.
   For backward compatibility, the previous behavior can be
   obtained using argument method="conservative".
 
