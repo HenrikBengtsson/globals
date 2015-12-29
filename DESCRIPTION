@@ -4,6 +4,10 @@ Depends:
     R (>= 3.1.2)
 Imports:
     codetools
+Suggests:
+    R.rsp
+VignetteBuilder:
+    R.rsp
 Title: Identify Global Objects in R Expressions
 Authors@R: c(
   person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
