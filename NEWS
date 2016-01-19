@@ -1,6 +1,12 @@
 Package: globals
 ================
 
+Version: 0.6.0-9000 [2016-01-19]
+o Now the error message of globalsOf(..., mustExist=TRUE) when
+  it fails to locate a global also gives information on the
+  expression that is problematic.
+
+
 Version: 0.6.0 [2015-12-12]
 o findGlobals() is updated to handle the case where a local
   variable is overwriting a global one with the same name,

@@ -72,7 +72,7 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     } else {
       where[name] <- list(NULL)
       if (mustExist) {
-        stop("Identified a global by static code inspection, but failed to locate the corresponding object in the relevant environments: ", sQuote(name))
+        stop(sprintf("Identified a global object via static code inspection (%s), but failed to locate the corresponding object in the relevant environments: %s", hexpr(expr), sQuote(name)))
       }
     }
   }
