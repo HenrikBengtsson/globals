@@ -142,10 +142,10 @@ stopifnot(pkgs == "globals")
 
 message("*** globalsOf() and core-package functions:")
 sample2 <- base::sample
-expr <- substitute({ x <- sample(10); y <- sample2(10) }, env=list())
+expr <- substitute({ x <- sample(10); y <- sample2(10); s <- sessionInfo() }, env=list())
 globals <- globalsOf(expr)
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2")))
+stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2", "sessionInfo")))
 where <- attr(globals, "where")
 stopifnot(
   length(where) == length(globals),

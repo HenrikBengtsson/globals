@@ -15,6 +15,7 @@ findBasePkgs <- local({
 })
 
 isBasePkgs <- function(pkgs) {
+  pkgs <- gsub("^package:", "", pkgs)
   pkgs %in% findBasePkgs()
 }
 

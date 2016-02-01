@@ -1,10 +1,12 @@
 Package: globals
 ================
 
-Version: 0.6.0-9000 [2016-01-19]
+Version: 0.6.0-9000 [2016-01-31]
 o Now the error message of globalsOf(..., mustExist=TRUE) when
   it fails to locate a global also gives information on the
   expression that is problematic.
+o BUG FIX: cleanup() for Globals did not cleanup functions
+  in core package environments named 'package:<name>'.
 
 
 Version: 0.6.0 [2015-12-12]
