@@ -142,10 +142,11 @@ stopifnot(pkgs == "globals")
 
 message("*** globalsOf() and core-package functions:")
 sample2 <- base::sample
-expr <- substitute({ x <- sample(10); y <- sample2(10) }, env=list())
+sum2 <- base::sum
+expr <- substitute({ x <- sample(10); y <- sum(x); x2 <- sample2(10); y2 <- sum2(x); s <- sessionInfo() }, env=list())
 globals <- globalsOf(expr)
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2")))
+stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2")))
 where <- attr(globals, "where")
 stopifnot(
   length(where) == length(globals),
@@ -156,9 +157,24 @@ stopifnot(
 
 globals <- cleanup(globals)
 str(globals)
-stopifnot(all(names(globals) %in% c("sample2")))
+stopifnot(all(names(globals) %in% c("sample2", "sum2")))
 where <- attr(globals, "where")
 stopifnot(
   length(where) == length(globals),
   covr || identical(where$sample2, globalenv())
 )
+
+globals <- cleanup(globals, drop="primitives")
+str(globals)
+stopifnot(all(names(globals) %in% c("sample2")))
+
+
+message("*** globalsOf() - exceptions ...")
+
+rm(list="a")
+res <- try({
+  globals <- globalsOf({ x <- a }, substitute=TRUE, mustExist=TRUE)
+}, silent=TRUE)
+stopifnot(inherits(res, "try-error"))
+
+message("*** globalsOf() - exceptions ... DONE")

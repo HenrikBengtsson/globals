@@ -35,6 +35,7 @@ findGlobals_liberal <- function(expr, envir, ...) {
   }
 
   fun <- asFunction(expr, envir=envir, ...)
+
   w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
   walkCode(expr, w)
 
@@ -57,6 +58,7 @@ findGlobals_ordered <- function(expr, envir, ...) {
   }
 
   fun <- asFunction(expr, envir=envir, ...)
+
   w <- makeUsageCollector(fun, name="<anonymous>",
                           enterLocal=enterLocal, enterGlobal=enterGlobal)
   walkCode(expr, w)
@@ -78,7 +80,7 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
   if (substitute) expr <- substitute(expr)
 
   if (is.list(expr)) {
-    globals <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, dotdotdot=dotdotdot, unlist=FALSE)
+    globals <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, dotdotdot=dotdotdot, substitute=FALSE, unlist=FALSE)
     if (unlist) {
       needsDotdotdot <- FALSE
       for (kk in seq_along(globals)) {

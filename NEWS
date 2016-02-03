@@ -1,11 +1,19 @@
 Package: globals
 ================
 
+Version: 0.6.1 [2016-01-31]
+o Now the error message of globalsOf(..., mustExist=TRUE) when
+  it fails to locate a global also gives information on the
+  expression that is problematic.
+o BUG FIX: cleanup() for Globals did not cleanup functions
+  in core package environments named 'package:<name>'.
+
+
 Version: 0.6.0 [2015-12-12]
 o findGlobals() is updated to handle the case where a local
   variable is overwriting a global one with the same name,
   e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
-  as global object.  Previously it would have been missed.
+  as a global object.  Previously it would have been missed.
   For backward compatibility, the previous behavior can be
   obtained using argument method="conservative".
 
