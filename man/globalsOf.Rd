@@ -7,7 +7,7 @@
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
   "conservative", "liberal"), tweak = NULL, substitute = FALSE,
-  mustExist = TRUE, unlist = TRUE)
+  mustExist = TRUE, addS3 = TRUE, unlist = TRUE)
 }
 \arguments{
 \item{expr}{An R expression.}
@@ -25,6 +25,11 @@ otherwise not.}
 \item{mustExist}{If TRUE, an error is thrown if the object of the
 identified global cannot be located.  Otherwise, the global
 is not returned.}
+
+\item{addS3}{If TRUE and there exist S3 generic functions among the
+identified globals, then all corresponding S3 methods that
+can be located from the \code{envir} environment are also
+appended to the set of globals returned.}
 
 \item{unlist}{If TRUE, a list of unique objects is returned.
 If FALSE, a list of \code{length(expr)} sublists.}

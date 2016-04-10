@@ -13,6 +13,10 @@
 #' @param mustExist If TRUE, an error is thrown if the object of the
 #'        identified global cannot be located.  Otherwise, the global
 #'        is not returned.
+#' @param addS3 If TRUE and there exist S3 generic functions among the
+#'        identified globals, then all corresponding S3 methods that
+#'        can be located from the \code{envir} environment are also
+#'        appended to the set of globals returned.
 #' @param unlist If TRUE, a list of unique objects is returned.
 #'        If FALSE, a list of \code{length(expr)} sublists.
 #'
@@ -46,7 +50,7 @@
 #'
 #' @aliases findGlobals
 #' @export
-globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
+globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, addS3=TRUE, unlist=TRUE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
@@ -90,6 +94,11 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
   }
 
   attr(globals, "where") <- where
+
+  if (addS3) {
+    globals <- addS3Methods(globals, envir=envir)
+    globals <- unique(globals)
+  }
 
   globals
 }

@@ -6,6 +6,8 @@
 \alias{as.Globals}
 \alias{as.Globals.Globals}
 \alias{as.Globals.list}
+\alias{c.Globals}
+\alias{unique.Globals}
 \title{A representation of a set of globals}
 \usage{
 Globals(object, ...)
