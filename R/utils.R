@@ -245,6 +245,8 @@ s3GlobalsOf <- function(name, envir=parent.frame()) {
   names(uwhere) <- uwhere
   uwhere <- lapply(uwhere, FUN=function(w) {
     if (w == ".GlobalEnv") return(.GlobalEnv)
+    w <- sub("package:", "", w, fixed=TRUE)   ## For R (<= 3.1.3)
+    w <- sub("namespace:", "", w, fixed=TRUE) ## Just in case
     asNamespace(w)
   })
   where <- uwhere[where]
