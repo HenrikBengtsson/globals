@@ -62,6 +62,9 @@ if (!covr) stopifnot(
 globals <- cleanup(globals)
 str(globals)
 stopifnot(all(names(globals) %in% c("foo")))
+globals <- cleanup(globals, drop="internals")
+str(globals)
+stopifnot(all(names(globals) %in% c("foo")))
 pkgs <- packagesOf(globals)
 stopifnot(pkgs == "globals")
 
@@ -213,3 +216,18 @@ res <- try({
 stopifnot(inherits(res, "try-error"))
 
 message("*** globalsOf() - exceptions ... DONE")
+
+
+message("*** Globals() - exceptions ...")
+
+res <- tryCatch({ Globals(NULL) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+res <- tryCatch({ Globals(list(1,2)) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+res <- tryCatch({ Globals(list(a=1,2)) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+message("*** Globals() - exceptions ... DONE")
+
