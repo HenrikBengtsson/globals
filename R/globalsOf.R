@@ -51,8 +51,10 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
 
   if (substitute) expr <- substitute(expr)
 
+  ## 1. Identify global variables (static code inspection)
   names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
 
+  ## 2. Locate them (run time)
   n <- length(names)
   needsDotdotdot <- (identical(names[n], "..."))
   if (needsDotdotdot) names <- names[-n]
@@ -92,4 +94,64 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
   attr(globals, "where") <- where
 
   globals
-}
+} ## globalsOf()
+
+
+
+
+#' Locates and retrieves a set of global variables by their names
+#'
+#' @param names A character vector of global variable names.
+#' @param envir The environment from where to search for globals.
+#' @param mustExist If TRUE, an error is thrown if the object of the
+#'        identified global cannot be located.  Otherwise, the global
+#'        is not returned.
+#' @param ... Not used.
+#'
+#' @return A \link{Globals} object.
+#'
+#' @export
+globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
+  names <- as.character(names)
+
+  ## Locate and retrieve the specified globals
+  n <- length(names)
+  needsDotdotdot <- (identical(names[n], "..."))
+  if (needsDotdotdot) names <- names[-n]
+
+  globals <- structure(list(), class=c("Globals", "list"))
+  where <- list()
+  for (name in names) {
+    env <- where(name, envir=envir, inherits=TRUE)
+    if (!is.null(env)) {
+      where[[name]] <- env
+      value <- get(name, envir=env, inherits=FALSE)
+      if (is.null(value)) {
+        globals[name] <- list(NULL)
+      } else {
+        globals[[name]] <- value
+      }
+    } else {
+      where[name] <- list(NULL)
+      if (mustExist) {
+        stop(sprintf("Failed to locate global object in the relevant environments: %s", sQuote(name)))
+      }
+    }
+  }
+
+  if (needsDotdotdot) {
+    if (exists("...", envir=envir, inherits=TRUE)) {
+      where[["..."]] <- where("...", envir=envir, inherits=TRUE)
+      ddd <- evalq(list(...), envir=envir, enclos=envir)
+    } else {
+      where["..."] <- list(NULL)
+      ddd <- NA
+    }
+    class(ddd) <- c("DotDotDotList", class(ddd))
+    globals[["..."]] <- ddd
+  }
+
+  attr(globals, "where") <- where
+
+  globals
+} ## globalsByName()

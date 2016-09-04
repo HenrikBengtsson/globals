@@ -1,6 +1,11 @@
 Package: globals
 ================
 
+Version: 0.6.1-9000 [2016-09-03]
+o Added globalsByName() for locating and retrieving a set of
+  known global variables.
+
+
 Version: 0.6.1 [2016-01-31]
 o Now the error message of globalsOf(..., mustExist=TRUE) when
   it fails to locate a global also gives information on the

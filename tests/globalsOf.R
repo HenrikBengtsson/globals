@@ -32,6 +32,41 @@ stopifnot(all(globalsI %in% c("{", "<-", "b", "c", "d")))
 message("*** findGlobals() ... DONE")
 
 
+message("*** globalsByName() ...")
+
+globalsC <- globalsByName(c("{", "<-", "c", "d"))
+str(globalsC)
+stopifnot(all(names(globalsC) %in% c("{", "<-", "c", "d")))
+globalsC <- cleanup(globalsC)
+str(globalsC)
+stopifnot(all(names(globalsC) %in% c("c", "d")))
+where <- attr(globalsC, "where")
+stopifnot(
+  length(where) == length(globalsC),
+  identical(where$c, globalenv()),
+  identical(where$d, globalenv())
+)
+
+foo <- globals::Globals
+globals <- globalsByName(c("{", "foo", "list"))
+str(globals)
+stopifnot(all(names(globals) %in% c("{", "foo", "list")))
+where <- attr(globals, "where")
+stopifnot(
+  length(where) == length(globals),
+  identical(where$`{`, baseenv()),
+  covr || identical(where$foo, globalenv()),
+  identical(where$list, baseenv())
+)
+
+globals <- cleanup(globals)
+str(globals)
+stopifnot(all(names(globals) %in% c("foo")))
+pkgs <- packagesOf(globals)
+stopifnot(pkgs == "globals")
+
+message("*** globalsByName() ... DONE")
+
 
 message("*** globalsOf() ...")
 
