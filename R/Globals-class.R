@@ -25,6 +25,9 @@ Globals <- function(object, ...) {
     stop("Argument 'object' specifies globals with empty names.")
   }
 
+  where <- attr(object, "where")
+  stopifnot(is.list(where), length(where) == length(object))
+
   structure(object, class=c(class(object), "Globals"))
 }
 
@@ -46,5 +49,9 @@ as.Globals.list <- function(x, ...) {
   res <- NextMethod("[")
   attr(res, "where") <- where[i]
   class(res) <- class(x)
+
+  where <- attr(res, "where")
+  stopifnot(is.list(where), length(where) == length(res))
+
   res
 }
