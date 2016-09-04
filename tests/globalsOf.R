@@ -52,10 +52,10 @@ globals <- globalsByName(c("{", "foo", "list"))
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "foo", "list")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(
   identical(where$`{`, baseenv()),
-  covr || identical(where$foo, globalenv()),
+  identical(where$foo, globalenv()),
   identical(where$list, baseenv())
 )
 
@@ -161,10 +161,10 @@ globals <- globalsOf(expr)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "foo", "list")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(
   identical(where$`{`, baseenv()),
-  covr || identical(where$foo, globalenv()),
+  identical(where$foo, globalenv()),
   identical(where$list, baseenv())
 )
 
@@ -183,21 +183,21 @@ globals <- globalsOf(expr)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(
   identical(where$`<-`, baseenv()),
   identical(where$sample, baseenv()),
-  covr || identical(where$sample2, globalenv())
+  identical(where$sample2, globalenv())
 )
+
 
 globals <- cleanup(globals)
 str(globals)
 stopifnot(all(names(globals) %in% c("sample2", "sum2")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
-  covr || identical(where$sample2, globalenv())
-)
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(identical(where$sample2, globalenv()))
+
 
 globals <- cleanup(globals, drop="primitives")
 str(globals)
