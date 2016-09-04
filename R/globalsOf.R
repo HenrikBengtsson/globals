@@ -55,43 +55,15 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
   names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
 
   ## 2. Locate them (run time)
-  n <- length(names)
-  needsDotdotdot <- (identical(names[n], "..."))
-  if (needsDotdotdot) names <- names[-n]
-
-  globals <- structure(list(), class=c("Globals", "list"))
-  where <- list()
-  for (name in names) {
-    env <- where(name, envir=envir, inherits=TRUE)
-    if (!is.null(env)) {
-      where[[name]] <- env
-      value <- get(name, envir=env, inherits=FALSE)
-      if (is.null(value)) {
-        globals[name] <- list(NULL)
-      } else {
-        globals[[name]] <- value
-      }
-    } else {
-      where[name] <- list(NULL)
-      if (mustExist) {
-        stop(sprintf("Identified a global object via static code inspection (%s), but failed to locate the corresponding object in the relevant environments: %s", hexpr(expr), sQuote(name)))
-      }
-    }
-  }
-
-  if (needsDotdotdot) {
-    if (exists("...", envir=envir, inherits=TRUE)) {
-      where[["..."]] <- where("...", envir=envir, inherits=TRUE)
-      ddd <- evalq(list(...), envir=envir, enclos=envir)
-    } else {
-      where["..."] <- list(NULL)
-      ddd <- NA
-    }
-    class(ddd) <- c("DotDotDotList", class(ddd))
-    globals[["..."]] <- ddd
-  }
-
-  attr(globals, "where") <- where
+  globals <- tryCatch({
+    globalsByName(names, envir=envir, mustExist=mustExist)
+  }, error = function(ex) {
+    ## HACK: Tweak error message to also include the expression inspected.
+    msg <- conditionMessage(ex)
+    msg <- sprintf("Identified global objects via static code inspection (%s). %s", hexpr(expr), msg)
+    ex$message <- msg
+    stop(ex)
+  })
 
   globals
 } ## globalsOf()
