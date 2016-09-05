@@ -63,3 +63,45 @@ as.Globals.list <- function(x, ...) {
 
   res
 }
+
+
+
+#' @export
+c.Globals <- function(x, ...) {
+  args <- list(...)
+
+  where <- attr(x, "where")
+  clazz <- class(x)
+  class(x) <- NULL
+  
+  for (kk in seq_along(args)) {
+    g <- args[[kk]]
+    stopifnot(inherits(g, "Globals"))
+    w <- attr(g, "where")
+    where <- c(where, w)
+    x <- c(x, g)
+  }
+  
+  class(x) <- clazz
+  attr(x, "where") <- where
+
+  stopifnot(length(where) == length(x), all(names(where) == names(x)))
+
+  x
+}
+
+#' @export
+unique.Globals <- function(x, ...) {
+  names <- names(x)
+  dups <- duplicated(names)
+  if (any(dups)) {
+    where <- attr(x, "where")
+    where <- where[!dups]
+    x <- x[!dups]
+    attr(x, "where") <- where
+    
+    stopifnot(length(where) == length(x), all(names(where) == names(x)))
+  }
+
+  x
+}
