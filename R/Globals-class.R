@@ -26,7 +26,11 @@ Globals <- function(object, ...) {
   }
 
   where <- attr(object, "where")
-  stopifnot(is.list(where), length(where) == length(object))
+  stopifnot(
+    is.list(where),
+    length(where) == length(object),
+    all(names(where) == names)
+  )
 
   structure(object, class=c(class(object), "Globals"))
 }
@@ -51,7 +55,11 @@ as.Globals.list <- function(x, ...) {
   class(res) <- class(x)
 
   where <- attr(res, "where")
-  stopifnot(is.list(where), length(where) == length(res))
+  stopifnot(
+    is.list(where),
+    length(where) == length(res),
+    all(names(where) == names(res))
+  )
 
   res
 }
