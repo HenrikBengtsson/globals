@@ -43,7 +43,7 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
     }
     if (is.function(pairlist)) expr <- pairlist(expr)
   } else {
-    stop("Cannot tweak expression. Unknown type ", sQuote(typeof(expr)), call.=FALSE)
+    stop("Cannot walk expression. Unknown object type ", sQuote(typeof(expr)), call.=FALSE)
   }
 
   ## Assert that the tweak functions return a valid object

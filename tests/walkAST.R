@@ -11,6 +11,9 @@ exprs <- list(
   assign = substitute(1 -> a),
   assign = substitute(a <- b + 1),
   assign = substitute(x <- rnorm(20, mu=0)),
+  fcn    = substitute(function(a=1, b=2) sum(c(a, b))),
+  fcn    = substitute(function(a=1, b) sum(c(a, b))),
+  fcn    = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
   ok     = substitute(function(...) sum(x, ...)),
   warn   = substitute(sum(x, ...))
 )
@@ -46,5 +49,24 @@ for (kk in seq_along(exprs)) {
 
   message(sprintf("- walkAST(<expression #%d (%s)>) ... DONE", kk, sQuote(name)))
 } ## for (name ...)
+
+
+message("*** walkAST() - substitute=TRUE ...")
+
+expr <- walkAST(a <- 1, substitute=TRUE)
+print(expr)
+
+message("*** walkAST() - substitute=TRUE ... DONE")
+
+
+message("*** walkAST() - exceptions ...")
+
+res <- tryCatch({
+  expr <- walkAST(list())
+}, error = identity)
+print(res)
+stopifnot(inherits(res, "simpleError"))
+
+message("*** walkAST() - exceptions ... DONE")
 
 message("*** walkAST() ... DONE")

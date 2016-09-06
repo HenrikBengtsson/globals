@@ -63,7 +63,7 @@ stopifnot(all(hpaste(x, collapse=NULL) == x))
 # Empty input
 stopifnot(identical(hpaste(character(0)), character(0)))
 
-message("* hpaste() ...")
+message("* hpaste() ... DONE")
 
 
 message("* asFunction() ...")
@@ -104,7 +104,9 @@ str(env)
 message("- where('sample') ...")
 env <- where("sample", mode="function")
 print(env)
-stopifnot(identical(env, baseenv()))
+if (!"covr" %in% loadedNamespaces()) {
+  stopifnot(identical(env, baseenv()))
+}
 obj <- get("sample", mode="function", envir=env, inherits=FALSE)
 stopifnot(identical(obj, base::sample))
 
