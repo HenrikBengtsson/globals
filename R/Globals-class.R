@@ -11,7 +11,7 @@
 #' The \code{\link{globalsOf}()} function identifies globals
 #' from an R expression and returns a Globals object.
 #'
-#' @aliases as.Globals as.Globals.Globals as.Globals.list [.Globals
+#' @aliases as.Globals as.Globals.Globals as.Globals.list [.Globals names
 #' @export
 Globals <- function(object, ...) {
   if (!is.list(object)) {
@@ -47,6 +47,14 @@ as.Globals.list <- function(x, ...) {
   Globals(x, ...)
 }
 
+#' @export
+`names<-.Globals` <- function(x, value) {
+  x <- NextMethod("names")
+  where <- attr(x, "where")
+  names(where) <- names(x)
+  attr(x, "where") <- where
+  invisible(x)
+}
 
 #' @export
 `[.Globals` <- function(x, i) {

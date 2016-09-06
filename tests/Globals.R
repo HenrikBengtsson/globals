@@ -17,6 +17,30 @@ stopifnot(
   all(names(globals) == names(where))
 )
 
+message("*** Globals() - names ...")
+
+globals <- globals0
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 2L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globals0))),
+  all(names(globals) == names(where))
+)
+
+names(globals)[1] <- "A"
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 2L,
+  length(where) == length(globals),
+  all(names(globals) == c("A", names(globals0)[-1])),
+  all(names(globals) == names(where))
+)
+
+message("*** Globals() - names ... DONE")
+
 message("*** Globals() - subsetting ...")
 
 globals <- globals0[1]

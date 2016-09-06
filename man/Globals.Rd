@@ -6,6 +6,7 @@
 \alias{as.Globals}
 \alias{as.Globals.Globals}
 \alias{as.Globals.list}
+\alias{names}
 \title{A representation of a set of globals}
 \usage{
 Globals(object, ...)
