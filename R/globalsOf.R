@@ -104,6 +104,7 @@ globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
         globals[[name]] <- value
       }
     } else {
+      globals[name] <- list(NULL)
       where[name] <- list(NULL)
       if (mustExist) {
         stop(sprintf("Failed to locate global object in the relevant environments: %s", sQuote(name)))
@@ -122,6 +123,12 @@ globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
     class(ddd) <- c("DotDotDotList", class(ddd))
     globals[["..."]] <- ddd
   }
+
+  stopifnot(
+    is.list(where),
+    length(where) == length(globals),
+    all(names(where) == names(globals))
+  )
 
   attr(globals, "where") <- where
 
