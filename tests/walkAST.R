@@ -18,6 +18,8 @@ exprs <- list(
   warn   = substitute(sum(x, ...))
 )
 
+nullify <- function(e) NULL
+
 disp <- function(expr) {
   cat("Expression:\n")
   print(expr)
@@ -47,8 +49,17 @@ for (kk in seq_along(exprs)) {
   ## Display the AST tree
   walkAST(expr, atomic=disp, name=disp, call=disp, pairlist=disp)
 
+  ## Nullify
+  exprN <- walkAST(expr, atomic=nullify, name=nullify, call=nullify, pairlist=nullify)
+  print(exprN)
+  str(as.list(exprN))
+  
+
+message("*** walkAST() - nullify ... DONE")
+
   message(sprintf("- walkAST(<expression #%d (%s)>) ... DONE", kk, sQuote(name)))
 } ## for (name ...)
+
 
 
 message("*** walkAST() - substitute=TRUE ...")
