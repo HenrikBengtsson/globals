@@ -19,58 +19,37 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
   } else if (is.name(expr)) {
     if (is.function(name)) expr <- name(expr)
   } else if (is.call(expr)) {
-    n <- length(expr)
-    for (kk in seq_len(n)) {
-      expr[[kk]] <- walkAST(expr[[kk]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+##    message("call")
+    for (kk in seq_along(expr)) {
+      e <- walkAST(expr[[kk]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+      if (is.null(e)) {
+        expr[kk] <- list(NULL)
+      } else {
+        expr[[kk]] <- e
+      }
     }
     if (is.function(call)) expr <- call(expr)
   } else if (is.pairlist(expr)) {
-    n <- length(expr)
-    for (kk in seq_len(n)) {
-      expr[[kk]] <- walkAST(expr[[kk]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+##    message("pairlist")
+    for (kk in seq_along(expr)) {
+      ## AD HOC: The following is needed to handle '...'. /HB 2016-09-06
+      if (is.name(expr[[kk]]) && expr[[kk]] == "") next
+      e <- walkAST(expr[[kk]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+      if (is.null(e)) {
+        expr[kk] <- list(NULL)
+      } else {
+        expr[[kk]] <- e
+      }
     }
     if (is.function(pairlist)) expr <- pairlist(expr)
   } else {
     stop("Cannot tweak expression. Unknown type ", sQuote(typeof(expr)), call.=FALSE)
   }
 
+  ## Assert that the tweak functions return a valid object
+  if (!missing(expr)) {
+    stopifnot(is.atomic(expr) || is.name(expr) || is.call(expr) || is.pairlist(expr))
+  }
+  
   expr
 } ## walkAST()
-
-
-tweakFormulas <- function(expr) {
-  ## Formula #1:
-  ##   expression: ~ rhs
-  ##   AST: (~ rhs)
-  ##   tweaked expression: rhs; ~ rhs
-  ##
-  ## Formula #2:
-  ##   expression: lhs ~ rhs
-  ##   AST: (~ lhs rhs)
-  ##   tweaked expression: rhs; lhs ~ rhs
-
-  walkAST(expr, call=function(expr) {
-    if (!is.call(expr)) return(expr)
-  
-    op <- expr[[1]]
-    if (!is.symbol(op)) return(expr)
-    op <- as.character(op)
-    if (op != "~") return(expr)
-    
-    n <- length(expr)
-    if (n != 2 && n != 3) return(expr)
-
-    if (n == 2) {
-      lhs <- NULL
-      rhs <- expr[[2]]
-    } else if (n == 3) {
-      lhs <- expr[[2]]
-      rhs <- expr[[3]]
-    }
- 
-    ## covr: skip=1
-    expr <- substitute({ lhs; rhs; e }, list(lhs=lhs, rhs=rhs, e=expr))
-
-    expr
-  })
-} # tweakFormulas()
