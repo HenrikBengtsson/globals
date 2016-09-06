@@ -25,12 +25,13 @@ Globals <- function(object, ...) {
     stop("Argument 'object' specifies globals with empty names.")
   }
 
-  where <- attr(object, "where")
-  stopifnot(
-    is.list(where),
-    length(where) == length(object),
-    all(names(where) == names)
-  )
+  ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
+##  where <- attr(object, "where")
+##  stopifnot(
+##    is.list(where),
+##    length(where) == length(object),
+##    all(names(where) == names)
+##  )
 
   structure(object, class=c(class(object), "Globals"))
 }
@@ -54,15 +55,43 @@ as.Globals.list <- function(x, ...) {
   attr(res, "where") <- where[i]
   class(res) <- class(x)
 
-  where <- attr(res, "where")
-  stopifnot(
-    is.list(where),
-    length(where) == length(res),
-    all(names(where) == names(res))
-  )
+  ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
+##  where <- attr(res, "where")
+##  stopifnot(
+##    is.list(where),
+##    length(where) == length(res),
+##    all(names(where) == names(res))
+##  )
 
   res
 }
+
+
+## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
+## #' @export
+## `$<-.Globals` <- function(x, name, value) {
+##   where <- attr(x, "where")
+##   
+##   ## Remove an element?
+##   if (is.null(value)) {
+##     x[[name]] <- NULL
+##     where[[name]] <- NULL
+##   } else {
+##     ## Value must be Globals object of length one
+##     if (inherits(value, "Globals")) {
+##       if (length(value) != 1) {
+##         stop("Cannot assign Globals object of length different than one: ", length(value))
+##       }
+##       x[[name]] <- value[[1]]
+##       where[[name]] <- attr(value, "where")[[1]]
+##     } else {
+##       stop("Can only assign a length-one Globals object")
+##     }
+##   }
+##   
+##   attr(x, "where") <- where
+##   invisible(x)
+## }
 
 
 
@@ -85,7 +114,10 @@ c.Globals <- function(x, ...) {
   class(x) <- clazz
   attr(x, "where") <- where
 
-  stopifnot(length(where) == length(x), all(names(where) == names(x)))
+  stopifnot(
+    length(where) == length(x),
+    all(names(where) == names(x))
+  )
 
   x
 }
@@ -100,7 +132,10 @@ unique.Globals <- function(x, ...) {
     x <- x[!dups]
     attr(x, "where") <- where
     
-    stopifnot(length(where) == length(x), all(names(where) == names(x)))
+    stopifnot(
+      length(where) == length(x),
+      all(names(where) == names(x))
+    )
   }
 
   x
