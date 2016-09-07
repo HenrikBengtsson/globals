@@ -46,6 +46,19 @@ as.Globals.Globals <- function(x, ...) x
 
 #' @export
 as.Globals.list <- function(x, ...) {
+  ## Use the globals environments as the locals?
+  ## (with emptyenv() as the fallback)
+  where <- attr(x, "where")
+  if (is.null(where)) {
+    where <- lapply(x, FUN=function(obj) {
+        e <- environment(obj)
+	if (is.null(e)) e <- emptyenv()
+	e
+    })
+    names(where) <- names(x)
+    attr(x, "where") <- where
+  }
+  
   Globals(x, ...)
 }
 
