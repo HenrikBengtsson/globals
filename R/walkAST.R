@@ -20,25 +20,25 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
     if (is.function(name)) expr <- name(expr)
   } else if (is.call(expr)) {
 ##    message("call")
-    for (kk in seq_along(expr)) {
-      e <- walkAST(expr[[kk]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+    for (cc in seq_along(expr)) {
+      e <- walkAST(expr[[cc]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
       if (is.null(e)) {
-        expr[kk] <- list(NULL)
+        expr[cc] <- list(NULL)
       } else {
-        expr[[kk]] <- e
+        expr[[cc]] <- e
       }
     }
     if (is.function(call)) expr <- call(expr)
   } else if (is.pairlist(expr)) {
 ##    message("pairlist")
-    for (kk in seq_along(expr)) {
+    for (pp in seq_along(expr)) {
       ## AD HOC: The following is needed to handle '...'. /HB 2016-09-06
-      if (is.name(expr[[kk]]) && expr[[kk]] == "") next
-      e <- walkAST(expr[[kk]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+      if (is.name(expr[[pp]]) && expr[[pp]] == "") next
+      e <- walkAST(expr[[pp]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
       if (is.null(e)) {
-        expr[kk] <- list(NULL)
+        expr[pp] <- list(NULL)
       } else {
-        expr[[kk]] <- e
+        expr[[pp]] <- e
       }
     }
     if (is.function(pairlist)) expr <- pairlist(expr)
