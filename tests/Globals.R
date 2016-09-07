@@ -206,6 +206,25 @@ stopifnot(
 message("*** Globals() - unique ... DONE")
 
 
+message("*** Globals() - coercion ...")
+
+globals <- as.Globals(globals0)
+stopifnot(identical(globals, globals0))
+
+globals <- as.Globals(unclass(globals0))
+stopifnot(identical(globals, globals0))
+
+globalsT <- unclass(globals0)
+attr(globalsT, "where") <- NULL
+globals <- as.Globals(globalsT)
+stopifnot(
+  length(globals) == length(globals0),
+  names(globals) == names(globals0)
+)
+
+message("*** Globals() - coercion ... DONE")
+
+
 message("*** Globals() - exceptions ...")
 
 res <- tryCatch({ Globals(NULL) }, error = identity)

@@ -35,7 +35,7 @@ Globals <- function(object, ...) {
 ##    all(names(where) == names)
 ##  )
 
-  structure(object, class=c(class(object), "Globals"))
+  structure(object, class=c("Globals", class(object)))
 }
 
 #' @export
