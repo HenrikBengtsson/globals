@@ -3,23 +3,24 @@ library("globals")
 message("*** walkAST() ...")
 
 exprs <- list(
-  null   = substitute(NULL),
-  atomic = substitute(1),
-  atomic = substitute("a"),
-  atomic = substitute(TRUE),
-  assign = substitute(a <- 1),
-  assign = substitute(1 -> a),
-  assign = substitute(a <- b + 1),
-  assign = substitute(x <- rnorm(20, mu=0)),
-  index  = substitute(x[1,1]),
-  index  = substitute(x[1:2,1:2]),
-  index  = substitute(x[,1:2]),
-  index  = substitute(x[,1]),
-  fcn    = substitute(function(a=1, b=2) sum(c(a, b))),
-  fcn    = substitute(function(a=1, b) sum(c(a, b))),
-  fcn    = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
-  ok     = substitute(function(...) sum(x, ...)),
-  warn   = substitute(sum(x, ...))
+  null     = substitute(NULL),
+  atomic   = substitute(1),
+  atomic   = substitute("a"),
+  atomic   = substitute(TRUE),
+  assign   = substitute(a <- 1),
+  assign   = substitute(1 -> a),
+  assign   = substitute(a <- b + 1),
+  assign   = substitute(x <- rnorm(20, mu=0)),
+  index    = substitute(x[1,1]),
+  index    = substitute(x[1:2,1:2]),
+  index    = substitute(x[,1:2]),
+  index    = substitute(x[,1]),
+  fcn      = substitute(function(a=1, b=2) sum(c(a, b))),
+  fcn      = substitute(function(a=1, b) sum(c(a, b))),
+  fcn      = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
+  ok       = substitute(function(...) sum(x, ...)),
+  warn     = substitute(sum(x, ...)),
+  null     = substitute(NULL)
 )
 
 nullify <- function(e) NULL
@@ -35,7 +36,7 @@ disp <- function(expr) {
   expr
 } ## disp()
 
-for (kk in seq_along(exprs)[12]) {
+for (kk in seq_along(exprs)) {
   name <- names(exprs)[kk]
   message(sprintf("- walkAST(<expression #%d (%s)>) ...", kk, sQuote(name)))
   expr <- exprs[[kk]]
