@@ -75,31 +75,33 @@ as.Globals.list <- function(x, ...) {
 }
 
 
-## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
-## #' @export
-## `$<-.Globals` <- function(x, name, value) {
-##   where <- attr(x, "where")
-##   
-##   ## Remove an element?
-##   if (is.null(value)) {
-##     x[[name]] <- NULL
-##     where[[name]] <- NULL
-##   } else {
-##     ## Value must be Globals object of length one
-##     if (inherits(value, "Globals")) {
-##       if (length(value) != 1) {
-##         stop("Cannot assign Globals object of length different than one: ", length(value))
-##       }
-##       x[[name]] <- value[[1]]
-##       where[[name]] <- attr(value, "where")[[1]]
-##     } else {
-##       stop("Cannot assign to Globals list. Unsupported data type: ", sQuote(mode(value)))
-##     }
-##   }
-##   
-##   attr(x, "where") <- where
-##   invisible(x)
-## }
+#' @export
+`$<-.Globals` <- function(x, name, value) {
+  where <- attr(x, "where")
+  
+  ## Remove an element?
+  if (is.null(value)) {
+    x[[name]] <- NULL
+    where[[name]] <- NULL
+  } else {
+    ## Value must be Globals object of length one
+    if (inherits(value, "Globals")) {
+      if (length(value) != 1) {
+        stop("Cannot assign Globals object of length different than one: ", length(value))
+      }
+      x[[name]] <- value[[1]]
+      where[[name]] <- attr(value, "where")[[1]]
+    } else {
+      w <- environment(value)
+      if (is.null(w)) w <- emptyenv()
+      x[[name]] <- value
+      where[[name]] <- w
+    }
+  }
+  
+  attr(x, "where") <- where
+  invisible(x)
+}
 
 
 

@@ -88,6 +88,59 @@ stopifnot(
 message("*** Globals() - subsetting ... DONE")
 
 
+message("*** Globals() - subsetted assignment ...")
+
+globals <- globals0
+globals$a <- globals0["a"]
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 2L,
+  length(where) == length(globals),
+  all(names(globals) == names(globals0)),
+  all(names(globals) == names(where)),
+  identical(globals, globals0)
+)
+
+globals <- globals0
+globals$b <- globals0["a"]
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 3L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globals0), "b")),
+  all(names(globals) == names(where)),
+  identical(globals$b, globals0$a)
+)
+
+globals <- globals0
+globals$a <- NULL
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 1L,
+  length(where) == length(globals),
+  all(names(globals) == names(globals0)[-1]),
+  all(names(globals) == names(where)),
+  is.null(globals$a)
+)
+
+globals <- globals0
+globals$a <- 1:2
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 2L,
+  length(where) == length(globals),
+  all(names(globals) == names(globals0)),
+  all(names(globals) == names(where)),
+  identical(globals$a, 1:2)
+)
+
+message("*** Globals() - subsetted assignment ... DONE")
+
+
 message("*** Globals() - combining ...")
 
 globalsA <- globals0[1:2]
@@ -162,6 +215,11 @@ res <- tryCatch({ Globals(list(1,2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 res <- tryCatch({ Globals(list(a=1,2)) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+## Assigning more than one element
+globals <- globals0
+res <- tryCatch({ globals$a <- globals0[2:1] }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 ## Appending unnamed objects
