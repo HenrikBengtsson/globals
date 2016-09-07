@@ -21,6 +21,8 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
   } else if (is.call(expr)) {
 ##    message("call")
     for (cc in seq_along(expr)) {
+      ## AD HOC: The following is needed to handle x[,1]. /HB 2016-09-06
+      if (is.name(expr[[cc]]) && expr[[cc]] == "") next
       e <- walkAST(expr[[cc]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
       if (is.null(e)) {
         expr[cc] <- list(NULL)

@@ -11,6 +11,10 @@ exprs <- list(
   assign = substitute(1 -> a),
   assign = substitute(a <- b + 1),
   assign = substitute(x <- rnorm(20, mu=0)),
+  index  = substitute(x[1,1]),
+  index  = substitute(x[1:2,1:2]),
+  index  = substitute(x[,1:2]),
+  index  = substitute(x[,1]),
   fcn    = substitute(function(a=1, b=2) sum(c(a, b))),
   fcn    = substitute(function(a=1, b) sum(c(a, b))),
   fcn    = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
@@ -31,10 +35,10 @@ disp <- function(expr) {
   expr
 } ## disp()
 
-for (kk in seq_along(exprs)) {
+for (kk in seq_along(exprs)[12]) {
   name <- names(exprs)[kk]
   message(sprintf("- walkAST(<expression #%d (%s)>) ...", kk, sQuote(name)))
-  expr <- exprs[[name]]
+  expr <- exprs[[kk]]
   print(expr)
   str(as.list(expr))
 
