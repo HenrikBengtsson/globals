@@ -102,6 +102,29 @@ stopifnot(
   all(names(globals) == names(where))
 )
 
+globalsA <- globals0[1:2]
+globalsB <- list(b=1, c=letters)
+globals <- c(globalsA, globalsB)
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 4L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == names(where))
+)
+
+globalsA <- globals0[1:2]
+globals <- c(globalsA, b=1, c=letters)
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 4L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == names(where))
+)
+
 message("*** Globals() - combining ... DONE")
 
 
@@ -139,6 +162,10 @@ res <- tryCatch({ Globals(list(1,2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 res <- tryCatch({ Globals(list(a=1,2)) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+## Appending unnamed objects
+res <- tryCatch({ c(globals0, 2) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 message("*** Globals() - exceptions ... DONE")

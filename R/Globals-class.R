@@ -93,7 +93,7 @@ as.Globals.list <- function(x, ...) {
 ##       x[[name]] <- value[[1]]
 ##       where[[name]] <- attr(value, "where")[[1]]
 ##     } else {
-##       stop("Can only assign a length-one Globals object")
+##       stop("Cannot assign to Globals list. Unsupported data type: ", sQuote(mode(value)))
 ##     }
 ##   }
 ##   
@@ -110,11 +110,31 @@ c.Globals <- function(x, ...) {
   where <- attr(x, "where")
   clazz <- class(x)
   class(x) <- NULL
-  
+
   for (kk in seq_along(args)) {
     g <- args[[kk]]
-    stopifnot(inherits(g, "Globals"))
-    w <- attr(g, "where")
+    name <- names(args)[kk]
+    
+    if (inherits(g, "Globals")) {
+      w <- attr(g, "where")
+    } else if (is.list(g)) {
+      names <- names(g)
+      stopifnot(!is.null(names))
+      w <- lapply(g, FUN=function(obj) {
+        e <- environment(obj)
+	if (is.null(e)) e <- emptyenv()
+	e
+      })
+      names(w) <- names
+    } else {
+      if (is.null(name)) {
+        stop("Can only append named objects to Globals list: ", sQuote(mode(g)))
+      }
+      g <- structure(list(g), names=name)
+      e <- environment(g)
+      if (is.null(e)) e <- emptyenv()
+      w <- structure(list(e), names=name)
+    }
     where <- c(where, w)
     x <- c(x, g)
   }
