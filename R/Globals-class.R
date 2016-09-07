@@ -25,8 +25,10 @@ Globals <- function(object, ...) {
     stop("Argument 'object' specifies globals with empty names.")
   }
 
+  where <- attr(object, "where")
+  stopifnot(is.list(where))
+  
   ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
-##  where <- attr(object, "where")
 ##  stopifnot(
 ##    is.list(where),
 ##    length(where) == length(object),
