@@ -8,9 +8,9 @@
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
 |language |en                           |
-|collate  |en_US.UTF-8                  |
-|tz       |SystemV/PST8PDT              |
-|date     |2016-09-06                   |
+|collate  |C                            |
+|tz       |NA                           |
+|date     |2016-09-07                   |
 
 ## Packages
 
