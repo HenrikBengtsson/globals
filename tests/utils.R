@@ -53,15 +53,17 @@ printf("y = %s.\n", hpaste(y, maxHead=Inf))
 printf("y = %s.\n", paste(y, collapse=", "))
 ## y = 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
 
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Adding a special separator before the last element
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Change last separator
 printf("x = %s.\n", hpaste(x, lastCollapse=" and "))
 ## x = 1, 2, 3, 4, 5 and 6.
 
-message("* hpaste() ...")
+# No collapse
+stopifnot(all(hpaste(x, collapse=NULL) == x))
+
+# Empty input
+stopifnot(identical(hpaste(character(0)), character(0)))
+
+message("* hpaste() ... DONE")
 
 
 message("* asFunction() ...")
@@ -83,18 +85,28 @@ stopifnot(!isBasePkgs("globals"))
 message("* is.base() & is.internal() ...")
 stopifnot(is.base(base::library))
 stopifnot(!is.base(globals::globalsOf))
+stopifnot(!is.base(NULL))
 stopifnot(is.internal(print.default))
 stopifnot(!is.internal(globals::globalsOf))
+stopifnot(!is.internal(NULL))
 
 
 
 
 message("* where() ...")
 
+env <- where("sample", where=1L)
+str(env)
+
+env <- where("sample", frame=1L)
+str(env)
+
 message("- where('sample') ...")
 env <- where("sample", mode="function")
 print(env)
-stopifnot(identical(env, baseenv()))
+if (!"covr" %in% loadedNamespaces()) {
+  stopifnot(identical(env, baseenv()))
+}
 obj <- get("sample", mode="function", envir=env, inherits=FALSE)
 stopifnot(identical(obj, base::sample))
 
@@ -127,6 +139,10 @@ str(envs)
 stopifnot(identical(envs$aa, globalenv()))
 stopifnot(identical(envs$bb, envs$envir))
 stopifnot(is.null(envs$cc))
+
+message("- where() - missing ...")
+env <- where("non-existing-object", inherits=FALSE)
+stopifnot(is.null(env))
 
 rm(list=c("aa", "envs", "foo", "env", "obj", "where"))
 

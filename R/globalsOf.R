@@ -51,8 +51,42 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
 
   if (substitute) expr <- substitute(expr)
 
+  ## 1. Identify global variables (static code inspection)
   names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
 
+  ## 2. Locate them (run time)
+  globals <- tryCatch({
+    globalsByName(names, envir=envir, mustExist=mustExist)
+  }, error = function(ex) {
+    ## HACK: Tweak error message to also include the expression inspected.
+    msg <- conditionMessage(ex)
+    msg <- sprintf("Identified global objects via static code inspection (%s). %s", hexpr(expr), msg)
+    ex$message <- msg
+    stop(ex)
+  })
+
+  globals
+} ## globalsOf()
+
+
+
+
+#' Locates and retrieves a set of global variables by their names
+#'
+#' @param names A character vector of global variable names.
+#' @param envir The environment from where to search for globals.
+#' @param mustExist If TRUE, an error is thrown if the object of the
+#'        identified global cannot be located.  Otherwise, the global
+#'        is not returned.
+#' @param ... Not used.
+#'
+#' @return A \link{Globals} object.
+#'
+#' @export
+globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
+  names <- as.character(names)
+
+  ## Locate and retrieve the specified globals
   n <- length(names)
   needsDotdotdot <- (identical(names[n], "..."))
   if (needsDotdotdot) names <- names[-n]
@@ -70,9 +104,10 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
         globals[[name]] <- value
       }
     } else {
+      globals[name] <- list(NULL)
       where[name] <- list(NULL)
       if (mustExist) {
-        stop(sprintf("Identified a global object via static code inspection (%s), but failed to locate the corresponding object in the relevant environments: %s", hexpr(expr), sQuote(name)))
+        stop(sprintf("Failed to locate global object in the relevant environments: %s", sQuote(name)))
       }
     }
   }
@@ -89,7 +124,13 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     globals[["..."]] <- ddd
   }
 
+  stopifnot(
+    is.list(where),
+    length(where) == length(globals),
+    all(names(where) == names(globals))
+  )
+
   attr(globals, "where") <- where
 
   globals
-}
+} ## globalsByName()

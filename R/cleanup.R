@@ -9,12 +9,19 @@ cleanup <- function(...) UseMethod("cleanup")
 #'
 #' @aliases cleanup
 #' @export
-cleanup.Globals <- function(globals, drop=c("base-packages"), ...) {
+cleanup.Globals <- function(globals, drop=c("missing", "base-packages"), ...) {
   where <- attr(globals, "where")
 
   names <- names(globals)
   keep <- rep(TRUE, times=length(globals))
   names(keep) <- names
+
+  ## Drop non-found objects
+  if ("missing" %in% drop) {
+    for (name in names) {
+      if (is.null(where[[name]])) keep[name] <- FALSE
+    }
+  }
 
   ## Drop objects that are part of one of the "base" packages
   if ("base-packages" %in% drop) {

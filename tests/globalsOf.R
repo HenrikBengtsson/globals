@@ -32,6 +32,44 @@ stopifnot(all(globalsI %in% c("{", "<-", "b", "c", "d")))
 message("*** findGlobals() ... DONE")
 
 
+message("*** globalsByName() ...")
+
+globalsC <- globalsByName(c("{", "<-", "c", "d"))
+str(globalsC)
+stopifnot(all(names(globalsC) %in% c("{", "<-", "c", "d")))
+globalsC <- cleanup(globalsC)
+str(globalsC)
+stopifnot(all(names(globalsC) %in% c("c", "d")))
+where <- attr(globalsC, "where")
+stopifnot(
+  length(where) == length(globalsC),
+  identical(where$c, globalenv()),
+  identical(where$d, globalenv())
+)
+
+foo <- globals::Globals
+globals <- globalsByName(c("{", "foo", "list"))
+str(globals)
+stopifnot(all(names(globals) %in% c("{", "foo", "list")))
+where <- attr(globals, "where")
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(
+  identical(where$`{`, baseenv()),
+  identical(where$foo, globalenv()),
+  identical(where$list, baseenv())
+)
+
+globals <- cleanup(globals)
+str(globals)
+stopifnot(all(names(globals) %in% c("foo")))
+globals <- cleanup(globals, drop="internals")
+str(globals)
+stopifnot(all(names(globals) %in% c("foo")))
+pkgs <- packagesOf(globals)
+stopifnot(pkgs == "globals")
+
+message("*** globalsByName() ... DONE")
+
 
 message("*** globalsOf() ...")
 
@@ -126,10 +164,10 @@ globals <- globalsOf(expr)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "foo", "list")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(
   identical(where$`{`, baseenv()),
-  covr || identical(where$foo, globalenv()),
+  identical(where$foo, globalenv()),
   identical(where$list, baseenv())
 )
 
@@ -148,21 +186,21 @@ globals <- globalsOf(expr)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(
   identical(where$`<-`, baseenv()),
   identical(where$sample, baseenv()),
-  covr || identical(where$sample2, globalenv())
+  identical(where$sample2, globalenv())
 )
+
 
 globals <- cleanup(globals)
 str(globals)
 stopifnot(all(names(globals) %in% c("sample2", "sum2")))
 where <- attr(globals, "where")
-stopifnot(
-  length(where) == length(globals),
-  covr || identical(where$sample2, globalenv())
-)
+stopifnot(length(where) == length(globals))
+if (!covr) stopifnot(identical(where$sample2, globalenv()))
+
 
 globals <- cleanup(globals, drop="primitives")
 str(globals)
@@ -178,3 +216,18 @@ res <- try({
 stopifnot(inherits(res, "try-error"))
 
 message("*** globalsOf() - exceptions ... DONE")
+
+
+message("*** Globals() - exceptions ...")
+
+res <- tryCatch({ Globals(NULL) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+res <- tryCatch({ Globals(list(1,2)) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+res <- tryCatch({ Globals(list(a=1,2)) }, error = identity)
+stopifnot(inherits(res, "simpleError"))
+
+message("*** Globals() - exceptions ... DONE")
+
