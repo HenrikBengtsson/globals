@@ -1,7 +1,7 @@
 Package: globals
 ================
 
-Version: 0.6.1-9000 [2016-09-07]
+Version: 0.7.0 [2016-09-08]
 o Added walkAST(), which can be used to tweak expressions.
 o Added globalsByName() for locating and retrieving a set of
   known global variables.
