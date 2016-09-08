@@ -8,15 +8,15 @@
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
 |language |en                           |
-|collate  |C                            |
-|tz       |NA                           |
-|date     |2016-09-07                   |
+|collate  |en_US.UTF-8                  |
+|tz       |SystemV/PST8PDT              |
+|date     |2016-09-08                   |
 
 ## Packages
 
 |package |*  |version    |date       |source                             |
 |:-------|:--|:----------|:----------|:----------------------------------|
-|globals |   |0.6.1-9000 |2016-09-07 |local (HenrikBengtsson/globals@NA) |
+|globals |   |0.6.1-9000 |2016-09-08 |local (HenrikBengtsson/globals@NA) |
 
 # Check results
 0 packages with problems
