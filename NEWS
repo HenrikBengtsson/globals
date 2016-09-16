@@ -1,8 +1,9 @@
 Package: globals
 ================
 
-Version: 0.7.0-9000 [2016-09-08]
-o ...
+Version: 0.7.0-9000 [2016-09-16]
+o Globals() and as.Globals() now accepts an empty list
+  as input as well.
 
 
 Version: 0.7.0 [2016-09-08]

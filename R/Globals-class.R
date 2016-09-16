@@ -13,19 +13,24 @@
 #'
 #' @aliases as.Globals as.Globals.Globals as.Globals.list [.Globals names
 #' @export
-Globals <- function(object, ...) {
+Globals <- function(object=list(), ...) {
   if (!is.list(object)) {
     stop("Argument 'object' is not a list: ", class(object)[1])
   }
 
-  names <- names(object)
-  if (is.null(names)) {
-    stop("Argument 'object' must be a named list.")
-  } else if (!all(nzchar(names))) {
-    stop("Argument 'object' specifies globals with empty names.")
+  if (length(object) > 0) {
+    names <- names(object)
+    if (is.null(names)) {
+      stop("Argument 'object' must be a named list.")
+    } else if (!all(nzchar(names))) {
+      stop("Argument 'object' specifies globals with empty names.")
+    }
   }
 
   where <- attr(object, "where")
+  if (length(object) == 0 && is.null(where)) {
+    attr(object, "where") <- where <- list()
+  }
   stopifnot(is.list(where))
   
   ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
