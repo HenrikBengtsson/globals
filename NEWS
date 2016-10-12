@@ -1,9 +1,12 @@
 Package: globals
 ================
 
-Version: 0.7.0-9000 [2016-09-16]
+Version: 0.7.0-9000 [2016-10-11]
 o Globals() and as.Globals() now accepts an empty list
   as input as well.
+o BUG FIX: walkAST(quote( function(x=NULL) 0 )) would give
+  a sanity check error due to the NULL argument.  Thank
+  you GitHub user billy34 for reporting on this.
 
 
 Version: 0.7.0 [2016-09-08]

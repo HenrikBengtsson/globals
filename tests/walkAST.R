@@ -18,6 +18,7 @@ exprs <- list(
   fcn      = substitute(function(a=1, b=2) sum(c(a, b))),
   fcn      = substitute(function(a=1, b) sum(c(a, b))),
   fcn      = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
+  fcn      = substitute(function(a=NULL) a),
   ok       = substitute(function(...) sum(x, ...)),
   warn     = substitute(sum(x, ...)),
   null     = substitute(NULL)
