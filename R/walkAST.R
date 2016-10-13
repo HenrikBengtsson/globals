@@ -44,7 +44,8 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
       }
     }
     ## WORKAROUND: Since expr[i] <- list(NULL) turns pairlist 'expr' into
-    ## a list we have to make sure to it is a pairlist also afterward.
+    ## a list we have to make sure to it is a pairlist also afterward, cf.
+    ## https://stat.ethz.ch/pipermail/r-devel/2016-October/073263.html
     ## /HB 2016-10-12
     expr <- as.pairlist(expr)
   } else {
