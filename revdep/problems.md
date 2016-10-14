@@ -10,15 +10,18 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |SystemV/PST8PDT              |
-|date     |2016-09-08                   |
+|date     |2016-10-13                   |
 
 ## Packages
 
-|package |*  |version    |date       |source                             |
-|:-------|:--|:----------|:----------|:----------------------------------|
-|globals |   |0.6.1-9000 |2016-09-08 |local (HenrikBengtsson/globals@NA) |
+|package |*  |version |date       |source        |
+|:-------|:--|:-------|:----------|:-------------|
+|globals |   |0.7.0   |2016-09-09 |cran (@0.7.0) |
 
 # Check results
+
 0 packages with problems
+
+
 
 

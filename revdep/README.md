@@ -10,16 +10,40 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |SystemV/PST8PDT              |
-|date     |2016-09-08                   |
+|date     |2016-10-13                   |
 
 ## Packages
 
-|package |*  |version    |date       |source                             |
-|:-------|:--|:----------|:----------|:----------------------------------|
-|globals |   |0.6.1-9000 |2016-09-08 |local (HenrikBengtsson/globals@NA) |
+|package |*  |version |date       |source        |
+|:-------|:--|:-------|:----------|:-------------|
+|globals |   |0.7.0   |2016-09-09 |cran (@0.7.0) |
 
 # Check results
+
 20 packages
+
+|package          |version | errors| warnings| notes|
+|:----------------|:-------|------:|--------:|-----:|
+|ACNE             |0.8.1   |      0|        0|     0|
+|aroma.affymetrix |3.0.0   |      0|        0|     0|
+|aroma.cn         |1.6.1   |      0|        0|     0|
+|aroma.core       |3.0.0   |      0|        0|     1|
+|calmate          |0.12.1  |      0|        0|     0|
+|doFuture         |0.2.1   |      0|        0|     0|
+|fiery            |0.2.1   |      0|        0|     0|
+|future.BatchJobs |0.13.0  |      0|        0|     0|
+|future           |1.1.1   |      0|        0|     0|
+|GeneBreak        |1.3.0   |      0|        0|     1|
+|MPAgenomics      |1.1.2   |      0|        0|     2|
+|NSA              |0.0.32  |      0|        0|     6|
+|pbmcapply        |1.1.1   |      0|        0|     0|
+|PECA             |1.9.0   |      0|        0|     1|
+|PSCBS            |0.61.0  |      0|        0|     0|
+|PureCN           |1.1.56  |      0|        0|     1|
+|QDNAseq          |1.9.2   |      0|        0|     0|
+|Repitools        |1.19.3  |      0|        0|     2|
+|R.filesets       |2.10.0  |      0|        0|     0|
+|TIN              |1.5.2   |      0|        0|     2|
 
 ## ACNE (0.8.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
@@ -75,13 +99,13 @@ Bug reports: https://github.com/HenrikBengtsson/future.BatchJobs/issues
 
 0 errors | 0 warnings | 0 notes
 
-## future (1.0.1)
+## future (1.1.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/future/issues
 
 0 errors | 0 warnings | 0 notes
 
-## GeneBreak (1.2.0)
+## GeneBreak (1.3.0)
 Maintainer: Evert van den Broek <vandenbroek.evert@gmail.com>
 
 0 errors | 0 warnings | 1 note 
@@ -221,13 +245,13 @@ Rd file 'NSANormalization.Rd':
 These lines will be truncated in the PDF manual.
 ```
 
-## pbmcapply (1.1.0)
+## pbmcapply (1.1.1)
 Maintainer: Kevin kuang <kvn.kuang@mail.utoronto.ca>  
 Bug reports: https://github.com/kvnkuang/pbmcapply/issues
 
 0 errors | 0 warnings | 0 notes
 
-## PECA (1.8.0)
+## PECA (1.9.0)
 Maintainer: Tomi Suomi <tomi.suomi@utu.fi>
 
 0 errors | 0 warnings | 1 note 
@@ -247,7 +271,7 @@ Bug reports: https://github.com/HenrikBengtsson/PSCBS/issues
 
 0 errors | 0 warnings | 0 notes
 
-## PureCN (1.0.4)
+## PureCN (1.1.56)
 Maintainer: Markus Riester <markus.riester@novartis.com>
 
 0 errors | 0 warnings | 1 note 
@@ -255,9 +279,17 @@ Maintainer: Markus Riester <markus.riester@novartis.com>
 ```
 checking R code for possible problems ... NOTE
 Found the following calls to data() loading into the global environment:
+File ‘PureCN/R/bootstrapResults.R’:
+  data(purecn.example.output)
+File ‘PureCN/R/callAlterations.R’:
+  data(purecn.example.output)
+  data(purecn.example.output)
+File ‘PureCN/R/callLOH.R’:
+  data(purecn.example.output)
 File ‘PureCN/R/createCurationFile.R’:
   data(purecn.example.output)
-File ‘PureCN/R/findFocal.R’:
+File ‘PureCN/R/curateResults.R’:
+  data(purecn.example.output)
   data(purecn.example.output)
 File ‘PureCN/R/plotAbs.R’:
   data(purecn.example.output)
@@ -265,31 +297,16 @@ File ‘PureCN/R/predictSomatic.R’:
   data(purecn.example.output)
 File ‘PureCN/R/readCurationFile.R’:
   data(purecn.example.output)
-File ‘PureCN/R/runAbsoluteCN.R’:
-  data(purecn.example.output)
-File ‘PureCN/R/segmentationCBS.R’:
-  data(purecn.example.output)
 See section ‘Good practice’ in ‘?data’.
 ```
 
-## QDNAseq (1.8.0)
+## QDNAseq (1.9.2)
 Maintainer: Daoud Sie <d.sie@vumc.nl>  
 Bug reports: https://github.com/ccagc/QDNAseq/issues
 
-0 errors | 0 warnings | 1 note 
+0 errors | 0 warnings | 0 notes
 
-```
-checking R code for possible problems ... NOTE
-estimateCorrection,QDNAseqReadCounts : calculateFits: no visible global
-  function definition for ‘formula’
-Undefined global functions or variables:
-  formula
-Consider adding
-  importFrom("stats", "formula")
-to your NAMESPACE file.
-```
-
-## Repitools (1.18.2)
+## Repitools (1.19.3)
 Maintainer: Mark Robinson <mark.robinson@imls.uzh.ch>
 
 0 errors | 0 warnings | 2 notes
@@ -348,7 +365,7 @@ Bug reports: https://github.com/HenrikBengtsson/R.filesets/issues
 
 0 errors | 0 warnings | 0 notes
 
-## TIN (1.4.1)
+## TIN (1.5.2)
 Maintainer: Bjarne Johannessen <bjajoh@rr-research.no>
 
 0 errors | 0 warnings | 2 notes
