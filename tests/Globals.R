@@ -225,6 +225,15 @@ stopifnot(
 message("*** Globals() - coercion ... DONE")
 
 
+message("*** Globals() - empty ...")
+
+globals <- Globals()
+globals <- Globals(list())
+globals <- as.Globals(list())
+
+message("*** Globals() - empty ... DONE")
+
+
 message("*** Globals() - exceptions ...")
 
 res <- tryCatch({ Globals(NULL) }, error = identity)
