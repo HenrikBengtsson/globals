@@ -1,5 +1,5 @@
-# CRAN submission globals 0.7.0
-on 2016-09-08
+# CRAN submission globals 0.7.1
+on 2016-10-13
 
 I've verified that this submission causes *no* issues for
 any of the 20 reverse (recursive) package dependencies
@@ -21,26 +21,27 @@ The package has been verified using `R CMD check --as-cran` on:
 * Platform x86_64-unknown-linux-gnu (64-bit) [Travis CI]:
   - R version 3.2.5 (2016-04-14)
   - R version 3.3.1 (2016-06-21)
-  - R Under development (unstable) (2016-09-07 r71224)
+  - R Under development (unstable) (2016-10-12 r71502)
 
 * Platform x86_64-pc-linux-gnu (64-bit):
+  - R version 3.1.2 (2014-10-31)
   - R version 3.2.5 (2016-04-14)
   - R version 3.3.1 (2016-06-21)
-  - R version 3.3.1 Patched (2016-09-07 r71224)
-  - R Under development (unstable) (2016-09-07 r71224)
+  - R version 3.3.1 Patched (2016-10-12 r71510)
+  - R Under development (unstable) (2016-10-12 r71510)
 
 * Platform i686-pc-linux-gnu (32-bit):
   - R version 3.3.1 (2016-06-21)
 
 * Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
-  - R Under development (unstable) (2016-09-06 r71220)
+  - R Under development (unstable) (2016-10-10 r71494)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit) [Appveyor CI]:
-  - R Under development (unstable) (2016-09-06 r71220)
+  - R Under development (unstable) (2016-10-10 r71494)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit) [win-builder]:
   - R version 3.3.1 (2016-06-21)
-  - R Under development (unstable) (2016-09-08 r71224)
+  - R Under development (unstable) (2016-10-13 r71511)
 
 
 ### Reverse package check validation
