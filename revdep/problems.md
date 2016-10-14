@@ -14,9 +14,9 @@
 
 ## Packages
 
-|package |*  |version |date       |source        |
-|:-------|:--|:-------|:----------|:-------------|
-|globals |   |0.7.0   |2016-09-09 |cran (@0.7.0) |
+|package |*  |version    |date       |source                             |
+|:-------|:--|:----------|:----------|:----------------------------------|
+|globals |   |0.7.0-9000 |2016-10-14 |local (HenrikBengtsson/globals@NA) |
 
 # Check results
 
