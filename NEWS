@@ -1,6 +1,11 @@
 Package: globals
 ================
 
+Version: 0.7.1-9000 [2016-12-28]
+o BUG FIX: c(x, list()) where x is a Globals object would give
+  an error reporting that the list does not have named elements.
+
+
 Version: 0.7.1 [2016-10-13]
 o Globals() and as.Globals() now accepts an empty list
   as input as well.

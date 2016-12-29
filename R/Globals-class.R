@@ -140,6 +140,9 @@ c.Globals <- function(x, ...) {
     if (inherits(g, "Globals")) {
       w <- attr(g, "where")
     } else if (is.list(g)) {
+      ## Nothing to do?
+      if (length(g) == 0) next
+    
       names <- names(g)
       stopifnot(!is.null(names))
       w <- lapply(g, FUN=function(obj) {
