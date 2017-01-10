@@ -168,13 +168,25 @@ stopifnot(
 )
 
 globalsA <- globals0[1:2]
+globalsB <- list()
+globals <- c(globalsA, globalsB)
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 2L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == names(where))
+)
+
+globalsA <- globals0[1:2]
 globals <- c(globalsA, b=1, c=letters)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
   length(globals) == 4L,
   length(where) == length(globals),
-  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == c(names(globalsA), "b", "c")),
   all(names(globals) == names(where))
 )
 

@@ -1,88 +1,145 @@
 Package: globals
 ================
 
+Version: 0.7.2 [2016-12-28]
+
+BUG FIXES:
+
+  o c(x, list()) where x is a Globals object would give an error
+    reporting that the list does not have named elements.
+  
+  
 Version: 0.7.1 [2016-10-13]
-o Globals() and as.Globals() now accepts an empty list
-  as input as well.
-o BUG FIX: walkAST(quote( function(x=NULL) 0 )) would give
-  a sanity check error due to the NULL argument.  Thank
-  you GitHub user billy34 for reporting on this.
 
+NEW FEATURES:
 
+  o Globals() and as.Globals() now accepts an empty list
+    as input as well.
+
+BUG FIXES:
+
+  o walkAST(quote( function(x=NULL) 0 )) would give a sanity check
+    error due to the NULL argument.  Thank you GitHub user billy34
+    for reporting on this.
+  
+  
 Version: 0.7.0 [2016-09-08]
-o Added walkAST(), which can be used to tweak expressions.
-o Added globalsByName() for locating and retrieving a set of
-  known global variables.
-o Added c(), $<-(), names(), unique() for Globals objects.
-  Improved as.Globals() for lists.
 
+NEW FEATURES:
 
+  o Added walkAST(), which can be used to tweak expressions.
+
+  o Added globalsByName() for locating and retrieving a set of
+    known global variables.
+
+  o Added c(), $<-(), names(), unique() for Globals objects.
+    Improved as.Globals() for lists.
+  
+  
 Version: 0.6.1 [2016-01-31]
-o Now the error message of globalsOf(..., mustExist=TRUE) when
-  it fails to locate a global also gives information on the
-  expression that is problematic.
-o BUG FIX: cleanup() for Globals did not cleanup functions
-  in core package environments named 'package:<name>'.
 
+NEW FEATURES:
 
+  o Now the error message of globalsOf(..., mustExist=TRUE) when
+    it fails to locate a global also gives information on the
+    expression that is problematic.
+
+BUG FIXES:
+
+  o cleanup() for Globals did not cleanup functions in core package
+    environments named 'package:<name>'.
+  
+  
 Version: 0.6.0 [2015-12-12]
-o findGlobals() is updated to handle the case where a local
-  variable is overwriting a global one with the same name,
-  e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
-  as a global object.  Previously it would have been missed.
-  For backward compatibility, the previous behavior can be
-  obtained using argument method="conservative".
 
+NEW FEATURES:
 
+  o findGlobals() is updated to handle the case where a local
+    variable is overwriting a global one with the same name,
+    e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
+    as a global object.  Previously it would have been missed.
+    For backward compatibility, the previous behavior can be
+    obtained using argument method="conservative".
+  
+  
 Version: 0.5.0 [2015-10-13]
-o globalsOf() now returns attribute 'where' specifying where
-  each global object is located.
-o BUG FIX: cleanup() now only drops objects that are *located*
-  in one of the "base" packages; previously it would also drop
-  copies of such objects, e.g. FUN <- base::sample.
 
+NEW FEATURES:
 
+  o globalsOf() now returns attribute 'where' specifying where
+    each global object is located.
+
+BUG FIXES:
+
+  o cleanup() now only drops objects that are *located* in one of
+    the "base" packages; previously it would also drop copies of
+    such objects, e.g. FUN <- base::sample.
+  
+  
 Version: 0.4.1 [2015-10-05]
-o BUG FIX: globalsOf() failed to return global variables
-  with value NULL.  They were identified but silently dropped.
 
+BUG FIXES:
 
+  o globalsOf() failed to return global variables with value NULL.
+    They were identified but silently dropped.
+  
+  
 Version: 0.4.0 [2015-09-12]
-o findGlobals() and globalsOf() gained argument 'dotdotdot'.
-o Explicit namespace imports also from 'utils' package.
 
+NEW FEATURES:
 
+  o findGlobals() and globalsOf() gained argument 'dotdotdot'.
+
+  
 Version: 0.3.1 [2015-06-10]
-o More test coverage.
 
-
+  o More test coverage.
+  
+  
 Version: 0.3.0 [2015-06-08]
-o Renamed getGlobals() to globalsOf().
 
+NEW FEATURES:
 
+  o Renamed getGlobals() to globalsOf().
+  
+  
 Version: 0.2.3 [2015-06-08]
-o Added [() for Globals.
-o findGlobals() and getGlobals() gained argument 'substitute'.
-o Added cleanup(..., method="internals").
 
+NEW FEATURES:
 
+  o Added [() for Globals.
+
+  o findGlobals() and getGlobals() gained argument 'substitute'.
+
+  o Added cleanup(..., method="internals").
+  
+  
 Version: 0.2.2 [2015-05-20]
-o Added Globals class with methods cleanup() and packagesOf().
-  Added as.Globals() to coerce lists to Globals objects.
 
+NEW FEATURES:
 
+  o Added Globals class with methods cleanup() and packagesOf().
+    Added as.Globals() to coerce lists to Globals objects.
+  
+  
 Version: 0.2.1 [2015-05-20]
-o getGlobals() gained argument 'mustExist' for controlling whether
-  to give an error when the corresponding object for an identified
-  global cannot be found or to silently drop the missing global.
-o findGlobals() and getGlobals() gained argument 'method' for
-  controlling whether a "conservative" or a "liberal" algorithm
-  for identifying true globals should be used.
 
+NEW FEATURES:
 
+  o getGlobals() gained argument 'mustExist' for controlling whether
+    to give an error when the corresponding object for an identified
+    global cannot be found or to silently drop the missing global.
+
+  o findGlobals() and getGlobals() gained argument 'method' for
+    controlling whether a "conservative" or a "liberal" algorithm
+    for identifying true globals should be used.
+  
+  
 Version: 0.2.0 [2015-05-19]
-o Moved globals function from an in-house package to this package.
 
-
+  o Moved globals function from an in-house package to this package.
+  
+  
 Version: 0.1.0 [2015-02-07]
-o Created.
+
+  o Created.
