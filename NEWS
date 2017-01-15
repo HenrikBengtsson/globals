@@ -8,6 +8,8 @@ NEW FEATURES:
   o globalsOf() identifies also globals in locally defined functions.
     This can be disabled with argument recursive = FALSE.
 
+  o findGlobals() now takes both closures (functions) and expressions.
+  
 
 Version: 0.7.2 [2016-12-28]
 

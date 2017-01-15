@@ -10,27 +10,22 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2017-01-08                   |
+|date     |2017-01-14                   |
 
 ## Packages
 
-|package |*  |version |date       |source |
-|:-------|:--|:-------|:----------|:------|
-|globals |   |0.7.1   |2016-10-14 |local  |
+|package |*  |version |date       |source        |
+|:-------|:--|:-------|:----------|:-------------|
+|globals |   |0.7.2   |2017-01-09 |cran (@0.7.2) |
 
 # Check results
 
-21 packages
+16 packages
 
 |package              |version | errors| warnings| notes|
 |:--------------------|:-------|------:|--------:|-----:|
 |ACNE                 |0.8.1   |      0|        0|     0|
-|aroma.affymetrix     |3.0.0   |      0|        0|     0|
-|aroma.cn             |1.6.1   |      0|        0|     0|
-|aroma.core           |3.0.0   |      0|        0|     1|
 |calmate              |0.12.1  |      0|        0|     0|
-|doFuture             |0.3.0   |      0|        0|     0|
-|fiery                |0.2.2   |      0|        0|     0|
 |future.BatchJobs     |0.13.1  |      0|        0|     0|
 |future               |1.2.0   |      0|        0|     0|
 |GeneBreak            |1.4.0   |      0|        0|     1|
@@ -52,45 +47,9 @@ Bug reports: https://github.com/HenrikBengtsson/ACNE/issues
 
 0 errors | 0 warnings | 0 notes
 
-## aroma.affymetrix (3.0.0)
-Maintainer: Henrik Bengtsson <henrikb@braju.com>  
-Bug reports: https://github.com/HenrikBengtsson/aroma.affymetrix/issues
-
-0 errors | 0 warnings | 0 notes
-
-## aroma.cn (1.6.1)
-Maintainer: Henrik Bengtsson <henrikb@braju.com>  
-Bug reports: https://github.com/HenrikBengtsson/aroma.cn/issues
-
-0 errors | 0 warnings | 0 notes
-
-## aroma.core (3.0.0)
-Maintainer: Henrik Bengtsson <henrikb@braju.com>  
-Bug reports: https://github.com/HenrikBengtsson/aroma.core/issues
-
-0 errors | 0 warnings | 1 note 
-
-```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking:
-  ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
-```
-
 ## calmate (0.12.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/calmate/issues
-
-0 errors | 0 warnings | 0 notes
-
-## doFuture (0.3.0)
-Maintainer: Henrik Bengtsson <henrikb@braju.com>  
-Bug reports: https://github.com/HenrikBengtsson/doFuture/issues
-
-0 errors | 0 warnings | 0 notes
-
-## fiery (0.2.2)
-Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>  
-Bug reports: https://github.com/thomasp85/fiery/issues
 
 0 errors | 0 warnings | 0 notes
 
