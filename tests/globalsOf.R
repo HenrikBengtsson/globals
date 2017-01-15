@@ -117,6 +117,30 @@ stopifnot(
   identical(where$d, globalenv())
 )
 
+message(" ** globalsOf(..., method='ordered') w/ local functions:")
+
+a <- 1
+foo <- function(x) x - a
+
+globalsL <- globalsOf({ foo(3) }, substitute = TRUE, method = "ordered", recursive = FALSE, mustExist = FALSE)
+stopifnot(all(names(globalsL) %in% c("{", "foo")),
+          !any("a" %in% names(globalsL)))
+globalsL <- cleanup(globalsL)
+str(globalsL)
+stopifnot(all(names(globalsL) %in% c("foo"), !any("a" %in% names(globalsL))))
+
+globalsL <- globalsOf({ foo(3) }, substitute = TRUE, method = "ordered", recursive = TRUE, mustExist = FALSE)
+stopifnot(all(names(globalsL) %in% c("{", "foo", "-", "a")))
+globalsL <- cleanup(globalsL)
+str(globalsL)
+stopifnot(all(names(globalsL) %in% c("foo", "a")))
+
+globalsL <- globalsOf({ foo(3) }, substitute = TRUE, recursive = TRUE, mustExist = FALSE)
+stopifnot(all(names(globalsL) %in% c("{", "foo", "-", "a")))
+globalsL <- cleanup(globalsL)
+str(globalsL)
+stopifnot(all(names(globalsL) %in% c("foo", "a")))
+
 message("*** globalsOf() ... DONE")
 
 
