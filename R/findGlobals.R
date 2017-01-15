@@ -11,16 +11,23 @@ findGlobals_conservative <- function(expr, envir, ...) {
     objs <<- c(objs, v)
   }
 
-  ## From codetools::findGlobals():
-  fun <- asFunction(expr, envir=envir, ...)
-  # codetools::collectUsage(fun, enterGlobal=enter)
+  if (is.function(expr)) {
+    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    fun <- expr
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    collectUsageFunction(fun, name="<anonymous>", w)
+  } else {
+    ## From codetools::findGlobals():
+    fun <- asFunction(expr, envir=envir, ...)
+    # codetools::collectUsage(fun, enterGlobal=enter)
 
-  ## The latter becomes equivalent to (after cleanup):
-  w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
-  w$env <- new.env(hash=TRUE, parent=w$env)
-  locals <- findLocalsList(list(expr))
-  for (name in locals) assign(name, value=TRUE, envir=w$env)
-  walkCode(expr, w)
+    ## The latter becomes equivalent to (after cleanup):
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    w$env <- new.env(hash=TRUE, parent=w$env)
+    locals <- findLocalsList(list(expr))
+    for (name in locals) assign(name, value=TRUE, envir=w$env)
+    walkCode(expr, w)
+  }
 
   unique(objs)
 }
@@ -34,10 +41,16 @@ findGlobals_liberal <- function(expr, envir, ...) {
     objs <<- c(objs, v)
   }
 
-  fun <- asFunction(expr, envir=envir, ...)
-
-  w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
-  walkCode(expr, w)
+  if (is.function(expr)) {
+    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    fun <- expr
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    collectUsageFunction(fun, name="<anonymous>", w)
+  } else {
+    fun <- asFunction(expr, envir=envir, ...)
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    walkCode(expr, w)
+  }
 
   unique(objs)
 }
@@ -59,7 +72,9 @@ findGlobals_ordered <- function(expr, envir, ...) {
 
   ## A function or an expression?
   if (is.function(expr)) {
+    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
     fun <- expr
+    
     w <- makeUsageCollector(fun, name="<anonymous>",
                             enterLocal=enterLocal, enterGlobal=enterGlobal)
     collectUsageFunction(fun, name="<anonymous>", w)

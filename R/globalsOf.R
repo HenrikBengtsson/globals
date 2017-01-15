@@ -58,7 +58,7 @@
 #'
 #' @aliases findGlobals
 #' @export
-globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE, recursive=FALSE) {
+globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE, recursive=TRUE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
@@ -80,9 +80,13 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
   ## 3. Among globals that are closures (functions) and that exist outside
   ##    of namespaces ("packages"), check for additional globals?
   if (recursive) {
-    where <- sapply(attr(globals, "where"), FUN = environmentName)
+    ## Don't enter functions in namespaces / packages
+    where <- sapply(globals, FUN = function(x) environmentName(environment(x)))
     globalsT <- globals[!(where %in% loadedNamespaces())]
-    globalsT <- globals[sapply(globals, FUN = typeof) == "closure"]
+
+    ## Enter only functions
+    globalsT <- globals[sapply(globalsT, FUN = typeof) == "closure"]
+        
     if (length(globalsT) > 0) {
       for (gg in seq_along(globalsT)) {
         fcn <- globalsT[[gg]]

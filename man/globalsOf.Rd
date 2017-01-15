@@ -7,7 +7,7 @@
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
   "conservative", "liberal"), tweak = NULL, substitute = FALSE,
-  mustExist = TRUE, unlist = TRUE, recursive = FALSE)
+  mustExist = TRUE, unlist = TRUE, recursive = TRUE)
 }
 \arguments{
 \item{expr}{An R expression.}

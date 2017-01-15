@@ -1,12 +1,12 @@
 Package: globals
 ================
 
-Version: 0.7.2-9000 [2017-01-14]
+Version: 0.7.9-9000 [2017-01-14]
 
 NEW FEATURES:
 
-  o globalsOf(..., method = "ordered", recursive = TRUE) identifies also
-    globals in locally defined functions.
+  o globalsOf() identifies also globals in locally defined functions.
+    This can be disabled with argument recursive = FALSE.
 
 
 Version: 0.7.2 [2016-12-28]
