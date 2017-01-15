@@ -1,20 +1,29 @@
 #' Get all global objects of an expression
 #'
 #' @param expr An R expression.
+#'
 #' @param envir The environment from where to search for globals.
+#'
 #' @param \dots Not used.
+#'
 #' @param method A character string specifying what type of search algorithm to use.
+#'
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
-## @param dotdotdot A @character string specifying how to handle a
-##        \emph{global} \code{\dots} if one is discovered.
+#'
 #' @param substitute If TRUE, the expression is \code{substitute()}:ed,
 #'        otherwise not.
+#'
 #' @param mustExist If TRUE, an error is thrown if the object of the
 #'        identified global cannot be located.  Otherwise, the global
 #'        is not returned.
+#'
 #' @param unlist If TRUE, a list of unique objects is returned.
 #'        If FALSE, a list of \code{length(expr)} sublists.
+#'
+#' @param recursive If TRUE, globals that are closures (functions) and that
+#'        exist outside of namespaces ("packages"), will be recursively
+#'        scanned for globals.
 #'
 #' @return A \link{Globals} object.
 #'
@@ -38,6 +47,9 @@
 #' are most likely among the identified ones.  At the same time,
 #' there is a risk that some false positives are also identified.
 #'
+#' With \code{recursive = TRUE}, globals part of locally defined
+#' functions will also be found, otherwise not.
+#'
 #' @example incl/globalsOf.R
 #'
 #' @seealso
@@ -46,7 +58,7 @@
 #'
 #' @aliases findGlobals
 #' @export
-globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE) {
+globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE, recursive=FALSE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
@@ -64,6 +76,24 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     ex$message <- msg
     stop(ex)
   })
+
+  ## 3. Among globals that are closures (functions) and that exist outside
+  ##    of namespaces ("packages"), check for additional globals?
+  if (recursive) {
+    where <- sapply(attr(globals, "where"), FUN = environmentName)
+    globalsT <- globals[!(where %in% loadedNamespaces())]
+    globalsT <- globals[sapply(globals, FUN = typeof) == "closure"]
+    if (length(globalsT) > 0) {
+      for (gg in seq_along(globalsT)) {
+        fcn <- globalsT[[gg]]
+	globalsGG <- globalsOf(fcn, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
+	if (length(globalsGG) > 0) {
+	  globals <- c(globals, globalsGG)
+	}
+      }
+      globals <- unique(globals)
+    }
+  }
 
   globals
 } ## globalsOf()
