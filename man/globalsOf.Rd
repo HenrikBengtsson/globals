@@ -45,7 +45,7 @@ Get all global objects of an expression
 There currently three methods for identifying global objects.
 
 The \code{"ordered"} search method identifies globals such that
-a global variable preceeding a local variable with the same name
+a global variable preceding a local variable with the same name
 is not dropped (which the \code{"conservative"} method would).
 
 The \code{"conservative"} search method tries to keep the number
