@@ -1,26 +1,34 @@
 Package: globals
 ================
 
+Version: 0.8.0 [2017-01-14]
+
+NEW FEATURES:
+
+  o globalsOf() identifies also globals in locally defined functions.
+    This can be disabled with argument recursive = FALSE.
+
+  o findGlobals() now takes both closures (functions) and expressions.
+  
+
 Version: 0.7.2 [2016-12-28]
 
 BUG FIXES:
 
-  o c(x, list()) where x is a Globals object would give an error
-    reporting that the list does not have named elements.
+  o c(x, list()) where x is a Globals object would give an error reporting
+    that the list does not have named elements.
   
   
 Version: 0.7.1 [2016-10-13]
 
 NEW FEATURES:
 
-  o Globals() and as.Globals() now accepts an empty list
-    as input as well.
+  o Globals() and as.Globals() now accepts an empty list as input as well.
 
 BUG FIXES:
 
-  o walkAST(quote( function(x=NULL) 0 )) would give a sanity check
-    error due to the NULL argument.  Thank you GitHub user billy34
-    for reporting on this.
+  o walkAST(quote( function(x=NULL) 0 )) would give a sanity check error due
+    to the NULL argument.  Thank you GitHub user billy34 for reporting on this.
   
   
 Version: 0.7.0 [2016-09-08]
@@ -29,20 +37,21 @@ NEW FEATURES:
 
   o Added walkAST(), which can be used to tweak expressions.
 
-  o Added globalsByName() for locating and retrieving a set of
-    known global variables.
+  o Added globalsByName() for locating and retrieving a set of known global
+    variables.
 
   o Added c(), $<-(), names(), unique() for Globals objects.
-    Improved as.Globals() for lists.
+
+  o Improved as.Globals() for lists.
   
   
 Version: 0.6.1 [2016-01-31]
 
 NEW FEATURES:
 
-  o Now the error message of globalsOf(..., mustExist=TRUE) when
-    it fails to locate a global also gives information on the
-    expression that is problematic.
+  o Now the error message of globalsOf(..., mustExist=TRUE) when it fails to
+    locate a global also gives information on the expression that is
+    problematic.
 
 BUG FIXES:
 
@@ -54,34 +63,33 @@ Version: 0.6.0 [2015-12-12]
 
 NEW FEATURES:
 
-  o findGlobals() is updated to handle the case where a local
-    variable is overwriting a global one with the same name,
-    e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
-    as a global object.  Previously it would have been missed.
-    For backward compatibility, the previous behavior can be
-    obtained using argument method="conservative".
+  o findGlobals() is updated to handle the case where a local variable is
+    overwriting a global one with the same name, e.g. { a <- b; b <- 1 }.
+    Now 'b' is correctly identified as a global object.  Previously it would
+    have been missed.  For backward compatibility, the previous behavior can
+    be obtained using argument method="conservative".
   
   
 Version: 0.5.0 [2015-10-13]
 
 NEW FEATURES:
 
-  o globalsOf() now returns attribute 'where' specifying where
-    each global object is located.
+  o globalsOf() now returns attribute 'where' specifying where each global
+    object is located.
 
 BUG FIXES:
 
-  o cleanup() now only drops objects that are *located* in one of
-    the "base" packages; previously it would also drop copies of
-    such objects, e.g. FUN <- base::sample.
+  o cleanup() now only drops objects that are *located* in one of the "base"
+    packages; previously it would also drop copies of such objects, e.g.
+    FUN <- base::sample.
   
   
 Version: 0.4.1 [2015-10-05]
 
 BUG FIXES:
 
-  o globalsOf() failed to return global variables with value NULL.
-    They were identified but silently dropped.
+  o globalsOf() failed to return global variables with value NULL.  They were
+    identified but silently dropped.
   
   
 Version: 0.4.0 [2015-09-12]
@@ -126,13 +134,13 @@ Version: 0.2.1 [2015-05-20]
 
 NEW FEATURES:
 
-  o getGlobals() gained argument 'mustExist' for controlling whether
-    to give an error when the corresponding object for an identified
-    global cannot be found or to silently drop the missing global.
+  o getGlobals() gained argument 'mustExist' for controlling whether to give an
+    error when the corresponding object for an identified global cannot be
+    found or to silently drop the missing global.
 
-  o findGlobals() and getGlobals() gained argument 'method' for
-    controlling whether a "conservative" or a "liberal" algorithm
-    for identifying true globals should be used.
+  o findGlobals() and getGlobals() gained argument 'method' for controlling
+    whether a "conservative" or a "liberal" algorithm for identifying true
+    globals should be used.
   
   
 Version: 0.2.0 [2015-05-19]

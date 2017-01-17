@@ -7,7 +7,7 @@
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
   "conservative", "liberal"), tweak = NULL, substitute = FALSE,
-  mustExist = TRUE, unlist = TRUE)
+  mustExist = TRUE, unlist = TRUE, recursive = TRUE)
 }
 \arguments{
 \item{expr}{An R expression.}
@@ -29,6 +29,10 @@ is not returned.}
 \item{unlist}{If TRUE, a list of unique objects is returned.
 If FALSE, a list of \code{length(expr)} sublists.}
 
+\item{recursive}{If TRUE, globals that are closures (functions) and that
+exist outside of namespaces ("packages"), will be recursively
+scanned for globals.}
+
 \item{\dots}{Not used.}
 }
 \value{
@@ -41,7 +45,7 @@ Get all global objects of an expression
 There currently three methods for identifying global objects.
 
 The \code{"ordered"} search method identifies globals such that
-a global variable preceeding a local variable with the same name
+a global variable preceding a local variable with the same name
 is not dropped (which the \code{"conservative"} method would).
 
 The \code{"conservative"} search method tries to keep the number
@@ -56,6 +60,9 @@ The \code{"liberal"} search method tries to keep the
 true-positive ratio as high as possible, i.e. the true globals
 are most likely among the identified ones.  At the same time,
 there is a risk that some false positives are also identified.
+
+With \code{recursive = TRUE}, globals part of locally defined
+functions will also be found, otherwise not.
 }
 \examples{
 b <- 2

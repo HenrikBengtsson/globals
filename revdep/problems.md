@@ -10,13 +10,13 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2017-01-08                   |
+|date     |2017-01-14                   |
 
 ## Packages
 
-|package |*  |version |date       |source |
-|:-------|:--|:-------|:----------|:------|
-|globals |   |0.7.1   |2016-10-14 |local  |
+|package |*  |version |date       |source        |
+|:-------|:--|:-------|:----------|:-------------|
+|globals |   |0.7.2   |2017-01-09 |cran (@0.7.2) |
 
 # Check results
 

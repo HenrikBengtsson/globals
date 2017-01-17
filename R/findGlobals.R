@@ -11,16 +11,23 @@ findGlobals_conservative <- function(expr, envir, ...) {
     objs <<- c(objs, v)
   }
 
-  ## From codetools::findGlobals():
-  fun <- asFunction(expr, envir=envir, ...)
-  # codetools::collectUsage(fun, enterGlobal=enter)
+  if (is.function(expr)) {
+    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    fun <- expr
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    collectUsageFunction(fun, name="<anonymous>", w)
+  } else {
+    ## From codetools::findGlobals():
+    fun <- asFunction(expr, envir=envir, ...)
+    # codetools::collectUsage(fun, enterGlobal=enter)
 
-  ## The latter becomes equivalent to (after cleanup):
-  w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
-  w$env <- new.env(hash=TRUE, parent=w$env)
-  locals <- findLocalsList(list(expr))
-  for (name in locals) assign(name, value=TRUE, envir=w$env)
-  walkCode(expr, w)
+    ## The latter becomes equivalent to (after cleanup):
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    w$env <- new.env(hash=TRUE, parent=w$env)
+    locals <- findLocalsList(list(expr))
+    for (name in locals) assign(name, value=TRUE, envir=w$env)
+    walkCode(expr, w)
+  }
 
   unique(objs)
 }
@@ -34,10 +41,16 @@ findGlobals_liberal <- function(expr, envir, ...) {
     objs <<- c(objs, v)
   }
 
-  fun <- asFunction(expr, envir=envir, ...)
-
-  w <- makeUsageCollector(fun, enterGlobal=enter, name="<anonymous>")
-  walkCode(expr, w)
+  if (is.function(expr)) {
+    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    fun <- expr
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    collectUsageFunction(fun, name="<anonymous>", w)
+  } else {
+    fun <- asFunction(expr, envir=envir, ...)
+    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    walkCode(expr, w)
+  }
 
   unique(objs)
 }
@@ -57,12 +70,21 @@ findGlobals_ordered <- function(expr, envir, ...) {
     name <<- c(name, v)
   }
 
-  fun <- asFunction(expr, envir=envir, ...)
-
-  w <- makeUsageCollector(fun, name="<anonymous>",
-                          enterLocal=enterLocal, enterGlobal=enterGlobal)
-  walkCode(expr, w)
-
+  ## A function or an expression?
+  if (is.function(expr)) {
+    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    fun <- expr
+    
+    w <- makeUsageCollector(fun, name="<anonymous>",
+                            enterLocal=enterLocal, enterGlobal=enterGlobal)
+    collectUsageFunction(fun, name="<anonymous>", w)
+  } else {
+    fun <- asFunction(expr, envir=envir, ...)
+    w <- makeUsageCollector(fun, name="<anonymous>",
+                            enterLocal=enterLocal, enterGlobal=enterGlobal)
+    walkCode(expr, w)
+  }
+  
   ## Drop duplicated names
   dups <- duplicated(name)
   class <- class[!dups]
@@ -137,4 +159,35 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
   if (needsDotdotdot) globals <- c(globals, "...")
 
   globals
+}
+
+
+## Utility functions adopted from codetools:::dropMissing()
+## and codetools:::collectUsageFun()
+dropMissingFormals <- function(x) {
+  nx <- length(x)
+  ix <- logical(length = nx)
+  for (i in seq_len(nx)) {
+    tmp <- x[[i]]
+    if (!missing(tmp)) ix[i] <- TRUE
+  }
+  x[ix]
+}
+
+#' @importFrom codetools walkCode findLocalsList
+collectUsageFunction <- function(fun, name, w) {
+  formals <- formals(fun)
+  body <- body(fun)
+  
+  w$name <- c(w$name, name)
+  parnames <- names(formals)
+  
+  formals_clean <- dropMissingFormals(formals)
+  locals <- findLocalsList(c(list(body), formals_clean))
+  
+  w$env <- new.env(hash = TRUE, parent = w$env)
+  for (n in c(parnames, locals)) assign(n, TRUE, w$env)
+  for (a in formals_clean) walkCode(a, w)
+  
+  walkCode(body, w)
 }
