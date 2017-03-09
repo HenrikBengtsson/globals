@@ -32,29 +32,7 @@ is.internal <- function(x) {
   any(grepl(".Internal", body, fixed=TRUE))
 }
 
-## Emulates R internal findVar1mode() function
-## https://svn.r-project.org/R/trunk/src/main/envir.c
-where <- function(x, where=-1, envir=if (missing(frame)) { if (where < 0) parent.frame(-where) else as.environment(where) } else sys.frame(frame), frame, mode="any", inherits=TRUE) {
-  tt <- 1
-  ## Validate arguments
-  stopifnot(is.environment(envir))
-  stopifnot(is.character(mode), length(mode) == 1L)
-  inherits <- as.logical(inherits)
-  stopifnot(inherits %in% c(FALSE, TRUE))
-
-  ## Search
-  while (!identical(envir, emptyenv())) {
-    if (exists(x, envir=envir, mode=mode, inherits=FALSE)) return(envir)
-    if (!inherits) return(NULL)
-    envir <- parent.env(envir)
-  }
-
-  NULL
-}
-
-
-## From R.utils 2.0.2 (2015-05-23)
-hpaste <- function(..., sep="", collapse=", ", lastCollapse=NULL, maxHead=if (missing(lastCollapse)) 3 else Inf, maxTail=if (is.finite(maxHead)) 1 else Inf, abbreviate="...") {
+hpaste <- function(..., sep="", collapse=", ", lastCollapse=NULL, maxHead=3L, maxTail=1L, abbreviate="...") {
   if (is.null(lastCollapse)) lastCollapse <- collapse
 
   # Build vector 'x'
@@ -98,3 +76,25 @@ hexpr <- function(expr, trim=TRUE, collapse="; ", maxHead=6L, maxTail=3L, ...) {
   if (trim) code <- trim(code)
   hpaste(code, collapse=collapse, maxHead=maxHead, maxTail=maxTail, ...)
 } # hexpr()
+
+
+## From future 1.3.0
+mdebug <- function(...) {
+  if (!getOption("globals.debug", FALSE)) return()
+  message(sprintf(...))
+} ## mdebug()
+
+
+#' @importFrom utils capture.output
+envname <- function(env) {
+  name <- environmentName(env)
+  if (name == "") {
+    ## e.g. new.env()
+    name <- capture.output(print(env))
+    name <- gsub("(.*: |>)", "", name)
+  } else {
+    ## e.g. globals:::where("plan")
+    name <- gsub("package:", "", name, fixed = TRUE)
+  }
+  name
+}
