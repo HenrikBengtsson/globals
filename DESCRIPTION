@@ -17,4 +17,4 @@ LazyLoad: TRUE
 ByteCompile: TRUE
 URL: https://github.com/HenrikBengtsson/globals
 BugReports: https://github.com/HenrikBengtsson/globals/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

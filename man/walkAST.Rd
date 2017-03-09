@@ -28,4 +28,3 @@ Walk the Abstract Syntax Tree (AST) of an R Expression
 }
 \keyword{internal}
 \keyword{programming}
-

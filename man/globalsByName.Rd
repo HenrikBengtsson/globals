@@ -23,4 +23,3 @@ A \link{Globals} object.
 \description{
 Locates and retrieves a set of global variables by their names
 }
-
