@@ -4,6 +4,10 @@ Package: globals
 Version: 0.8.0-9000 [2017-03-09]
 
   o ...
+
+NEW FEATURES:
+
+  o Added option 'globals.debug', which when TRUE enables debugging output.
   
 BUG FIXES:
 
