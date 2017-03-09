@@ -2,10 +2,10 @@
 % Please edit documentation in R/Globals-class.R
 \name{Globals}
 \alias{Globals}
-\alias{[.Globals}
 \alias{as.Globals}
 \alias{as.Globals.Globals}
 \alias{as.Globals.list}
+\alias{[.Globals}
 \alias{names}
 \title{A representation of a set of globals}
 \usage{
@@ -26,4 +26,3 @@ A representation of a set of globals
 The \code{\link{globalsOf}()} function identifies globals
 from an R expression and returns a Globals object.
 }
-
