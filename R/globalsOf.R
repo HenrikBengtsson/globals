@@ -95,8 +95,6 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     
     ## Enter only functions
     ## NOTE: This excludes functions "not found", but also primitives not dropped above.
-    str(globalsT)
-    str(lapply(globalsT, FUN = typeof))
     globalsT <- globals[sapply(globalsT, FUN = typeof) == "closure"]
 
     if (length(globalsT) > 0) {
