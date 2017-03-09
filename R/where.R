@@ -11,12 +11,13 @@ where <- function(x, where=-1, envir=if (missing(frame)) { if (where < 0) parent
   mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ...", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
   
   ## Search
-  while (!identical(envir, emptyenv())) {
-    mdebug("- searching %s: %s", sQuote(envname(envir)), hpaste(sQuote(ls(envir = envir, all.names = TRUE))))
-    if (exists(x, envir=envir, mode=mode, inherits=FALSE)) {
-      mdebug("  + found in location: %s", sQuote(envname(envir)))
+  env <- envir
+  while (!identical(env, emptyenv())) {
+    mdebug("- searching %s: %s", sQuote(envname(env)), hpaste(sQuote(ls(envir = env, all.names = TRUE))))
+    if (exists(x, envir=env, mode=mode, inherits=FALSE)) {
+      mdebug("  + found in location: %s", sQuote(envname(env)))
       mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
-      return(envir)
+      return(env)
     }
     
     if (!inherits) {
@@ -25,7 +26,7 @@ where <- function(x, where=-1, envir=if (missing(frame)) { if (where < 0) parent
       return(NULL)
     }
     
-    envir <- parent.env(envir)
+    env <- parent.env(env)
   }
 
   mdebug("- failed to located: NULL")
