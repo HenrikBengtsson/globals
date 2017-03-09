@@ -63,9 +63,12 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
 
   if (substitute) expr <- substitute(expr)
 
+  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive)
+  
   ## 1. Identify global variables (static code inspection)
   names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
-
+  mdebug(" - preliminary globals (by name): [%d] %s", length(names), hpaste(sQuote(names)))
+  
   ## 2. Locate them (run time)
   globals <- tryCatch({
     globalsByName(names, envir=envir, mustExist=mustExist)
@@ -77,18 +80,30 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     stop(ex)
   })
 
+  mdebug(" - preliminary globals (by value): [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+  
   ## 3. Among globals that are closures (functions) and that exist outside
   ##    of namespaces ("packages"), check for additional globals?
   if (recursive) {
+    mdebug(" - recursive scan of preliminary globals ...")
+
     ## Don't enter functions in namespaces / packages
     where <- sapply(globals, FUN = function(x) environmentName(environment(x)))
     globalsT <- globals[!(where %in% loadedNamespaces())]
 
+    mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT))))
+    
     ## Enter only functions
+    ## NOTE: This excludes functions "not found", but also primitives not dropped above.
+    str(globalsT)
+    str(lapply(globalsT, FUN = typeof))
     globalsT <- globals[sapply(globalsT, FUN = typeof) == "closure"]
-        
+
     if (length(globalsT) > 0) {
+      mdebug(" - subset of globals to be scanned: [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT))))
+      namesT <- names(globalsT)
       for (gg in seq_along(globalsT)) {
+        mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
         fcn <- globalsT[[gg]]
         env <- environment(fcn) ## was 'envir' in globals 0.8.0.
 #        env <- envir ## was 'envir' in globals 0.8.0.
@@ -98,9 +113,18 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
 	}
       }
       globals <- unique(globals)
+      mdebug(" - updated set of globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+    } else {
+      mdebug(" - subset of globals to be scanned: [0]")
     }
+    
+    mdebug(" - recursive scan of preliminary globals ... DONE")
   }
 
+  mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+  
+  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ... DONE", method, mustExist, unlist, recursive)
+  
   globals
 } ## globalsOf()
 
