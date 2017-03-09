@@ -85,12 +85,13 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     globalsT <- globals[!(where %in% loadedNamespaces())]
 
     ## Enter only functions
-    globalsT <- globals[sapply(globalsT, FUN = typeof) == "closure"]
+    globalsT <- globalsT[sapply(globalsT, FUN = typeof) == "closure"]
         
     if (length(globalsT) > 0) {
       for (gg in seq_along(globalsT)) {
         fcn <- globalsT[[gg]]
-	globalsGG <- globalsOf(fcn, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
+        env <- environment(fcn)
+	globalsGG <- globalsOf(fcn, envir=env, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
 	if (length(globalsGG) > 0) {
 	  globals <- c(globals, globalsGG)
 	}

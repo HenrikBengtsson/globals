@@ -1,10 +1,15 @@
 Package: globals
 ================
 
-Version: 0.8.0-9000 [2017-01-16]
+Version: 0.8.0-9000 [2017-03-09]
 
   o ...
   
+BUG FIXES:
+
+  o globalsOf(..., recursive = TRUE) would in some cases scan an incorrect
+    subset of already identified globals.
+    
 
 Version: 0.8.0 [2017-01-14]
 
