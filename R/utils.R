@@ -42,19 +42,35 @@ where <- function(x, where=-1, envir=if (missing(frame)) { if (where < 0) parent
   inherits <- as.logical(inherits)
   stopifnot(inherits %in% c(FALSE, TRUE))
 
+  mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ...", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
+  
   ## Search
   while (!identical(envir, emptyenv())) {
-    if (exists(x, envir=envir, mode=mode, inherits=FALSE)) return(envir)
-    if (!inherits) return(NULL)
+    mdebug("- searching location: %s", sQuote(envname(envir)))
+    mdebug("- content of %s: %s", sQuote(envname(envir)), hpaste(sQuote(ls(envir = envir, all.names = TRUE))))
+    if (exists(x, envir=envir, mode=mode, inherits=FALSE)) {
+      mdebug("  + found in location: %s", sQuote(envname(envir)))
+      mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
+      return(envir)
+    }
+    
+    if (!inherits) {
+      mdebug("  + failed to located: NULL")
+      mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
+      return(NULL)
+    }
+    
     envir <- parent.env(envir)
   }
 
+  mdebug("- failed to located: NULL")
+  mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
+  
   NULL
 }
 
 
-## From R.utils 2.0.2 (2015-05-23)
-hpaste <- function(..., sep="", collapse=", ", lastCollapse=NULL, maxHead=if (missing(lastCollapse)) 3 else Inf, maxTail=if (is.finite(maxHead)) 1 else Inf, abbreviate="...") {
+hpaste <- function(..., sep="", collapse=", ", lastCollapse=NULL, maxHead=3L, maxTail=1L, abbreviate="...") {
   if (is.null(lastCollapse)) lastCollapse <- collapse
 
   # Build vector 'x'
@@ -105,3 +121,13 @@ mdebug <- function(...) {
   if (!getOption("globals.debug", FALSE)) return()
   message(sprintf(...))
 } ## mdebug()
+
+
+envname <- function(env) {
+  name <- environmentName(env)
+  if (name == "") {
+    name <- capture.output(print(env))
+    name <- gsub("(.*: |>)", "", name)
+  }
+  name
+}

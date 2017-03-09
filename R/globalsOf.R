@@ -146,15 +146,22 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
 globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
   names <- as.character(names)
 
+  mdebug("globalsByName(<%d names>, mustExist = %s) ...", length(names), mustExist)
+  mdebug("- search from environment: %s", sQuote(envname(envir)))
+
   ## Locate and retrieve the specified globals
   n <- length(names)
   needsDotdotdot <- (identical(names[n], "..."))
   if (needsDotdotdot) names <- names[-n]
-
+  mdebug("- dotdotdot: %s", needsDotdotdot)
+  
   globals <- structure(list(), class=c("Globals", "list"))
   where <- list()
-  for (name in names) {
+  for (kk in seq_along(names)) {
+    name <- names[kk]
+    mdebug("- locating #%d (%s)", kk, sQuote(name))
     env <- where(name, envir=envir, inherits=TRUE)
+    mdebug("  + found in environment: %s", sQuote(envname(env)))
     if (!is.null(env)) {
       where[[name]] <- env
       value <- get(name, envir=env, inherits=FALSE)
@@ -192,5 +199,7 @@ globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
 
   attr(globals, "where") <- where
 
+  mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE", length(names), mustExist)
+  
   globals
 } ## globalsByName()
