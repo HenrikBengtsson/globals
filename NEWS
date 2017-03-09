@@ -9,7 +9,10 @@ BUG FIXES:
 
   o globalsOf(..., recursive = TRUE) would in some cases scan an incorrect
     subset of already identified globals.
-    
+
+  o globalsOf(..., recursive = TRUE) failed to skip objects part of package
+    namespaces that where defined via a local() statement.
+
 
 Version: 0.8.0 [2017-01-14]
 

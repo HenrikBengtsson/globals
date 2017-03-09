@@ -48,7 +48,7 @@ stopifnot(
 )
 
 foo <- globals::Globals
-globals <- globalsByName(c("{", "foo", "list"))
+globals <- globalsByName(c("{", "foo", "list"), recursive = FALSE)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "foo", "list")))
 where <- attr(globals, "where")
@@ -187,7 +187,7 @@ stopifnot(length(pkgs) == 0L)
 message("*** globalsOf() and package functions:")
 foo <- globals::Globals
 expr <- substitute({ foo(list(a=1)) })
-globals <- globalsOf(expr)
+globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "foo", "list")))
 where <- attr(globals, "where")
@@ -209,7 +209,7 @@ message("*** globalsOf() and core-package functions:")
 sample2 <- base::sample
 sum2 <- base::sum
 expr <- substitute({ x <- sample(10); y <- sum(x); x2 <- sample2(10); y2 <- sum2(x); s <- sessionInfo() }, env=list())
-globals <- globalsOf(expr)
+globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2")))
 where <- attr(globals, "where")

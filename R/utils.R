@@ -89,8 +89,12 @@ mdebug <- function(...) {
 envname <- function(env) {
   name <- environmentName(env)
   if (name == "") {
+    ## e.g. new.env()
     name <- capture.output(print(env))
     name <- gsub("(.*: |>)", "", name)
+  } else {
+    ## e.g. globals:::where("plan")
+    name <- gsub("package:", "", name, fixed = TRUE)
   }
   name
 }
