@@ -95,16 +95,15 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     
     ## Enter only functions
     ## NOTE: This excludes functions "not found", but also primitives not dropped above.
-    globalsT <- globals[sapply(globalsT, FUN = typeof) == "closure"]
-
+    globalsT <- globalsT[sapply(globalsT, FUN = typeof) == "closure"]
+        
     if (length(globalsT) > 0) {
       mdebug(" - subset of globals to be scanned: [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT))))
       namesT <- names(globalsT)
       for (gg in seq_along(globalsT)) {
         mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
         fcn <- globalsT[[gg]]
-        env <- environment(fcn) ## was 'envir' in globals 0.8.0.
-#        env <- envir ## was 'envir' in globals 0.8.0.
+        env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
 	globalsGG <- globalsOf(fcn, envir=env, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
 	if (length(globalsGG) > 0) {
 	  globals <- c(globals, globalsGG)
