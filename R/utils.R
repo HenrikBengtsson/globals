@@ -98,3 +98,10 @@ hexpr <- function(expr, trim=TRUE, collapse="; ", maxHead=6L, maxTail=3L, ...) {
   if (trim) code <- trim(code)
   hpaste(code, collapse=collapse, maxHead=maxHead, maxTail=maxTail, ...)
 } # hexpr()
+
+
+## From future 1.3.0
+mdebug <- function(...) {
+  if (!getOption("globals.debug", FALSE)) return()
+  message(sprintf(...))
+} ## mdebug()

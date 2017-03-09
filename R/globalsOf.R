@@ -90,7 +90,9 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
     if (length(globalsT) > 0) {
       for (gg in seq_along(globalsT)) {
         fcn <- globalsT[[gg]]
-	globalsGG <- globalsOf(fcn, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
+        env <- environment(fcn) ## was 'envir' in globals 0.8.0.
+#        env <- envir ## was 'envir' in globals 0.8.0.
+	globalsGG <- globalsOf(fcn, envir=env, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
 	if (length(globalsGG) > 0) {
 	  globals <- c(globals, globalsGG)
 	}
