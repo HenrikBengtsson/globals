@@ -4,19 +4,19 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.3.2 (2016-10-31) |
+|version  |R version 3.3.3 (2017-03-06) |
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2017-01-14                   |
+|date     |2017-03-09                   |
 
 ## Packages
 
-|package |*  |version |date       |source        |
-|:-------|:--|:-------|:----------|:-------------|
-|globals |   |0.7.2   |2017-01-09 |cran (@0.7.2) |
+|package |*  |version    |date       |source                             |
+|:-------|:--|:----------|:----------|:----------------------------------|
+|globals |   |0.8.0-9000 |2017-03-10 |local (HenrikBengtsson/globals@NA) |
 
 # Check results
 
@@ -32,18 +32,18 @@
 |doFuture             |0.3.0   |      0|        0|     0|
 |fiery                |0.2.2   |      0|        0|     0|
 |future.BatchJobs     |0.13.1  |      0|        0|     0|
-|future               |1.2.0   |      0|        0|     0|
+|future               |1.3.0   |      0|        0|     0|
 |GeneBreak            |1.4.0   |      0|        0|     1|
 |googleComputeEngineR |0.1.0   |      0|        0|     0|
 |MPAgenomics          |1.1.2   |      0|        0|     2|
 |NSA                  |0.0.32  |      0|        0|     6|
-|pbmcapply            |1.1.3   |      0|        0|     0|
+|pbmcapply            |1.2.1   |      0|        0|     0|
 |PECA                 |1.10.0  |      0|        0|     1|
 |PSCBS                |0.62.0  |      0|        0|     0|
-|PureCN               |1.2.3   |      0|        1|     1|
+|PureCN               |1.2.3   |      0|        0|     1|
 |QDNAseq              |1.10.0  |      0|        0|     0|
 |Repitools            |1.20.0  |      0|        0|     2|
-|R.filesets           |2.10.0  |      0|        0|     0|
+|R.filesets           |2.11.0  |      0|        0|     0|
 |TIN                  |1.6.0   |      0|        0|     2|
 
 ## ACNE (0.8.1)
@@ -73,7 +73,7 @@ Bug reports: https://github.com/HenrikBengtsson/aroma.core/issues
 ```
 checking package dependencies ... NOTE
 Packages suggested but not available for checking:
-  ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
+  ‘png’ ‘Cairo’ ‘EBImage’ ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
 ```
 
 ## calmate (0.12.1)
@@ -100,7 +100,7 @@ Bug reports: https://github.com/HenrikBengtsson/future.BatchJobs/issues
 
 0 errors | 0 warnings | 0 notes
 
-## future (1.2.0)
+## future (1.3.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/future/issues
 
@@ -252,7 +252,7 @@ Rd file 'NSANormalization.Rd':
 These lines will be truncated in the PDF manual.
 ```
 
-## pbmcapply (1.1.3)
+## pbmcapply (1.2.1)
 Maintainer: Kevin kuang <kvn.kuang@mail.utoronto.ca>  
 Bug reports: https://github.com/kvnkuang/pbmcapply/issues
 
@@ -281,14 +281,9 @@ Bug reports: https://github.com/HenrikBengtsson/PSCBS/issues
 ## PureCN (1.2.3)
 Maintainer: Markus Riester <markus.riester@novartis.com>
 
-0 errors | 1 warning  | 1 note 
+0 errors | 0 warnings | 1 note 
 
 ```
-checking whether package ‘PureCN’ can be installed ... WARNING
-Found the following significant warnings:
-  Warning: namespace ‘Matrix’ is not available and has been replaced
-See ‘/home/hb/repositories/globals/revdep/checks/PureCN.Rcheck/00install.out’ for details.
-
 checking R code for possible problems ... NOTE
 Found the following calls to data() loading into the global environment:
 File ‘PureCN/R/bootstrapResults.R’:
@@ -371,7 +366,7 @@ Rd file 'writeWig.Rd':
 These lines will be truncated in the PDF manual.
 ```
 
-## R.filesets (2.10.0)
+## R.filesets (2.11.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/R.filesets/issues
 
