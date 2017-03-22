@@ -8,7 +8,7 @@ Version: 0.9.0-9000 [2017-03-21]
 BUG FIXES:
 
   o walkAST() could produce error "Cannot walk expression. Unknown object
-    type 'builtin'" and "... type 'closure'".
+    type 'nnn'" for expressions of type 'builtin', 'closure' and 'special'.
     
 
 Version: 0.9.0 [2017-03-09]

@@ -23,7 +23,8 @@ exprs <- list(
   warn     = substitute(sum(x, ...)),
   null     = substitute(NULL),
   builtin  = base::length,
-  closure  = function() NULL
+  closure  = function() NULL,
+  special  = base::log
 )
 
 nullify <- function(e) NULL
