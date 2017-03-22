@@ -22,7 +22,8 @@ exprs <- list(
   ok       = substitute(function(...) sum(x, ...)),
   warn     = substitute(sum(x, ...)),
   null     = substitute(NULL),
-  builtin  = substitute(list(a = x), list(x = length))
+  builtin  = base::length,
+  closure  = function() NULL
 )
 
 nullify <- function(e) NULL
