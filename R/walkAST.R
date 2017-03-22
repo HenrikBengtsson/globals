@@ -48,13 +48,16 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
     ## https://stat.ethz.ch/pipermail/r-devel/2016-October/073263.html
     ## /HB 2016-10-12
     expr <- as.pairlist(expr)
+  } else if (typeof(expr) == "builtin") {
+    ## Nothing to do
+    return(expr)
   } else {
     stop("Cannot walk expression. Unknown object type ", sQuote(typeof(expr)), call.=FALSE)
   }
 
   ## Assert that the tweak functions return a valid object
   if (!missing(expr)) {
-    stopifnot(is.atomic(expr) || is.name(expr) || is.call(expr) || is.pairlist(expr))
+    stopifnot(is.atomic(expr) || is.name(expr) || is.call(expr) || is.pairlist(expr) || typeof(expr) == "builtin")
   }
   
   expr
