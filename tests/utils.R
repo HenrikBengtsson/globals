@@ -31,34 +31,34 @@ z <- LETTERS[x]
 printf("x = %s.\n", hpaste(x))
 ## x = 1, 2, 3, ..., 6.
 
-printf("x = %s.\n", hpaste(x, maxHead=2))
+printf("x = %s.\n", hpaste(x, maxHead = 2))
 ## x = 1, 2, ..., 6.
 
-printf("x = %s.\n", hpaste(x), maxHead=3) # Default
+printf("x = %s.\n", hpaste(x), maxHead = 3) # Default
 ## x = 1, 2, 3, ..., 6.
 
 # It will never output 1, 2, 3, 4, ..., 6
-printf("x = %s.\n", hpaste(x, maxHead=4))
+printf("x = %s.\n", hpaste(x, maxHead = 4))
 ## x = 1, 2, 3, 4, 5 and 6.
 
 # Showing the tail
-printf("x = %s.\n", hpaste(x, maxHead=1, maxTail=2))
+printf("x = %s.\n", hpaste(x, maxHead = 1, maxTail = 2))
 ## x = 1, ..., 5, 6.
 
 # Turning off abbreviation
-printf("y = %s.\n", hpaste(y, maxHead=Inf))
+printf("y = %s.\n", hpaste(y, maxHead = Inf))
 ## y = 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
 
 ## ...or simply
-printf("y = %s.\n", paste(y, collapse=", "))
+printf("y = %s.\n", paste(y, collapse = ", "))
 ## y = 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
 
 # Change last separator
-printf("x = %s.\n", hpaste(x, lastCollapse=" and "))
+printf("x = %s.\n", hpaste(x, lastCollapse = " and "))
 ## x = 1, 2, 3, 4, 5 and 6.
 
 # No collapse
-stopifnot(all(hpaste(x, collapse=NULL) == x))
+stopifnot(all(hpaste(x, collapse = NULL) == x))
 
 # Empty input
 stopifnot(identical(hpaste(character(0)), character(0)))
@@ -95,34 +95,34 @@ stopifnot(!is.internal(NULL))
 
 message("* where() ...")
 
-env <- where("sample", where=1L)
+env <- where("sample", where = 1L)
 str(env)
 
-env <- where("sample", frame=1L)
+env <- where("sample", frame = 1L)
 str(env)
 
 message("- where('sample') ...")
-env <- where("sample", mode="function")
+env <- where("sample", mode = "function")
 print(env)
 if (!"covr" %in% loadedNamespaces()) {
   stopifnot(identical(env, baseenv()))
 }
-obj <- get("sample", mode="function", envir=env, inherits=FALSE)
+obj <- get("sample", mode = "function", envir = env, inherits = FALSE)
 stopifnot(identical(obj, base::sample))
 
 
-message("- where('sample', mode='integer') ...")
-env <- where("sample", mode="integer")
+message("- where('sample', mode = 'integer') ...")
+env <- where("sample", mode = "integer")
 print(env)
 stopifnot(is.null(env))
 
 
 message("- where('sample2') ...")
 sample2 <- base::sample
-env <- where("sample2", mode="function")
+env <- where("sample2", mode = "function")
 print(env)
 stopifnot(identical(env, environment()))
-obj <- get("sample2", mode="function", envir=env, inherits=FALSE)
+obj <- get("sample2", mode = "function", envir = env, inherits = FALSE)
 stopifnot(identical(obj, sample2))
 
 
@@ -131,7 +131,7 @@ aa <- 1
 
 foo <- function() {
   bb <- 2
-  list(aa=where("aa"), bb=where("bb"), cc=where("cc"), envir=environment())
+  list(aa = where("aa"), bb = where("bb"), cc = where("cc"), envir = environment())
 }
 
 envs <- foo()
@@ -141,10 +141,10 @@ stopifnot(identical(envs$bb, envs$envir))
 stopifnot(is.null(envs$cc))
 
 message("- where() - missing ...")
-env <- where("non-existing-object", inherits=FALSE)
+env <- where("non-existing-object", inherits = FALSE)
 stopifnot(is.null(env))
 
-rm(list=c("aa", "envs", "foo", "env", "obj", "where"))
+rm(list = c("aa", "envs", "foo", "env", "obj", "where"))
 
 message("* where() ... DONE")
 

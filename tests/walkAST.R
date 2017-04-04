@@ -10,15 +10,15 @@ exprs <- list(
   assign   = substitute(a <- 1),
   assign   = substitute(1 -> a),
   assign   = substitute(a <- b + 1),
-  assign   = substitute(x <- rnorm(20, mu=0)),
+  assign   = substitute(x <- rnorm(20, mu = 0)),
   index    = substitute(x[1,1]),
   index    = substitute(x[1:2,1:2]),
   index    = substitute(x[,1:2]),
   index    = substitute(x[,1]),
-  fcn      = substitute(function(a=1, b=2) sum(c(a, b))),
-  fcn      = substitute(function(a=1, b) sum(c(a, b))),
-  fcn      = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
-  fcn      = substitute(function(a=NULL) a),
+  fcn      = substitute(function(a = 1, b = 2) sum(c(a, b))),
+  fcn      = substitute(function(a = 1, b) sum(c(a, b))),
+  fcn      = substitute(function(a = 1, b = 2, ...) sum(c(a, b, ...))),
+  fcn      = substitute(function(a = NULL) a),
   ok       = substitute(function(...) sum(x, ...)),
   warn     = substitute(sum(x, ...)),
   null     = substitute(NULL),
@@ -52,14 +52,14 @@ for (kk in seq_along(exprs)) {
   str(as.list(exprI))
   res <- all.equal(exprI, expr)
   print(res)
-  if (!identical(exprI, expr)) saveRDS(list(expr=expr, exprI=exprI), file="/tmp/foo.rds")
+  if (!identical(exprI, expr)) saveRDS(list(expr = expr, exprI = exprI), file = "/tmp/foo.rds")
   stopifnot(length(exprI) == length(expr), identical(exprI, expr))
 
   ## Display the AST tree
-  walkAST(expr, atomic=disp, name=disp, call=disp, pairlist=disp)
+  walkAST(expr, atomic = disp, name = disp, call = disp, pairlist = disp)
 
   ## Nullify
-  exprN <- walkAST(expr, atomic=nullify, name=nullify, call=nullify, pairlist=nullify)
+  exprN <- walkAST(expr, atomic = nullify, name = nullify, call = nullify, pairlist = nullify)
   print(exprN)
   str(as.list(exprN))
   
@@ -71,12 +71,12 @@ message("*** walkAST() - nullify ... DONE")
 
 
 
-message("*** walkAST() - substitute=TRUE ...")
+message("*** walkAST() - substitute = TRUE ...")
 
-expr <- walkAST(a <- 1, substitute=TRUE)
+expr <- walkAST(a <- 1, substitute = TRUE)
 print(expr)
 
-message("*** walkAST() - substitute=TRUE ... DONE")
+message("*** walkAST() - substitute = TRUE ... DONE")
 
 
 message("*** walkAST() - exceptions ...")

@@ -1,5 +1,5 @@
-asFunction <- function(expr, envir=parent.frame(), ...) {
-  eval(substitute(function() x, list(x=expr)), envir=envir, ...)
+asFunction <- function(expr, envir = parent.frame(), ...) {
+  eval(substitute(function() x, list(x = expr)), envir = envir, ...)
 }
 
 #' @importFrom utils installed.packages
@@ -29,14 +29,14 @@ is.base <- function(x) {
 is.internal <- function(x) {
   if (typeof(x) != "closure") return(FALSE)
   body <- deparse(body(x))
-  any(grepl(".Internal", body, fixed=TRUE))
+  any(grepl(".Internal", body, fixed = TRUE))
 }
 
-hpaste <- function(..., sep="", collapse=", ", lastCollapse=NULL, maxHead=3L, maxTail=1L, abbreviate="...") {
+hpaste <- function(..., sep = "", collapse = ", ", lastCollapse = NULL, maxHead = 3L, maxTail = 1L, abbreviate = "...") {
   if (is.null(lastCollapse)) lastCollapse <- collapse
 
   # Build vector 'x'
-  x <- paste(..., sep=sep)
+  x <- paste(..., sep = sep)
   n <- length(x)
 
   # Nothing todo?
@@ -53,10 +53,10 @@ hpaste <- function(..., sep="", collapse=", ", lastCollapse=NULL, maxHead=3L, ma
 
   if (!is.null(collapse) && n > 1) {
     if (lastCollapse == collapse) {
-      x <- paste(x, collapse=collapse)
+      x <- paste(x, collapse = collapse)
     } else {
-      xT <- paste(x[1:(n-1)], collapse=collapse)
-      x <- paste(xT, x[n], sep=lastCollapse)
+      xT <- paste(x[1:(n-1)], collapse = collapse)
+      x <- paste(xT, x[n], sep = lastCollapse)
     }
   }
 
@@ -71,10 +71,10 @@ trim <- function(s) {
 
 
 ## From future 0.11.0
-hexpr <- function(expr, trim=TRUE, collapse="; ", maxHead=6L, maxTail=3L, ...) {
+hexpr <- function(expr, trim = TRUE, collapse = "; ", maxHead = 6L, maxTail = 3L, ...) {
   code <- deparse(expr)
   if (trim) code <- trim(code)
-  hpaste(code, collapse=collapse, maxHead=maxHead, maxTail=maxTail, ...)
+  hpaste(code, collapse = collapse, maxHead = maxHead, maxTail = maxTail, ...)
 } # hexpr()
 
 

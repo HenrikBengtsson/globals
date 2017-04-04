@@ -1,35 +1,35 @@
 library("globals")
 
-ovars <- ls(envir=globalenv())
+ovars <- ls(envir = globalenv())
 
 
 ## WORKAROUND: Avoid problem reported in testthat Issue #229, which
 ## causes covr::package_coverage() to given an error. /HB 2015-02-16
 suppressWarnings({
-  rm(list=c("a", "b", "c", "x", "y", "z", "square",
+  rm(list = c("a", "b", "c", "x", "y", "z", "square",
             "pathname", "url", "filename"))
 })
 
 
 message("Setting up expressions")
 exprs <- list(
-  A = substitute({ Sys.sleep(1); x <- 0.1 }, env=list()),
-  B = substitute({ y <- 0.2 }, env=list()),
-  C = substitute({ z <- a+0.3 }, env=list()),
-  D = substitute({ pathname <- file.path(dirname(url), filename) }, env=list()),
-  E = substitute({ b <- c }, env=list()),
+  A = substitute({ Sys.sleep(1); x <- 0.1 }, env = list()),
+  B = substitute({ y <- 0.2 }, env = list()),
+  C = substitute({ z <- a+0.3 }, env = list()),
+  D = substitute({ pathname <- file.path(dirname(url), filename) }, env = list()),
+  E = substitute({ b <- c }, env = list()),
   F = substitute({
     a <- { runif(1) }
     b <- { rnorm(1) }
     x <- a*b; abs(x)
-  }, env=list()),
+  }, env = list()),
   G = substitute({
     y <- square(a)
-  }, env=list()),
+  }, env = list()),
   H = substitute({
     b <- a
     a <- 1
-  }, env=list())
+  }, env = list())
 )
 
 atleast <- list(
@@ -69,13 +69,13 @@ for (kk in seq_along(exprs)) {
   cat(sprintf("Expression #%d ('%s'):\n", kk, key))
   print(expr)
 
-  names <- findGlobals(expr, method="liberal")
-  cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse=", ")))
+  names <- findGlobals(expr, method = "liberal")
+  cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse = ", ")))
   stopifnot(all(atleast[[key]] %in% names))
   stopifnot(!any(names %in% not[[key]]))
 
-  globals <- globalsOf(expr, method="liberal", mustExist=FALSE)
-  cat(sprintf("Globals: %s\n", paste(sQuote(names(globals)), collapse=", ")))
+  globals <- globalsOf(expr, method = "liberal", mustExist = FALSE)
+  cat(sprintf("Globals: %s\n", paste(sQuote(names(globals)), collapse = ", ")))
   stopifnot(all(atleast[[key]] %in% names(globals)))
   stopifnot(!any(names(globals) %in% not[[key]]))
   str(globals)
@@ -83,9 +83,9 @@ for (kk in seq_along(exprs)) {
   cat("\n")
 }
 
-names <- findGlobals(exprs, method="liberal", unlist=TRUE)
-cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse=", ")))
+names <- findGlobals(exprs, method = "liberal", unlist = TRUE)
+cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse = ", ")))
 
 
 ## Cleanup
-rm(list=setdiff(ls(envir=globalenv()), ovars), envir=globalenv())
+rm(list = setdiff(ls(envir = globalenv()), ovars), envir = globalenv())

@@ -156,7 +156,7 @@ stopifnot(
 )
 
 globalsA <- globals0[1:2]
-globalsB <- list(b=1, c=letters)
+globalsB <- list(b = 1, c = letters)
 globals <- c(globalsA, globalsB)
 str(globals)
 where <- attr(globals, "where")
@@ -180,7 +180,7 @@ stopifnot(
 )
 
 globalsA <- globals0[1:2]
-globals <- c(globalsA, b=1, c=letters)
+globals <- c(globalsA, b = 1, c = letters)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
@@ -201,7 +201,7 @@ where <- attr(globals, "where")
 stopifnot(
   length(globals) == 6L,
   length(where) == length(globals),
-  all(names(globals) == rep(names(globals0), times=3L)),
+  all(names(globals) == rep(names(globals0), times = 3L)),
   all(names(globals) == names(where))
 )
 
@@ -254,7 +254,7 @@ stopifnot(inherits(res, "simpleError"))
 res <- tryCatch({ Globals(list(1,2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
-res <- tryCatch({ Globals(list(a=1,2)) }, error = identity)
+res <- tryCatch({ Globals(list(a = 1,2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 ## Assigning more than one element

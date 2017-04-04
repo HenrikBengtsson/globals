@@ -58,7 +58,7 @@
 #'
 #' @aliases findGlobals
 #' @export
-globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "conservative", "liberal"), tweak=NULL, substitute=FALSE, mustExist=TRUE, unlist=TRUE, recursive=TRUE) {
+globalsOf <- function(expr, envir = parent.frame(), ..., method = c("ordered", "conservative", "liberal"), tweak = NULL, substitute = FALSE, mustExist = TRUE, unlist = TRUE, recursive = TRUE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
@@ -66,12 +66,12 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
   mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive)
   
   ## 1. Identify global variables (static code inspection)
-  names <- findGlobals(expr, envir=envir, ..., method=method, tweak=tweak, substitute=FALSE, unlist=unlist)
+  names <- findGlobals(expr, envir = envir, ..., method = method, tweak = tweak, substitute = FALSE, unlist = unlist)
   mdebug(" - preliminary globals (by name): [%d] %s", length(names), hpaste(sQuote(names)))
   
   ## 2. Locate them (run time)
   globals <- tryCatch({
-    globalsByName(names, envir=envir, mustExist=mustExist)
+    globalsByName(names, envir = envir, mustExist = mustExist)
   }, error = function(ex) {
     ## HACK: Tweak error message to also include the expression inspected.
     msg <- conditionMessage(ex)
@@ -106,7 +106,7 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
         mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
         fcn <- globalsT[[gg]]
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
-	globalsGG <- globalsOf(fcn, envir=env, ..., method=method, tweak=tweak, substitute=FALSE, mustExist=mustExist, unlist=unlist, recursive=recursive)
+	globalsGG <- globalsOf(fcn, envir = env, ..., method = method, tweak = tweak, substitute = FALSE, mustExist = mustExist, unlist = unlist, recursive = recursive)
 	if (length(globalsGG) > 0) {
 	  globals <- c(globals, globalsGG)
 	}
@@ -142,7 +142,7 @@ globalsOf <- function(expr, envir=parent.frame(), ..., method=c("ordered", "cons
 #' @return A \link{Globals} object.
 #'
 #' @export
-globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
+globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE, ...) {
   names <- as.character(names)
 
   mdebug("globalsByName(<%d names>, mustExist = %s) ...", length(names), mustExist)
@@ -154,16 +154,16 @@ globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
   if (needsDotdotdot) names <- names[-n]
   mdebug("- dotdotdot: %s", needsDotdotdot)
   
-  globals <- structure(list(), class=c("Globals", "list"))
+  globals <- structure(list(), class = c("Globals", "list"))
   where <- list()
   for (kk in seq_along(names)) {
     name <- names[kk]
     mdebug("- locating #%d (%s)", kk, sQuote(name))
-    env <- where(name, envir=envir, inherits=TRUE)
+    env <- where(name, envir = envir, inherits = TRUE)
     mdebug("  + found in environment: %s", sQuote(envname(env)))
     if (!is.null(env)) {
       where[[name]] <- env
-      value <- get(name, envir=env, inherits=FALSE)
+      value <- get(name, envir = env, inherits = FALSE)
       if (is.null(value)) {
         globals[name] <- list(NULL)
       } else {
@@ -179,9 +179,9 @@ globalsByName <- function(names, envir=parent.frame(), mustExist=TRUE, ...) {
   }
 
   if (needsDotdotdot) {
-    if (exists("...", envir=envir, inherits=TRUE)) {
-      where[["..."]] <- where("...", envir=envir, inherits=TRUE)
-      ddd <- evalq(list(...), envir=envir, enclos=envir)
+    if (exists("...", envir = envir, inherits = TRUE)) {
+      where[["..."]] <- where("...", envir = envir, inherits = TRUE)
+      ddd <- evalq(list(...), envir = envir, enclos = envir)
     } else {
       where["..."] <- list(NULL)
       ddd <- NA

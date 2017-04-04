@@ -11,7 +11,7 @@
 #'
 #' @export
 #' @keywords programming internal
-walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, substitute=FALSE) {
+walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL, pairlist = NULL, substitute = FALSE) {
   if (substitute) expr <- substitute(expr)
 
   if (is.atomic(expr)) {
@@ -23,7 +23,7 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
     for (cc in seq_along(expr)) {
       ## AD HOC: The following is needed to handle x[,1]. /HB 2016-09-06
       if (is.name(expr[[cc]]) && expr[[cc]] == "") next
-      e <- walkAST(expr[[cc]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+      e <- walkAST(expr[[cc]], atomic = atomic, name = name, call = call, pairlist = pairlist, substitute = FALSE)
       if (is.null(e)) {
         expr[cc] <- list(NULL)
       } else {
@@ -36,7 +36,7 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
     for (pp in seq_along(expr)) {
       ## AD HOC: The following is needed to handle '...'. /HB 2016-09-06
       if (is.name(expr[[pp]]) && expr[[pp]] == "") next
-      e <- walkAST(expr[[pp]], atomic=atomic, name=name, call=call, pairlist=pairlist, substitute=FALSE)
+      e <- walkAST(expr[[pp]], atomic = atomic, name = name, call = call, pairlist = pairlist, substitute = FALSE)
       if (is.null(e)) {
         expr[pp] <- list(NULL)
       } else {
@@ -53,7 +53,7 @@ walkAST <- function(expr, atomic=NULL, name=NULL, call=NULL, pairlist=NULL, subs
     ## FIXME: ... or can closures and specials be "walked"? /HB 2017-03-21
     return(expr)
   } else {
-    stop("Cannot walk expression. Unknown object type ", sQuote(typeof(expr)), call.=FALSE)
+    stop("Cannot walk expression. Unknown object type ", sQuote(typeof(expr)), call. = FALSE)
   }
 
   ## Assert that the tweak functions return a valid object

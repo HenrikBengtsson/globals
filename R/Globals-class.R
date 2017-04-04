@@ -13,7 +13,7 @@
 #'
 #' @aliases as.Globals as.Globals.Globals as.Globals.list [.Globals names
 #' @export
-Globals <- function(object=list(), ...) {
+Globals <- function(object = list(), ...) {
   if (!is.list(object)) {
     stop("Argument 'object' is not a list: ", class(object)[1])
   }
@@ -40,7 +40,7 @@ Globals <- function(object=list(), ...) {
 ##    all(names(where) == names)
 ##  )
 
-  structure(object, class=c("Globals", class(object)))
+  structure(object, class = c("Globals", class(object)))
 }
 
 #' @export
@@ -55,7 +55,7 @@ as.Globals.list <- function(x, ...) {
   ## (with emptyenv() as the fallback)
   where <- attr(x, "where")
   if (is.null(where)) {
-    where <- lapply(x, FUN=function(obj) {
+    where <- lapply(x, FUN = function(obj) {
         e <- environment(obj)
 	if (is.null(e)) e <- emptyenv()
 	e
@@ -145,7 +145,7 @@ c.Globals <- function(x, ...) {
     
       names <- names(g)
       stopifnot(!is.null(names))
-      w <- lapply(g, FUN=function(obj) {
+      w <- lapply(g, FUN = function(obj) {
         e <- environment(obj)
 	if (is.null(e)) e <- emptyenv()
 	e
@@ -155,10 +155,10 @@ c.Globals <- function(x, ...) {
       if (is.null(name)) {
         stop("Can only append named objects to Globals list: ", sQuote(mode(g)))
       }
-      g <- structure(list(g), names=name)
+      g <- structure(list(g), names = name)
       e <- environment(g)
       if (is.null(e)) e <- emptyenv()
-      w <- structure(list(e), names=name)
+      w <- structure(list(e), names = name)
     }
     where <- c(where, w)
     x <- c(x, g)

@@ -13,7 +13,7 @@ packagesOf <- function(...) UseMethod("packagesOf")
 packagesOf.Globals <- function(globals, ...) {
   ## Scan 'globals' for which packages needs to be loaded.
   ## This information is in the environment name of the objects.
-  pkgs <- sapply(globals, FUN=function(obj) {
+  pkgs <- sapply(globals, FUN = function(obj) {
     environmentName(environment(obj))
   })
 

@@ -1,5 +1,5 @@
 library("globals")
-opts <- options(warn=1L)
+opts <- options(warn = 1L)
 
 exprs <- list(
   ok   = substitute(function(...) sum(x, ...)),
@@ -20,17 +20,17 @@ for (name in names(exprs)) {
   print(globals)
   stopifnot(all.equal(globals, c("sum", "x")))
 
-  message("\n*** findGlobals(dotdotdot='ignore'):")
+  message("\n*** findGlobals(dotdotdot = 'ignore'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- findGlobals(expr, dotdotdot="ignore")
+  globals <- findGlobals(expr, dotdotdot = "ignore")
   print(globals)
   stopifnot(all.equal(globals, c("sum", "x")))
 
-  message("\n*** findGlobals(dotdotdot='return'):")
+  message("\n*** findGlobals(dotdotdot = 'return'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- findGlobals(expr, dotdotdot="return")
+  globals <- findGlobals(expr, dotdotdot = "return")
   print(globals)
   if (name == "ok") {
     stopifnot(all.equal(globals, c("sum", "x")))
@@ -38,10 +38,10 @@ for (name in names(exprs)) {
     stopifnot(all.equal(globals, c("sum", "x", "...")))
   }
 
-  message("\n*** findGlobals(dotdotdot='warn'):")
+  message("\n*** findGlobals(dotdotdot = 'warn'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- findGlobals(expr, dotdotdot="warn")
+  globals <- findGlobals(expr, dotdotdot = "warn")
   print(globals)
   if (name == "ok") {
     stopifnot(all.equal(globals, c("sum", "x")))
@@ -49,10 +49,10 @@ for (name in names(exprs)) {
     stopifnot(all.equal(globals, c("sum", "x", "...")))
   }
 
-  message("\n*** findGlobals(dotdotdot='error'):")
+  message("\n*** findGlobals(dotdotdot = 'error'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- try(findGlobals(expr, dotdotdot="error"))
+  globals <- try(findGlobals(expr, dotdotdot = "error"))
   if (name == "ok") {
     stopifnot(all.equal(globals, c("sum", "x")))
   } else {
@@ -60,9 +60,9 @@ for (name in names(exprs)) {
   }
 } # for (name ...)
 
-message("\n*** findGlobals(<exprs>, dotdotdot='return'):")
+message("\n*** findGlobals(<exprs>, dotdotdot = 'return'):")
 print(exprs)
-globals <- findGlobals(exprs, dotdotdot="return")
+globals <- findGlobals(exprs, dotdotdot = "return")
 print(globals)
 
 
@@ -77,19 +77,19 @@ x <- 1:2
 for (name in names(exprs)) {
   expr <- exprs[[name]]
 
-  message("\n*** globalsOf(dotdotdot='ignore'):")
+  message("\n*** globalsOf(dotdotdot = 'ignore'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot="ignore")
+  globals <- globalsOf(expr, dotdotdot = "ignore")
   print(globals)
   stopifnot(all.equal(names(globals), c("sum", "x")))
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot='return'):")
+  message("\n*** globalsOf(dotdotdot = 'return'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot="return")
+  globals <- globalsOf(expr, dotdotdot = "return")
   print(globals)
   if (name == "ok") {
     stopifnot(all.equal(names(globals), c("sum", "x")))
@@ -100,10 +100,10 @@ for (name in names(exprs)) {
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot='warn'):")
+  message("\n*** globalsOf(dotdotdot = 'warn'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot="warn")
+  globals <- globalsOf(expr, dotdotdot = "warn")
   print(globals)
   if (name == "ok") {
     stopifnot(all.equal(names(globals), c("sum", "x")))
@@ -114,10 +114,10 @@ for (name in names(exprs)) {
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot='error'):")
+  message("\n*** globalsOf(dotdotdot = 'error'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- try(globalsOf(expr, dotdotdot="error"))
+  globals <- try(globalsOf(expr, dotdotdot = "error"))
   if (name == "ok") {
     stopifnot(all.equal(names(globals), c("sum", "x")))
     stopifnot(all.equal(globals$sum, base::sum))
@@ -127,9 +127,9 @@ for (name in names(exprs)) {
   }
 } # for (name ...)
 
-message("\n*** globalsOf(<exprs>, dotdotdot='return'):")
+message("\n*** globalsOf(<exprs>, dotdotdot = 'return'):")
 print(exprs)
-globals <- globalsOf(exprs, dotdotdot="return")
+globals <- globalsOf(exprs, dotdotdot = "return")
 print(globals)
 
 
@@ -144,47 +144,47 @@ aux <- function(x, ...) {
 for (name in names(exprs)) {
   expr <- exprs[[name]]
 
-  message("\n*** globalsOf(dotdotdot='ignore'):")
+  message("\n*** globalsOf(dotdotdot = 'ignore'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot="ignore")
+  globals <- globalsOf(expr, dotdotdot = "ignore")
   print(globals)
   stopifnot(all.equal(names(globals), c("sum", "x")))
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot='return'):")
+  message("\n*** globalsOf(dotdotdot = 'return'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot="return")
+  globals <- globalsOf(expr, dotdotdot = "return")
   print(globals)
   if (name == "ok") {
     stopifnot(all.equal(names(globals), c("sum", "x")))
   } else {
     stopifnot(all.equal(names(globals), c("sum", "x", "...")))
-    stopifnot(all.equal(globals$`...`, args, check.attributes=FALSE))
+    stopifnot(all.equal(globals$`...`, args, check.attributes = FALSE))
   }
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot='warn'):")
+  message("\n*** globalsOf(dotdotdot = 'warn'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot="warn")
+  globals <- globalsOf(expr, dotdotdot = "warn")
   print(globals)
   if (name == "ok") {
     stopifnot(all.equal(names(globals), c("sum", "x")))
   } else {
     stopifnot(all.equal(names(globals), c("sum", "x", "...")))
-    stopifnot(all.equal(globals$`...`, args, check.attributes=FALSE))
+    stopifnot(all.equal(globals$`...`, args, check.attributes = FALSE))
   }
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot='error'):")
+  message("\n*** globalsOf(dotdotdot = 'error'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- try(globalsOf(expr, dotdotdot="error"))
+  globals <- try(globalsOf(expr, dotdotdot = "error"))
   if (name == "ok") {
     stopifnot(all.equal(names(globals), c("sum", "x")))
     stopifnot(all.equal(globals$sum, base::sum))
@@ -194,14 +194,14 @@ for (name in names(exprs)) {
   }
 } # for (name ...)
 
-message("\n*** globalsOf(<exprs>, dotdotdot='return'):")
+message("\n*** globalsOf(<exprs>, dotdotdot = 'return'):")
 print(exprs)
-globals <- globalsOf(exprs, dotdotdot="return")
+globals <- globalsOf(exprs, dotdotdot = "return")
 print(globals)
 
 } # aux()
 
-aux(x=3:4, y=1, z=42L)
+aux(x = 3:4, y = 1, z = 42L)
 message("*** function(x, ...) globalsOf() ... DONE")
 
 
