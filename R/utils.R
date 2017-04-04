@@ -8,8 +8,8 @@ findBasePkgs <- local({
   function() {
     if (length(pkgs) > 0L) return(pkgs)
     data <- installed.packages()
-    isBase <- (data[, "Priority"] %in% "base")
-    pkgs <<- rownames(data)[isBase]
+    is_base <- (data[, "Priority"] %in% "base")
+    pkgs <<- rownames(data)[is_base]
     pkgs
   }
 })
@@ -77,11 +77,12 @@ trim <- function(s) {
 
 
 ## From future 0.11.0
-hexpr <- function(expr, trim = TRUE, collapse = "; ", maxHead = 6L,
-                  maxTail = 3L, ...) {
+hexpr <- function(expr, trim = TRUE, collapse = "; ", max_head = 6L,
+                  max_tail = 3L, ...) {
   code <- deparse(expr)
   if (trim) code <- trim(code)
-  hpaste(code, collapse = collapse, maxHead = maxHead, maxTail = maxTail, ...)
+  hpaste(code, collapse = collapse,
+         max_head = max_head, max_tail = max_tail, ...)
 } # hexpr()
 
 

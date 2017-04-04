@@ -118,19 +118,19 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
            length(globals), hpaste(sQuote(names(globals))))
 
     if (unlist) {
-      needsDotdotdot <- FALSE
+      needs_dotdotdot <- FALSE
       for (kk in seq_along(globals)) {
         s <- globals[[kk]]
         n <- length(s)
         if (identical(s[n], "...")) {
-          needsDotdotdot <- TRUE
+          needs_dotdotdot <- TRUE
           s <- s[-n]
           globals[[kk]] <- s
         }
       }
       globals <- unlist(globals, use.names = TRUE)
       globals <- sort(unique(globals))
-      if (needsDotdotdot) globals <- c(globals, "...")
+      if (needs_dotdotdot) globals <- c(globals, "...")
     }
 
     mdebug(" - globals found: [%d] %s",
@@ -154,7 +154,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
   }
 
   ## Is there a need for global '...' variables?
-  needsDotdotdot <- FALSE
+  needs_dotdotdot <- FALSE
   globals <- withCallingHandlers({
     oopts <- options(warn = 0L)
     on.exit(options(oopts))
@@ -171,12 +171,12 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     pattern <- "... may be used in an incorrect context"
     if (grepl(pattern, w$message, fixed = TRUE)) {
       mdebug(" - detected: %s", dQuote(trim(w$message)))
-      needsDotdotdot <<- TRUE
+      needs_dotdotdot <<- TRUE
       if (dotdotdot == "return") {
         ## Consume / muffle warning
         invokeRestart("muffleWarning")
       } else if (dotdotdot == "ignore") {
-        needsDotdotdot <<- FALSE
+        needs_dotdotdot <<- FALSE
         ## Consume / muffle warning
         invokeRestart("muffleWarning")
       } else if (dotdotdot == "error") {
@@ -186,7 +186,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     }
   })
 
-  if (needsDotdotdot) globals <- c(globals, "...")
+  if (needs_dotdotdot) globals <- c(globals, "...")
 
   mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
 

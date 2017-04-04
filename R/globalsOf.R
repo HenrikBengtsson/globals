@@ -98,29 +98,29 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     where <- attr(globals, "where")
     stopifnot(length(where) == length(globals))
     where <- sapply(where, FUN = envname)
-    globalsT <- globals[!(where %in% loadedNamespaces())]
+    globals_t <- globals[!(where %in% loadedNamespaces())]
 
-    mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT)))) #nolint
+    mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globals_t), hpaste(sQuote(names(globals_t)))) #nolint
 
     ## Enter only functions
     ## NOTE: This excludes functions "not found", but also primitives
     ##       not dropped above.
-    globalsT <- globalsT[sapply(globalsT, FUN = typeof) == "closure"]
+    globals_t <- globals_t[sapply(globals_t, FUN = typeof) == "closure"]
 
-    if (length(globalsT) > 0) {
+    if (length(globals_t) > 0) {
       mdebug(" - subset of globals to be scanned: [%d] %s",
-             length(globalsT), hpaste(sQuote(names(globalsT))))
-      namesT <- names(globalsT)
-      for (gg in seq_along(globalsT)) {
+             length(globals_t), hpaste(sQuote(names(globals_t))))
+      namesT <- names(globals_t)
+      for (gg in seq_along(globals_t)) {
         mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
-        fcn <- globalsT[[gg]]
+        fcn <- globals_t[[gg]]
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
-	globalsGG <- globalsOf(fcn, envir = env, ..., method = method,
-                               tweak = tweak, substitute = FALSE,
-                               mustExist = mustExist, unlist = unlist,
-                               recursive = recursive)
-	if (length(globalsGG) > 0) {
-	  globals <- c(globals, globalsGG)
+	globals_gg <- globalsOf(fcn, envir = env, ..., method = method,
+                                tweak = tweak, substitute = FALSE,
+                                mustExist = mustExist, unlist = unlist,
+                                recursive = recursive)
+	if (length(globals_gg) > 0) {
+	  globals <- c(globals, globals_gg)
 	}
       }
       globals <- unique(globals)
@@ -166,9 +166,9 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
 
   ## Locate and retrieve the specified globals
   n <- length(names)
-  needsDotdotdot <- (identical(names[n], "..."))
-  if (needsDotdotdot) names <- names[-n]
-  mdebug("- dotdotdot: %s", needsDotdotdot)
+  needs_dotdotdot <- (identical(names[n], "..."))
+  if (needs_dotdotdot) names <- names[-n]
+  mdebug("- dotdotdot: %s", needs_dotdotdot)
 
   globals <- structure(list(), class = c("Globals", "list"))
   where <- list()
@@ -194,7 +194,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     }
   }
 
-  if (needsDotdotdot) {
+  if (needs_dotdotdot) {
     if (exists("...", envir = envir, inherits = TRUE)) {
       where[["..."]] <- where("...", envir = envir, inherits = TRUE)
       ddd <- evalq(list(...), envir = envir, enclos = envir)
