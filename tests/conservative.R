@@ -15,13 +15,14 @@ message("Setting up expressions")
 exprs <- list(
   A = substitute({ Sys.sleep(1); x <- 0.1 }, env = list()),
   B = substitute({ y <- 0.2 }, env = list()),
-  C = substitute({ z <- a+0.3 }, env = list()),
-  D = substitute({ pathname <- file.path(dirname(url), filename) }, env = list()),
+  C = substitute({ z <- a + 0.3 }, env = list()),
+  D = substitute({ pathname <- file.path(dirname(url), filename) },
+                 env = list()),
   E = substitute({ b <- c }, env = list()),
   F = substitute({
     a <- { runif(1) }
     b <- { rnorm(1) }
-    x <- a*b; abs(x)
+    x <- a * b; abs(x)
   }, env = list()),
   G = substitute({
     y <- square(a)

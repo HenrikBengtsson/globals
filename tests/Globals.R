@@ -143,50 +143,50 @@ message("*** Globals() - subsetted assignment ... DONE")
 
 message("*** Globals() - combining ...")
 
-globalsA <- globals0[1:2]
-globalsB <- globals0[1:2]
-globals <- c(globalsA, globalsB)
+globals_a <- globals0[1:2]
+globals_b <- globals0[1:2]
+globals <- c(globals_a, globals_b)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
   length(globals) == 4L,
   length(where) == length(globals),
-  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == c(names(globals_a), names(globals_b))),
   all(names(globals) == names(where))
 )
 
-globalsA <- globals0[1:2]
-globalsB <- list(b = 1, c = letters)
-globals <- c(globalsA, globalsB)
+globals_a <- globals0[1:2]
+globals_b <- list(b = 1, c = letters)
+globals <- c(globals_a, globals_b)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
   length(globals) == 4L,
   length(where) == length(globals),
-  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == c(names(globals_a), names(globals_b))),
   all(names(globals) == names(where))
 )
 
-globalsA <- globals0[1:2]
-globalsB <- list()
-globals <- c(globalsA, globalsB)
+globals_a <- globals0[1:2]
+globals_b <- list()
+globals <- c(globals_a, globals_b)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
   length(globals) == 2L,
   length(where) == length(globals),
-  all(names(globals) == c(names(globalsA), names(globalsB))),
+  all(names(globals) == c(names(globals_a), names(globals_b))),
   all(names(globals) == names(where))
 )
 
-globalsA <- globals0[1:2]
-globals <- c(globalsA, b = 1, c = letters)
+globals_a <- globals0[1:2]
+globals <- c(globals_a, b = 1, c = letters)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
   length(globals) == 4L,
   length(where) == length(globals),
-  all(names(globals) == c(names(globalsA), "b", "c")),
+  all(names(globals) == c(names(globals_a), "b", "c")),
   all(names(globals) == names(where))
 )
 
@@ -226,9 +226,9 @@ stopifnot(identical(globals, globals0))
 globals <- as.Globals(unclass(globals0))
 stopifnot(identical(globals, globals0))
 
-globalsT <- unclass(globals0)
-attr(globalsT, "where") <- NULL
-globals <- as.Globals(globalsT)
+globals_t <- unclass(globals0)
+attr(globals_t, "where") <- NULL
+globals <- as.Globals(globals_t)
 stopifnot(
   length(globals) == length(globals0),
   names(globals) == names(globals0)

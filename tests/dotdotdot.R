@@ -138,7 +138,7 @@ message("*** globalsOf() ... DONE")
 
 message("*** function(x, ...) globalsOf() ...")
 
-aux <- function(x, ...) {
+aux <- function(x, ..., exprs) {
   args <- list(...)
 
 for (name in names(exprs)) {
@@ -201,7 +201,7 @@ print(globals)
 
 } # aux()
 
-aux(x = 3:4, y = 1, z = 42L)
+aux(x = 3:4, y = 1, z = 42L, exprs = exprs)
 message("*** function(x, ...) globalsOf() ... DONE")
 
 

@@ -73,10 +73,10 @@ stopifnot(fcn() == 1)
 
 
 message("* findBasePkgs() & isBasePkgs() ...")
-basePkgs <- findBasePkgs()
-print(basePkgs)
-stopifnot(length(basePkgs) > 1L)
-for (pkg in basePkgs) {
+base_pkgs <- findBasePkgs()
+print(base_pkgs)
+stopifnot(length(base_pkgs) > 1L)
+for (pkg in base_pkgs) {
   stopifnot(isBasePkgs(pkg))
 }
 stopifnot(!isBasePkgs("globals"))
@@ -130,8 +130,9 @@ message("- where() - local objects of functions ...")
 aa <- 1
 
 foo <- function() {
-  bb <- 2
-  list(aa = where("aa"), bb = where("bb"), cc = where("cc"), envir = environment())
+  bb <- 2 #nolint
+  list(aa = where("aa"), bb = where("bb"), cc = where("cc"),
+       envir = environment())
 }
 
 envs <- foo()
