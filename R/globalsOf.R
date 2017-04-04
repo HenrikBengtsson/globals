@@ -110,9 +110,9 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     if (length(globals_t) > 0) {
       mdebug(" - subset of globals to be scanned: [%d] %s",
              length(globals_t), hpaste(sQuote(names(globals_t))))
-      namesT <- names(globals_t)
+      names_t <- names(globals_t)
       for (gg in seq_along(globals_t)) {
-        mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
+        mdebug("   + scanning global #%d (%s) ...", gg, sQuote(names_t[[gg]]))
         fcn <- globals_t[[gg]]
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
         globals_gg <- globalsOf(fcn, envir = env, ..., method = method,
