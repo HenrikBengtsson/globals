@@ -130,13 +130,13 @@ for (method in c("ordered", "conservative", "liberal")) {
   globalsL <- cleanup(globalsL)
   str(globalsL)
   stopifnot(all(names(globalsL) %in% c("foo"), !any("a" %in% names(globalsL))))
-  
+
   globalsL <- globalsOf({ foo(3) }, substitute = TRUE, method = "ordered", recursive = TRUE, mustExist = FALSE)
   stopifnot(all(names(globalsL) %in% c("{", "foo", "bar", "-", "a")))
   globalsL <- cleanup(globalsL)
   str(globalsL)
   stopifnot(all(names(globalsL) %in% c("foo", "bar", "a")))
-  
+
   globalsL <- globalsOf({ foo(3) }, substitute = TRUE, recursive = TRUE, mustExist = FALSE)
   stopifnot(all(names(globalsL) %in% c("{", "foo", "bar", "-", "a")))
   globalsL <- cleanup(globalsL)

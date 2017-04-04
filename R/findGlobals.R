@@ -74,7 +74,7 @@ findGlobals_ordered <- function(expr, envir, ...) {
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
     fun <- expr
-    
+
     w <- makeUsageCollector(fun, name = "<anonymous>",
                             enterLocal = enterLocal, enterGlobal = enterGlobal)
     collectUsageFunction(fun, name = "<anonymous>", w)
@@ -84,7 +84,7 @@ findGlobals_ordered <- function(expr, envir, ...) {
                             enterLocal = enterLocal, enterGlobal = enterGlobal)
     walkCode(expr, w)
   }
-  
+
   ## Drop duplicated names
   dups <- duplicated(name)
   class <- class[!dups]
@@ -102,14 +102,14 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL, dotdotd
   if (substitute) expr <- substitute(expr)
 
   mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...", dotdotdot, method, unlist)
-  
+
   if (is.list(expr)) {
     mdebug(" - expr: <a list of length %d>", length(expr))
-    
+
     globals <- lapply(expr, FUN = findGlobals, envir = envir, ..., tweak = tweak, dotdotdot = dotdotdot, substitute = FALSE, unlist = FALSE)
 
     mdebug(" - preliminary globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
-    
+
     if (unlist) {
       needsDotdotdot <- FALSE
       for (kk in seq_along(globals)) {
@@ -127,7 +127,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL, dotdotd
     }
 
     mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
-    
+
     mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist)
     return(globals)
   }
@@ -181,9 +181,9 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL, dotdotd
   if (needsDotdotdot) globals <- c(globals, "...")
 
   mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
-  
+
   mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist)
-  
+
   globals
 }
 
@@ -204,16 +204,16 @@ dropMissingFormals <- function(x) {
 collectUsageFunction <- function(fun, name, w) {
   formals <- formals(fun)
   body <- body(fun)
-  
+
   w$name <- c(w$name, name)
   parnames <- names(formals)
-  
+
   formals_clean <- dropMissingFormals(formals)
   locals <- findLocalsList(c(list(body), formals_clean))
-  
+
   w$env <- new.env(hash = TRUE, parent = w$env)
   for (n in c(parnames, locals)) assign(n, TRUE, w$env)
   for (a in formals_clean) walkCode(a, w)
-  
+
   walkCode(body, w)
 }

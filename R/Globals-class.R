@@ -32,7 +32,7 @@ Globals <- function(object = list(), ...) {
     attr(object, "where") <- where <- list()
   }
   stopifnot(is.list(where))
-  
+
   ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
 ##  stopifnot(
 ##    is.list(where),
@@ -63,7 +63,7 @@ as.Globals.list <- function(x, ...) {
     names(where) <- names(x)
     attr(x, "where") <- where
   }
-  
+
   Globals(x, ...)
 }
 
@@ -98,7 +98,7 @@ as.Globals.list <- function(x, ...) {
 #' @export
 `$<-.Globals` <- function(x, name, value) {
   where <- attr(x, "where")
-  
+
   ## Remove an element?
   if (is.null(value)) {
     x[[name]] <- NULL
@@ -118,7 +118,7 @@ as.Globals.list <- function(x, ...) {
       where[[name]] <- w
     }
   }
-  
+
   attr(x, "where") <- where
   invisible(x)
 }
@@ -136,13 +136,13 @@ c.Globals <- function(x, ...) {
   for (kk in seq_along(args)) {
     g <- args[[kk]]
     name <- names(args)[kk]
-    
+
     if (inherits(g, "Globals")) {
       w <- attr(g, "where")
     } else if (is.list(g)) {
       ## Nothing to do?
       if (length(g) == 0) next
-    
+
       names <- names(g)
       stopifnot(!is.null(names))
       w <- lapply(g, FUN = function(obj) {
@@ -163,7 +163,7 @@ c.Globals <- function(x, ...) {
     where <- c(where, w)
     x <- c(x, g)
   }
-  
+
   class(x) <- clazz
   attr(x, "where") <- where
 
@@ -184,7 +184,7 @@ unique.Globals <- function(x, ...) {
     where <- where[!dups]
     x <- x[!dups]
     attr(x, "where") <- where
-    
+
     stopifnot(
       length(where) == length(x),
       all(names(where) == names(x))

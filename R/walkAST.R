@@ -60,6 +60,6 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL, pairlist = NU
   if (!missing(expr)) {
     stopifnot(is.atomic(expr) || is.name(expr) || is.call(expr) || is.pairlist(expr) || typeof(expr) %in% c("builtin", "closure", "special"))
   }
-  
+
   expr
 } ## walkAST()

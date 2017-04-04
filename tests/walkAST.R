@@ -62,7 +62,7 @@ for (kk in seq_along(exprs)) {
   exprN <- walkAST(expr, atomic = nullify, name = nullify, call = nullify, pairlist = nullify)
   print(exprN)
   str(as.list(exprN))
-  
+
 
 message("*** walkAST() - nullify ... DONE")
 

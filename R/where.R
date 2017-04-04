@@ -9,7 +9,7 @@ where <- function(x, where = -1, envir = if (missing(frame)) { if (where < 0) pa
   stopifnot(inherits %in% c(FALSE, TRUE))
 
   mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ...", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
-  
+
   ## Search
   env <- envir
   while (!identical(env, emptyenv())) {
@@ -19,18 +19,18 @@ where <- function(x, where = -1, envir = if (missing(frame)) { if (where < 0) pa
       mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
       return(env)
     }
-    
+
     if (!inherits) {
       mdebug("  + failed to located: NULL")
       mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
       return(NULL)
     }
-    
+
     env <- parent.env(env)
   }
 
   mdebug("- failed to located: NULL")
   mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
-  
+
   NULL
 }
