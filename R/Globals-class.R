@@ -57,8 +57,8 @@ as.Globals.list <- function(x, ...) {
   if (is.null(where)) {
     where <- lapply(x, FUN = function(obj) {
         e <- environment(obj)
-	if (is.null(e)) e <- emptyenv()
-	e
+        if (is.null(e)) e <- emptyenv()
+        e
     })
     names(where) <- names(x)
     attr(x, "where") <- where
@@ -148,8 +148,8 @@ c.Globals <- function(x, ...) {
       stopifnot(!is.null(names))
       w <- lapply(g, FUN = function(obj) {
         e <- environment(obj)
-	if (is.null(e)) e <- emptyenv()
-	e
+        if (is.null(e)) e <- emptyenv()
+        e
       })
       names(w) <- names
     } else {

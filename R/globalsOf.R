@@ -115,13 +115,13 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
         mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
         fcn <- globals_t[[gg]]
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
-	globals_gg <- globalsOf(fcn, envir = env, ..., method = method,
+        globals_gg <- globalsOf(fcn, envir = env, ..., method = method,
                                 tweak = tweak, substitute = FALSE,
                                 mustExist = mustExist, unlist = unlist,
                                 recursive = recursive)
-	if (length(globals_gg) > 0) {
-	  globals <- c(globals, globals_gg)
-	}
+        if (length(globals_gg) > 0) {
+          globals <- c(globals, globals_gg)
+        }
       }
       globals <- unique(globals)
       mdebug(" - updated set of globals found: [%d] %s",
