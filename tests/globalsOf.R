@@ -257,4 +257,3 @@ res <- tryCatch({ Globals(list(a = 1, 2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 message("*** Globals() - exceptions ... DONE")
-

@@ -149,4 +149,3 @@ rm(list = c("aa", "envs", "foo", "env", "obj", "where"))
 message("* where() ... DONE")
 
 message("*** utils ... DONE")
-

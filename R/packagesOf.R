@@ -34,4 +34,3 @@ packagesOf.Globals <- function(globals, ...) {
 
   pkgs
 } # packagesOf()
-
