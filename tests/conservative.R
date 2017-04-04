@@ -59,7 +59,7 @@ not <- list(
 ## Define globals
 a <- 3.14
 c <- 2.71
-square <- function(x) x^2
+square <- function(x) x ^ 2
 filename <- "index.html"
 # Yes, pretend we forget 'url'
 

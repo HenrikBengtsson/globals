@@ -4,8 +4,8 @@ where <- function(x, where = -1,
                   envir = if (missing(frame)) {
                             if (where < 0)
                               parent.frame(-where)
-                            else as.environment(where) }
-                          else sys.frame(frame),
+                            else as.environment(where)
+                          } else sys.frame(frame),
                   frame, mode = "any", inherits = TRUE) {
   ## Validate arguments
   stopifnot(is.environment(envir))
