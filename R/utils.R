@@ -32,7 +32,8 @@ is.internal <- function(x) {
   any(grepl(".Internal", body, fixed = TRUE))
 }
 
-hpaste <- function(..., sep = "", collapse = ", ", lastCollapse = NULL, maxHead = 3L, maxTail = 1L, abbreviate = "...") {
+hpaste <- function(..., sep = "", collapse = ", ", lastCollapse = NULL,
+                   maxHead = 3L, maxTail = 1L, abbreviate = "...") {
   if (is.null(lastCollapse)) lastCollapse <- collapse
 
   # Build vector 'x'
@@ -71,7 +72,8 @@ trim <- function(s) {
 
 
 ## From future 0.11.0
-hexpr <- function(expr, trim = TRUE, collapse = "; ", maxHead = 6L, maxTail = 3L, ...) {
+hexpr <- function(expr, trim = TRUE, collapse = "; ", maxHead = 6L,
+                  maxTail = 3L, ...) {
   code <- deparse(expr)
   if (trim) code <- trim(code)
   hpaste(code, collapse = collapse, maxHead = maxHead, maxTail = maxTail, ...)

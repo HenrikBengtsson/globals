@@ -9,7 +9,8 @@ cleanup <- function(...) UseMethod("cleanup")
 #'
 #' @aliases cleanup
 #' @export
-cleanup.Globals <- function(globals, drop = c("missing", "base-packages"), ...) {
+cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
+                            ...) {
   where <- attr(globals, "where")
 
   names <- names(globals)
@@ -49,4 +50,4 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"), ...) 
   }
 
   globals
-} # cleanup()
+}

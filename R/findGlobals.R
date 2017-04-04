@@ -12,7 +12,7 @@ findGlobals_conservative <- function(expr, envir, ...) {
   }
 
   if (is.function(expr)) {
-    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    if (typeof(expr) != "closure") return(character(0L)) # e.g. `<-`
     fun <- expr
     w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
     collectUsageFunction(fun, name = "<anonymous>", w)
@@ -95,20 +95,27 @@ findGlobals_ordered <- function(expr, envir, ...) {
 
 
 #' @export
-findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL, dotdotdot = c("warning", "error", "return", "ignore"), method = c("ordered", "conservative", "liberal"), substitute = FALSE, unlist = TRUE) {
+findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
+                        dotdotdot = c("warning", "error", "return", "ignore"),
+                        method = c("ordered", "conservative", "liberal"),
+                        substitute = FALSE, unlist = TRUE) {
   method <- match.arg(method)
   dotdotdot <- match.arg(dotdotdot)
 
   if (substitute) expr <- substitute(expr)
 
-  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...", dotdotdot, method, unlist)
+  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...",
+         dotdotdot, method, unlist)
 
   if (is.list(expr)) {
     mdebug(" - expr: <a list of length %d>", length(expr))
 
-    globals <- lapply(expr, FUN = findGlobals, envir = envir, ..., tweak = tweak, dotdotdot = dotdotdot, substitute = FALSE, unlist = FALSE)
+    globals <- lapply(expr, FUN = findGlobals, envir = envir, ...,
+                      tweak = tweak, dotdotdot = dotdotdot,
+                      substitute = FALSE, unlist = FALSE)
 
-    mdebug(" - preliminary globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+    mdebug(" - preliminary globals found: [%d] %s",
+           length(globals), hpaste(sQuote(names(globals))))
 
     if (unlist) {
       needsDotdotdot <- FALSE
@@ -126,9 +133,10 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL, dotdotd
       if (needsDotdotdot) globals <- c(globals, "...")
     }
 
-    mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
+    mdebug(" - globals found: [%d] %s",
+           length(globals), hpaste(sQuote(globals)))
 
-    mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist)
+    mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
     return(globals)
   }
 
@@ -182,7 +190,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL, dotdotd
 
   mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
 
-  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist)
+  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
 
   globals
 }

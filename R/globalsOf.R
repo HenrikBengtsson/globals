@@ -6,7 +6,8 @@
 #'
 #' @param \dots Not used.
 #'
-#' @param method A character string specifying what type of search algorithm to use.
+#' @param method A character string specifying what type of search algorithm
+#'        to use.
 #'
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
@@ -58,16 +59,21 @@
 #'
 #' @aliases findGlobals
 #' @export
-globalsOf <- function(expr, envir = parent.frame(), ..., method = c("ordered", "conservative", "liberal"), tweak = NULL, substitute = FALSE, mustExist = TRUE, unlist = TRUE, recursive = TRUE) {
+globalsOf <- function(expr, envir = parent.frame(), ...,
+                      method = c("ordered", "conservative", "liberal"),
+                      tweak = NULL, substitute = FALSE, mustExist = TRUE,
+                      unlist = TRUE, recursive = TRUE) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
 
-  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive)
+  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive) #nolint
 
   ## 1. Identify global variables (static code inspection)
-  names <- findGlobals(expr, envir = envir, ..., method = method, tweak = tweak, substitute = FALSE, unlist = unlist)
-  mdebug(" - preliminary globals (by name): [%d] %s", length(names), hpaste(sQuote(names)))
+  names <- findGlobals(expr, envir = envir, ..., method = method,
+                       tweak = tweak, substitute = FALSE, unlist = unlist)
+  mdebug(" - preliminary globals (by name): [%d] %s",
+         length(names), hpaste(sQuote(names)))
 
   ## 2. Locate them (run time)
   globals <- tryCatch({
@@ -75,12 +81,13 @@ globalsOf <- function(expr, envir = parent.frame(), ..., method = c("ordered", "
   }, error = function(ex) {
     ## HACK: Tweak error message to also include the expression inspected.
     msg <- conditionMessage(ex)
-    msg <- sprintf("Identified global objects via static code inspection (%s). %s", hexpr(expr), msg)
+    msg <- sprintf("Identified global objects via static code inspection (%s). %s", hexpr(expr), msg) #nolint
     ex$message <- msg
     stop(ex)
   })
 
-  mdebug(" - preliminary globals (by value): [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+  mdebug(" - preliminary globals (by value): [%d] %s",
+         length(globals), hpaste(sQuote(names(globals))))
 
   ## 3. Among globals that are closures (functions) and that exist outside
   ##    of namespaces ("packages"), check for additional globals?
@@ -93,26 +100,32 @@ globalsOf <- function(expr, envir = parent.frame(), ..., method = c("ordered", "
     where <- sapply(where, FUN = envname)
     globalsT <- globals[!(where %in% loadedNamespaces())]
 
-    mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT))))
+    mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT)))) #nolint
 
     ## Enter only functions
-    ## NOTE: This excludes functions "not found", but also primitives not dropped above.
+    ## NOTE: This excludes functions "not found", but also primitives
+    ##       not dropped above.
     globalsT <- globalsT[sapply(globalsT, FUN = typeof) == "closure"]
 
     if (length(globalsT) > 0) {
-      mdebug(" - subset of globals to be scanned: [%d] %s", length(globalsT), hpaste(sQuote(names(globalsT))))
+      mdebug(" - subset of globals to be scanned: [%d] %s",
+             length(globalsT), hpaste(sQuote(names(globalsT))))
       namesT <- names(globalsT)
       for (gg in seq_along(globalsT)) {
         mdebug("   + scanning global #%d (%s) ...", gg, sQuote(namesT[[gg]]))
         fcn <- globalsT[[gg]]
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
-	globalsGG <- globalsOf(fcn, envir = env, ..., method = method, tweak = tweak, substitute = FALSE, mustExist = mustExist, unlist = unlist, recursive = recursive)
+	globalsGG <- globalsOf(fcn, envir = env, ..., method = method,
+                               tweak = tweak, substitute = FALSE,
+                               mustExist = mustExist, unlist = unlist,
+                               recursive = recursive)
 	if (length(globalsGG) > 0) {
 	  globals <- c(globals, globalsGG)
 	}
       }
       globals <- unique(globals)
-      mdebug(" - updated set of globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+      mdebug(" - updated set of globals found: [%d] %s",
+             length(globals), hpaste(sQuote(names(globals))))
     } else {
       mdebug(" - subset of globals to be scanned: [0]")
     }
@@ -120,9 +133,10 @@ globalsOf <- function(expr, envir = parent.frame(), ..., method = c("ordered", "
     mdebug(" - recursive scan of preliminary globals ... DONE")
   }
 
-  mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
+  mdebug(" - globals found: [%d] %s",
+         length(globals), hpaste(sQuote(names(globals))))
 
-  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ... DONE", method, mustExist, unlist, recursive)
+  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ... DONE", method, mustExist, unlist, recursive) #nolint
 
   globals
 } ## globalsOf()
@@ -142,10 +156,12 @@ globalsOf <- function(expr, envir = parent.frame(), ..., method = c("ordered", "
 #' @return A \link{Globals} object.
 #'
 #' @export
-globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE, ...) {
+globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
+                          ...) {
   names <- as.character(names)
 
-  mdebug("globalsByName(<%d names>, mustExist = %s) ...", length(names), mustExist)
+  mdebug("globalsByName(<%d names>, mustExist = %s) ...",
+         length(names), mustExist)
   mdebug("- search from environment: %s", sQuote(envname(envir)))
 
   ## Locate and retrieve the specified globals
@@ -173,7 +189,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE, ...) 
       globals[name] <- list(NULL)
       where[name] <- list(NULL)
       if (mustExist) {
-        stop(sprintf("Failed to locate global object in the relevant environments: %s", sQuote(name)))
+        stop(sprintf("Failed to locate global object in the relevant environments: %s", sQuote(name))) #nolint
       }
     }
   }
@@ -198,7 +214,8 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE, ...) 
 
   attr(globals, "where") <- where
 
-  mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE", length(names), mustExist)
+  mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE",
+         length(names), mustExist)
 
   globals
 } ## globalsByName()

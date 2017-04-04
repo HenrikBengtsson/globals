@@ -107,7 +107,8 @@ as.Globals.list <- function(x, ...) {
     ## Value must be Globals object of length one
     if (inherits(value, "Globals")) {
       if (length(value) != 1) {
-        stop("Cannot assign Globals object of length different than one: ", length(value))
+        stop("Cannot assign Globals object of length different than one: ",
+             length(value))
       }
       x[[name]] <- value[[1]]
       where[[name]] <- attr(value, "where")[[1]]
