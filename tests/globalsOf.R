@@ -250,10 +250,10 @@ message("*** Globals() - exceptions ...")
 res <- tryCatch({ Globals(NULL) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
-res <- tryCatch({ Globals(list(1,2)) }, error = identity)
+res <- tryCatch({ Globals(list(1, 2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
-res <- tryCatch({ Globals(list(a = 1,2)) }, error = identity)
+res <- tryCatch({ Globals(list(a = 1, 2)) }, error = identity)
 stopifnot(inherits(res, "simpleError"))
 
 message("*** Globals() - exceptions ... DONE")

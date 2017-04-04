@@ -8,7 +8,7 @@ findBasePkgs <- local({
   function() {
     if (length(pkgs) > 0L) return(pkgs)
     data <- installed.packages()
-    isBase <- (data[,"Priority"] %in% "base")
+    isBase <- (data[, "Priority"] %in% "base")
     pkgs <<- rownames(data)[isBase]
     pkgs
   }
