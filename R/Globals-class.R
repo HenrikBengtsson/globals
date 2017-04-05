@@ -36,7 +36,7 @@ Globals <- function(object = list(), ...) {
   stopifnot(
     is.list(where),
     length(where) == length(object),
-    all(names(where) == names)
+    length(names(where)) == length(names(object))
   )
 
   structure(object, class = c("Globals", class(object)))
@@ -86,7 +86,7 @@ as.Globals.list <- function(x, ...) {
   stopifnot(
     is.list(where),
     length(where) == length(res),
-    all(names(where) == names(res))
+    length(names(where)) == length(names(res))
   )
 
   res
