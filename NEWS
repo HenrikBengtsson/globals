@@ -3,9 +3,9 @@ Package: globals
 
 Version: 0.9.0-9000 [2017-04-05]
 
-  o ...
-  
 NEW FEATURES:
+
+  o Globals that are part of a formula are now identified.
 
   o findGlobals(..., trace = TRUE) will now show low-level parse information
     as the abstract syntax tree (AST) is walked.

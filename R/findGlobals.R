@@ -71,6 +71,10 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   }
 
   enter_global <- function(type, v, e, w) {
+    class <<- c(class, "global")
+    name <<- c(name, v)
+
+    ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
         stopifnot(identical(e[[1]], as.symbol("~")))
@@ -84,8 +88,6 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
         }
       }
     }
-    class <<- c(class, "global")
-    name <<- c(name, v)
   }
 
   ## A function or an expression?
