@@ -33,12 +33,11 @@ Globals <- function(object = list(), ...) {
   }
   stopifnot(is.list(where))
 
-  ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
-##  stopifnot(
-##    is.list(where),
-##    length(where) == length(object),
-##    all(names(where) == names)
-##  )
+  stopifnot(
+    is.list(where),
+    length(where) == length(object),
+    all(names(where) == names)
+  )
 
   structure(object, class = c("Globals", class(object)))
 }
@@ -83,13 +82,12 @@ as.Globals.list <- function(x, ...) {
   attr(res, "where") <- where[i]
   class(res) <- class(x)
 
-  ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
-##  where <- attr(res, "where")
-##  stopifnot(
-##    is.list(where),
-##    length(where) == length(res),
-##    all(names(where) == names(res))
-##  )
+  where <- attr(res, "where")
+  stopifnot(
+    is.list(where),
+    length(where) == length(res),
+    all(names(where) == names(res))
+  )
 
   res
 }
