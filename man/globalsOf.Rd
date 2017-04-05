@@ -16,7 +16,8 @@ globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
 
 \item{\dots}{Not used.}
 
-\item{method}{A character string specifying what type of search algorithm to use.}
+\item{method}{A character string specifying what type of search algorithm
+to use.}
 
 \item{tweak}{An optional function that takes an expression
 and returns a tweaked expression.}
@@ -69,11 +70,11 @@ b <- 2
 expr <- substitute({ a <- b; b <- 1 })
 
 ## Will _not_ identify 'b' (because it's also a local)
-globalsC <- globalsOf(expr, method="conservative")
+globalsC <- globalsOf(expr, method = "conservative")
 print(globalsC)
 
 ## Will identify 'b'
-globalsL <- globalsOf(expr, method="liberal")
+globalsL <- globalsOf(expr, method = "liberal")
 print(globalsL)
 }
 \seealso{

@@ -10,7 +10,9 @@ walkAST(expr, atomic = NULL, name = NULL, call = NULL, pairlist = NULL,
 \arguments{
 \item{expr}{R \link[base]{expression}.}
 
-\item{atomic, name, call, pairlist}{single-argument function that takes an atomic, name, call and pairlist expression, respectively. Have to return a valid R expression.}
+\item{atomic, name, call, pairlist}{single-argument function that takes an
+atomic, name, call and pairlist expression, respectively. Have to
+return a valid R expression.}
 
 \item{name}{single-argument function that takes a name expression.}
 
@@ -18,7 +20,8 @@ walkAST(expr, atomic = NULL, name = NULL, call = NULL, pairlist = NULL,
 
 \item{pairlist}{single-argument function that takes a pairlist expression.}
 
-\item{substitute}{If TRUE, \code{expr} is \code{\link[base]{substitute}()}:ed.}
+\item{substitute}{If TRUE, \code{expr} is
+\code{\link[base]{substitute}()}:ed.}
 }
 \value{
 R \link[base]{expression}.
