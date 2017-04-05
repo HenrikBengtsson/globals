@@ -27,7 +27,7 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
   ## Drop objects that are part of one of the "base" packages
   if ("base-packages" %in% drop) {
     for (name in names) {
-      if (isBasePkgs(environmentName(where[[name]]))) keep[name] <- FALSE
+      if (is_base_pkg(environmentName(where[[name]]))) keep[name] <- FALSE
     }
   }
 
@@ -41,7 +41,7 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
   ## Drop objects that calls .Internal()
   if ("internals" %in% drop) {
     for (name in names) {
-      if (is.internal(globals[[name]])) keep[name] <- FALSE
+      if (is_internal(globals[[name]])) keep[name] <- FALSE
     }
   }
 

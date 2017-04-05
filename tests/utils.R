@@ -2,11 +2,11 @@ library("globals")
 
 message("*** utils ...")
 
-asFunction <- globals:::asFunction
-findBasePkgs <- globals:::findBasePkgs
-isBasePkgs <- globals:::isBasePkgs
+as_function <- globals:::as_function
+find_base_pkgs <- globals:::find_base_pkgs
+is_base_pkg <- globals:::is_base_pkg
 is.base <- globals:::is.base
-is.internal <- globals:::is.internal
+is_internal <- globals:::is_internal
 where <- globals:::where
 
 ## WORKAROUND: Make sure tests also work with 'covr' package
@@ -66,29 +66,29 @@ stopifnot(identical(hpaste(character(0)), character(0)))
 message("* hpaste() ... DONE")
 
 
-message("* asFunction() ...")
-fcn <- asFunction({ 1 })
+message("* as_function() ...")
+fcn <- as_function({ 1 })
 print(fcn())
 stopifnot(fcn() == 1)
 
 
-message("* findBasePkgs() & isBasePkgs() ...")
-base_pkgs <- findBasePkgs()
+message("* find_base_pkgs() & is_base_pkg() ...")
+base_pkgs <- find_base_pkgs()
 print(base_pkgs)
 stopifnot(length(base_pkgs) > 1L)
 for (pkg in base_pkgs) {
-  stopifnot(isBasePkgs(pkg))
+  stopifnot(is_base_pkg(pkg))
 }
-stopifnot(!isBasePkgs("globals"))
+stopifnot(!is_base_pkg("globals"))
 
 
-message("* is.base() & is.internal() ...")
+message("* is.base() & is_internal() ...")
 stopifnot(is.base(base::library))
 stopifnot(!is.base(globals::globalsOf))
 stopifnot(!is.base(NULL))
-stopifnot(is.internal(print.default))
-stopifnot(!is.internal(globals::globalsOf))
-stopifnot(!is.internal(NULL))
+stopifnot(is_internal(print.default))
+stopifnot(!is_internal(globals::globalsOf))
+stopifnot(!is_internal(NULL))
 
 
 

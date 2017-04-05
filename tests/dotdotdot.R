@@ -14,7 +14,7 @@ for (name in names(exprs)) {
   expr <- exprs[[name]]
 
   message("\n*** codetools::findGlobals():")
-  fun <- globals:::asFunction(expr)
+  fun <- globals:::as_function(expr)
   print(fun)
   globals <- codetools::findGlobals(fun)
   print(globals)

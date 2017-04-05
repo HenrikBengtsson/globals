@@ -1,9 +1,9 @@
-asFunction <- function(expr, envir = parent.frame(), ...) {
+as_function <- function(expr, envir = parent.frame(), ...) {
   eval(substitute(function() x, list(x = expr)), envir = envir, ...)
 }
 
 #' @importFrom utils installed.packages
-findBasePkgs <- local({
+find_base_pkgs <- local({
   pkgs <- NULL
   function() {
     if (length(pkgs) > 0L) return(pkgs)
@@ -14,19 +14,19 @@ findBasePkgs <- local({
   }
 })
 
-isBasePkgs <- function(pkgs) {
+is_base_pkg <- function(pkgs) {
   pkgs <- gsub("^package:", "", pkgs)
-  pkgs %in% findBasePkgs()
+  pkgs %in% find_base_pkgs()
 }
 
 # cf. is.primitive()
 is.base <- function(x) {
   if (typeof(x) != "closure") return(FALSE)
-  isBasePkgs(environmentName(environment(x)))
+  is_base_pkg(environmentName(environment(x)))
 }
 
 # cf. is.primitive()
-is.internal <- function(x) {
+is_internal <- function(x) {
   if (typeof(x) != "closure") return(FALSE)
   body <- deparse(body(x))
   any(grepl(".Internal", body, fixed = TRUE))
