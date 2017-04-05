@@ -1,9 +1,14 @@
 Package: globals
 ================
 
-Version: 0.9.0-9000 [2017-04-04]
+Version: 0.9.0-9000 [2017-04-05]
 
   o ...
+  
+NEW FEATURES:
+
+  o findGlobals(..., trace = TRUE) will now show low-level parse information
+    as the abstract syntax tree (AST) is walked.
 
 SOFTWARE QUALITY:
 
