@@ -83,37 +83,6 @@ find_globals_ordered <- function(expr, envir, ...) {
     name <<- c(name, v)
   }
 
-  debug <- getOption("globals.debug", FALSE)
-  if (debug) {
-    inject_one_tracer <- function(fcn, name) {
-      b <- body(fcn)
-      f <- formals(fcn)
-      args <- setdiff(names(f), c("w", "..."))
-      title <- sprintf("%s():", name)
-      b <- bquote({
-        message(.(title))
-        if (length(.(args)) > 0) str(mget(.(args)))
-        .(b)
-      })
-      body(fcn) <- b
-      fcn
-    }
-
-    inject_tracer <- function(w) {
-      w$startCollectLocals <- function(parnames, locals, ...) { NULL }
-      w$finishCollectLocals <- function(w, ...) { NULL }
-      w$enterInternal <- function(type, v, e, ...) { NULL }
-      
-      for (key in names(w)) {
-        fcn <- w[[key]] 
-        if (!is.function(fcn)) next
-        fcn <- inject_one_tracer(fcn, key)
-        w[[key]] <- fcn
-      }
-      w
-    }
-  }
-  
   ## A function or an expression?
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
@@ -122,18 +91,12 @@ find_globals_ordered <- function(expr, envir, ...) {
     w <- makeUsageCollector(fun, name = "<anonymous>",
                             enterLocal = enter_local,
                             enterGlobal = enter_global)
-    
-    if (debug) w <- inject_tracer(w)
-    
     collect_usage_function(fun, name = "<anonymous>", w)
   } else {
     fun <- as_function(expr, envir = envir, ...)
     w <- makeUsageCollector(fun, name = "<anonymous>",
                             enterLocal = enter_local,
                             enterGlobal = enter_global)
-
-    if (debug) w <- inject_tracer(w)
-    
     walkCode(expr, w)
   }
 
