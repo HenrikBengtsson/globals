@@ -10,7 +10,7 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2017-04-05                   |
+|date     |2017-04-16                   |
 
 ## Packages
 
@@ -20,7 +20,7 @@
 
 # Check results
 
-22 packages
+23 packages
 
 |package              |version | errors| warnings| notes|
 |:--------------------|:-------|------:|--------:|-----:|
@@ -46,6 +46,7 @@
 |R.filesets           |2.11.0  |      0|        0|     0|
 |TIN                  |1.6.0   |      0|        0|     2|
 |vesselr              |0.2.1   |      0|        0|     0|
+|warbleR              |1.1.6   |      0|        0|     0|
 
 ## ACNE (0.8.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
@@ -403,6 +404,12 @@ File ‘TIN/R/correlationPlot.R’:
 
 ## vesselr (0.2.1)
 Maintainer: Jordan D. Dworkin <jdwor@mail.med.upenn.edu>
+
+0 errors | 0 warnings | 0 notes
+
+## warbleR (1.1.6)
+Maintainer: Marcelo Araya-Salas <araya-salas@cornell.edu>  
+Bug reports: https://github.com/maRce10/warbleR/issues
 
 0 errors | 0 warnings | 0 notes
 
