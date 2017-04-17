@@ -10,18 +10,21 @@ exprs <- list(
   assign   = substitute(a <- 1),
   assign   = substitute(1 -> a),
   assign   = substitute(a <- b + 1),
-  assign   = substitute(x <- rnorm(20, mu=0)),
-  index    = substitute(x[1,1]),
-  index    = substitute(x[1:2,1:2]),
-  index    = substitute(x[,1:2]),
-  index    = substitute(x[,1]),
-  fcn      = substitute(function(a=1, b=2) sum(c(a, b))),
-  fcn      = substitute(function(a=1, b) sum(c(a, b))),
-  fcn      = substitute(function(a=1, b=2, ...) sum(c(a, b, ...))),
-  fcn      = substitute(function(a=NULL) a),
+  assign   = substitute(x <- rnorm(20, mu = 0)),
+  index    = substitute(x[1, 1]),
+  index    = substitute(x[1:2, 1:2]),
+  index    = substitute(x[, 1:2]),
+  index    = substitute(x[, 1]),
+  fcn      = substitute(function(a = 1, b = 2) sum(c(a, b))),
+  fcn      = substitute(function(a = 1, b) sum(c(a, b))),
+  fcn      = substitute(function(a = 1, b = 2, ...) sum(c(a, b, ...))),
+  fcn      = substitute(function(a = NULL) a),
   ok       = substitute(function(...) sum(x, ...)),
   warn     = substitute(sum(x, ...)),
-  null     = substitute(NULL)
+  null     = substitute(NULL),
+  builtin  = base::length,
+  closure  = function() NULL,
+  special  = base::log
 )
 
 nullify <- function(e) NULL
@@ -45,35 +48,39 @@ for (kk in seq_along(exprs)) {
   str(as.list(expr))
 
   ## Assert identity (default behavior)
-  exprI <- walkAST(expr)
-  str(as.list(exprI))
-  res <- all.equal(exprI, expr)
+  expr_i <- walkAST(expr)
+  str(as.list(expr_i))
+  res <- all.equal(expr_i, expr)
   print(res)
-  if (!identical(exprI, expr)) saveRDS(list(expr=expr, exprI=exprI), file="/tmp/foo.rds")
-  stopifnot(length(exprI) == length(expr), identical(exprI, expr))
+  if (!identical(expr_i, expr)) {
+    saveRDS(list(expr = expr, expr_i = expr_i), file = "/tmp/foo.rds")
+  }
+  stopifnot(length(expr_i) == length(expr), identical(expr_i, expr))
 
   ## Display the AST tree
-  walkAST(expr, atomic=disp, name=disp, call=disp, pairlist=disp)
+  walkAST(expr, atomic = disp, name = disp, call = disp, pairlist = disp)
 
   ## Nullify
-  exprN <- walkAST(expr, atomic=nullify, name=nullify, call=nullify, pairlist=nullify)
-  print(exprN)
-  str(as.list(exprN))
-  
+  expr_n <- walkAST(expr, atomic = nullify, name = nullify,
+                   call = nullify, pairlist = nullify)
+  print(expr_n)
+  str(as.list(expr_n))
+
 
 message("*** walkAST() - nullify ... DONE")
 
-  message(sprintf("- walkAST(<expression #%d (%s)>) ... DONE", kk, sQuote(name)))
+  message(sprintf("- walkAST(<expression #%d (%s)>) ... DONE",
+                  kk, sQuote(name)))
 } ## for (name ...)
 
 
 
-message("*** walkAST() - substitute=TRUE ...")
+message("*** walkAST() - substitute = TRUE ...")
 
-expr <- walkAST(a <- 1, substitute=TRUE)
+expr <- walkAST(a <- 1, substitute = TRUE)
 print(expr)
 
-message("*** walkAST() - substitute=TRUE ... DONE")
+message("*** walkAST() - substitute = TRUE ... DONE")
 
 
 message("*** walkAST() - exceptions ...")

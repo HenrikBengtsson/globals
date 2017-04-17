@@ -13,7 +13,7 @@
 #'
 #' @aliases as.Globals as.Globals.Globals as.Globals.list [.Globals names
 #' @export
-Globals <- function(object=list(), ...) {
+Globals <- function(object = list(), ...) {
   if (!is.list(object)) {
     stop("Argument 'object' is not a list: ", class(object)[1])
   }
@@ -32,15 +32,14 @@ Globals <- function(object=list(), ...) {
     attr(object, "where") <- where <- list()
   }
   stopifnot(is.list(where))
-  
-  ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
-##  stopifnot(
-##    is.list(where),
-##    length(where) == length(object),
-##    all(names(where) == names)
-##  )
 
-  structure(object, class=c("Globals", class(object)))
+  stopifnot(
+    is.list(where),
+    length(where) == length(object),
+    length(names(where)) == length(names(object))
+  )
+
+  structure(object, class = c("Globals", class(object)))
 }
 
 #' @export
@@ -55,15 +54,15 @@ as.Globals.list <- function(x, ...) {
   ## (with emptyenv() as the fallback)
   where <- attr(x, "where")
   if (is.null(where)) {
-    where <- lapply(x, FUN=function(obj) {
+    where <- lapply(x, FUN = function(obj) {
         e <- environment(obj)
-	if (is.null(e)) e <- emptyenv()
-	e
+        if (is.null(e)) e <- emptyenv()
+        e
     })
     names(where) <- names(x)
     attr(x, "where") <- where
   }
-  
+
   Globals(x, ...)
 }
 
@@ -83,13 +82,12 @@ as.Globals.list <- function(x, ...) {
   attr(res, "where") <- where[i]
   class(res) <- class(x)
 
-  ## TODO: Add only when future (> 1.0.1) is on CRAN /HB 2016-09-05
-##  where <- attr(res, "where")
-##  stopifnot(
-##    is.list(where),
-##    length(where) == length(res),
-##    all(names(where) == names(res))
-##  )
+  where <- attr(res, "where")
+  stopifnot(
+    is.list(where),
+    length(where) == length(res),
+    length(names(where)) == length(names(res))
+  )
 
   res
 }
@@ -98,7 +96,7 @@ as.Globals.list <- function(x, ...) {
 #' @export
 `$<-.Globals` <- function(x, name, value) {
   where <- attr(x, "where")
-  
+
   ## Remove an element?
   if (is.null(value)) {
     x[[name]] <- NULL
@@ -107,7 +105,8 @@ as.Globals.list <- function(x, ...) {
     ## Value must be Globals object of length one
     if (inherits(value, "Globals")) {
       if (length(value) != 1) {
-        stop("Cannot assign Globals object of length different than one: ", length(value))
+        stop("Cannot assign Globals object of length different than one: ",
+             length(value))
       }
       x[[name]] <- value[[1]]
       where[[name]] <- attr(value, "where")[[1]]
@@ -118,7 +117,7 @@ as.Globals.list <- function(x, ...) {
       where[[name]] <- w
     }
   }
-  
+
   attr(x, "where") <- where
   invisible(x)
 }
@@ -136,34 +135,34 @@ c.Globals <- function(x, ...) {
   for (kk in seq_along(args)) {
     g <- args[[kk]]
     name <- names(args)[kk]
-    
+
     if (inherits(g, "Globals")) {
       w <- attr(g, "where")
     } else if (is.list(g)) {
       ## Nothing to do?
       if (length(g) == 0) next
-    
+
       names <- names(g)
       stopifnot(!is.null(names))
-      w <- lapply(g, FUN=function(obj) {
+      w <- lapply(g, FUN = function(obj) {
         e <- environment(obj)
-	if (is.null(e)) e <- emptyenv()
-	e
+        if (is.null(e)) e <- emptyenv()
+        e
       })
       names(w) <- names
     } else {
       if (is.null(name)) {
         stop("Can only append named objects to Globals list: ", sQuote(mode(g)))
       }
-      g <- structure(list(g), names=name)
+      g <- structure(list(g), names = name)
       e <- environment(g)
       if (is.null(e)) e <- emptyenv()
-      w <- structure(list(e), names=name)
+      w <- structure(list(e), names = name)
     }
     where <- c(where, w)
     x <- c(x, g)
   }
-  
+
   class(x) <- clazz
   attr(x, "where") <- where
 
@@ -184,7 +183,7 @@ unique.Globals <- function(x, ...) {
     where <- where[!dups]
     x <- x[!dups]
     attr(x, "where") <- where
-    
+
     stopifnot(
       length(where) == length(x),
       all(names(where) == names(x))

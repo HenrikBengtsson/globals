@@ -1,10 +1,10 @@
 ## This function is equivalent to:
-##    fun <- asFunction(expr, envir=envir, ...)
-##    codetools::findGlobals(fun, merge=TRUE)
+##    fun <- as_function(expr, envir = envir, ...)
+##    codetools::findGlobals(fun, merge = TRUE)
 ## but we expand it here to make it more explicit
 ## what is going on.
 #' @importFrom codetools makeUsageCollector findLocalsList walkCode
-findGlobals_conservative <- function(expr, envir, ...) {
+find_globals_conservative <- function(expr, envir, ..., trace = FALSE) {
   objs <- character()
 
   enter <- function(type, v, e, w) {
@@ -12,20 +12,23 @@ findGlobals_conservative <- function(expr, envir, ...) {
   }
 
   if (is.function(expr)) {
-    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    if (typeof(expr) != "closure") return(character(0L)) # e.g. `<-`
     fun <- expr
-    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
-    collectUsageFunction(fun, name="<anonymous>", w)
+    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    if (trace) w <- inject_tracer_to_walker(w)
+    collect_usage_function(fun, name = "<anonymous>", w)
   } else {
     ## From codetools::findGlobals():
-    fun <- asFunction(expr, envir=envir, ...)
-    # codetools::collectUsage(fun, enterGlobal=enter)
+    fun <- as_function(expr, envir = envir, ...)
+    # codetools::collectUsage(fun, enterGlobal = enter)
 
     ## The latter becomes equivalent to (after cleanup):
-    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
-    w$env <- new.env(hash=TRUE, parent=w$env)
+    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    w$env <- new.env(hash = TRUE, parent = w$env)
+    if (trace) w <- inject_tracer_to_walker(w)
+    
     locals <- findLocalsList(list(expr))
-    for (name in locals) assign(name, value=TRUE, envir=w$env)
+    for (name in locals) assign(name, value = TRUE, envir = w$env)
     walkCode(expr, w)
   }
 
@@ -34,7 +37,7 @@ findGlobals_conservative <- function(expr, envir, ...) {
 
 
 #' @importFrom codetools makeUsageCollector walkCode
-findGlobals_liberal <- function(expr, envir, ...) {
+find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
   objs <- character()
 
   enter <- function(type, v, e, w) {
@@ -44,11 +47,13 @@ findGlobals_liberal <- function(expr, envir, ...) {
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
     fun <- expr
-    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
-    collectUsageFunction(fun, name="<anonymous>", w)
+    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    if (trace) w <- inject_tracer_to_walker(w)
+    collect_usage_function(fun, name = "<anonymous>", w)
   } else {
-    fun <- asFunction(expr, envir=envir, ...)
-    w <- makeUsageCollector(fun, name="<anonymous>", enterGlobal=enter)
+    fun <- as_function(expr, envir = envir, ...)
+    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    if (trace) w <- inject_tracer_to_walker(w)
     walkCode(expr, w)
   }
 
@@ -57,34 +62,53 @@ findGlobals_liberal <- function(expr, envir, ...) {
 
 
 #' @importFrom codetools makeUsageCollector walkCode
-findGlobals_ordered <- function(expr, envir, ...) {
+find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   class <- name <- character()
 
-  enterLocal <- function(type, v, e, w) {
+  enter_local <- function(type, v, e, w) {
     class <<- c(class, "local")
     name <<- c(name, v)
   }
 
-  enterGlobal <- function(type, v, e, w) {
+  enter_global <- function(type, v, e, w) {
     class <<- c(class, "global")
     name <<- c(name, v)
+
+    ## Also walk formulas to identify globals
+    if (type == "function") {
+      if (v == "~") {
+        stopifnot(identical(e[[1]], as.symbol("~")))
+        expr <- e[-1]
+        for (kk in seq_along(expr)) {
+          globals <- find_globals_ordered(expr = expr[[kk]], envir = w$env)
+          if (length(globals) > 0) {
+            class <<- c(class, rep("global", times = length(globals)))
+            name <<- c(name, globals)
+          }
+        }
+      }
+    }
   }
 
   ## A function or an expression?
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
     fun <- expr
-    
-    w <- makeUsageCollector(fun, name="<anonymous>",
-                            enterLocal=enterLocal, enterGlobal=enterGlobal)
-    collectUsageFunction(fun, name="<anonymous>", w)
+
+    w <- makeUsageCollector(fun, name = "<anonymous>",
+                            enterLocal = enter_local,
+                            enterGlobal = enter_global)
+    if (trace) w <- inject_tracer_to_walker(w)
+    collect_usage_function(fun, name = "<anonymous>", w)
   } else {
-    fun <- asFunction(expr, envir=envir, ...)
-    w <- makeUsageCollector(fun, name="<anonymous>",
-                            enterLocal=enterLocal, enterGlobal=enterGlobal)
+    fun <- as_function(expr, envir = envir, ...)
+    w <- makeUsageCollector(fun, name = "<anonymous>",
+                            enterLocal = enter_local,
+                            enterGlobal = enter_global)
+    if (trace) w <- inject_tracer_to_walker(w)
     walkCode(expr, w)
   }
-  
+
   ## Drop duplicated names
   dups <- duplicated(name)
   class <- class[!dups]
@@ -95,40 +119,48 @@ findGlobals_ordered <- function(expr, envir, ...) {
 
 
 #' @export
-findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c("warning", "error", "return", "ignore"), method=c("ordered", "conservative", "liberal"), substitute=FALSE, unlist=TRUE) {
+findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
+                        dotdotdot = c("warning", "error", "return", "ignore"),
+                        method = c("ordered", "conservative", "liberal"),
+                        substitute = FALSE, unlist = TRUE, trace = FALSE) {
   method <- match.arg(method)
   dotdotdot <- match.arg(dotdotdot)
 
   if (substitute) expr <- substitute(expr)
 
-  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...", dotdotdot, method, unlist)
-  
+  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...",
+         dotdotdot, method, unlist)
+
   if (is.list(expr)) {
     mdebug(" - expr: <a list of length %d>", length(expr))
-    
-    globals <- lapply(expr, FUN=findGlobals, envir=envir, ..., tweak=tweak, dotdotdot=dotdotdot, substitute=FALSE, unlist=FALSE)
 
-    mdebug(" - preliminary globals found: [%d] %s", length(globals), hpaste(sQuote(names(globals))))
-    
+    globals <- lapply(expr, FUN = findGlobals, envir = envir, ...,
+                      tweak = tweak, dotdotdot = dotdotdot,
+                      substitute = FALSE, unlist = FALSE)
+
+    mdebug(" - preliminary globals found: [%d] %s",
+           length(globals), hpaste(sQuote(names(globals))))
+
     if (unlist) {
-      needsDotdotdot <- FALSE
+      needs_dotdotdot <- FALSE
       for (kk in seq_along(globals)) {
         s <- globals[[kk]]
         n <- length(s)
         if (identical(s[n], "...")) {
-          needsDotdotdot <- TRUE
+          needs_dotdotdot <- TRUE
           s <- s[-n]
           globals[[kk]] <- s
         }
       }
-      globals <- unlist(globals, use.names=TRUE)
+      globals <- unlist(globals, use.names = TRUE)
       globals <- sort(unique(globals))
-      if (needsDotdotdot) globals <- c(globals, "...")
+      if (needs_dotdotdot) globals <- c(globals, "...")
     }
 
-    mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
-    
-    mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist)
+    mdebug(" - globals found: [%d] %s",
+           length(globals), hpaste(sQuote(globals)))
+
+    mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
     return(globals)
   }
 
@@ -138,20 +170,20 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
   }
 
   if (method == "ordered") {
-    findGlobalsT <- findGlobals_ordered
+    find_globals_t <- find_globals_ordered
   } else if (method == "conservative") {
-    findGlobalsT <- findGlobals_conservative
+    find_globals_t <- find_globals_conservative
   } else if (method == "liberal") {
-    findGlobalsT <- findGlobals_liberal
+    find_globals_t <- find_globals_liberal
   }
 
   ## Is there a need for global '...' variables?
-  needsDotdotdot <- FALSE
+  needs_dotdotdot <- FALSE
   globals <- withCallingHandlers({
-    oopts <- options(warn=0L)
+    oopts <- options(warn = 0L)
     on.exit(options(oopts))
-    findGlobalsT(expr, envir=envir)
-  }, warning=function(w) {
+    find_globals_t(expr, envir = envir, trace = trace)
+  }, warning = function(w) {
     ## Warned about '...'?
     ## NOTE: The warning we're looking for is the one generated by
     ## codetools::findGlobals().  That warning is _not_ translated,
@@ -161,14 +193,14 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
     ## tests (tests/dotdotdot.R) will detect that.  In other words,
     ## such a change will not go unnoticed.  /HB 2017-03-08
     pattern <- "... may be used in an incorrect context"
-    if (grepl(pattern, w$message, fixed=TRUE)) {
+    if (grepl(pattern, w$message, fixed = TRUE)) {
       mdebug(" - detected: %s", dQuote(trim(w$message)))
-      needsDotdotdot <<- TRUE
+      needs_dotdotdot <<- TRUE
       if (dotdotdot == "return") {
         ## Consume / muffle warning
         invokeRestart("muffleWarning")
       } else if (dotdotdot == "ignore") {
-        needsDotdotdot <<- FALSE
+        needs_dotdotdot <<- FALSE
         ## Consume / muffle warning
         invokeRestart("muffleWarning")
       } else if (dotdotdot == "error") {
@@ -178,19 +210,19 @@ findGlobals <- function(expr, envir=parent.frame(), ..., tweak=NULL, dotdotdot=c
     }
   })
 
-  if (needsDotdotdot) globals <- c(globals, "...")
+  if (needs_dotdotdot) globals <- c(globals, "...")
 
   mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
-  
-  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist)
-  
+
+  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+
   globals
 }
 
 
 ## Utility functions adopted from codetools:::dropMissing()
 ## and codetools:::collectUsageFun()
-dropMissingFormals <- function(x) {
+drop_missing_formals <- function(x) {
   nx <- length(x)
   ix <- logical(length = nx)
   for (i in seq_len(nx)) {
@@ -201,19 +233,55 @@ dropMissingFormals <- function(x) {
 }
 
 #' @importFrom codetools walkCode findLocalsList
-collectUsageFunction <- function(fun, name, w) {
+collect_usage_function <- function(fun, name, w) {
   formals <- formals(fun)
   body <- body(fun)
-  
+
   w$name <- c(w$name, name)
   parnames <- names(formals)
-  
-  formals_clean <- dropMissingFormals(formals)
+
+  formals_clean <- drop_missing_formals(formals)
   locals <- findLocalsList(c(list(body), formals_clean))
-  
+
   w$env <- new.env(hash = TRUE, parent = w$env)
   for (n in c(parnames, locals)) assign(n, TRUE, w$env)
   for (a in formals_clean) walkCode(a, w)
-  
+
   walkCode(body, w)
+}
+
+
+inject_tracer_to_function <- function(fcn, name) {
+  b <- body(fcn)
+  f <- formals(fcn)
+  args <- setdiff(names(f), c("w", "..."))
+  title <- sprintf("%s():", name)
+  b <- bquote({
+    message(.(title))
+    if (length(.(args)) > 0) str(mget(.(args)))
+    .(b)
+  })
+  body(fcn) <- b
+  fcn
+}
+
+inject_tracer_to_walker <- function(w) {
+  if (is.null(w$startCollectLocals)) {
+    w$startCollectLocals <- function(parnames, locals, ...) { NULL }
+  }
+  if (is.null(w$finishCollectLocals)) {
+    w$finishCollectLocals <- function(w, ...) { NULL }
+  }
+  if (is.null(w$enterInternal)) {
+    w$enterInternal <- function(type, v, e, ...) { NULL }
+  }
+  
+  for (key in names(w)) {
+    fcn <- w[[key]] 
+    if (!is.function(fcn)) next
+    fcn <- inject_tracer_to_function(fcn, key)
+    w[[key]] <- fcn
+  }
+  
+  w
 }

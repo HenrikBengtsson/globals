@@ -1,5 +1,5 @@
 Package: globals
-Version: 0.9.0
+Version: 0.10.0
 Depends:
     R (>= 3.1.2)
 Imports:
@@ -8,10 +8,11 @@ Title: Identify Global Objects in R Expressions
 Authors@R: c(
   person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
          email="henrikb@braju.com"))
-Description: Identifies global ("unknown") objects in R expressions by code
-    inspection using various strategies, e.g. conservative or liberal. The objective
-    of this package is to make it as simple as possible to identify global objects
-    for the purpose of exporting them in distributed compute environments.
+Description: Identifies global ("unknown" or "free") objects in R expressions
+    by code inspection using various strategies, e.g. conservative or liberal.
+    The objective of this package is to make it as simple as possible to
+    identify global objects for the purpose of exporting them in distributed
+    compute environments.
 License: LGPL (>= 2.1)
 LazyLoad: TRUE
 ByteCompile: TRUE

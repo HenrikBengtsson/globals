@@ -10,29 +10,29 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2017-03-09                   |
+|date     |2017-04-16                   |
 
 ## Packages
 
-|package |*  |version    |date       |source                             |
-|:-------|:--|:----------|:----------|:----------------------------------|
-|globals |   |0.8.0-9000 |2017-03-10 |local (HenrikBengtsson/globals@NA) |
+|package |*  |version |date       |source        |
+|:-------|:--|:-------|:----------|:-------------|
+|globals |   |0.9.0   |2017-03-10 |cran (@0.9.0) |
 
 # Check results
 
-21 packages
+23 packages
 
 |package              |version | errors| warnings| notes|
 |:--------------------|:-------|------:|--------:|-----:|
 |ACNE                 |0.8.1   |      0|        0|     0|
-|aroma.affymetrix     |3.0.0   |      0|        0|     0|
+|aroma.affymetrix     |3.1.0   |      0|        0|     0|
 |aroma.cn             |1.6.1   |      0|        0|     0|
-|aroma.core           |3.0.0   |      0|        0|     1|
+|aroma.core           |3.1.0   |      0|        0|     0|
 |calmate              |0.12.1  |      0|        0|     0|
-|doFuture             |0.3.0   |      0|        0|     0|
+|doFuture             |0.5.0   |      0|        0|     0|
 |fiery                |0.2.2   |      0|        0|     0|
-|future.BatchJobs     |0.13.1  |      0|        0|     0|
-|future               |1.3.0   |      0|        0|     0|
+|future.BatchJobs     |0.14.0  |      0|        0|     0|
+|future               |1.4.0   |      0|        0|     0|
 |GeneBreak            |1.4.0   |      0|        0|     1|
 |googleComputeEngineR |0.1.0   |      0|        0|     0|
 |MPAgenomics          |1.1.2   |      0|        0|     2|
@@ -45,6 +45,8 @@
 |Repitools            |1.20.0  |      0|        0|     2|
 |R.filesets           |2.11.0  |      0|        0|     0|
 |TIN                  |1.6.0   |      0|        0|     2|
+|vesselr              |0.2.1   |      0|        0|     0|
+|warbleR              |1.1.6   |      0|        0|     0|
 
 ## ACNE (0.8.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
@@ -52,7 +54,7 @@ Bug reports: https://github.com/HenrikBengtsson/ACNE/issues
 
 0 errors | 0 warnings | 0 notes
 
-## aroma.affymetrix (3.0.0)
+## aroma.affymetrix (3.1.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/aroma.affymetrix/issues
 
@@ -64,17 +66,11 @@ Bug reports: https://github.com/HenrikBengtsson/aroma.cn/issues
 
 0 errors | 0 warnings | 0 notes
 
-## aroma.core (3.0.0)
+## aroma.core (3.1.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/aroma.core/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking:
-  ‘png’ ‘Cairo’ ‘EBImage’ ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
-```
+0 errors | 0 warnings | 0 notes
 
 ## calmate (0.12.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
@@ -82,7 +78,7 @@ Bug reports: https://github.com/HenrikBengtsson/calmate/issues
 
 0 errors | 0 warnings | 0 notes
 
-## doFuture (0.3.0)
+## doFuture (0.5.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/doFuture/issues
 
@@ -94,13 +90,13 @@ Bug reports: https://github.com/thomasp85/fiery/issues
 
 0 errors | 0 warnings | 0 notes
 
-## future.BatchJobs (0.13.1)
+## future.BatchJobs (0.14.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/future.BatchJobs/issues
 
 0 errors | 0 warnings | 0 notes
 
-## future (1.3.0)
+## future (1.4.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/future/issues
 
@@ -405,4 +401,15 @@ File ‘TIN/R/correlationPlot.R’:
   assign("randomGeneSetsDist", B, envir = .GlobalEnv)
   assign("traPermutationsDist", L, envir = .GlobalEnv)
 ```
+
+## vesselr (0.2.1)
+Maintainer: Jordan D. Dworkin <jdwor@mail.med.upenn.edu>
+
+0 errors | 0 warnings | 0 notes
+
+## warbleR (1.1.6)
+Maintainer: Marcelo Araya-Salas <araya-salas@cornell.edu>  
+Bug reports: https://github.com/maRce10/warbleR/issues
+
+0 errors | 0 warnings | 0 notes
 
