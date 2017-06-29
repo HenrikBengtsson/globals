@@ -90,11 +90,22 @@ message("*** walkAST() - exceptions ...")
 
 if (requireNamespace("methods")) {
   s4 <- methods::getClass("MethodDefinition")
+  
+  options(globals.walkAST.onUnknownType = "error")
   res <- tryCatch({
     expr <- walkAST(s4)
   }, error = identity)
   print(res)
   stopifnot(inherits(res, "simpleError"))
+
+  options(globals.walkAST.onUnknownType = "warning")
+  res <- tryCatch({
+    expr <- walkAST(s4)
+  }, warning = identity)
+  print(res)
+  stopifnot(inherits(res, "simpleWarning"))
+
+  options(globals.walkAST.onUnknownType = "error")
 }
 
 message("*** walkAST() - exceptions ... DONE")

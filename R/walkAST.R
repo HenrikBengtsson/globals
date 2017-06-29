@@ -66,8 +66,14 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
     ##  "bytecode", and "weakref" (cf. ?typeof) also be added? /2017-06-29
     return(expr)
   } else {
-    stop("Cannot walk expression. Unknown object type ",
-         sQuote(typeof(expr)), call. = FALSE)
+    msg <- paste("Cannot walk expression. Unknown object type",
+                 sQuote(typeof(expr)))
+    onUnknownType <- getOption("globals.walkAST.onUnknownType", "error")
+    if (onUnknownType == "error") {
+      stop(msg, call. = FALSE)
+    } else if (onUnknownType == "warning") {
+      warning(msg, call. = FALSE)
+    }
   }
 
   ## Assert that the tweak functions return a valid object
