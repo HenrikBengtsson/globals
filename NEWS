@@ -1,10 +1,15 @@
 Package: globals
 ================
 
-Version: 0.10.0-9000 [2017-04-17]
+Version: 0.10.0-9000 [2017-06-29]
 
   o ...
  
+BUG FIXES:
+
+  o walkAST() could produce error "Cannot walk expression. Unknown object
+    type 'list'" and same for 'expression'.
+
 
 Version: 0.10.0 [2017-04-16]
 

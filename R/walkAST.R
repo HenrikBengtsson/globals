@@ -20,6 +20,10 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
 
   if (is.atomic(expr)) {
     if (is.function(atomic)) expr <- atomic(expr)
+  } else if (is.list(expr)) {
+    ## FIXME: Should we have a specific function for this, or is atomic() ok?
+    ## https://github.com/HenrikBengtsson/globals/issues/27
+    if (is.function(atomic)) expr <- atomic(expr)
   } else if (is.name(expr)) {
     if (is.function(name)) expr <- name(expr)
   } else if (is.call(expr)) {
@@ -54,9 +58,12 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
     ## https://stat.ethz.ch/pipermail/r-devel/2016-October/073263.html
     ## /HB 2016-10-12
     expr <- as.pairlist(expr)
-  } else if (typeof(expr) %in% c("builtin", "closure", "special")) {
+  } else if (typeof(expr) %in% c("builtin", "closure", "special",
+                                 "expression")) {
     ## Nothing to do
     ## FIXME: ... or can closures and specials be "walked"? /HB 2017-03-21
+    ## FIXME: Should "S4", "promise", "char", "...", "any", "externalptr",
+    ##  "bytecode", and "weakref" (cf. ?typeof) also be added? /2017-06-29
     return(expr)
   } else {
     stop("Cannot walk expression. Unknown object type ",
@@ -66,6 +73,7 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
   ## Assert that the tweak functions return a valid object
   if (!missing(expr)) {
     stopifnot(is.atomic(expr) ||
+              is.list(expr) ||
               is.name(expr) ||
               is.call(expr) ||
               is.pairlist(expr) ||
