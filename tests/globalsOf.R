@@ -29,6 +29,18 @@ globals_i <- findGlobals(expr, method = "ordered")
 print(globals_i)
 stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d")))
 
+message(" ** findGlobals(..., tweak):")
+tweak_another_expression <- function(expr) {
+  substitute({ x <- B; B <- 1; y <- C; z <- D }, env = list())
+}
+globals_i <- findGlobals(expr, tweak = tweak_another_expression)
+stopifnot(all(globals_i %in% c("{", "<-", "B", "C", "D")))
+
+message(" ** findGlobals(..., trace = TRUE):")
+globals_i <- findGlobals(expr, trace = TRUE)
+print(globals_i)
+stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d")))
+
 message("*** findGlobals() ... DONE")
 
 
