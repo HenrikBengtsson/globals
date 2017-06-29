@@ -20,10 +20,6 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
 
   if (is.atomic(expr)) {
     if (is.function(atomic)) expr <- atomic(expr)
-  } else if (is.list(expr)) {
-    ## FIXME: Should we have a specific function for this, or is atomic() ok?
-    ## https://github.com/HenrikBengtsson/globals/issues/27
-    if (is.function(atomic)) expr <- atomic(expr)
   } else if (is.name(expr)) {
     if (is.function(name)) expr <- name(expr)
   } else if (is.call(expr)) {
@@ -58,6 +54,10 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
     ## https://stat.ethz.ch/pipermail/r-devel/2016-October/073263.html
     ## /HB 2016-10-12
     expr <- as.pairlist(expr)
+  } else if (is.list(expr)) {
+    ## FIXME: Should we have a specific function for this, or is atomic() ok?
+    ## https://github.com/HenrikBengtsson/globals/issues/27
+    if (is.function(atomic)) expr <- atomic(expr)
   } else if (typeof(expr) %in% c("builtin", "closure", "special",
                                  "expression")) {
     ## Nothing to do
