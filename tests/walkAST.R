@@ -26,6 +26,7 @@ exprs <- list(
   closure    = function() NULL,
   special    = base::log,
   list       = substitute(FUN(a = A), list(A = list())),
+  pairlist   = substitute(FUN(a = A), list(A = pairlist(a = 1))),
   expression = substitute(FUN(a = A), list(A = expression()))
 )
 

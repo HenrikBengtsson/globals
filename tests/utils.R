@@ -8,6 +8,7 @@ is_base_pkg <- globals:::is_base_pkg
 is.base <- globals:::is.base
 is_internal <- globals:::is_internal
 where <- globals:::where
+mdebug <- globals:::mdebug
 
 ## WORKAROUND: Make sure tests also work with 'covr' package
 if ("covr" %in% loadedNamespaces()) {
@@ -31,22 +32,22 @@ z <- LETTERS[x]
 printf("x = %s.\n", hpaste(x))
 ## x = 1, 2, 3, ..., 6.
 
-printf("x = %s.\n", hpaste(x, maxHead = 2))
+printf("x = %s.\n", hpaste(x, max_head = 2))
 ## x = 1, 2, ..., 6.
 
-printf("x = %s.\n", hpaste(x), maxHead = 3) # Default
+printf("x = %s.\n", hpaste(x), max_head = 3) # Default
 ## x = 1, 2, 3, ..., 6.
 
 # It will never output 1, 2, 3, 4, ..., 6
-printf("x = %s.\n", hpaste(x, maxHead = 4))
+printf("x = %s.\n", hpaste(x, max_head = 4))
 ## x = 1, 2, 3, 4, 5 and 6.
 
 # Showing the tail
-printf("x = %s.\n", hpaste(x, maxHead = 1, maxTail = 2))
+printf("x = %s.\n", hpaste(x, max_head = 1, max_tail = 2))
 ## x = 1, ..., 5, 6.
 
 # Turning off abbreviation
-printf("y = %s.\n", hpaste(y, maxHead = Inf))
+printf("y = %s.\n", hpaste(y, max_head = Inf))
 ## y = 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
 
 ## ...or simply
@@ -54,7 +55,7 @@ printf("y = %s.\n", paste(y, collapse = ", "))
 ## y = 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
 
 # Change last separator
-printf("x = %s.\n", hpaste(x, lastCollapse = " and "))
+printf("x = %s.\n", hpaste(x, last_collapse = " and "))
 ## x = 1, 2, 3, 4, 5 and 6.
 
 # No collapse
@@ -148,5 +149,14 @@ stopifnot(is.null(env))
 rm(list = c("aa", "envs", "foo", "env", "obj", "where"))
 
 message("* where() ... DONE")
+
+message("- mdebug() ...")
+
+mdebug("Message A")
+oopts <- options(globals.debug = TRUE)
+mdebug("Message B")
+options(oopts)
+
+message("* mdebug() ... DONE")
 
 message("*** utils ... DONE")
