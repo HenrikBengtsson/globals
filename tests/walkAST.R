@@ -29,6 +29,9 @@ exprs <- list(
   pairlist   = substitute(FUN(a = A), list(A = pairlist(a = 1))),
   expression = substitute(FUN(a = A), list(A = expression()))
 )
+if (requireNamespace("methods")) {
+  exprs$s4 <- methods::getClass("MethodDefinition")
+}
 
 nullify <- function(e) NULL
 
@@ -38,8 +41,10 @@ disp <- function(expr) {
   cat("str():\n")
   str(expr)
   cat(sprintf("typeof: %s\n", typeof(expr)))
-  cat("as.list():\n")
-  str(as.list(expr))
+  if (is.recursive(expr)) {
+    cat("as.list():\n")
+    str(as.list(expr))
+  }  
   expr
 } ## disp()
 
@@ -47,12 +52,11 @@ for (kk in seq_along(exprs)) {
   name <- names(exprs)[kk]
   message(sprintf("- walkAST(<expression #%d (%s)>) ...", kk, sQuote(name)))
   expr <- exprs[[kk]]
-  print(expr)
-  str(as.list(expr))
+  disp(expr)
 
   ## Assert identity (default behavior)
   expr_i <- walkAST(expr)
-  str(as.list(expr_i))
+  disp(expr_i)
   res <- all.equal(expr_i, expr)
   print(res)
   if (!identical(expr_i, expr)) {
@@ -66,11 +70,9 @@ for (kk in seq_along(exprs)) {
   ## Nullify
   expr_n <- walkAST(expr, atomic = nullify, name = nullify,
                    call = nullify, pairlist = nullify)
-  print(expr_n)
-  str(as.list(expr_n))
+  disp(expr_n)
 
-
-message("*** walkAST() - nullify ... DONE")
+  message("*** walkAST() - nullify ... DONE")
 
   message(sprintf("- walkAST(<expression #%d (%s)>) ... DONE",
                   kk, sQuote(name)))
@@ -88,19 +90,19 @@ message("*** walkAST() - substitute = TRUE ... DONE")
 
 message("*** walkAST() - exceptions ...")
 
-if (requireNamespace("methods")) {
-  s4 <- methods::getClass("MethodDefinition")
+if (FALSE) {
+  expr <- "FIXME: How to create an object of type, say, 'weakref'?"
   
   options(globals.walkAST.onUnknownType = "error")
   res <- tryCatch({
-    expr <- walkAST(s4)
+    walkAST(expr)
   }, error = identity)
   print(res)
   stopifnot(inherits(res, "simpleError"))
 
   options(globals.walkAST.onUnknownType = "warning")
   res <- tryCatch({
-    expr <- walkAST(s4)
+    walkAST(expr)
   }, warning = identity)
   print(res)
   stopifnot(inherits(res, "simpleWarning"))

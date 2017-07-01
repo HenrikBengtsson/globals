@@ -59,11 +59,11 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
     ## https://github.com/HenrikBengtsson/globals/issues/27
     if (is.function(atomic)) expr <- atomic(expr)
   } else if (typeof(expr) %in% c("builtin", "closure", "special",
-                                 "expression")) {
+                                 "expression", "S4")) {
     ## Nothing to do
     ## FIXME: ... or can closures and specials be "walked"? /HB 2017-03-21
-    ## FIXME: Should "S4", "promise", "char", "...", "any", "externalptr",
-    ##  "bytecode", and "weakref" (cf. ?typeof) also be added? /2017-06-29
+    ## FIXME: Should "promise", "char", "...", "any", "externalptr",
+    ##  "bytecode", and "weakref" (cf. ?typeof) also be added? /2017-07-01
     return(expr)
   } else {
     msg <- paste("Cannot walk expression. Unknown object type",
@@ -74,6 +74,8 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
     } else if (onUnknownType == "warning") {
       warning(msg, call. = FALSE)
     }
+    ## Skip below assertion
+    return(expr)
   }
 
   ## Assert that the tweak functions return a valid object
