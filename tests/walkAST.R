@@ -90,25 +90,24 @@ message("*** walkAST() - substitute = TRUE ... DONE")
 
 message("*** walkAST() - exceptions ...")
 
-if (FALSE) {
-  expr <- "FIXME: How to create an object of type, say, 'weakref'?"
+f <- function(...) get("...")
+expr <- f(NULL)
   
-  options(globals.walkAST.onUnknownType = "error")
-  res <- tryCatch({
-    walkAST(expr)
-  }, error = identity)
-  print(res)
-  stopifnot(inherits(res, "simpleError"))
+options(globals.walkAST.onUnknownType = "error")
+res <- tryCatch({
+  walkAST(expr)
+}, error = identity)
+print(res)
+stopifnot(inherits(res, "simpleError"))
 
-  options(globals.walkAST.onUnknownType = "warning")
-  res <- tryCatch({
-    walkAST(expr)
-  }, warning = identity)
-  print(res)
-  stopifnot(inherits(res, "simpleWarning"))
+options(globals.walkAST.onUnknownType = "warning")
+res <- tryCatch({
+  walkAST(expr)
+}, warning = identity)
+print(res)
+stopifnot(inherits(res, "simpleWarning"))
 
-  options(globals.walkAST.onUnknownType = "error")
-}
+options(globals.walkAST.onUnknownType = "error")
 
 message("*** walkAST() - exceptions ... DONE")
 
