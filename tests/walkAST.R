@@ -57,11 +57,6 @@ for (kk in seq_along(exprs)) {
   ## Assert identity (default behavior)
   expr_i <- walkAST(expr)
   disp(expr_i)
-  res <- all.equal(expr_i, expr)
-  print(res)
-  if (!identical(expr_i, expr)) {
-    saveRDS(list(expr = expr, expr_i = expr_i), file = "/tmp/foo.rds")
-  }
   stopifnot(length(expr_i) == length(expr), identical(expr_i, expr))
 
   ## Display the AST tree
