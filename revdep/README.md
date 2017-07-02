@@ -4,49 +4,58 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.3.3 (2017-03-06) |
+|version  |R version 3.4.0 (2017-04-21) |
 |system   |x86_64, linux-gnu            |
 |ui       |X11                          |
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2017-04-16                   |
+|date     |2017-07-01                   |
 
 ## Packages
 
-|package |*  |version |date       |source        |
-|:-------|:--|:-------|:----------|:-------------|
-|globals |   |0.9.0   |2017-03-10 |cran (@0.9.0) |
+|package |*  |version |date       |source         |
+|:-------|:--|:-------|:----------|:--------------|
+|globals |   |0.10.0  |2017-04-17 |cran (@0.10.0) |
 
 # Check results
 
-23 packages
+32 packages
 
-|package              |version | errors| warnings| notes|
-|:--------------------|:-------|------:|--------:|-----:|
-|ACNE                 |0.8.1   |      0|        0|     0|
-|aroma.affymetrix     |3.1.0   |      0|        0|     0|
-|aroma.cn             |1.6.1   |      0|        0|     0|
-|aroma.core           |3.1.0   |      0|        0|     0|
-|calmate              |0.12.1  |      0|        0|     0|
-|doFuture             |0.5.0   |      0|        0|     0|
-|fiery                |0.2.2   |      0|        0|     0|
-|future.BatchJobs     |0.14.0  |      0|        0|     0|
-|future               |1.4.0   |      0|        0|     0|
-|GeneBreak            |1.4.0   |      0|        0|     1|
-|googleComputeEngineR |0.1.0   |      0|        0|     0|
-|MPAgenomics          |1.1.2   |      0|        0|     2|
-|NSA                  |0.0.32  |      0|        0|     6|
-|pbmcapply            |1.2.1   |      0|        0|     0|
-|PECA                 |1.10.0  |      0|        0|     1|
-|PSCBS                |0.62.0  |      0|        0|     0|
-|PureCN               |1.2.3   |      0|        0|     1|
-|QDNAseq              |1.10.0  |      0|        0|     0|
-|Repitools            |1.20.0  |      0|        0|     2|
-|R.filesets           |2.11.0  |      0|        0|     0|
-|TIN                  |1.6.0   |      0|        0|     2|
-|vesselr              |0.2.1   |      0|        0|     0|
-|warbleR              |1.1.6   |      0|        0|     0|
+|package              |version    | errors| warnings| notes|
+|:--------------------|:----------|------:|--------:|-----:|
+|ACNE                 |0.8.1      |      0|        0|     0|
+|aroma.affymetrix     |3.1.0      |      0|        0|     0|
+|aroma.cn             |1.6.1      |      0|        0|     0|
+|aroma.core           |3.1.0      |      0|        0|     1|
+|calmate              |0.12.1     |      0|        0|     0|
+|doFuture             |0.5.0      |      0|        0|     0|
+|easyml               |0.1.0      |      0|        0|     0|
+|fiery                |0.2.3      |      0|        0|     0|
+|future.BatchJobs     |0.14.1     |      0|        0|     0|
+|future.batchtools    |0.5.0      |      0|        0|     0|
+|future               |1.5.0      |      0|        0|     0|
+|GeneBreak            |1.6.0      |      0|        0|     1|
+|googleComputeEngineR |0.1.0      |      0|        0|     0|
+|kernelboot           |0.1.1      |      0|        0|     0|
+|MPAgenomics          |1.1.2      |      0|        0|     2|
+|NSA                  |0.0.32     |      0|        0|     6|
+|origami              |0.8.0      |      0|        0|     0|
+|pbmcapply            |1.2.2      |      0|        0|     0|
+|PeakSegDP            |2017.06.20 |      0|        0|     0|
+|PeakSegOptimal       |2017.06.20 |      0|        0|     1|
+|PECA                 |1.12.0     |      0|        0|     1|
+|penaltyLearning      |2017.06.14 |      0|        0|     0|
+|PSCBS                |0.63.0     |      0|        0|     0|
+|PureCN               |1.6.3      |      0|        0|     1|
+|QDNAseq              |1.12.0     |      0|        1|     0|
+|Repitools            |1.22.0     |      0|        0|     3|
+|R.filesets           |2.11.0     |      0|        0|     0|
+|sperrorest           |2.0.0      |      0|        0|     0|
+|startR               |0.0.1      |      0|        0|     0|
+|TIN                  |1.8.0      |      0|        0|     2|
+|vesselr              |0.2.1      |      0|        0|     0|
+|warbleR              |1.1.8      |      0|        0|     0|
 
 ## ACNE (0.8.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
@@ -70,7 +79,13 @@ Bug reports: https://github.com/HenrikBengtsson/aroma.cn/issues
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/aroma.core/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
+
+```
+checking package dependencies ... NOTE
+Packages suggested but not available for checking:
+  ‘expectile’ ‘HaarSeg’ ‘mpcbs’
+```
 
 ## calmate (0.12.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
@@ -84,25 +99,37 @@ Bug reports: https://github.com/HenrikBengtsson/doFuture/issues
 
 0 errors | 0 warnings | 0 notes
 
-## fiery (0.2.2)
+## easyml (0.1.0)
+Maintainer: Woo-Young Ahn <ahn.280@osu.edu>  
+Bug reports: https://github.com/CCS-Lab/easyml/issues
+
+0 errors | 0 warnings | 0 notes
+
+## fiery (0.2.3)
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>  
 Bug reports: https://github.com/thomasp85/fiery/issues
 
 0 errors | 0 warnings | 0 notes
 
-## future.BatchJobs (0.14.0)
+## future.BatchJobs (0.14.1)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/future.BatchJobs/issues
 
 0 errors | 0 warnings | 0 notes
 
-## future (1.4.0)
+## future.batchtools (0.5.0)
+Maintainer: Henrik Bengtsson <henrikb@braju.com>  
+Bug reports: https://github.com/HenrikBengtsson/future.batchtools/issues
+
+0 errors | 0 warnings | 0 notes
+
+## future (1.5.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/future/issues
 
 0 errors | 0 warnings | 0 notes
 
-## GeneBreak (1.4.0)
+## GeneBreak (1.6.0)
 Maintainer: Evert van den Broek <vandenbroek.evert@gmail.com>
 
 0 errors | 0 warnings | 1 note 
@@ -128,6 +155,12 @@ to your NAMESPACE file.
 ## googleComputeEngineR (0.1.0)
 Maintainer: Mark Edmondson <r@sunholo.com>  
 Bug reports: https://github.com/cloudyr/googleComputeEngineR/issues
+
+0 errors | 0 warnings | 0 notes
+
+## kernelboot (0.1.1)
+Maintainer: Tymoteusz Wolodzko <twolodzko+kernelboot@gmail.com>  
+Bug reports: https://github.com/twolodzko/kernelboot/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -248,13 +281,41 @@ Rd file 'NSANormalization.Rd':
 These lines will be truncated in the PDF manual.
 ```
 
-## pbmcapply (1.2.1)
+## origami (0.8.0)
+Maintainer: Jeremy Coyle <jeremyrcoyle@gmail.com>
+
+0 errors | 0 warnings | 0 notes
+
+## pbmcapply (1.2.2)
 Maintainer: Kevin kuang <kvn.kuang@mail.utoronto.ca>  
 Bug reports: https://github.com/kvnkuang/pbmcapply/issues
 
 0 errors | 0 warnings | 0 notes
 
-## PECA (1.10.0)
+## PeakSegDP (2017.06.20)
+Maintainer: Toby Dylan Hocking <toby.hocking@r-project.org>
+
+0 errors | 0 warnings | 0 notes
+
+## PeakSegOptimal (2017.06.20)
+Maintainer: Toby Dylan Hocking <toby.hocking@r-project.org>
+
+0 errors | 0 warnings | 1 note 
+
+```
+checking compiled code ... NOTE
+File ‘PeakSegOptimal/libs/PeakSegOptimal.so’:
+  Found ‘puts’, possibly from ‘printf’ (C), ‘puts’ (C)
+    Objects: ‘PeakSegFPOPLog.o’, ‘PeakSegPDPALog.o’,
+      ‘funPieceListLog.o’
+
+Compiled code should not call entry points which might terminate R nor
+write to stdout/stderr instead of to the console, nor the system RNG.
+
+See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+```
+
+## PECA (1.12.0)
 Maintainer: Tomi Suomi <tomi.suomi@utu.fi>
 
 0 errors | 0 warnings | 1 note 
@@ -268,51 +329,49 @@ Rd file 'PECA.Rd':
 These lines will be truncated in the PDF manual.
 ```
 
-## PSCBS (0.62.0)
+## penaltyLearning (2017.06.14)
+Maintainer: Toby Dylan Hocking <toby.hocking@r-project.org>
+
+0 errors | 0 warnings | 0 notes
+
+## PSCBS (0.63.0)
 Maintainer: Henrik Bengtsson <henrikb@braju.com>  
 Bug reports: https://github.com/HenrikBengtsson/PSCBS/issues
 
 0 errors | 0 warnings | 0 notes
 
-## PureCN (1.2.3)
+## PureCN (1.6.3)
 Maintainer: Markus Riester <markus.riester@novartis.com>
 
 0 errors | 0 warnings | 1 note 
 
 ```
-checking R code for possible problems ... NOTE
-Found the following calls to data() loading into the global environment:
-File ‘PureCN/R/bootstrapResults.R’:
-  data(purecn.example.output)
-File ‘PureCN/R/callAlterations.R’:
-  data(purecn.example.output)
-  data(purecn.example.output)
-File ‘PureCN/R/callLOH.R’:
-  data(purecn.example.output)
-File ‘PureCN/R/createCurationFile.R’:
-  data(purecn.example.output)
-File ‘PureCN/R/curateResults.R’:
-  data(purecn.example.output)
-  data(purecn.example.output)
-File ‘PureCN/R/plotAbs.R’:
-  data(purecn.example.output)
-File ‘PureCN/R/predictSomatic.R’:
-  data(purecn.example.output)
-File ‘PureCN/R/readCurationFile.R’:
-  data(purecn.example.output)
-See section ‘Good practice’ in ‘?data’.
+checking installed package size ... NOTE
+  installed size is  5.6Mb
+  sub-directories of 1Mb or more:
+    doc       1.6Mb
+    extdata   2.7Mb
 ```
 
-## QDNAseq (1.10.0)
+## QDNAseq (1.12.0)
 Maintainer: Daoud Sie <d.sie@vumc.nl>  
 Bug reports: https://github.com/ccagc/QDNAseq/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 1 warning  | 0 notes
 
-## Repitools (1.20.0)
+```
+checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘exportVCF’
+All user-level objects in a package should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+```
+
+## Repitools (1.22.0)
 Maintainer: Mark Robinson <mark.robinson@imls.uzh.ch>
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 3 notes
 
 ```
 checking R code for possible problems ... NOTE
@@ -360,6 +419,15 @@ Rd file 'writeWig.Rd':
      writeWig(rs, seq.len = NULL, design=NULL, sample=20, drop.zero=TRUE, normalize=TRUE, verbose=TRUE)
 
 These lines will be truncated in the PDF manual.
+
+checking compiled code ... NOTE
+File ‘Repitools/libs/Repitools.so’:
+  Found no call to: ‘R_useDynamicSymbols’
+
+It is good practice to register native routines and to disable symbol
+search.
+
+See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
 ```
 
 ## R.filesets (2.11.0)
@@ -368,7 +436,19 @@ Bug reports: https://github.com/HenrikBengtsson/R.filesets/issues
 
 0 errors | 0 warnings | 0 notes
 
-## TIN (1.6.0)
+## sperrorest (2.0.0)
+Maintainer: Alexander Brenning <alexander.brenning@uni-jena.de>  
+Bug reports: https://github.com/pat-s/sperrorest/issues
+
+0 errors | 0 warnings | 0 notes
+
+## startR (0.0.1)
+Maintainer: Nicolau Manubens <nicolau.manubens@bsc.es>  
+Bug reports: https://earth.bsc.es/gitlab/es/startR/issues
+
+0 errors | 0 warnings | 0 notes
+
+## TIN (1.8.0)
 Maintainer: Bjarne Johannessen <bjajoh@rr-research.no>
 
 0 errors | 0 warnings | 2 notes
@@ -407,7 +487,7 @@ Maintainer: Jordan D. Dworkin <jdwor@mail.med.upenn.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## warbleR (1.1.6)
+## warbleR (1.1.8)
 Maintainer: Marcelo Araya-Salas <araya-salas@cornell.edu>  
 Bug reports: https://github.com/maRce10/warbleR/issues
 
