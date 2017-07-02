@@ -101,6 +101,8 @@ print(res)
 stopifnot(inherits(res, "simpleError"))
 
 options(globals.walkAST.onUnknownType = "warning")
+foo <- walkAST(expr)
+
 res <- tryCatch({
   walkAST(expr)
 }, warning = identity)
