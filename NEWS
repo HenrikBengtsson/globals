@@ -1,10 +1,15 @@
 Package: globals
 ================
 
-Version: 0.10.1-9000 [2017-07-02]
+Version: 0.10.1-9000 [2017-08-05]
 
   o ...
- 
+
+BUG FIXES:
+
+  o walkAST() could produce error "Cannot walk expression. Unknown object
+    type '...'" for objects of type 'environment'.
+
 
 Version: 0.10.1 [2017-07-01]
 
