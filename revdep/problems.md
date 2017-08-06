@@ -1,43 +1,46 @@
-# Setup
+# fiery
 
-## Platform
+Version: 0.2.3
 
-|setting  |value                        |
-|:--------|:----------------------------|
-|version  |R version 3.4.0 (2017-04-21) |
-|system   |x86_64, linux-gnu            |
-|ui       |X11                          |
-|language |en                           |
-|collate  |en_US.UTF-8                  |
-|tz       |America/Los_Angeles          |
-|date     |2017-07-01                   |
+## Newly broken
 
-## Packages
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      6: private$run_blocking_server(showcase = showcase)
+      7: startServer(self$host, self$port, list(call = private$request_logic, onHeaders = private$header_logic, 
+             onWSOpen = private$websocket_logic))
+      8: stop("Failed to create server")
+      
+      testthat results ================================================================
+      OK: 167 SKIPPED: 0 FAILED: 5
+      1. Error: lifecycle events get fired (@test-Fire.R#125) 
+      2. Error: futures can be added and called (@test-Fire.R#223) 
+      3. Error: ignite is blocked during run (@test-Fire.R#317) 
+      4. Error: external triggers are fired (@test-Fire.R#334) 
+      5. Error: showcase opens a browser (@test-Fire.R#353) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
-|package |*  |version |date       |source         |
-|:-------|:--|:-------|:----------|:--------------|
-|globals |   |0.10.0  |2017-04-17 |cran (@0.10.0) |
+## In both
 
-# Check results
+*   checking top-level files ... WARNING
+    ```
+    Conversion of ‘README.md’ failed:
+    pandoc: Could not fetch https://img.shields.io/codecov/c/github/thomasp85/fiery/master.svg
+    TlsExceptionHostPort (HandshakeFailed Error_EOF) "img.shields.io" 443
+    ```
 
-1 packages with problems
-
-|package |version | errors| warnings| notes|
-|:-------|:-------|------:|--------:|-----:|
-|QDNAseq |1.12.0  |      0|        1|     0|
-
-## QDNAseq (1.12.0)
-Maintainer: Daoud Sie <d.sie@vumc.nl>  
-Bug reports: https://github.com/ccagc/QDNAseq/issues
-
-0 errors | 1 warning  | 0 notes
-
-```
-checking for missing documentation entries ... WARNING
-Undocumented code objects:
-  ‘exportVCF’
-All user-level objects in a package should have documentation entries.
-See chapter ‘Writing R documentation files’ in the ‘Writing R
-Extensions’ manual.
-```
+*   checking CRAN incoming feasibility ... NOTE
+    ```
+    Maintainer: ‘Thomas Lin Pedersen <thomasp85@gmail.com>’
+    
+    The Date field is over a month old.
+    
+    This build time stamp is over a month old.
+    ```
 
