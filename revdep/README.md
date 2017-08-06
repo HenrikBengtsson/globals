@@ -28,9 +28,9 @@
 
 |package              |version    |error |warning |note |
 |:--------------------|:----------|:-----|:-------|:----|
-|NA                   |NA         |      |        |     |
+|aroma.affymetrix     |3.1.0      |      |1       |2    |
 |aroma.core           |3.1.0      |      |        |2    |
-|NA                   |NA         |      |        |     |
+|brms                 |1.8.0      |      |1 -1    |     |
 |doFuture             |0.5.0      |      |        |1    |
 |fiery                |0.2.3      |      |1       |1    |
 |future               |1.5.0      |      |        |1    |

@@ -14,14 +14,16 @@ availableCores <- function() {
 num_workers <- availableCores()
 message("Number of workers: ", num_workers)
 
+timeout <- as.difftime(60, units = "mins")
+
 packages <- c(
   "doFuture", "future.BatchJobs", "future.batchtools", "pbmcapply",
   "aroma.affymetrix", "aroma.core", "fiery", "googleComputeEngineR", "kernelboot", "multiApply", "origami", "PSCBS", "R.filesets", "sperrorest", "startR",
   "brms", "penaltyLearning"
 )
 
-revdep_check(bioc = TRUE, num_workers = num_workers)
+revdep_check(bioc = TRUE, num_workers = num_workers, timeout = timeout)
 revdep_add(packages = packages)
-revdep_check(num_workers = availableCores())
+revdep_check(num_workers = availableCores(), timeout = timeout)
 revdep_report_summary(file = "revdep/README.md")
 revdep_report_problems(file = "revdep/problems.md")
