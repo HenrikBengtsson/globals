@@ -59,7 +59,7 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
     ## https://github.com/HenrikBengtsson/globals/issues/27
     if (is.function(atomic)) expr <- atomic(expr)
   } else if (typeof(expr) %in% c("builtin", "closure", "special",
-                                 "expression", "S4")) {
+                                 "expression", "S4", "environment")) {
     ## Nothing to do
     ## FIXME: ... or can closures and specials be "walked"? /HB 2017-03-21
     ## FIXME: Should "promise", "char", "...", "any", "externalptr",
