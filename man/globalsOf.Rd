@@ -7,7 +7,7 @@
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
   "conservative", "liberal"), tweak = NULL, substitute = FALSE,
-  mustExist = TRUE, unlist = TRUE, recursive = TRUE)
+  mustExist = TRUE, unlist = TRUE, recursive = TRUE, skip = NULL)
 }
 \arguments{
 \item{expr}{An R expression.}
@@ -35,6 +35,9 @@ If FALSE, a list of \code{length(expr)} sublists.}
 \item{recursive}{If TRUE, globals that are closures (functions) and that
 exist outside of namespaces ("packages"), will be recursively
 scanned for globals.}
+
+\item{skip}{(internal) A list of globals not to be searched for
+additional globals.  Ignored unless \code{recursive} is TRUE.}
 }
 \value{
 A \link{Globals} object.
