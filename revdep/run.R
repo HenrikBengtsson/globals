@@ -1,8 +1,12 @@
-library("revdepcheck")
+options(warn = 1)
 
 availableCores <- function() {
-  getenv <- function(name) as.integer(Sys.getenv(name, NA_character_))
-  getopt <- function(name) as.integer(getOption(name, NA_integer_))
+  getenv <- function(name) {
+    as.integer(Sys.getenv(name, NA_character_))
+  }
+  getopt <- function(name) {
+    as.integer(getOption(name, NA_integer_))
+  }
   if (is.finite(n <- getopt("mc.cores") + 1L)) return(n)
   if (is.finite(n <- getopt("Ncpus") + 1L)) return(n)
   if (is.finite(n <- getenv("PBS_NUM_PPN"))) return(n)
@@ -11,19 +15,35 @@ availableCores <- function() {
   1L
 }
 
-num_workers <- availableCores()
-message("Number of workers: ", num_workers)
+reset <- isTRUE(as.logical(toupper(Sys.getenv("_R_CHECK_REVDEP_RESET_", "FALSE"))))
+revdep_framework <- Sys.getenv("_R_CHECK_REVDEP_", "revdepcheck")
+if (revdep_framework == "devtools") {
+  library("devtools")
+  if (reset) revdep_check_reset()
+  revdep_check(bioconductor = TRUE, recursive = FALSE, threads = availableCores())
+  revdep_check_save_summary()
+  revdep_check_print_problems()
+} else if (revdep_framework == "revdepcheck") {
+  library("revdepcheck")
+  if (reset) revdep_reset()
+  timeout <- as.difftime(30, units = "mins")
+  revdep_check(num_workers = availableCores(), timeout = timeout, quiet = FALSE,
+               bioc = TRUE)
 
-timeout <- as.difftime(60, units = "mins")
-
-packages <- c(
-  "doFuture", "future.BatchJobs", "future.batchtools", "pbmcapply",
-  "aroma.affymetrix", "aroma.core", "fiery", "googleComputeEngineR", "kernelboot", "multiApply", "origami", "PSCBS", "R.filesets", "sperrorest", "startR",
-  "brms", "penaltyLearning"
-)
-
-revdep_check(bioc = TRUE, num_workers = num_workers, timeout = timeout)
-revdep_add(packages = packages)
-revdep_check(num_workers = availableCores(), timeout = timeout)
-revdep_report_summary(file = "revdep/README.md")
-revdep_report_problems(file = "revdep/problems.md")
+  ## AD HOC: revdeptools doesn't support recursive checking, so we have to
+  ## manually specify recursive revdep packages we wish to check.
+  packages <- c(
+    ## Reverse depends (of future):
+    "doFuture", "future.BatchJobs", "future.batchtools", "pbmcapply",
+    ## Reverse imports (of future):
+    "aroma.affymetrix", "aroma.core", "fiery", "googleComputeEngineR",
+    "kernelboot", "multiApply", "origami", "PSCBS", "R.filesets", "sperrorest",
+    "startR",
+    ## Reverse sugggests (of future):
+    "brms", "penaltyLearning"
+  )
+  revdep_add(packages = packages)
+  revdep_check(num_workers = availableCores(), timeout = timeout, quiet = FALSE)
+} else {	       
+  stop("Unknown revdep framework: ", revdep_framework)
+}
