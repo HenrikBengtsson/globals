@@ -19,12 +19,6 @@
 
 # Revdeps
 
-## Couldn't check (1)
-
-|package          |version |error |warning |note |
-|:----------------|:-------|:-----|:-------|:----|
-|future.BatchJobs |?       |      |        |     |
-
 ## All (18)
 
 |package                                                  |version    |error |warning |note |
@@ -35,7 +29,7 @@
 |[doFuture](problems.md#dofuture)                         |0.5.1      |      |1       |     |
 |[fiery](problems.md#fiery)                               |1.0.0      |      |2       |1    |
 |[future](problems.md#future)                             |1.6.1      |      |1       |     |
-|future.BatchJobs                                         |?          |      |        |     |
+|[future.BatchJobs](problems.md#future.batchjobs)         |0.15.0     |      |1       |     |
 |[future.batchtools](problems.md#future.batchtools)       |0.6.0      |      |1       |     |
 |[googleComputeEngineR](problems.md#googlecomputeenginer) |0.2.0      |      |1       |     |
 |[kernelboot](problems.md#kernelboot)                     |0.1.2      |      |1       |     |
@@ -47,4 +41,3 @@
 |[R.filesets](problems.md#r.filesets)                     |2.11.0     |      |1       |     |
 |[sperrorest](problems.md#sperrorest)                     |2.1.0      |      |1       |     |
 |[startR](problems.md#startr)                             |0.0.1      |      |1       |     |
-

@@ -123,6 +123,21 @@ Version: 1.6.1
     This build time stamp is over a month old.
     ```
 
+# future.BatchJobs
+
+Version: 0.15.0
+
+## In both
+
+*   checking CRAN incoming feasibility ... WARNING
+    ```
+    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
+    
+    Insufficient package version (submitted: 0.15.0, existing: 0.15.0)
+    
+    This build time stamp is over a month old.
+    ```
+
 # future.batchtools
 
 Version: 0.6.0
