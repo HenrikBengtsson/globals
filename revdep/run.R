@@ -40,7 +40,8 @@ if (revdep_framework == "devtools") {
     "kernelboot", "multiApply", "origami", "PSCBS", "R.filesets", "sperrorest",
     "startR",
     ## Reverse sugggests (of future):
-    "brms", "penaltyLearning"
+    ## "brms", ## skip takes a very long time
+    "penaltyLearning"
   )
   revdep_add(packages = packages)
   revdep_check(num_workers = availableCores(), timeout = timeout, quiet = FALSE)
