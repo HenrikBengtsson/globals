@@ -28,7 +28,7 @@ where <- function(x, where = -1,
     }
 
     if (!inherits) {
-      mdebug("  + failed to located: NULL")
+      mdebug("  + failed to locate: NULL")
       mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits) #nolint
       return(NULL)
     }
@@ -36,7 +36,7 @@ where <- function(x, where = -1,
     env <- parent.env(env)
   }
 
-  mdebug("- failed to located: NULL")
+  mdebug("- failed to locate: NULL")
   mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE",
          sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
 
