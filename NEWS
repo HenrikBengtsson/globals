@@ -1,6 +1,15 @@
 Package: globals
 ================
 
+Version: 0.10.3 [2017-10-12]
+
+BUG FIXES:
+
+ o globalsOf(..., recursive = TRUE) would result in "Error in match.fun(FUN) :
+   node stack overflow" if one of the globals identified was a function that
+   called itself recursively (either directly or indirectly).
+
+
 Version: 0.10.2 [2017-08-08]
 
 BUG FIXES:

@@ -160,6 +160,31 @@ for (method in c("ordered", "conservative", "liberal")) {
   stopifnot(all(names(globals_l) %in% c("foo", "bar", "a")))
 }
 
+
+message(" ** globalsOf() w/ recursive functions:")
+
+## "Easy"
+f <- function() Recall()
+globals <- globalsOf(f)
+str(globals)
+
+## Direct recursive call
+f <- function() f()
+globals <- globalsOf(f)
+str(globals)
+
+## Indirect recursive call
+f <- function() g()
+g <- function() f()
+globals_f <- globalsOf(f)
+str(globals_f)
+globals_g <- globalsOf(g)
+str(globals_g)
+globals_f <- globals_f[order(names(globals_f))]
+globals_g <- globals_g[order(names(globals_g))]
+stopifnot(identical(globals_g, globals_f))
+
+
 message("*** globalsOf() ... DONE")
 
 

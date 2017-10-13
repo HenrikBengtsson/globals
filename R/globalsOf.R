@@ -26,6 +26,9 @@
 #'        exist outside of namespaces ("packages"), will be recursively
 #'        scanned for globals.
 #'
+#' @param skip (internal) A list of globals not to be searched for
+#'        additional globals.  Ignored unless \code{recursive} is TRUE.
+#'
 #' @return A \link{Globals} object.
 #'
 #' @details
@@ -62,11 +65,12 @@
 globalsOf <- function(expr, envir = parent.frame(), ...,
                       method = c("ordered", "conservative", "liberal"),
                       tweak = NULL, substitute = FALSE, mustExist = TRUE,
-                      unlist = TRUE, recursive = TRUE) {
+                      unlist = TRUE, recursive = TRUE, skip = NULL) {
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
-
+  stopifnot(is.null(skip) || is.list(skip))
+  
   mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive) #nolint
 
   ## 1. Identify global variables (static code inspection)
@@ -111,16 +115,30 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
       mdebug(" - subset of globals to be scanned: [%d] %s",
              length(globals_t), hpaste(sQuote(names(globals_t))))
       names_t <- names(globals_t)
+
+      ## Avoid recursive scanning of already scanned ("known") globals
+      skip_t <- c(skip, globals_t)
+      
       for (gg in seq_along(globals_t)) {
         mdebug("   + scanning global #%d (%s) ...", gg, sQuote(names_t[[gg]]))
         fcn <- globals_t[[gg]]
+
+        ## Is function 'fcn' among the already identified globals?
+        already_scanned <- any(sapply(skip, FUN = identical, fcn))
+        if (already_scanned) next;
+
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
+
         globals_gg <- globalsOf(fcn, envir = env, ..., method = method,
                                 tweak = tweak, substitute = FALSE,
                                 mustExist = mustExist, unlist = unlist,
-                                recursive = recursive)
+                                recursive = recursive,
+                                skip = skip_t)
         if (length(globals_gg) > 0) {
           globals <- c(globals, globals_gg)
+
+          skip_gg <- globals_gg[sapply(globals_gg, FUN = typeof) == "closure"]
+          skip_t <- c(skip_t, skip_gg)
         }
       }
       globals <- unique(globals)
