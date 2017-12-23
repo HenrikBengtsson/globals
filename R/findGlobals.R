@@ -66,6 +66,17 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   class <- name <- character()
 
   enter_local <- function(type, v, e, w) {
+    ## LH <- RH: Handle cases where a global variable exists in RH and LH
+    ##           assigns a local variable with the same name, e.g. x <- x + 1.
+    ##           In such case we want to detect 'x' as a global variable.
+    if (type == "<-") {
+      globals <- find_globals_ordered(expr = e[[3]], envir = w$env)
+      if (length(globals) > 0) {
+        ## These will be added again later when RH is walked by the callee.
+        class <<- c(class, rep("global", times = length(globals)))
+        name <<- c(name, globals)
+      }
+    }
     class <<- c(class, "local")
     name <<- c(name, v)
   }

@@ -1,9 +1,13 @@
 Package: globals
 ================
 
-Version: 0.10.3-9000 [2017-10-13]
+Version: 0.10.3-9000 [2017-12-22]
 
- o ...
+NEW FEATURES:
+
+ o Now findGlobals() identifies 'x' as a global variable in 'x <- x + 1'
+   and likewise for x + 1 -> x.  Note that ditto using `<<-` and `->>`
+   was already identifying 'x' as a global.
  
 
 Version: 0.10.3 [2017-10-12]
