@@ -1,10 +1,13 @@
 Package: globals
 ================
 
-Version: 0.10.3-9000 [2017-10-13]
+Version: 0.10.3-9000 [2017-12-24]
 
- o ...
- 
+BUG FIXES:
+
+ o findGlobals(..., trace = TRUE) now outputs only to standard error.
+   Previously, some of the output went to standard output.
+
 
 Version: 0.10.3 [2017-10-12]
 

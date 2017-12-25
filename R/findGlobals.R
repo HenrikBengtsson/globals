@@ -258,7 +258,10 @@ inject_tracer_to_function <- function(fcn, name) {
   title <- sprintf("%s():", name)
   b <- bquote({
     message(.(title))
-    if (length(.(args)) > 0) str(mget(.(args)))
+    if (length(.(args)) > 0) {
+      mstr <- get("mstr", envir = getNamespace("globals"), mode = "function")
+      mstr(mget(.(args)))
+    }
     .(b)
   })
   body(fcn) <- b
