@@ -64,27 +64,39 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
 #' @importFrom codetools makeUsageCollector walkCode
 find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   class <- name <- character()
-
+  record <- TRUE
+  
   enter_local <- function(type, v, e, w) {
     ## LH <- RH: Handle cases where a global variable exists in RH and LH
     ##           assigns a local variable with the same name, e.g. x <- x + 1.
     ##           In such case we want to detect 'x' as a global variable.
-    if (type == "<-") {
-      globals <- find_globals_ordered(expr = e[[3]], envir = w$env)
-      if (length(globals) > 0) {
-        ## These will be added again later when RH is walked by the callee.
-        class <<- c(class, rep("global", times = length(globals)))
-        name <<- c(name, globals)
-      }
+    if (type == "<-" && getOption("globals.selfassign", FALSE)) {
+      record <<- FALSE
+      globals <- find_globals_ordered(expr = e[[3]], envir = envir, ...,
+                                      trace = trace)
+      R.utils::mstr(list(record = record, globals = globals))
+      record <<- TRUE
+#      R.utils::mcat("self-assign globals:")
+#      R.utils::mprint(globals)
+#      if (v %in% globals) {
+#        class <<- c(class, "global")
+#        name <<- c(name, v)
+#      }
     }
-    class <<- c(class, "local")
-    name <<- c(name, v)
+
+    if (record) {
+      class <<- c(class, "local")
+      name <<- c(name, v)
+      R.utils::mcat("Added local: ", sQuote(v))
+    }
   }
 
   enter_global <- function(type, v, e, w) {
+    if (!record) return()
     class <<- c(class, "global")
     name <<- c(name, v)
-
+    R.utils::mcat("Added global: ", sQuote(name))
+    
     ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
@@ -92,9 +104,10 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
         expr <- e[-1]
         for (kk in seq_along(expr)) {
           globals <- find_globals_ordered(expr = expr[[kk]], envir = w$env)
-          if (length(globals) > 0) {
+          if (length(globals) > 0 && record) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
+            R.utils::mcat("Added global 2: ", paste(sQuote(globals)))
           }
         }
       }
