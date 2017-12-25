@@ -92,6 +92,10 @@ mdebug <- function(...) {
   message(sprintf(...))
 } ## mdebug()
 
+#' @importFrom utils capture.output str
+mstr <- function(...) {
+  message(capture.output(str(...), envir = parent.frame()), appendLF = TRUE)
+}
 
 #' @importFrom utils capture.output
 envname <- function(env) {
