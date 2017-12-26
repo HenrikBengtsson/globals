@@ -7,27 +7,29 @@ if (covr) {
   baseenv <- function() environment(base::sample)
 }
 
+a <- 0
 b <- 2
 c <- 3
 d <- NULL
-expr <- substitute({ x <- b; b <- 1; y <- c; z <- d }, env = list())
+e <- function() TRUE
+expr <- substitute({ x <- b; b <- 1; y <- c; z <- d; a <- a + 1; e <- e() }, env = list())
 
 message("*** findGlobals() ...")
 
 message(" ** findGlobals(..., method = 'conservative'):")
 globals_c <- findGlobals(expr, method = "conservative")
 print(globals_c)
-stopifnot(all(globals_c %in% c("{", "<-", "c", "d")))
+stopifnot(all(globals_c %in% c("{", "<-", "c", "d", "+")))
 
 message(" ** findGlobals(..., method = 'liberal'):")
 globals_l <- findGlobals(expr, method = "liberal")
 print(globals_l)
-stopifnot(all(globals_l %in% c("{", "<-", "b", "c", "d")))
+stopifnot(all(globals_l %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(..., method = 'ordered'):")
 globals_i <- findGlobals(expr, method = "ordered")
 print(globals_i)
-stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d")))
+stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {
@@ -39,7 +41,7 @@ stopifnot(all(globals_i %in% c("{", "<-", "B", "C", "D")))
 message(" ** findGlobals(..., trace = TRUE):")
 globals_i <- findGlobals(expr, trace = TRUE)
 print(globals_i)
-stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d")))
+stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message("*** findGlobals() ... DONE")
 
@@ -88,7 +90,7 @@ message("*** globalsOf() ...")
 message(" ** globalsOf(..., method = 'conservative'):")
 globals_c <- globalsOf(expr, method = "conservative")
 str(globals_c)
-stopifnot(all(names(globals_c) %in% c("{", "<-", "c", "d")))
+stopifnot(all(names(globals_c) %in% c("{", "<-", "c", "d", "+")))
 globals_c <- cleanup(globals_c)
 str(globals_c)
 stopifnot(all(names(globals_c) %in% c("c", "d")))
@@ -102,10 +104,10 @@ stopifnot(
 message(" ** globalsOf(..., method = 'liberal'):")
 globals_l <- globalsOf(expr, method = "liberal")
 str(globals_l)
-stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d")))
+stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 globals_l <- cleanup(globals_l)
 str(globals_l)
-stopifnot(all(names(globals_l) %in% c("b", "c", "d")))
+stopifnot(all(names(globals_l) %in% c("b", "c", "d", "a", "e")))
 where <- attr(globals_l, "where")
 stopifnot(
   length(where) == length(globals_l),
@@ -115,15 +117,15 @@ stopifnot(
 )
 
 message(" ** globalsOf(..., method = 'ordered'):")
-globals_l <- globalsOf(expr, method = "ordered")
-str(globals_l)
-stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d")))
-globals_l <- cleanup(globals_l)
-str(globals_l)
-stopifnot(all(names(globals_l) %in% c("b", "c", "d")))
-where <- attr(globals_l, "where")
+globals_i <- globalsOf(expr, method = "ordered")
+str(globals_i)
+stopifnot(all(names(globals_i) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
+globals_i <- cleanup(globals_i)
+str(globals_i)
+stopifnot(all(names(globals_i) %in% c("b", "c", "d", "a", "e")))
+where <- attr(globals_i, "where")
 stopifnot(
-  length(where) == length(globals_l),
+  length(where) == length(globals_i),
   identical(where$b, globalenv()),
   identical(where$c, globalenv()),
   identical(where$d, globalenv())
@@ -136,28 +138,28 @@ bar <- function(x) x - a
 foo <- function(x) bar(x)
 
 for (method in c("ordered", "conservative", "liberal")) {
-  globals_l <- globalsOf({ foo(3) }, substitute = TRUE, method = method,
+  globals <- globalsOf({ foo(3) }, substitute = TRUE, method = method,
                          recursive = FALSE, mustExist = FALSE)
-  stopifnot(all(names(globals_l) %in% c("{", "foo")),
-            !any("a" %in% names(globals_l)))
-  globals_l <- cleanup(globals_l)
-  str(globals_l)
-  stopifnot(all(names(globals_l) %in% c("foo"),
-                !any("a" %in% names(globals_l))))
+  stopifnot(all(names(globals) %in% c("{", "foo")),
+            !any("a" %in% names(globals)))
+  globals <- cleanup(globals)
+  str(globals)
+  stopifnot(all(names(globals) %in% c("foo"),
+                !any("a" %in% names(globals))))
 
-  globals_l <- globalsOf({ foo(3) }, substitute = TRUE, method = "ordered",
+  globals <- globalsOf({ foo(3) }, substitute = TRUE, method = "ordered",
                          recursive = TRUE, mustExist = FALSE)
-  stopifnot(all(names(globals_l) %in% c("{", "foo", "bar", "-", "a")))
-  globals_l <- cleanup(globals_l)
-  str(globals_l)
-  stopifnot(all(names(globals_l) %in% c("foo", "bar", "a")))
+  stopifnot(all(names(globals) %in% c("{", "foo", "bar", "-", "a")))
+  globals <- cleanup(globals)
+  str(globals)
+  stopifnot(all(names(globals) %in% c("foo", "bar", "a")))
 
-  globals_l <- globalsOf({ foo(3) }, substitute = TRUE,
+  globals <- globalsOf({ foo(3) }, substitute = TRUE,
                          recursive = TRUE, mustExist = FALSE)
-  stopifnot(all(names(globals_l) %in% c("{", "foo", "bar", "-", "a")))
-  globals_l <- cleanup(globals_l)
-  str(globals_l)
-  stopifnot(all(names(globals_l) %in% c("foo", "bar", "a")))
+  stopifnot(all(names(globals) %in% c("{", "foo", "bar", "-", "a")))
+  globals <- cleanup(globals)
+  str(globals)
+  stopifnot(all(names(globals) %in% c("foo", "bar", "a")))
 }
 
 
@@ -202,15 +204,15 @@ stopifnot(identical(where_s, where_l[-1]))
 message("*** cleanup() & packagesOf():")
 globals <- globalsOf(expr, method = "conservative")
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "c", "d")))
+stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
 
 globals <- as.Globals(globals)
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "c", "d")))
+stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
 
 globals <- as.Globals(unclass(globals))
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "c", "d")))
+stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
 
 pkgs <- packagesOf(globals)
 print(pkgs)
