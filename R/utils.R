@@ -94,7 +94,9 @@ mdebug <- function(...) {
 
 #' @importFrom utils capture.output str
 mstr <- function(...) {
-  message(capture.output(str(...), envir = parent.frame()), appendLF = TRUE)
+  bfr <- capture.output(str(...))
+  bfr <- paste(bfr, collapse = "\n")
+  message(bfr, appendLF = TRUE)
 }
 
 #' @importFrom utils capture.output
