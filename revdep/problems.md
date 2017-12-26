@@ -34,6 +34,10 @@ Version: 3.1.1
       expectile   yes   http://r-forge.r-project.org          
       HaarSeg     yes   http://r-forge.r-project.org          
       mpcbs       yes   http://r-forge.r-project.org          
+    
+    The Date field is over a month old.
+    
+    This build time stamp is over a month old.
     ```
 
 *   checking package dependencies ... NOTE
@@ -42,34 +46,9 @@ Version: 3.1.1
       ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
     ```
 
-# brms
-
-Version: 1.10.0
-
-## In both
-
-*   checking CRAN incoming feasibility ... WARNING
-    ```
-    Maintainer: ‘Paul-Christian Bürkner <paul.buerkner@gmail.com>’
-    
-    Insufficient package version (submitted: 1.10.0, existing: 1.10.0)
-    
-    The Date field is over a month old.
-    
-    This build time stamp is over a month old.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.3Mb
-      sub-directories of 1Mb or more:
-        R     2.2Mb
-        doc   2.4Mb
-    ```
-
 # doFuture
 
-Version: 0.5.1
+Version: 0.6.0
 
 ## In both
 
@@ -77,12 +56,14 @@ Version: 0.5.1
     ```
     Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
     
-    Insufficient package version (submitted: 0.5.1, existing: 0.5.1)
+    Insufficient package version (submitted: 0.6.0, existing: 0.6.0)
+    
+    This build time stamp is over a month old.
     ```
 
 # fiery
 
-Version: 1.0.0
+Version: 1.1.0
 
 ## In both
 
@@ -90,7 +71,9 @@ Version: 1.0.0
     ```
     Maintainer: ‘Thomas Lin Pedersen <thomasp85@gmail.com>’
     
-    Insufficient package version (submitted: 1.0.0, existing: 1.0.0)
+    Insufficient package version (submitted: 1.1.0, existing: 1.1.0)
+    
+    The Date field is over a month old.
     
     This build time stamp is over a month old.
     ```
@@ -106,21 +89,6 @@ Version: 1.0.0
     ```
     Namespace in Imports field not imported from: ‘desc’
       All declared Imports should be used.
-    ```
-
-# future
-
-Version: 1.6.1
-
-## In both
-
-*   checking CRAN incoming feasibility ... WARNING
-    ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 1.6.1, existing: 1.6.1)
-    
-    This build time stamp is over a month old.
     ```
 
 # future.BatchJobs
@@ -164,11 +132,13 @@ Version: 0.2.0
     Maintainer: ‘Mark Edmondson <r@sunholo.com>’
     
     Insufficient package version (submitted: 0.2.0, existing: 0.2.0)
+    
+    This build time stamp is over a month old.
     ```
 
 # kernelboot
 
-Version: 0.1.2
+Version: 0.1.3
 
 ## In both
 
@@ -176,7 +146,7 @@ Version: 0.1.2
     ```
     Maintainer: ‘Tymoteusz Wolodzko <twolodzko+kernelboot@gmail.com>’
     
-    Insufficient package version (submitted: 0.1.2, existing: 0.1.2)
+    Insufficient package version (submitted: 0.1.3, existing: 0.1.3)
     ```
 
 # multiApply
@@ -232,7 +202,7 @@ Version: 1.2.4
 
 # penaltyLearning
 
-Version: 2017.07.11
+Version: 2017.12.08
 
 ## In both
 
@@ -240,11 +210,9 @@ Version: 2017.07.11
     ```
     Maintainer: ‘Toby Dylan Hocking <toby.hocking@r-project.org>’
     
-    Insufficient package version (submitted: 2017.7.11, existing: 2017.7.11)
-    Version contains leading zeroes (2017.07.11)
-    Version contains large components (2017.07.11)
-    
-    This build time stamp is over a month old.
+    Insufficient package version (submitted: 2017.12.8, existing: 2017.12.8)
+    Version contains leading zeroes (2017.12.08)
+    Version contains large components (2017.12.08)
     ```
 
 # PSCBS
@@ -281,7 +249,7 @@ Version: 2.11.0
 
 # sperrorest
 
-Version: 2.1.0
+Version: 2.1.1
 
 ## In both
 
@@ -289,7 +257,11 @@ Version: 2.1.0
     ```
     Maintainer: ‘Alexander Brenning <alexander.brenning@uni-jena.de>’
     
-    Insufficient package version (submitted: 2.1.0, existing: 2.1.0)
+    Insufficient package version (submitted: 2.1.1, existing: 2.1.1)
+    
+    The Date field is over a month old.
+    
+    This build time stamp is over a month old.
     ```
 
 # startR
