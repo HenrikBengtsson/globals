@@ -11,7 +11,8 @@ a <- 0
 b <- 2
 c <- 3
 d <- NULL
-expr <- substitute({ x <- b; b <- 1; y <- c; z <- d; a <- a + 1 }, env = list())
+e <- function() TRUE
+expr <- substitute({ x <- b; b <- 1; y <- c; z <- d; a <- a + 1; e <- e() }, env = list())
 
 message("*** findGlobals() ...")
 
@@ -23,12 +24,12 @@ stopifnot(all(globals_c %in% c("{", "<-", "c", "d", "+")))
 message(" ** findGlobals(..., method = 'liberal'):")
 globals_l <- findGlobals(expr, method = "liberal")
 print(globals_l)
-stopifnot(all(globals_l %in% c("{", "<-", "b", "c", "d", "+", "a")))
+stopifnot(all(globals_l %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(..., method = 'ordered'):")
 globals_i <- findGlobals(expr, method = "ordered")
 print(globals_i)
-stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a")))
+stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {
@@ -40,7 +41,7 @@ stopifnot(all(globals_i %in% c("{", "<-", "B", "C", "D")))
 message(" ** findGlobals(..., trace = TRUE):")
 globals_i <- findGlobals(expr, trace = TRUE)
 print(globals_i)
-stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a")))
+stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message("*** findGlobals() ... DONE")
 
@@ -103,10 +104,10 @@ stopifnot(
 message(" ** globalsOf(..., method = 'liberal'):")
 globals_l <- globalsOf(expr, method = "liberal")
 str(globals_l)
-stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d", "+", "a")))
+stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 globals_l <- cleanup(globals_l)
 str(globals_l)
-stopifnot(all(names(globals_l) %in% c("b", "c", "d", "a")))
+stopifnot(all(names(globals_l) %in% c("b", "c", "d", "a", "e")))
 where <- attr(globals_l, "where")
 stopifnot(
   length(where) == length(globals_l),
@@ -118,10 +119,10 @@ stopifnot(
 message(" ** globalsOf(..., method = 'ordered'):")
 globals_i <- globalsOf(expr, method = "ordered")
 str(globals_i)
-stopifnot(all(names(globals_i) %in% c("{", "<-", "b", "c", "d", "+", "a")))
+stopifnot(all(names(globals_i) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 globals_i <- cleanup(globals_i)
 str(globals_i)
-stopifnot(all(names(globals_i) %in% c("b", "c", "d", "a")))
+stopifnot(all(names(globals_i) %in% c("b", "c", "d", "a", "e")))
 where <- attr(globals_i, "where")
 stopifnot(
   length(where) == length(globals_i),
