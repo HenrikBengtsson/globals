@@ -62,7 +62,7 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
 
 
 #' @importFrom codetools makeUsageCollector walkCode
-find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
+find_nnn_ordered <- function(expr, envir, unique = TRUE, ..., trace = FALSE) {
   class <- name <- character()
   
   enter_local <- function(type, v, e, w) {
@@ -85,9 +85,9 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     class <<- c(class, "global")
     name <<- c(name, v)
     
-    ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
+        ## Also, walk formulas to identify globals
         stopifnot(identical(e[[1]], as.symbol("~")))
         expr <- e[-1]
         for (kk in seq_along(expr)) {
@@ -97,10 +97,78 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
             name <<- c(name, globals)
           }
         }
+      } else if (v == "if" && getOption("globals.ambiguous", TRUE)) {
+        ## ... and if-else statements
+        stopifnot(identical(e[[1]], as.symbol("if")))
+        
+        cond <- e[[2]]
+        if (is.atomic(cond)) {
+          cond <- as.logical(cond)
+          stopifnot(length(cond) == 1L)
+        } else {
+          cond <- NA
+        }
+
+        mdebug(" - cond: %d", cond)
+        
+        if (is.na(cond)) {
+          ## Locals identified in "ambiguous" if-else statements should be
+          ## ignored if following statements contain a global with the same
+          ## name.  For example, below 'x' should be considered a global:
+          ##   if (NA) x <- 0
+          ##   y <- x + 1
+          expr <- e[-(1:2)]
+          envir <- w$env
+          
+          ## NB: Suppress any codetools warnings, particularly "... may be
+          ## used in an incorrect context".  Those will be detected after
+          ## enter_global() returns, if they exist.
+          suppressWarnings({
+            for (kk in seq_along(expr)) {
+              locals <- find_locals_ordered(expr = expr[[kk]], envir = envir)
+              if (length(locals) > 0) {
+                class <<- c(class, rep("local-maybe-global",
+                                       times = length(locals)))
+                name <<- c(name, locals)
+              }
+            }
+          })
+        } else {
+          ## Locals identified in "constant" if-else statements should be
+          ## treated as is.  For example, in:
+          ##   if (TRUE) x <- 0
+          ##   y <- x + 1
+          ## 'x' should be considered a local variable, whereas in:
+          ##   if (FALSE) x <- 0
+          ##   y <- x + 1
+          ## 'x' should be considered a global variable.
+          ##
+          ## NB: We suppress any codetools warnings, particularly "... may be
+          ## used in an incorrect context".  Those will be detected after
+          ## enter_global() returns, if they exist.
+          if (cond) {
+            mdebug(" - expr: %s", paste(capture.output(print(e[[3]])), collapse = "\n"))
+            suppressWarnings(
+              globals <- find_globals_ordered(expr = e[[3]], envir = w$env)
+            )
+          } else if (length(e) >= 4) {
+            mdebug(" - expr: %s", paste(capture.output(print(e[[4]])), collapse = "\n"))
+            suppressWarnings(
+              globals <- find_globals_ordered(expr = e[[4]], envir = w$env)
+            )
+          } else {
+            globals <- character(0L)
+          }
+          mdebug(" - globals: %s", paste(sQuote(globals), collapse = ", "))
+          if (length(globals) > 0) {
+            class <<- c(class, rep("global", times = length(globals)))
+            name <<- c(name, globals)
+          }
+        }
       }
     }
   }
-
+  
   ## A function or an expression?
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
@@ -120,14 +188,52 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     walkCode(expr, w)
   }
 
+  mdebug("find_nnn_ordered():")
+  mdebug(" - names: [%d] %s", length(name), paste(sQuote(name), collapse = ", "))
+  mdebug(" - classes: [%d] %s", length(class), paste(sQuote(class), collapse = ", "))
+  
+  ## Drop duplicated names?
+  if (unique) {
+    dups <- duplicated(name)
+    class <- class[!dups]
+    name <- name[!dups]
+  }
+
+  list(name = name, class = class)
+}
+
+find_globals_ordered <- function(expr, ...) {
+  objs <- find_nnn_ordered(expr, ..., unique = FALSE)
+  name <- objs[["name"]]
+  class <- objs[["class"]]
+
+  maybes <- unique(name[class == "local-maybe-global"])
+  if (length(maybes) > 0) {
+    mdebug("find_globals_ordered():")
+    mdebug(" - maybes: [%d] %s", length(maybes), paste(sQuote(maybes), collapse = ", "))
+    mdebug(" - names: [%d] %s", length(name), paste(sQuote(name), collapse = ", "))
+    mdebug(" - classes: [%d] %s", length(class), paste(sQuote(class), collapse = ", "))
+    
+    for (nn in maybes) {
+      midxs <- which(name == nn & class == "local-maybe-global")
+      gidx <- which(name == nn & class == "global")[1]
+      class[midxs] <- if (!is.na(gidx)) "global" else "local"
+    }
+    mdebug(" - classes: [%d] %s", length(class), paste(sQuote(class), collapse = ", "))
+  }
+
   ## Drop duplicated names
   dups <- duplicated(name)
   class <- class[!dups]
   name <- name[!dups]
-
-  unique(name[class == "global"])
+  
+  name[class == "global"]
 }
 
+find_locals_ordered <- function(expr, ...) {
+  objs <- find_nnn_ordered(expr, ..., unique = TRUE)
+  objs[["name"]][objs[["class"]] == "local"]
+}
 
 #' @export
 findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
@@ -150,7 +256,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                       substitute = FALSE, unlist = FALSE)
 
     mdebug(" - preliminary globals found: [%d] %s",
-           length(globals), hpaste(sQuote(names(globals))))
+           length(globals), hpaste(sQuote(names(globals)), max_head = Inf))
 
     if (unlist) {
       needs_dotdotdot <- FALSE
@@ -169,7 +275,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     }
 
     mdebug(" - globals found: [%d] %s",
-           length(globals), hpaste(sQuote(globals)))
+           length(globals), hpaste(sQuote(globals), max_head = Inf))
 
     mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
     return(globals)
@@ -223,7 +329,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
 
   if (needs_dotdotdot) globals <- c(globals, "...")
 
-  mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
+  mdebug(" - globals found: [%d] %s", length(globals),
+         hpaste(sQuote(globals), max_head = Inf))
 
   mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
 
