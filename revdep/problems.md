@@ -213,6 +213,8 @@ Version: 2017.12.08
     Insufficient package version (submitted: 2017.12.8, existing: 2017.12.8)
     Version contains leading zeroes (2017.12.08)
     Version contains large components (2017.12.08)
+    
+    This build time stamp is over a month old.
     ```
 
 # PSCBS
