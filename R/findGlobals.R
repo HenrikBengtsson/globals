@@ -64,8 +64,19 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
 #' @importFrom codetools makeUsageCollector walkCode
 find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   class <- name <- character()
-
+  
   enter_local <- function(type, v, e, w) {
+    ## LH <- RH: Handle cases where a global variable exists in RH and LH
+    ##           assigns a local variable with the same name, e.g. x <- x + 1.
+    ##           In such case we want to detect 'x' as a global variable.
+    if (type == "<-" && getOption("globals.selfassign", TRUE)) {
+      globals <- all.names(e[[3]], unique = TRUE)
+      if (v %in% globals) {
+        class <<- c(class, "global")
+        name <<- c(name, v)
+      }
+    }
+
     class <<- c(class, "local")
     name <<- c(name, v)
   }
@@ -73,7 +84,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   enter_global <- function(type, v, e, w) {
     class <<- c(class, "global")
     name <<- c(name, v)
-
+    
     ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
@@ -258,7 +269,10 @@ inject_tracer_to_function <- function(fcn, name) {
   title <- sprintf("%s():", name)
   b <- bquote({
     message(.(title))
-    if (length(.(args)) > 0) str(mget(.(args)))
+    if (length(.(args)) > 0) {
+      mstr <- get("mstr", envir = getNamespace("globals"), mode = "function")
+      mstr(mget(.(args)))
+    }
     .(b)
   })
   body(fcn) <- b

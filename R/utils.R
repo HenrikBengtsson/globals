@@ -92,6 +92,12 @@ mdebug <- function(...) {
   message(sprintf(...))
 } ## mdebug()
 
+#' @importFrom utils capture.output str
+mstr <- function(...) {
+  bfr <- capture.output(str(...))
+  bfr <- paste(bfr, collapse = "\n")
+  message(bfr, appendLF = TRUE)
+}
 
 #' @importFrom utils capture.output
 envname <- function(env) {
