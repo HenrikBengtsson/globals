@@ -7,13 +7,6 @@ R package globals is available on [CRAN](https://cran.r-project.org/package=glob
 install.packages('globals')
 ```
 
-### Pre-release version
-
-To install the pre-release version that is available in Git branch `develop` on GitHub, use:
-```r
-source('http://callr.org/install#HenrikBengtsson/globals@develop')
-```
-This will install the package from source.  
 
 
 
