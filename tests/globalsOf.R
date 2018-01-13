@@ -82,6 +82,52 @@ stopifnot(all(names(globals) %in% c("foo")))
 pkgs <- packagesOf(globals)
 stopifnot(pkgs == "globals")
 
+
+## Also '...'
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "x", "..."))
+}
+globals <- myGlobals(x = 2, y = 3, z = 4)
+str(globals)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y", "z")))
+
+
+## FIXME: Currently '...' has to be specified at the end /HB 2018-01-13
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "...", "x"))
+}
+## globals <- myGlobals(x = 2, y = 3, z = 4)
+str(globals)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y", "z")))
+
+
+## Test with arguments defaulting to other arguments
+myGlobals <- function(x, y, z = y) {
+  globalsByName(c("a", "x", "y", "z"))
+}
+globals <- myGlobals(x = 2, y = 3)
+stopifnot(all(names(globals) %in% c("a", "x", "y", "z")),
+          globals$y == 3, identical(globals$z, globals$y))
+
+globals <- myGlobals(x = 2, y = 3, z = 4)
+stopifnot(all(names(globals) %in% c("a", "x", "y", "z")),
+          globals$y == 3, globals$z == 4)
+
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "x", "..."))
+}
+globals <- myGlobals(x = 2, y = 3)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y")),
+          globals[["..."]]$y == 3)
+
+globals <- myGlobals(x = 2, y = 3, z = 4)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y", "z")),
+          globals[["..."]]$y == 3, globals[["..."]]$z == 4)
+
 message("*** globalsByName() ... DONE")
 
 
