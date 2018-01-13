@@ -183,9 +183,9 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
   mdebug("- search from environment: %s", sQuote(envname(envir)))
 
   ## Locate and retrieve the specified globals
-  n <- length(names)
-  needs_dotdotdot <- (identical(names[n], "..."))
-  if (needs_dotdotdot) names <- names[-n]
+  idxs <- which(names == "...")
+  needs_dotdotdot <- (length(idxs) > 0)
+  if (needs_dotdotdot) names <- names[-idxs]
   mdebug("- dotdotdot: %s", needs_dotdotdot)
 
   globals <- structure(list(), class = c("Globals", "list"))

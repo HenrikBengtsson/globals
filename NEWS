@@ -1,9 +1,12 @@
 Package: globals
 ================
 
-Version: 0.11.0-9000 [2018-01-10]
+Version: 0.11.0-9000 [2018-01-13]
 
- o ...
+BUG FIX:
+
+  o If "..." was passed to globalsByName(names), an error would be produced
+    unless it was the last entry in 'names'.
 
 
 Version: 0.11.0 [2018-01-09]

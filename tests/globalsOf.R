@@ -93,11 +93,11 @@ stopifnot(all(names(globals) %in% c("a", "x", "...")),
           all(names(globals[["..."]]) %in% c("y", "z")))
 
 
-## FIXME: Currently '...' has to be specified at the end /HB 2018-01-13
+## BUG FIX: Assert that '...' does not have to be specified at the end
 myGlobals <- function(x, ...) {
   globalsByName(c("a", "...", "x"))
 }
-## globals <- myGlobals(x = 2, y = 3, z = 4)
+globals <- myGlobals(x = 2, y = 3, z = 4)
 str(globals)
 stopifnot(all(names(globals) %in% c("a", "x", "...")),
           all(names(globals[["..."]]) %in% c("y", "z")))
