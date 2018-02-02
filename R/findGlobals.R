@@ -63,13 +63,15 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
 
 #' @importFrom codetools makeUsageCollector walkCode
 find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
+  selfassign <- getOption("globals.selfassign", TRUE)
+  
   class <- name <- character()
   
   enter_local <- function(type, v, e, w) {
     ## LH <- RH: Handle cases where a global variable exists in RH and LH
     ##           assigns a local variable with the same name, e.g. x <- x + 1.
     ##           In such case we want to detect 'x' as a global variable.
-    if (type == "<-" && getOption("globals.selfassign", TRUE)) {
+    if (selfassign && type == "<-") {
       rhs <- e[[3]]
       globals <- all.names(rhs)
       if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
@@ -98,6 +100,21 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
           if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
+          }
+        }
+      } else if (selfassign && v == "<-") {
+        ## LH <- RH: Handle cases where a global variable exists in LH in the
+        ##           form of x[1] <- 0, which will cause 'x' to be called a
+        ##           local variable later unless called global here.
+        lhs <- e[[2]]
+        if (length(lhs) >= 2) {
+          ## Cases: a[1] <- 0, names(a) <- "x", names(a)[1] <- "x"
+          ## Skip first and third; they'll be handled up later, e.g.
+          ## `[<-` and `names<-`, as well as x[a] <- 0 and  x[a <- 1] <- 0
+          global <- all.names(lhs[2])
+          if (length(global) == 1) {
+            class <<- c(class, "global")
+            name <<- c(name, global)
           }
         }
       }
