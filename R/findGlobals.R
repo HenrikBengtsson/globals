@@ -109,12 +109,12 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
         lhs <- e[[2]]
         if (length(lhs) >= 2) {
           ## Cases: a[1] <- 0, names(a) <- "x", names(a)[1] <- "x"
-          ## Skip first and third; they'll be handled up later, e.g.
-          ## `[<-` and `names<-`, as well as x[a] <- 0 and  x[a <- 1] <- 0
-          global <- all.names(lhs[2])
-          if (length(global) == 1) {
-            class <<- c(class, "global")
-            name <<- c(name, global)
+          ## Skip first symbol, because it'll be handled up later as
+          ## an assignment function, e.g. `[<-` and `names<-`
+          globals <- find_globals_ordered(expr = lhs, envir = w$env)
+          if (length(globals) > 0) {
+            class <<- c(class, rep("global", times = length(globals)))
+            name <<- c(name, globals)
           }
         }
       }

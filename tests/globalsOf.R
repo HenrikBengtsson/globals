@@ -50,22 +50,32 @@ print(globals_i)
 stopifnot(all(globals_i %in% c("<-", "::")))
 
 message(" ** findGlobals(a[1] <- 0) etc.:")
+
 globals_i <- findGlobals(a[1] <- 0, substitute = TRUE)
 print(globals_i)
-stopifnot(all(globals_i %in% c("<-", "a", "[<-")))
+false_globals <- "["
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "[<-")))
 
 globals_i <- findGlobals(a[b <- 1] <- 0, substitute = TRUE)
 print(globals_i)
-stopifnot(all(globals_i %in% c("<-", "a", "[<-")))
+false_globals <- "["
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "[<-")))
+
+globals_i <- findGlobals(a$b <- 0, substitute = TRUE)
+print(globals_i)
+false_globals <- "$"
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "$<-")))
 
 globals_i <- findGlobals(names(a) <- "A", substitute = TRUE)
 print(globals_i)
-stopifnot(all(globals_i %in% c("<-", "a", "names<-")))
+stopifnot(all(globals_i %in% c("<-", "a", "names", "names<-")))
 
-## FIXME:
+## In order to handle the following case, we have to accept a few
+## false positives (`[`, `[[`, `$`, `[<-`, `[[<-`)
 globals_i <- findGlobals(names(a)[1] <- "A", substitute = TRUE)
 print(globals_i)
-# stopifnot(all(globals_i %in% c("<-", "a", "names<-")))
+false_globals <- c("[", "[<-")
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "names", "names<-")))
 
 
 message("*** findGlobals() ... DONE")
