@@ -7,7 +7,10 @@ BUG FIX:
 
   o globals::findGlobals() incorrectly identified 'a' as a global in
     expression of type 'a <- pkg::a'.
-    
+
+  o globals::findGlobals() failed to identify 'a' as a global if it was
+    part of LHS expressions of type 'a[1] <- ...' and 'names(a) <- ...'.
+
   o If "..." was passed to globalsByName(names), an error would be produced
     unless it was the last entry in 'names'.
 
