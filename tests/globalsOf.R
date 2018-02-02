@@ -43,6 +43,12 @@ globals_i <- findGlobals(expr, trace = TRUE)
 print(globals_i)
 stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
+message(" ** findGlobals(a <- pkg::a):")
+expr2 <- parse(text = "a <- pkg::a") ## To please R CMD check
+globals_i <- findGlobals(expr2)
+print(globals_i)
+stopifnot(all(globals_i %in% c("<-", "::")))
+
 message("*** findGlobals() ... DONE")
 
 

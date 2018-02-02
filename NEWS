@@ -1,10 +1,13 @@
 Package: globals
 ================
 
-Version: 0.11.0-9000 [2018-01-13]
+Version: 0.11.0-9000 [2018-02-01]
 
 BUG FIX:
 
+  o globals::findGlobals() incorrectly identified 'a' as a global in
+    expression of type 'a <- pkg::a'.
+    
   o If "..." was passed to globalsByName(names), an error would be produced
     unless it was the last entry in 'names'.
 

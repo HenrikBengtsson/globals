@@ -70,8 +70,11 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     ##           assigns a local variable with the same name, e.g. x <- x + 1.
     ##           In such case we want to detect 'x' as a global variable.
     if (type == "<-" && getOption("globals.selfassign", TRUE)) {
-      globals <- all.names(e[[3]], unique = TRUE)
-      if (v %in% globals) {
+      rhs <- e[[3]]
+      globals <- all.names(rhs)
+      if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
+        ## Case: a <- pkg::a
+      } else if (v %in% globals) {
         class <<- c(class, "global")
         name <<- c(name, v)
       }
