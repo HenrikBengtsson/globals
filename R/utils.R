@@ -1,5 +1,5 @@
-as_function <- function(expr, envir = parent.frame(), ...) {
-  eval(substitute(function() x, list(x = expr)), envir = envir, ...)
+as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
+  eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
 }
 
 #' @importFrom utils installed.packages
