@@ -80,7 +80,7 @@ walkAST <- function(expr, atomic = NULL, name = NULL, call = NULL,
 
   ## Assert that the tweak functions return a valid object
   if (!missing(expr)) {
-    stopifnot(is.atomic(expr) ||
+    stop_if_not(is.atomic(expr) ||
               is.list(expr) ||
               is.name(expr) ||
               is.call(expr) ||

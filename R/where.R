@@ -8,10 +8,10 @@ where <- function(x, where = -1,
                           } else sys.frame(frame),
                   frame, mode = "any", inherits = TRUE) {
   ## Validate arguments
-  stopifnot(is.environment(envir))
-  stopifnot(is.character(mode), length(mode) == 1L)
+  stop_if_not(is.environment(envir))
+  stop_if_not(is.character(mode), length(mode) == 1L)
   inherits <- as.logical(inherits)
-  stopifnot(inherits %in% c(FALSE, TRUE))
+  stop_if_not(inherits %in% c(FALSE, TRUE))
 
   mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ...",
          sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)

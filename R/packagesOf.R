@@ -30,7 +30,7 @@ packagesOf.Globals <- function(globals, ...) {
   pkgs <- sort(unique(pkgs))
 
   ## Sanity check
-  stopifnot(all(nzchar(pkgs)))
+  stop_if_not(all(nzchar(pkgs)))
 
   pkgs
 } # packagesOf()

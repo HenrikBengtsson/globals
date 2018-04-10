@@ -69,7 +69,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
   method <- match.arg(method)
 
   if (substitute) expr <- substitute(expr)
-  stopifnot(is.null(skip) || is.list(skip))
+  stop_if_not(is.null(skip) || is.list(skip))
   
   mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive) #nolint
 
@@ -100,7 +100,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
 
     ## Don't enter functions in namespaces / packages
     where <- attr(globals, "where")
-    stopifnot(length(where) == length(globals))
+    stop_if_not(length(where) == length(globals))
     where <- sapply(where, FUN = envname)
     globals_t <- globals[!(where %in% loadedNamespaces())]
 
@@ -224,7 +224,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     globals[["..."]] <- ddd
   }
 
-  stopifnot(
+  stop_if_not(
     is.list(where),
     length(where) == length(globals),
     all(names(where) == names(globals))
