@@ -68,7 +68,7 @@ as.Globals.list <- function(x, ...) {
 
 #' @export
 `names<-.Globals` <- function(x, value) {
-  x <- NextMethod("names")
+  x <- NextMethod("names<-")
   where <- attr(x, "where")
   names(where) <- names(x)
   attr(x, "where") <- where
