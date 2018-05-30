@@ -16,8 +16,10 @@ availableCores <- function() {
   1L
 }
 
-if (file_test("-f", p <- Sys.getenv("R_CHECK_ENVIRON", "~/.R/check.Renviron")))
-  message("R CMD check will use env vars from ", sQuote(p))
+if (file_test("-f", p <- Sys.getenv("R_CHECK_ENVIRON", "~/.R/check.Renviron"))) {
+  cat(sprintf("R CMD check will use env vars from %s\n", sQuote(p)))
+  cat(sprintf("To disable, set 'R_CHECK_ENVIRON=false' (a fake pathname)\n"))
+}
 
 revdep_check(num_workers = availableCores(),
              timeout = as.difftime(20, units = "mins"),
