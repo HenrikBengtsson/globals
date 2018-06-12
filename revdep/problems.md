@@ -4,18 +4,28 @@ Version: 3.1.1
 
 ## In both
 
+*   checking package dependencies ... NOTE
+    ```
+    Packages suggested but not available for checking: ‘oligo’ ‘pdInfoBuilder’
+    ```
+
 *   checking installed package size ... NOTE
     ```
-      installed size is 10.2Mb
+      installed size is 12.0Mb
       sub-directories of 1Mb or more:
-        R             6.6Mb
+        R             8.4Mb
         help          1.1Mb
         testScripts   1.3Mb
     ```
 
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘oligo’
+    ```
+
 # aroma.core
 
-Version: 3.1.2
+Version: 3.1.3
 
 ## In both
 
@@ -25,16 +35,56 @@ Version: 3.1.2
       ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
     ```
 
-# codebook
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.9Mb
+      sub-directories of 1Mb or more:
+        R   4.8Mb
+    ```
 
-Version: 0.5.8
+# civis
+
+Version: 1.4.0
 
 ## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# codebook
+
+Version: 0.5.9
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘codebook-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: codebook_missingness
+    > ### Title: Codebook missingness
+    > ### Aliases: codebook_missingness
+    > 
+    > ### ** Examples
+    > 
+    > data("bfi")
+    > codebook_missingness(bfi)
+    Error in `rownames<-`(`*tmp*`, value = table(pat)) : 
+      attempt to set 'rownames' on an object with no dimensions
+    Calls: codebook_missingness -> md_pattern -> <Anonymous> -> rownames<-
+    Execution halted
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘graphics’ ‘pander’
+      ‘graphics’ ‘htmltools’ ‘pander’ ‘readr’
       All declared Imports should be used.
     ```
 
@@ -48,16 +98,136 @@ Version: 0.5.8
       Note: found 65 marked UTF-8 strings
     ```
 
+# doFuture
+
+Version: 0.6.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
 # fiery
 
 Version: 1.1.0
 
 ## In both
 
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
     Namespace in Imports field not imported from: ‘desc’
       All declared Imports should be used.
+    ```
+
+# furrr
+
+Version: 0.1.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future
+
+Version: 1.8.1
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future.apply
+
+Version: 0.2.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future.BatchJobs
+
+Version: 0.15.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future.batchtools
+
+Version: 0.7.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future.callr
+
+Version: 0.3.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# googleComputeEngineR
+
+Version: 0.2.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # lidR
@@ -66,12 +236,19 @@ Version: 1.4.2
 
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking installed package size ... NOTE
     ```
-    Packages required but not available: ‘mapview’ ‘mapedit’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+      installed size is  7.8Mb
+      sub-directories of 1Mb or more:
+        R      1.3Mb
+        libs   5.2Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Rcpp’ ‘memoise’
+      All declared Imports should be used.
     ```
 
 # MetamapsDB
@@ -87,28 +264,31 @@ Version: 0.0.2
       All declared Imports should be used.
     ```
 
+# pbmcapply
+
+Version: 1.2.5
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
 # penaltyLearning
 
 Version: 2017.12.08
 
 ## In both
 
-*   checking examples ... ERROR
+*   checking Rd cross-references ... WARNING
     ```
-    Running examples in ‘penaltyLearning-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: featureMatrix
-    > ### Title: featureMatrix
-    > ### Aliases: featureMatrix
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > data(neuroblastoma, package="neuroblastoma", envir=environment())
-    Error in find.package(package, lib.loc, verbose = verbose) : 
-      there is no package called ‘neuroblastoma’
-    Calls: data -> find.package
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
     Execution halted
     ```
 
@@ -118,9 +298,12 @@ Version: 1.0.1
 
 ## In both
 
-*   checking Rd cross-references ... NOTE
+*   checking Rd cross-references ... WARNING
     ```
-    Package unavailable to check Rd xrefs: ‘purrr’
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # PSCBS
@@ -129,38 +312,40 @@ Version: 0.63.0
 
 ## In both
 
-*   checking examples ... ERROR
-    ```
-    ...
-      chromosome tcnId dhId     start       end tcnNbrOfLoci tcnMean tcnNbrOfSNPs
-    1          1     1    1    554484 143663981         1880  1.3916          778
-    2          1     2    1 143663981 185240536          671  2.0925          275
-    3          1     3    1 185240536 246679946         1111  2.6545          417
-      tcnNbrOfHets dhNbrOfLoci    dhMean    c1Mean    c2Mean
-    1          778         778 0.4009957 0.4167872 0.9748128
-    2          275         275 0.2344486 0.8009582 1.2915418
-    3          417         417 0.2819897 0.9529792 1.7015208
-    > 
-    > 
-    > # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    > # Calling segments in allelic balance (AB)
-    > # NOTE: Ideally, this should be done on whole-genome data
-    > # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    > # Explicitly estimate the threshold in DH for calling AB
-    > # (which be done by default by the caller, if skipped here)
-    > deltaAB <- estimateDeltaAB(fit, flavor="qq(DH)", verbose=verbose)
-    Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
-      there is no package called ‘survival’
-    Calls: estimateDeltaAB ... tryCatch -> tryCatchList -> tryCatchOne -> <Anonymous>
-    Execution halted
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.8Mb
+      installed size is  6.9Mb
       sub-directories of 1Mb or more:
         R         3.0Mb
         data-ex   2.6Mb
+    ```
+
+# R.filesets
+
+Version: 2.12.1
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# robotstxt
+
+Version: 0.6.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # sperrorest
@@ -174,3 +359,45 @@ Version: 2.1.5
     Package suggested but not available for checking: ‘RSAGA’
     ```
 
+# vinereg
+
+Version: 0.3.0
+
+## In both
+
+*   checking whether package ‘vinereg’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘vinereg’ ...
+** package ‘vinereg’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘lattice’
+ERROR: lazy loading failed for package ‘vinereg’
+* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/vinereg’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘vinereg’ ...
+** package ‘vinereg’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘lattice’
+ERROR: lazy loading failed for package ‘vinereg’
+* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/old/vinereg.Rcheck/vinereg’
+
+```
