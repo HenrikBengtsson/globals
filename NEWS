@@ -1,6 +1,22 @@
 Package: globals
 ================
 
+Version: 0.12.0 [2018-06-12]
+
+NEW FEATURES:
+
+  o Now globals::findGlobals() identifies 'a' as a global also when it is
+    part of LHS expressions of type 'a[1] <- ...' and 'names(a) <- ...'.
+
+BUG FIX:
+
+  o globals::findGlobals() incorrectly identified 'a' as a global in
+    expression of type 'a <- pkg::a'.
+
+  o If "..." was passed to globalsByName(names), an error would be produced
+    unless it was the last entry in 'names'.
+
+
 Version: 0.11.0 [2018-01-09]
 
 NEW FEATURES:

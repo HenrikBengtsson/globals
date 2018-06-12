@@ -1,49 +1,101 @@
 # aroma.affymetrix
 
-Version: 3.1.0
-
-## In both
-
-*   checking CRAN incoming feasibility ... WARNING
-    ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 3.1.0, existing: 3.1.0)
-    
-    The Date field is over a month old.
-    
-    This build time stamp is over a month old.
-    ```
-
-# aroma.core
-
 Version: 3.1.1
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking package dependencies ... NOTE
     ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 3.1.1, existing: 3.1.1)
-    
-    Suggests or Enhances not in mainstream repositories:
-      sfit, expectile, HaarSeg, mpcbs
-    Availability using Additional_repositories specification:
-      sfit        yes   https://henrikbengtsson.github.io/drat
-      expectile   yes   http://r-forge.r-project.org          
-      HaarSeg     yes   http://r-forge.r-project.org          
-      mpcbs       yes   http://r-forge.r-project.org          
-    
-    The Date field is over a month old.
-    
-    This build time stamp is over a month old.
+    Packages suggested but not available for checking: ‘oligo’ ‘pdInfoBuilder’
     ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.0Mb
+      sub-directories of 1Mb or more:
+        R             8.4Mb
+        help          1.1Mb
+        testScripts   1.3Mb
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘oligo’
+    ```
+
+# aroma.core
+
+Version: 3.1.3
+
+## In both
 
 *   checking package dependencies ... NOTE
     ```
     Packages suggested but not available for checking:
       ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.9Mb
+      sub-directories of 1Mb or more:
+        R   4.8Mb
+    ```
+
+# civis
+
+Version: 1.4.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# codebook
+
+Version: 0.5.9
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘codebook-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: codebook_missingness
+    > ### Title: Codebook missingness
+    > ### Aliases: codebook_missingness
+    > 
+    > ### ** Examples
+    > 
+    > data("bfi")
+    > codebook_missingness(bfi)
+    Error in `rownames<-`(`*tmp*`, value = table(pat)) : 
+      attempt to set 'rownames' on an object with no dimensions
+    Calls: codebook_missingness -> md_pattern -> <Anonymous> -> rownames<-
+    Execution halted
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘graphics’ ‘htmltools’ ‘pander’ ‘readr’
+      All declared Imports should be used.
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘labelled’
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 65 marked UTF-8 strings
     ```
 
 # doFuture
@@ -52,13 +104,12 @@ Version: 0.6.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 0.6.0, existing: 0.6.0)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # fiery
@@ -67,22 +118,12 @@ Version: 1.1.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Thomas Lin Pedersen <thomasp85@gmail.com>’
-    
-    Insufficient package version (submitted: 1.1.0, existing: 1.1.0)
-    
-    The Date field is over a month old.
-    
-    This build time stamp is over a month old.
-    ```
-
-*   checking top-level files ... WARNING
-    ```
-    Conversion of ‘README.md’ failed:
-    pandoc: Could not fetch https://img.shields.io/codecov/c/github/thomasp85/fiery/master.svg
-    TlsExceptionHostPort (HandshakeFailed Error_EOF) "img.shields.io" 443
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -91,34 +132,88 @@ Version: 1.1.0
       All declared Imports should be used.
     ```
 
+# furrr
+
+Version: 0.1.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future
+
+Version: 1.8.1
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future.apply
+
+Version: 0.2.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
 # future.BatchJobs
 
 Version: 0.15.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 0.15.0, existing: 0.15.0)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # future.batchtools
 
-Version: 0.6.0
+Version: 0.7.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 0.6.0, existing: 0.6.0)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# future.callr
+
+Version: 0.3.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # googleComputeEngineR
@@ -127,77 +222,60 @@ Version: 0.2.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Mark Edmondson <r@sunholo.com>’
-    
-    Insufficient package version (submitted: 0.2.0, existing: 0.2.0)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
-# kernelboot
+# lidR
 
-Version: 0.1.3
+Version: 1.4.2
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking installed package size ... NOTE
     ```
-    Maintainer: ‘Tymoteusz Wolodzko <twolodzko+kernelboot@gmail.com>’
-    
-    Insufficient package version (submitted: 0.1.3, existing: 0.1.3)
-    ```
-
-# multiApply
-
-Version: 0.0.1
-
-## In both
-
-*   checking CRAN incoming feasibility ... WARNING
-    ```
-    Maintainer: ‘Alasdair Hunter <alasdair.hunter@bsc.es>’
-    
-    Insufficient package version (submitted: 0.0.1, existing: 0.0.1)
-    
-    This build time stamp is over a month old.
-    ```
-
-# origami
-
-Version: 0.8.0
-
-## In both
-
-*   checking CRAN incoming feasibility ... WARNING
-    ```
-    Maintainer: ‘Jeremy Coyle <jeremyrcoyle@gmail.com>’
-    
-    Insufficient package version (submitted: 0.8.0, existing: 0.8.0)
-    
-    This build time stamp is over a month old.
+      installed size is  7.8Mb
+      sub-directories of 1Mb or more:
+        R      1.3Mb
+        libs   5.2Mb
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘methods’
+    Namespaces in Imports field not imported from:
+      ‘Rcpp’ ‘memoise’
+      All declared Imports should be used.
+    ```
+
+# MetamapsDB
+
+Version: 0.0.2
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Matrix’ ‘shiny’
       All declared Imports should be used.
     ```
 
 # pbmcapply
 
-Version: 1.2.4
+Version: 1.2.5
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Kevin kuang <kvn.kuang@mail.utoronto.ca>’
-    
-    Insufficient package version (submitted: 1.2.4, existing: 1.2.4)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # penaltyLearning
@@ -206,15 +284,26 @@ Version: 2017.12.08
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Toby Dylan Hocking <toby.hocking@r-project.org>’
-    
-    Insufficient package version (submitted: 2017.12.8, existing: 2017.12.8)
-    Version contains leading zeroes (2017.12.08)
-    Version contains large components (2017.12.08)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# promises
+
+Version: 1.0.1
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # PSCBS
@@ -223,61 +312,92 @@ Version: 0.63.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking installed package size ... NOTE
     ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 0.63.0, existing: 0.63.0)
-    
-    The Date field is over a month old.
-    
-    This build time stamp is over a month old.
+      installed size is  6.9Mb
+      sub-directories of 1Mb or more:
+        R         3.0Mb
+        data-ex   2.6Mb
     ```
 
 # R.filesets
 
-Version: 2.11.0
+Version: 2.12.1
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking Rd cross-references ... WARNING
     ```
-    Maintainer: ‘Henrik Bengtsson <henrikb@braju.com>’
-    
-    Insufficient package version (submitted: 2.11.0, existing: 2.11.0)
-    
-    This build time stamp is over a month old.
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
+    ```
+
+# robotstxt
+
+Version: 0.6.0
+
+## In both
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Error in find.package(package, lib.loc) : 
+      there is no package called ‘lattice’
+    Calls: <Anonymous> -> lapply -> FUN -> find.package
+    Execution halted
     ```
 
 # sperrorest
 
-Version: 2.1.1
+Version: 2.1.5
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking package dependencies ... NOTE
     ```
-    Maintainer: ‘Alexander Brenning <alexander.brenning@uni-jena.de>’
-    
-    Insufficient package version (submitted: 2.1.1, existing: 2.1.1)
-    
-    The Date field is over a month old.
-    
-    This build time stamp is over a month old.
+    Package suggested but not available for checking: ‘RSAGA’
     ```
 
-# startR
+# vinereg
 
-Version: 0.0.1
+Version: 0.3.0
 
 ## In both
 
-*   checking CRAN incoming feasibility ... WARNING
+*   checking whether package ‘vinereg’ can be installed ... ERROR
     ```
-    Maintainer: ‘Nicolau Manubens <nicolau.manubens@bsc.es>’
-    
-    Insufficient package version (submitted: 0.0.1, existing: 0.0.1)
-    
-    This build time stamp is over a month old.
+    Installation failed.
+    See ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/00install.out’ for details.
     ```
 
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘vinereg’ ...
+** package ‘vinereg’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘lattice’
+ERROR: lazy loading failed for package ‘vinereg’
+* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/vinereg’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘vinereg’ ...
+** package ‘vinereg’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘lattice’
+ERROR: lazy loading failed for package ‘vinereg’
+* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/old/vinereg.Rcheck/vinereg’
+
+```

@@ -63,15 +63,20 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
 
 #' @importFrom codetools makeUsageCollector walkCode
 find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
+  selfassign <- getOption("globals.selfassign", TRUE)
+  
   class <- name <- character()
   
   enter_local <- function(type, v, e, w) {
     ## LH <- RH: Handle cases where a global variable exists in RH and LH
     ##           assigns a local variable with the same name, e.g. x <- x + 1.
     ##           In such case we want to detect 'x' as a global variable.
-    if (type == "<-" && getOption("globals.selfassign", TRUE)) {
-      globals <- all.names(e[[3]], unique = TRUE)
-      if (v %in% globals) {
+    if (selfassign && type == "<-") {
+      rhs <- e[[3]]
+      globals <- all.names(rhs)
+      if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
+        ## Case: a <- pkg::a
+      } else if (v %in% globals) {
         class <<- c(class, "global")
         name <<- c(name, v)
       }
@@ -88,10 +93,25 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
-        stopifnot(identical(e[[1]], as.symbol("~")))
+        stop_if_not(identical(e[[1]], as.symbol("~")))
         expr <- e[-1]
         for (kk in seq_along(expr)) {
           globals <- find_globals_ordered(expr = expr[[kk]], envir = w$env)
+          if (length(globals) > 0) {
+            class <<- c(class, rep("global", times = length(globals)))
+            name <<- c(name, globals)
+          }
+        }
+      } else if (selfassign && v == "<-") {
+        ## LH <- RH: Handle cases where a global variable exists in LH in the
+        ##           form of x[1] <- 0, which will cause 'x' to be called a
+        ##           local variable later unless called global here.
+        lhs <- e[[2]]
+        if (length(lhs) >= 2) {
+          ## Cases: a[1] <- 0, names(a) <- "x", names(a)[1] <- "x"
+          ## Skip first symbol, because it'll be handled up later as
+          ## an assignment function, e.g. `[<-` and `names<-`
+          globals <- find_globals_ordered(expr = lhs, envir = w$env)
           if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)

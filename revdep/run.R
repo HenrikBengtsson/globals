@@ -1,4 +1,5 @@
-options(warn = 1)
+library("revdepcheck")
+options(warn = 1L)
 
 availableCores <- function() {
   getenv <- function(name) {
@@ -15,36 +16,42 @@ availableCores <- function() {
   1L
 }
 
-reset <- isTRUE(as.logical(toupper(Sys.getenv("_R_CHECK_REVDEP_RESET_", "FALSE"))))
-revdep_framework <- Sys.getenv("_R_CHECK_REVDEP_", "revdepcheck")
-if (revdep_framework == "devtools") {
-  library("devtools")
-  if (reset) revdep_check_reset()
-  revdep_check(bioconductor = TRUE, recursive = FALSE, threads = availableCores())
-  revdep_check_save_summary()
-  revdep_check_print_problems()
-} else if (revdep_framework == "revdepcheck") {
-  library("revdepcheck")
-  if (reset) revdep_reset()
-  timeout <- as.difftime(30, units = "mins")
-  revdep_check(num_workers = availableCores(), timeout = timeout, quiet = FALSE,
-               bioc = TRUE)
-
-  ## AD HOC: revdeptools doesn't support recursive checking, so we have to
-  ## manually specify recursive revdep packages we wish to check.
-  packages <- c(
-    ## Reverse depends (of future):
-    "doFuture", "future.BatchJobs", "future.batchtools", "pbmcapply",
-    ## Reverse imports (of future):
-    "aroma.affymetrix", "aroma.core", "fiery", "googleComputeEngineR",
-    "kernelboot", "multiApply", "origami", "PSCBS", "R.filesets", "sperrorest",
-    "startR",
-    ## Reverse sugggests (of future):
-    ## "brms", ## skip takes a very long time
-    "penaltyLearning"
-  )
-  revdep_add(packages = packages)
-  revdep_check(num_workers = availableCores(), timeout = timeout, quiet = FALSE)
-} else {	       
-  stop("Unknown revdep framework: ", revdep_framework)
+if (file_test("-f", p <- Sys.getenv("R_CHECK_ENVIRON", "~/.R/check.Renviron"))) {
+  cat(sprintf("R CMD check will use env vars from %s\n", sQuote(p)))
+  cat(sprintf("To disable, set 'R_CHECK_ENVIRON=false' (a fake pathname)\n"))
 }
+
+envs <- grep("^_R_CHECK_", names(Sys.getenv()), value = TRUE)
+if (length(envs) > 0L) {
+  cat(sprintf("Detected _R_CHECK_* env vars that will affect R CMD check: %s\n",
+              paste(sQuote(envs), collapse = ", ")))
+}
+
+## WORKAROUND: Remove checked pkgs that use file links, which otherwise
+## produce warnings which are promoted to errors by revdepcheck.
+unlink("revdep/checks/aroma.affymetrix", recursive = TRUE)
+
+revdep_check(num_workers = availableCores(),
+             timeout = as.difftime(20, units = "mins"),
+             quiet = FALSE, bioc = TRUE)
+
+## AD HOC: revdeptools doesn't support recursive checking, so we have to
+## manually specify recursive revdep packages we wish to check **that has
+## not already been tested above**.
+packages <- c(
+  ## Reverse depends (of future):
+  "doFuture",
+  "future.BatchJobs", "future.batchtools", "future.callr",
+  "pbmcapply",
+  ## Reverse imports (of future):
+  "aroma.affymetrix", "aroma.core", "civis", "codebook", "drake", "drtmle",
+  "fiery", "googleComputeEngineR", "kernelboot", "lidR", "MetamapsDB",
+  "origami", "PSCBS", "robotstxt", "sperrorest", "startR", "vinereg",
+  ## Reverse suggests (of future):
+  ## "brms", ## skip takes a very long time
+  "batchtools", "penaltyLearning", "promises", "R.filesets"
+)
+revdep_add(packages = packages)
+revdep_check(num_workers = availableCores(),
+             timeout = as.difftime(20, units = "mins"),
+             quiet = FALSE, bioc = TRUE)

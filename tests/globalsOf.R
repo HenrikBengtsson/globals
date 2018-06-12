@@ -43,6 +43,41 @@ globals_i <- findGlobals(expr, trace = TRUE)
 print(globals_i)
 stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
+message(" ** findGlobals(a <- pkg::a):")
+expr2 <- parse(text = "a <- pkg::a") ## To please R CMD check
+globals_i <- findGlobals(expr2)
+print(globals_i)
+stopifnot(all(globals_i %in% c("<-", "::")))
+
+message(" ** findGlobals(a[1] <- 0) etc.:")
+
+globals_i <- findGlobals(a[1] <- 0, substitute = TRUE)
+print(globals_i)
+false_globals <- "["
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "[<-")))
+
+globals_i <- findGlobals(a[b <- 1] <- 0, substitute = TRUE)
+print(globals_i)
+false_globals <- "["
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "[<-")))
+
+globals_i <- findGlobals(a$b <- 0, substitute = TRUE)
+print(globals_i)
+false_globals <- "$"
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "$<-")))
+
+globals_i <- findGlobals(names(a) <- "A", substitute = TRUE)
+print(globals_i)
+stopifnot(all(globals_i %in% c("<-", "a", "names", "names<-")))
+
+## In order to handle the following case, we have to accept a few
+## false positives (`[`, `[[`, `$`, `[<-`, `[[<-`)
+globals_i <- findGlobals(names(a)[1] <- "A", substitute = TRUE)
+print(globals_i)
+false_globals <- c("[", "[<-")
+stopifnot(all(setdiff(globals_i, false_globals) %in% c("<-", "a", "names", "names<-")))
+
+
 message("*** findGlobals() ... DONE")
 
 
@@ -81,6 +116,52 @@ str(globals)
 stopifnot(all(names(globals) %in% c("foo")))
 pkgs <- packagesOf(globals)
 stopifnot(pkgs == "globals")
+
+
+## Also '...'
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "x", "..."))
+}
+globals <- myGlobals(x = 2, y = 3, z = 4)
+str(globals)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y", "z")))
+
+
+## BUG FIX: Assert that '...' does not have to be specified at the end
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "...", "x"))
+}
+globals <- myGlobals(x = 2, y = 3, z = 4)
+str(globals)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y", "z")))
+
+
+## Test with arguments defaulting to other arguments
+myGlobals <- function(x, y, z = y) {
+  globalsByName(c("a", "x", "y", "z"))
+}
+globals <- myGlobals(x = 2, y = 3)
+stopifnot(all(names(globals) %in% c("a", "x", "y", "z")),
+          globals$y == 3, identical(globals$z, globals$y))
+
+globals <- myGlobals(x = 2, y = 3, z = 4)
+stopifnot(all(names(globals) %in% c("a", "x", "y", "z")),
+          globals$y == 3, globals$z == 4)
+
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "x", "..."))
+}
+globals <- myGlobals(x = 2, y = 3)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y")),
+          globals[["..."]]$y == 3)
+
+globals <- myGlobals(x = 2, y = 3, z = 4)
+stopifnot(all(names(globals) %in% c("a", "x", "...")),
+          all(names(globals[["..."]]) %in% c("y", "z")),
+          globals[["..."]]$y == 3, globals[["..."]]$z == 4)
 
 message("*** globalsByName() ... DONE")
 

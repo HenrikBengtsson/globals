@@ -31,9 +31,9 @@ Globals <- function(object = list(), ...) {
   if (length(object) == 0 && is.null(where)) {
     attr(object, "where") <- where <- list()
   }
-  stopifnot(is.list(where))
+  stop_if_not(is.list(where))
 
-  stopifnot(
+  stop_if_not(
     is.list(where),
     length(where) == length(object),
     length(names(where)) == length(names(object))
@@ -68,7 +68,7 @@ as.Globals.list <- function(x, ...) {
 
 #' @export
 `names<-.Globals` <- function(x, value) {
-  x <- NextMethod("names")
+  x <- NextMethod()
   where <- attr(x, "where")
   names(where) <- names(x)
   attr(x, "where") <- where
@@ -78,12 +78,12 @@ as.Globals.list <- function(x, ...) {
 #' @export
 `[.Globals` <- function(x, i) {
   where <- attr(x, "where")
-  res <- NextMethod("[")
+  res <- NextMethod()
   attr(res, "where") <- where[i]
   class(res) <- class(x)
 
   where <- attr(res, "where")
-  stopifnot(
+  stop_if_not(
     is.list(where),
     length(where) == length(res),
     length(names(where)) == length(names(res))
@@ -143,7 +143,7 @@ c.Globals <- function(x, ...) {
       if (length(g) == 0) next
 
       names <- names(g)
-      stopifnot(!is.null(names))
+      stop_if_not(!is.null(names))
       w <- lapply(g, FUN = function(obj) {
         e <- environment(obj)
         if (is.null(e)) e <- emptyenv()
@@ -166,7 +166,7 @@ c.Globals <- function(x, ...) {
   class(x) <- clazz
   attr(x, "where") <- where
 
-  stopifnot(
+  stop_if_not(
     length(where) == length(x),
     all(names(where) == names(x))
   )
@@ -184,7 +184,7 @@ unique.Globals <- function(x, ...) {
     x <- x[!dups]
     attr(x, "where") <- where
 
-    stopifnot(
+    stop_if_not(
       length(where) == length(x),
       all(names(where) == names(x))
     )

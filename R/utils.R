@@ -1,5 +1,5 @@
-as_function <- function(expr, envir = parent.frame(), ...) {
-  eval(substitute(function() x, list(x = expr)), envir = envir, ...)
+as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
+  eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
 }
 
 #' @importFrom utils installed.packages
@@ -111,4 +111,31 @@ envname <- function(env) {
     name <- gsub("package:", "", name, fixed = TRUE)
   }
   name
+}
+
+## When 'default' is specified, this is 30x faster than
+## base::getOption().  The difference is that here we use
+## use names(.Options) whereas in 'base' names(options())
+## is used.
+getOption <- local({
+  go <- base::getOption
+  function(x, default = NULL) {
+    if (missing(default) || match(x, table = names(.Options), nomatch = 0L) > 0L) go(x) else default
+  }
+})
+
+stop_if_not <- function(...) {
+  res <- list(...)
+  n <- length(res)
+  if (n == 0L) return()
+
+  for (ii in 1L:n) {
+    res_ii <- .subset2(res, ii)
+    if (length(res_ii) != 1L || is.na(res_ii) || !res_ii) {
+        mc <- match.call()
+        call <- deparse(mc[[ii + 1]], width.cutoff = 60L)
+        if (length(call) > 1L) call <- paste(call[1L], "...")
+        stop(sQuote(call), " is not TRUE", call. = FALSE, domain = NA)
+    }
+  }
 }
