@@ -42,8 +42,7 @@ packages <- c(
   ## Reverse depends (of future):
   "doFuture",
   "future.BatchJobs", "future.batchtools", "future.callr",
-  "future.apply",
-  "furrr", "pbmcapply",
+  "pbmcapply",
   ## Reverse imports (of future):
   "aroma.affymetrix", "aroma.core", "civis", "codebook", "drake", "drtmle",
   "fiery", "googleComputeEngineR", "kernelboot", "lidR", "MetamapsDB",
