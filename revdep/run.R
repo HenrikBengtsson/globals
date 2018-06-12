@@ -21,6 +21,16 @@ if (file_test("-f", p <- Sys.getenv("R_CHECK_ENVIRON", "~/.R/check.Renviron"))) 
   cat(sprintf("To disable, set 'R_CHECK_ENVIRON=false' (a fake pathname)\n"))
 }
 
+envs <- grep("^_R_CHECK_", names(Sys.getenv()), value = TRUE)
+if (length(envs) > 0L) {
+  cat(sprintf("Detected _R_CHECK_* env vars that will affect R CMD check: %s\n",
+              paste(sQuote(envs), collapse = ", ")))
+}
+
+## WORKAROUND: Remove checked pkgs that use file links, which otherwise
+## produce warnings which are promoted to errors by revdepcheck.
+unlink("revdep/checks/aroma.affymetrix", recursive = TRUE)
+
 revdep_check(num_workers = availableCores(),
              timeout = as.difftime(20, units = "mins"),
              quiet = FALSE, bioc = TRUE)
@@ -32,14 +42,15 @@ packages <- c(
   ## Reverse depends (of future):
   "doFuture",
   "future.BatchJobs", "future.batchtools", "future.callr",
-  "pbmcapply",
+  "future.apply",
+  "furrr", "pbmcapply",
   ## Reverse imports (of future):
-  "aroma.affymetrix", "aroma.core", "civis", "codebook", "drake", "fiery",
-  "googleComputeEngineR", "kernelboot", "lidR", "MetamapsDB", "origami",
-  "PSCBS", "robotstxt", "sperrorest", "startR",
-  ## Reverse sugggests (of future):
+  "aroma.affymetrix", "aroma.core", "civis", "codebook", "drake", "drtmle",
+  "fiery", "googleComputeEngineR", "kernelboot", "lidR", "MetamapsDB",
+  "origami", "PSCBS", "robotstxt", "sperrorest", "startR", "vinereg",
+  ## Reverse suggests (of future):
   ## "brms", ## skip takes a very long time
-  "penaltyLearning", "promises", "R.filesets"
+  "batchtools", "penaltyLearning", "promises", "R.filesets"
 )
 revdep_add(packages = packages)
 revdep_check(num_workers = availableCores(),
