@@ -4,23 +4,13 @@ Version: 3.1.1
 
 ## In both
 
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking: ‘oligo’ ‘pdInfoBuilder’
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.0Mb
+      installed size is  5.9Mb
       sub-directories of 1Mb or more:
-        R             8.4Mb
+        R             2.4Mb
         help          1.1Mb
         testScripts   1.3Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘oligo’
     ```
 
 # aroma.core
@@ -33,13 +23,6 @@ Version: 3.1.3
     ```
     Packages suggested but not available for checking:
       ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.9Mb
-      sub-directories of 1Mb or more:
-        R   4.8Mb
     ```
 
 # civis
@@ -61,25 +44,6 @@ Version: 1.4.0
 Version: 0.5.9
 
 ## In both
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘codebook-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: codebook_missingness
-    > ### Title: Codebook missingness
-    > ### Aliases: codebook_missingness
-    > 
-    > ### ** Examples
-    > 
-    > data("bfi")
-    > codebook_missingness(bfi)
-    Error in `rownames<-`(`*tmp*`, value = table(pat)) : 
-      attempt to set 'rownames' on an object with no dimensions
-    Calls: codebook_missingness -> md_pattern -> <Anonymous> -> rownames<-
-    Execution halted
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -117,6 +81,28 @@ Version: 0.6.0
 Version: 1.1.0
 
 ## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+             onWSOpen = private$websocket_logic))
+      10: stop("Failed to create server")
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 238 SKIPPED: 0 FAILED: 7
+      1. Error: life cycle events get fired (@test-Fire.R#168) 
+      2. Error: errors in start and resume gets caught (@test-Fire.R#288) 
+      3. Error: futures can be added and called (@test-Fire.R#317) 
+      4. Error: ignite is blocked during run (@test-Fire.R#404) 
+      5. Error: external triggers are fired (@test-Fire.R#424) 
+      6. Error: showcase opens a browser (@test-Fire.R#453) 
+      7. Error: is_running works (@test-Fire.R#529) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 *   checking Rd cross-references ... WARNING
     ```
@@ -162,7 +148,7 @@ Version: 1.8.1
 
 # future.apply
 
-Version: 0.2.0
+Version: 1.0.0
 
 ## In both
 
@@ -232,7 +218,7 @@ Version: 0.2.0
 
 # lidR
 
-Version: 1.4.2
+Version: 1.5.1
 
 ## In both
 
@@ -240,8 +226,7 @@ Version: 1.4.2
     ```
       installed size is  7.8Mb
       sub-directories of 1Mb or more:
-        R      1.3Mb
-        libs   5.2Mb
+        libs   5.7Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -306,20 +291,6 @@ Version: 1.0.1
     Execution halted
     ```
 
-# PSCBS
-
-Version: 0.63.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.9Mb
-      sub-directories of 1Mb or more:
-        R         3.0Mb
-        data-ex   2.6Mb
-    ```
-
 # R.filesets
 
 Version: 2.12.1
@@ -348,56 +319,15 @@ Version: 0.6.0
     Execution halted
     ```
 
-# sperrorest
+# startR
 
-Version: 2.1.5
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘RSAGA’
-    ```
-
-# vinereg
-
-Version: 0.3.0
+Version: 0.0.1
 
 ## In both
 
-*   checking whether package ‘vinereg’ can be installed ... ERROR
+*   checking dependencies in R code ... NOTE
     ```
-    Installation failed.
-    See ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/00install.out’ for details.
+    Unavailable namespace imported from by a ':::' call: ‘s2dverification’
+      See the note in ?`:::` about the use of this operator.
     ```
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘vinereg’ ...
-** package ‘vinereg’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘lattice’
-ERROR: lazy loading failed for package ‘vinereg’
-* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/vinereg’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘vinereg’ ...
-** package ‘vinereg’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘lattice’
-ERROR: lazy loading failed for package ‘vinereg’
-* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/old/vinereg.Rcheck/vinereg’
-
-```
