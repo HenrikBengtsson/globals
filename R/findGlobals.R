@@ -165,10 +165,21 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
   if (is.list(expr)) {
     mdebug(" - expr: <a list of length %d>", length(expr))
 
-    globals <- lapply(expr, FUN = findGlobals, envir = envir, ...,
+    ## Skip elements in 'expr' that cannot contain globals
+    types <- unlist(lapply(expr, FUN = storage.mode), use.names = FALSE)
+    ## Do *not* for types that we are interested, but instead look for
+    ## types that we are *not* interested.  The reason for this that in
+    ## future versions of R there might be new types added that may contain
+    ## globals and with this approach those types will also be scanned.
+    keep <- which(!(types %in% c("logical", "integer", "double", "complex",
+                                 "character", "raw", "NULL")))
+    
+    globals <- lapply(expr[keep], FUN = findGlobals, envir = envir, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
-
+    
+    keep <- NULL ## Not needed anymore
+    
     mdebug(" - preliminary globals found: [%d] %s",
            length(globals), hpaste(sQuote(names(globals))))
 
