@@ -178,7 +178,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
     
-    keep <- NULL ## Not needed anymore
+    keep <- types <- NULL ## Not needed anymore
     
     mdebug(" - preliminary globals found: [%d] %s",
            length(globals), hpaste(sQuote(names(globals))))
