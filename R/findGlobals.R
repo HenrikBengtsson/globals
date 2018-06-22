@@ -154,8 +154,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                         dotdotdot = c("warning", "error", "return", "ignore"),
                         method = c("ordered", "conservative", "liberal"),
                         substitute = FALSE, unlist = TRUE, trace = FALSE) {
-  method <- match.arg(method)
-  dotdotdot <- match.arg(dotdotdot)
+  method <- match.arg(method, choices = c("ordered", "conservative", "liberal"))
+  dotdotdot <- match.arg(dotdotdot, choices = c("warning", "error", "return", "ignore"))
 
   if (substitute) expr <- substitute(expr)
 

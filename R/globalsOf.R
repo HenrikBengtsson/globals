@@ -66,7 +66,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
                       method = c("ordered", "conservative", "liberal"),
                       tweak = NULL, substitute = FALSE, mustExist = TRUE,
                       unlist = TRUE, recursive = TRUE, skip = NULL) {
-  method <- match.arg(method)
+  method <- match.arg(method, choices = c("ordered", "conservative", "liberal"))
 
   if (substitute) expr <- substitute(expr)
   stop_if_not(is.null(skip) || is.list(skip))
