@@ -9,7 +9,7 @@
 |language |en                           |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2018-06-21                   |
+|date     |2018-06-24                   |
 
 # Dependencies
 
@@ -32,7 +32,7 @@
 |[doFuture](problems.md#dofuture)                         |0.6.0      |      |1       |     |
 |drake                                                    |5.2.1      |      |        |     |
 |drtmle                                                   |1.0.2      |      |        |     |
-|[fiery](problems.md#fiery)                               |1.1.0      |1     |1       |1    |
+|[fiery](problems.md#fiery)                               |1.1.0      |      |1       |1    |
 |[furrr](problems.md#furrr)                               |0.1.0      |      |1       |     |
 |[future](problems.md#future)                             |1.8.1      |      |1       |     |
 |[future.apply](problems.md#futureapply)                  |1.0.0      |      |1       |     |

@@ -82,28 +82,6 @@ Version: 1.1.0
 
 ## In both
 
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             onWSOpen = private$websocket_logic))
-      10: stop("Failed to create server")
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 238 SKIPPED: 0 FAILED: 7
-      1. Error: life cycle events get fired (@test-Fire.R#168) 
-      2. Error: errors in start and resume gets caught (@test-Fire.R#288) 
-      3. Error: futures can be added and called (@test-Fire.R#317) 
-      4. Error: ignite is blocked during run (@test-Fire.R#404) 
-      5. Error: external triggers are fired (@test-Fire.R#424) 
-      6. Error: showcase opens a browser (@test-Fire.R#453) 
-      7. Error: is_running works (@test-Fire.R#529) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 *   checking Rd cross-references ... WARNING
     ```
     Error in find.package(package, lib.loc) : 
