@@ -4,23 +4,13 @@ Version: 3.1.1
 
 ## In both
 
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking: ‘oligo’ ‘pdInfoBuilder’
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.0Mb
+      installed size is  5.9Mb
       sub-directories of 1Mb or more:
-        R             8.4Mb
+        R             2.4Mb
         help          1.1Mb
         testScripts   1.3Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘oligo’
     ```
 
 # aroma.core
@@ -35,16 +25,9 @@ Version: 3.1.3
       ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
     ```
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.9Mb
-      sub-directories of 1Mb or more:
-        R   4.8Mb
-    ```
-
 # civis
 
-Version: 1.4.0
+Version: 1.5.0
 
 ## In both
 
@@ -61,25 +44,6 @@ Version: 1.4.0
 Version: 0.5.9
 
 ## In both
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘codebook-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: codebook_missingness
-    > ### Title: Codebook missingness
-    > ### Aliases: codebook_missingness
-    > 
-    > ### ** Examples
-    > 
-    > data("bfi")
-    > codebook_missingness(bfi)
-    Error in `rownames<-`(`*tmp*`, value = table(pat)) : 
-      attempt to set 'rownames' on an object with no dimensions
-    Calls: codebook_missingness -> md_pattern -> <Anonymous> -> rownames<-
-    Execution halted
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -162,7 +126,7 @@ Version: 1.8.1
 
 # future.apply
 
-Version: 0.2.0
+Version: 1.0.0
 
 ## In both
 
@@ -232,7 +196,7 @@ Version: 0.2.0
 
 # lidR
 
-Version: 1.4.2
+Version: 1.5.1
 
 ## In both
 
@@ -240,8 +204,7 @@ Version: 1.4.2
     ```
       installed size is  7.8Mb
       sub-directories of 1Mb or more:
-        R      1.3Mb
-        libs   5.2Mb
+        libs   5.7Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -306,20 +269,6 @@ Version: 1.0.1
     Execution halted
     ```
 
-# PSCBS
-
-Version: 0.63.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.9Mb
-      sub-directories of 1Mb or more:
-        R         3.0Mb
-        data-ex   2.6Mb
-    ```
-
 # R.filesets
 
 Version: 2.12.1
@@ -348,56 +297,15 @@ Version: 0.6.0
     Execution halted
     ```
 
-# sperrorest
+# startR
 
-Version: 2.1.5
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘RSAGA’
-    ```
-
-# vinereg
-
-Version: 0.3.0
+Version: 0.0.1
 
 ## In both
 
-*   checking whether package ‘vinereg’ can be installed ... ERROR
+*   checking dependencies in R code ... NOTE
     ```
-    Installation failed.
-    See ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/00install.out’ for details.
+    Unavailable namespace imported from by a ':::' call: ‘s2dverification’
+      See the note in ?`:::` about the use of this operator.
     ```
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘vinereg’ ...
-** package ‘vinereg’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘lattice’
-ERROR: lazy loading failed for package ‘vinereg’
-* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/new/vinereg.Rcheck/vinereg’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘vinereg’ ...
-** package ‘vinereg’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘lattice’
-ERROR: lazy loading failed for package ‘vinereg’
-* removing ‘/home/hb/repositories/globals/revdep/checks/vinereg/old/vinereg.Rcheck/vinereg’
-
-```

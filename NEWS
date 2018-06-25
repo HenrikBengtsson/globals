@@ -1,6 +1,16 @@
 Package: globals
 ================
 
+Version: 0.12.1 [2018-06-24]
+
+PERFORMANCE:
+
+  o globals::findGlobals() is now significantly faster for elements that are
+    long lists with many elements of basic data types.  This is because
+    elements of such basic data type cannot contain globals and can therefore
+    be skipped early in the search for globals.
+    
+
 Version: 0.12.0 [2018-06-12]
 
 NEW FEATURES:

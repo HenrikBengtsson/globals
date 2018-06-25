@@ -154,8 +154,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                         dotdotdot = c("warning", "error", "return", "ignore"),
                         method = c("ordered", "conservative", "liberal"),
                         substitute = FALSE, unlist = TRUE, trace = FALSE) {
-  method <- match.arg(method)
-  dotdotdot <- match.arg(dotdotdot)
+  method <- match.arg(method, choices = c("ordered", "conservative", "liberal"))
+  dotdotdot <- match.arg(dotdotdot, choices = c("warning", "error", "return", "ignore"))
 
   if (substitute) expr <- substitute(expr)
 
@@ -165,10 +165,23 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
   if (is.list(expr)) {
     mdebug(" - expr: <a list of length %d>", length(expr))
 
-    globals <- lapply(expr, FUN = findGlobals, envir = envir, ...,
+    ## NOTE: Do *not* look for types that we are interested in, but instead
+    ## look for types that we are *not* interested.  The reason for this that
+    ## in future versions of R there might be new types added that may contain
+    ## globals and with this approach those types will also be scanned.
+    basicTypes <- c("logical", "integer", "double", "complex", "character",
+                    "raw", "NULL")
+
+    ## Skip elements in 'expr' of basic types that cannot contain globals
+    types <- unlist(lapply(expr, FUN = typeof), use.names = FALSE)
+    keep <- !(types %in% basicTypes)
+   
+    globals <- lapply(expr[keep], FUN = findGlobals, envir = envir, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
-
+    
+    keep <- types <- NULL ## Not needed anymore
+    
     mdebug(" - preliminary globals found: [%d] %s",
            length(globals), hpaste(sQuote(names(globals))))
 

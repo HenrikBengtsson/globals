@@ -1,5 +1,5 @@
-# CRAN submission globals 0.12.0
-on 2018-06-12
+# CRAN submission globals 0.12.1
+on 2018-06-24
 
 I've verified that this submission causes no issues for any of the
 29 reverse package dependencies available on CRAN.
@@ -14,20 +14,15 @@ Thanks in advance
 The package has been verified using `R CMD check --as-cran` on:
 
 * Platform x86_64-apple-darwin15.6.0 (64-bit) [Travis CI]:
-  - R version 3.4.4 (2017-01-27)
-  - R version 3.5.0 (2018-04-23)
 
-* Platform x86_64-apple-darwin15.6.0 (64-bit) [r-hub]:
+* Platform x86_64-apple-darwin15.6.0 (64-bit) [Travis CI]:
+  - R version 3.4.4 (2017-01-27)
   - R version 3.5.0 (2018-04-23)
 
 * Platform x86_64-unknown-linux-gnu (64-bit) [Travis CI]:
   - R version 3.4.4 (2017-01-27)
   - R version 3.5.0 (2018-04-23)
-  - R Under development (unstable) (2018-06-11 r74888)
-
-* Platform x86_64-pc-linux-gnu (64-bit) [r-hub]:
-  - R version 3.4.4 (2018-03-15)
-  - R Under development (unstable) (2018-06-08 r74876)
+  - R Under development (unstable) (2018-06-20 r74923)
 
 * Platform x86_64-pc-linux-gnu (64-bit):
   - R version 3.1.2 (2014-10-31)
@@ -40,17 +35,17 @@ The package has been verified using `R CMD check --as-cran` on:
   - R version 3.4.4 (2018-03-15)
 
 * Platform i386-pc-solaris2.10 (32-bit):
-  - R version 3.5.0 Patched (2018-04-30 r74674)
+  -  R version 3.5.0 Patched (2018-04-30 r74674)
 
 * Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-06-11 r74889)
+  - R Under development (unstable) (2018-06-21 r74928)
 
 * Platform x86_64-w64-mingw32 (64-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-05-30 r74808)
+  - R Under development (unstable) (2018-06-21 r74928)
 
-* Platform x86_64-w64-mingw32/x64 (64-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-06-11 r74889)
+* Platform x86_64-w64-mingw32 (64-bit) [r-hub]:
+  - R Under development (unstable) (2018-06-21 r74928)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit) [win-builder]:
   - R version 3.5.0 (2018-04-23)
-  - R Under development (unstable) (2018-06-11 r74889)
+  - R Under development (unstable) (2018-06-21 r74929)
