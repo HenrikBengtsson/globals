@@ -6,8 +6,9 @@
 \title{Get all global objects of an expression}
 \usage{
 globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
-  "conservative", "liberal"), tweak = NULL, substitute = FALSE,
-  mustExist = TRUE, unlist = TRUE, recursive = TRUE, skip = NULL)
+  "conservative", "liberal"), tweak = NULL, addS3 = TRUE,
+  substitute = FALSE, mustExist = TRUE, unlist = TRUE,
+  recursive = TRUE, skip = NULL)
 }
 \arguments{
 \item{expr}{An R expression.}
@@ -21,6 +22,11 @@ to use.}
 
 \item{tweak}{An optional function that takes an expression
 and returns a tweaked expression.}
+
+\item{addS3}{If TRUE and there exist S3 generic functions among the
+identified globals, then all corresponding S3 methods that
+can be located from the \code{envir} environment are also
+appended to the set of globals returned.}
 
 \item{substitute}{If TRUE, the expression is \code{substitute()}:ed,
 otherwise not.}

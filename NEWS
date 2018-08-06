@@ -1,10 +1,13 @@
 Package: globals
 ================
 
-Version: 0.12.1-9000 [2018-06-25]
+Version: 0.12.1-9000 [2018-08-06]
 
-  o ...
- 
+NEW FEATURES:
+
+ o globalsOf() now scans for S3 generic function among identified globals and,
+   if found, then adds any locally defined S3 methods with the same name.
+
 
 Version: 0.12.1 [2018-06-24]
 

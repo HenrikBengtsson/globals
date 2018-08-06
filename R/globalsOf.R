@@ -12,6 +12,11 @@
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
 #'
+#' @param addS3 If TRUE and there exist S3 generic functions among the
+#'        identified globals, then all corresponding S3 methods that
+#'        can be located from the \code{envir} environment are also
+#'        appended to the set of globals returned.
+#'
 #' @param substitute If TRUE, the expression is \code{substitute()}:ed,
 #'        otherwise not.
 #'
@@ -64,7 +69,8 @@
 #' @export
 globalsOf <- function(expr, envir = parent.frame(), ...,
                       method = c("ordered", "conservative", "liberal"),
-                      tweak = NULL, substitute = FALSE, mustExist = TRUE,
+                      tweak = NULL, addS3 = TRUE,
+		      substitute = FALSE, mustExist = TRUE,
                       unlist = TRUE, recursive = TRUE, skip = NULL) {
   method <- match.arg(method, choices = c("ordered", "conservative", "liberal"))
 
@@ -149,6 +155,12 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     }
 
     mdebug(" - recursive scan of preliminary globals ... DONE")
+  }
+
+  if (addS3 && length(globals) > 0) {
+    mdebug(" - Add locally defined S3 methods that may be needed by globals")
+    globals <- addS3Methods(globals, envir = envir)
+    globals <- unique(globals)
   }
 
   mdebug(" - globals found: [%d] %s",
