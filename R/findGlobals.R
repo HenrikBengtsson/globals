@@ -175,8 +175,17 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     ## Skip elements in 'expr' of basic types that cannot contain globals
     types <- unlist(lapply(expr, FUN = typeof), use.names = FALSE)
     keep <- !(types %in% basicTypes)
-   
-    globals <- lapply(expr[keep], FUN = findGlobals, envir = envir, ...,
+
+    expr <- expr[keep]
+
+    ## Early stopping?
+    if (length(expr) == 0) {
+      mdebug(" - globals found: [0] <none>")
+      mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+      return(character(0L))
+    }
+    
+    globals <- lapply(expr, FUN = findGlobals, envir = envir, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
     
@@ -197,7 +206,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
         }
       }
       globals <- unlist(globals, use.names = TRUE)
-      globals <- sort(unique(globals))
+      if (length(globals) > 1L) globals <- sort(unique(globals))
       if (needs_dotdotdot) globals <- c(globals, "...")
     }
 
