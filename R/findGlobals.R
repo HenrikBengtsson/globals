@@ -149,6 +149,13 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
 }
 
 
+#' @param dotdotdot TBD.
+#'
+#' @param trace TBD.
+#'
+#' @return \code{findGlobals()} returns a character vector.
+#'
+#' @rdname globalsOf
 #' @export
 findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                         dotdotdot = c("warning", "error", "return", "ignore"),

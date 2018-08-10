@@ -3,6 +3,10 @@ Package: globals
 
 Version: 0.12.1-9000 [2018-08-10]
 
+DOCUMENTAITON:
+
+  o Added help for globals::findGlobals().
+  
 BUG FIX:
 
   o globals::findGlobals() could produce a "Warning in is.na(x): is.na() 
