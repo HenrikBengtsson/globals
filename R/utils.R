@@ -15,11 +15,15 @@ is_base_pkg <- local({
     res <- rep(FALSE, times = npkgs)
     for (kk in seq_len(npkgs)) {
       pkg <- pkgs[kk]
-      value <- cache[[pkg]]
-      if (is.null(value)) {
-        prio <- packageDescription(pkg, fields = "Priority")
-        value <- (!is.na(prio) && prio == "base")
-	cache[[pkg]] <<- value
+      if (nzchar(pkg)) {
+        value <- cache[[pkg]]
+        if (is.null(value)) {
+          prio <- packageDescription(pkg, fields = "Priority")
+          value <- (!is.na(prio) && prio == "base")
+          cache[[pkg]] <<- value
+        }
+      } else {
+        value <- FALSE
       }
       res[kk] <- value
     }
