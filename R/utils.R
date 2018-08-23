@@ -2,6 +2,10 @@ as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
   eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
 }
 
+# Although the set of "base" packages rarely changes, it has happened
+# in R's history.  Beause of this, we avoid hardcoding the set of known
+# "base" packages and instead always look them up by the 'Priority'
+# field in their DESCRIPTION data and cache the results.
 #' @importFrom utils packageDescription
 is_base_pkg <- local({
   cache <- list()
