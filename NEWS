@@ -1,7 +1,14 @@
 Package: globals
 ================
 
-Version: 0.12.1-9000 [2018-08-10]
+Version: 0.12.1-9000 [2018-08-23]
+
+PERFORMANCE:
+
+  o cleanup() for Globals should now be much faster. Previously, it could be
+    very slow the first time it was called in a fresh R session, especially
+    if the user had a large number of packages installed and/or the package
+    libraries were on slow drives.
 
 DOCUMENTAITON:
 

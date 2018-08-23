@@ -2,22 +2,26 @@ as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
   eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
 }
 
-#' @importFrom utils installed.packages
-find_base_pkgs <- local({
-  pkgs <- NULL
-  function() {
-    if (length(pkgs) > 0L) return(pkgs)
-    data <- installed.packages()
-    is_base <- (data[, "Priority"] %in% "base")
-    pkgs <<- rownames(data)[is_base]
-    pkgs
+#' @importFrom utils packageDescription
+is_base_pkg <- local({
+  cache <- list()
+  function(pkgs) {
+    pkgs <- gsub("^package:", "", pkgs)
+    npkgs <- length(pkgs)
+    res <- rep(FALSE, times = npkgs)
+    for (kk in seq_len(npkgs)) {
+      pkg <- pkgs[kk]
+      value <- cache[[pkg]]
+      if (is.null(value)) {
+        prio <- packageDescription(pkg, fields = "Priority")
+        value <- (!is.na(prio) && prio == "base")
+	cache[[pkg]] <<- value
+      }
+      res[kk] <- value
+    }
+    res
   }
 })
-
-is_base_pkg <- function(pkgs) {
-  pkgs <- gsub("^package:", "", pkgs)
-  pkgs %in% find_base_pkgs()
-}
 
 # cf. is.primitive()
 is.base <- function(x) {
