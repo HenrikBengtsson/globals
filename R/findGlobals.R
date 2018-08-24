@@ -180,10 +180,12 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                     "raw", "NULL")
 
     ## Skip elements in 'expr' of basic types that cannot contain globals
-    types <- unlist(lapply(expr, FUN = typeof), use.names = FALSE)
+    types <- unlist(list_apply(expr, FUN = typeof))
     keep <- !(types %in% basicTypes)
 
-    expr <- expr[keep]
+    ## Don't use expr[keep] here, because that may use S3 dispatching
+    ## depending on class(expr)
+    expr <- .subset(expr, keep)
 
     ## Early stopping?
     if (length(expr) == 0) {
@@ -192,7 +194,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
       return(character(0L))
     }
     
-    globals <- lapply(expr, FUN = findGlobals, envir = envir, ...,
+    globals <- list_apply(expr, FUN = findGlobals, envir = envir, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
     

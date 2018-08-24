@@ -154,3 +154,15 @@ stop_if_not <- function(...) {
     }
   }
 }
+
+
+## An lapply(X) without internal X <- as.list(X), without setting names,
+## and without dispatching using `[[`.
+list_apply <- function(X, FUN, ...) {
+  n <- length(X)
+  res <- vector("list", length = n)
+  for (kk in seq_len(n)) {
+    res[[kk]] <- FUN(.subset2(X, kk), ...)
+  }
+  res
+}
