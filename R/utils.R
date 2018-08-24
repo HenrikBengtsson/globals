@@ -156,13 +156,51 @@ stop_if_not <- function(...) {
 }
 
 
+
+#' Gets the length of an object without dispatching
+#'
+#' @param x Any \R object.
+#'
+#' @return A non-negative integer.
+#'
+#' @details
+#' This function returns \code{length(unclass(x))}, but tries to avoid
+#' calling \code{unclass(x)} unless necessary.
+#' 
+#' @seealso \code{\link{.subset}()} and \code{\link{.subset2}()}.
+#' 
+#' @keywords internal
+#' @rdname private_length
+#' @importFrom utils getS3method
+.length <- function(x) {
+  nx <- length(x)
+  
+  ## Can we trust base::length(x), i.e. is there a risk that there is
+  ## a method that overrides with another definition?
+  classes <- class(x)
+  if (length(classes) == 1L && classes == "list") return(nx)
+
+  ## Identify all length() methods for this object
+  for (class in classes) {
+    fun <- getS3method("length", class, optional = TRUE)
+    if (!is.null(fun)) {
+      nx <- length(unclass(x))
+      break
+    }
+  }
+
+  nx
+} ## .length()
+
+
 ## An lapply(X) without internal X <- as.list(X), without setting names,
 ## and without dispatching using `[[`.
 list_apply <- function(X, FUN, ...) {
-  n <- length(X)
+  n <- .length(X)
   res <- vector("list", length = n)
   for (kk in seq_len(n)) {
     res[[kk]] <- FUN(.subset2(X, kk), ...)
   }
   res
 }
+	

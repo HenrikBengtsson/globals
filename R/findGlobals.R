@@ -170,7 +170,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
          dotdotdot, method, unlist)
 
   if (is.list(expr)) {
-    mdebug(" - expr: <a list of length %d>", length(expr))
+    mdebug(" - expr: <a list of length %d>", .length(expr))
 
     ## NOTE: Do *not* look for types that we are interested in, but instead
     ## look for types that we are *not* interested.  The reason for this that
@@ -188,7 +188,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     expr <- .subset(expr, keep)
 
     ## Early stopping?
-    if (length(expr) == 0) {
+    if (.length(expr) == 0) {
       mdebug(" - globals found: [0] <none>")
       mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
       return(character(0L))
