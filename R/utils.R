@@ -8,7 +8,10 @@ as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
 # field in their DESCRIPTION data and cache the results.
 #' @importFrom utils packageDescription
 is_base_pkg <- local({
-  cache <- list()
+  cache <- list(
+    R_EmptyEnv  = FALSE,
+    R_GlobalEnv = FALSE
+  )
   function(pkgs) {
     pkgs <- gsub("^package:", "", pkgs)
     npkgs <- length(pkgs)
@@ -18,7 +21,7 @@ is_base_pkg <- local({
       if (nzchar(pkg)) {
         value <- cache[[pkg]]
         if (is.null(value)) {
-          prio <- packageDescription(pkg, fields = "Priority")
+          prio <- suppressWarnings(packageDescription(pkg, fields = "Priority"))
           value <- (!is.na(prio) && prio == "base")
           cache[[pkg]] <<- value
         }
