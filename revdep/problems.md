@@ -145,44 +145,9 @@ Version: 0.10.0
       All declared Imports should be used.
     ```
 
-# evaluator
-
-Version: 0.3.0
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘ggalt’
-    ```
-
 # fiery
 
 Version: 1.1.0
-
-## Newly fixed
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             onWSOpen = private$websocket_logic))
-      10: stop("Failed to create server")
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 238 SKIPPED: 0 FAILED: 7
-      1. Error: life cycle events get fired (@test-Fire.R#168) 
-      2. Error: errors in start and resume gets caught (@test-Fire.R#288) 
-      3. Error: futures can be added and called (@test-Fire.R#317) 
-      4. Error: ignite is blocked during run (@test-Fire.R#404) 
-      5. Error: external triggers are fired (@test-Fire.R#424) 
-      6. Error: showcase opens a browser (@test-Fire.R#453) 
-      7. Error: is_running works (@test-Fire.R#529) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
 
 ## In both
 
@@ -273,34 +238,6 @@ Version: 2017.12.08
       3. Failure: error for NA and constant features (@test-errors.R#124) 
       
       Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# PSCBS
-
-Version: 0.64.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/segmentByPairedPSCBS,futures.R’ failed.
-    Last 13 lines of output:
-           Number of heterozygous SNPs: 775 (100.00%)
-           Chromosome: 3
-           Segmenting DH signals...
-            Segmenting by CBS...
-            Segmenting by CBS...
-             Chromosome: 2
-             Chromosome: 3
-      Error in readCacheHeader.default(fh) : 
-        Rcache file format error. Read empty header identifier: '~/.Rcache/PSCBS/segmentByCBS/sbdry/2aba5b85ae757609b8b4c9fc60be1156.Rcache' [description of the opened connection]
-      Calls: segmentByPairedPSCBS ... eval -> eval -> value -> value.Future -> resignalCondition
-              Random seed temporarily set (seed=c(407, -1371615447, -889757879, 1692656974, -1723952224, 1378814990, 1816467252), kind="L'Ecuyer-CMRG")
-        Merging (independently) segmented chromosome...done
-       Segmenting multiple chromosomes...done
-      Segmenting paired tumor-normal signals using Paired PSCBS...done
       Execution halted
     ```
 
