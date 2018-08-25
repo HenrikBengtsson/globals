@@ -1,6 +1,30 @@
 Package: globals
 ================
 
+Version: 0.12.2 [2018-08-25]
+
+PERFORMANCE:
+
+  o cleanup() for Globals should now be much faster. Previously, it could be
+    very slow the first time it was called in a fresh R session, especially
+    if the user had a large number of packages installed and/or the package
+    libraries were on slow drives.
+
+DOCUMENTAITON:
+
+  o Added help for globals::findGlobals().
+  
+BUG FIX:
+
+  o globals::findGlobals(x), where 'x' is a list, iterated over 'x' incorrectly
+    assuming no method dispatching on 'x' would take place. For instance, if
+    'x' contained an fst::fst_table object, then "Error in .subset2(x, i, 
+    exact = exact) : subscript out of bounds" would be produced.
+    
+  o globals::findGlobals() could produce a "Warning in is.na(x): is.na() 
+    applied to non-(list or vector) of type 'NULL'" in R (< 3.5.0).
+
+
 Version: 0.12.1 [2018-06-24]
 
 PERFORMANCE:

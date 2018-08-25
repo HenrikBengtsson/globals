@@ -149,6 +149,13 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
 }
 
 
+#' @param dotdotdot TBD.
+#'
+#' @param trace TBD.
+#'
+#' @return \code{findGlobals()} returns a character vector.
+#'
+#' @rdname globalsOf
 #' @export
 findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                         dotdotdot = c("warning", "error", "return", "ignore"),
@@ -163,7 +170,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
          dotdotdot, method, unlist)
 
   if (is.list(expr)) {
-    mdebug(" - expr: <a list of length %d>", length(expr))
+    mdebug(" - expr: <a list of length %d>", .length(expr))
 
     ## NOTE: Do *not* look for types that we are interested in, but instead
     ## look for types that we are *not* interested.  The reason for this that
@@ -173,10 +180,21 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                     "raw", "NULL")
 
     ## Skip elements in 'expr' of basic types that cannot contain globals
-    types <- unlist(lapply(expr, FUN = typeof), use.names = FALSE)
+    types <- unlist(list_apply(expr, FUN = typeof))
     keep <- !(types %in% basicTypes)
-   
-    globals <- lapply(expr[keep], FUN = findGlobals, envir = envir, ...,
+
+    ## Don't use expr[keep] here, because that may use S3 dispatching
+    ## depending on class(expr)
+    expr <- .subset(expr, keep)
+
+    ## Early stopping?
+    if (.length(expr) == 0) {
+      mdebug(" - globals found: [0] <none>")
+      mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+      return(character(0L))
+    }
+    
+    globals <- list_apply(expr, FUN = findGlobals, envir = envir, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
     
@@ -197,7 +215,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
         }
       }
       globals <- unlist(globals, use.names = TRUE)
-      globals <- sort(unique(globals))
+      if (length(globals) > 1L) globals <- sort(unique(globals))
       if (needs_dotdotdot) globals <- c(globals, "...")
     }
 
