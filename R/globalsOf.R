@@ -99,7 +99,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     mdebug(" - recursive scan of preliminary globals ...")
 
     ## Don't enter functions in namespaces / packages
-    where <- attr(globals, "where")
+    where <- attr(globals, "where", exact = TRUE)
     stop_if_not(length(where) == length(globals))
     where <- sapply(where, FUN = envname)
     globals_t <- globals[!(where %in% loadedNamespaces())]
