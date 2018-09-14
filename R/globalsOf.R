@@ -34,16 +34,16 @@
 #' @param skip (internal) A list of globals not to be searched for
 #'        additional globals.  Ignored unless \code{recursive} is TRUE.
 #'
-#' @return A \link{Globals} object.
+#' @return \code{globalsOf()} returns a \link{Globals} object.
 #'
 #' @details
-#' There currently three methods for identifying global objects.
+#' There currently three strategies for identifying global objects.
 #'
-#' The \code{"ordered"} search method identifies globals such that
+#' The \code{method = "ordered"} search method identifies globals such that
 #' a global variable preceding a local variable with the same name
 #' is not dropped (which the \code{"conservative"} method would).
 #'
-#' The \code{"conservative"} search method tries to keep the number
+#' The \code{method = "conservative"} search method tries to keep the number
 #' of false positive to a minimum, i.e. the identified objects are
 #' most likely true global objects.  At the same time, there is
 #' a risk that some true globals are not identified (see example).
@@ -51,7 +51,7 @@
 #' \code{\link[codetools]{findGlobals}()} function of the
 #' \pkg{codetools} package.
 #'
-#' The \code{"liberal"} search method tries to keep the
+#' The \code{method = "liberal"} search method tries to keep the
 #' true-positive ratio as high as possible, i.e. the true globals
 #' are most likely among the identified ones.  At the same time,
 #' there is a risk that some false positives are also identified.
@@ -105,7 +105,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     mdebug(" - recursive scan of preliminary globals ...")
 
     ## Don't enter functions in namespaces / packages
-    where <- attr(globals, "where")
+    where <- attr(globals, "where", exact = TRUE)
     stop_if_not(length(where) == length(globals))
     where <- sapply(where, FUN = envname)
     globals_t <- globals[!(where %in% loadedNamespaces())]

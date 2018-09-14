@@ -11,7 +11,7 @@ cleanup <- function(...) UseMethod("cleanup")
 #' @export
 cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
                             ...) {
-  where <- attr(globals, "where")
+  where <- attr(globals, "where", exact = TRUE)
 
   names <- names(globals)
   keep <- rep(TRUE, times = length(globals))

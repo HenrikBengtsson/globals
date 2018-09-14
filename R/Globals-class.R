@@ -27,7 +27,7 @@ Globals <- function(object = list(), ...) {
     }
   }
 
-  where <- attr(object, "where")
+  where <- attr(object, "where", exact = TRUE)
   if (length(object) == 0 && is.null(where)) {
     attr(object, "where") <- where <- list()
   }
@@ -52,7 +52,7 @@ as.Globals.Globals <- function(x, ...) x
 as.Globals.list <- function(x, ...) {
   ## Use the globals environments as the locals?
   ## (with emptyenv() as the fallback)
-  where <- attr(x, "where")
+  where <- attr(x, "where", exact = TRUE)
   if (is.null(where)) {
     where <- lapply(x, FUN = function(obj) {
         e <- environment(obj)
@@ -69,7 +69,7 @@ as.Globals.list <- function(x, ...) {
 #' @export
 `names<-.Globals` <- function(x, value) {
   x <- NextMethod()
-  where <- attr(x, "where")
+  where <- attr(x, "where", exact = TRUE)
   names(where) <- names(x)
   attr(x, "where") <- where
   invisible(x)
@@ -77,12 +77,12 @@ as.Globals.list <- function(x, ...) {
 
 #' @export
 `[.Globals` <- function(x, i) {
-  where <- attr(x, "where")
+  where <- attr(x, "where", exact = TRUE)
   res <- NextMethod()
   attr(res, "where") <- where[i]
   class(res) <- class(x)
 
-  where <- attr(res, "where")
+  where <- attr(res, "where", exact = TRUE)
   stop_if_not(
     is.list(where),
     length(where) == length(res),
@@ -95,7 +95,7 @@ as.Globals.list <- function(x, ...) {
 
 #' @export
 `$<-.Globals` <- function(x, name, value) {
-  where <- attr(x, "where")
+  where <- attr(x, "where", exact = TRUE)
 
   ## Remove an element?
   if (is.null(value)) {
@@ -109,7 +109,7 @@ as.Globals.list <- function(x, ...) {
              length(value))
       }
       x[[name]] <- value[[1]]
-      where[[name]] <- attr(value, "where")[[1]]
+      where[[name]] <- attr(value, "where", exact = TRUE)[[1]]
     } else {
       w <- environment(value)
       if (is.null(w)) w <- emptyenv()
@@ -128,7 +128,7 @@ as.Globals.list <- function(x, ...) {
 c.Globals <- function(x, ...) {
   args <- list(...)
 
-  where <- attr(x, "where")
+  where <- attr(x, "where", exact = TRUE)
   clazz <- class(x)
   class(x) <- NULL
 
@@ -137,7 +137,7 @@ c.Globals <- function(x, ...) {
     name <- names(args)[kk]
 
     if (inherits(g, "Globals")) {
-      w <- attr(g, "where")
+      w <- attr(g, "where", exact = TRUE)
     } else if (is.list(g)) {
       ## Nothing to do?
       if (length(g) == 0) next
@@ -179,7 +179,7 @@ unique.Globals <- function(x, ...) {
   names <- names(x)
   dups <- duplicated(names)
   if (any(dups)) {
-    where <- attr(x, "where")
+    where <- attr(x, "where", exact = TRUE)
     where <- where[!dups]
     x <- x[!dups]
     attr(x, "where") <- where

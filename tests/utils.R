@@ -3,7 +3,6 @@ library("globals")
 message("*** utils ...")
 
 as_function <- globals:::as_function
-find_base_pkgs <- globals:::find_base_pkgs
 is_base_pkg <- globals:::is_base_pkg
 is.base <- globals:::is.base
 is_internal <- globals:::is_internal
@@ -73,10 +72,8 @@ print(fcn())
 stopifnot(fcn() == 1)
 
 
-message("* find_base_pkgs() & is_base_pkg() ...")
-base_pkgs <- find_base_pkgs()
-print(base_pkgs)
-stopifnot(length(base_pkgs) > 1L)
+message("* is_base_pkg() ...")
+base_pkgs <- c("base")
 for (pkg in base_pkgs) {
   stopifnot(is_base_pkg(pkg))
 }

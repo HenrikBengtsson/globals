@@ -2,22 +2,37 @@ as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
   eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
 }
 
-#' @importFrom utils installed.packages
-find_base_pkgs <- local({
-  pkgs <- NULL
-  function() {
-    if (length(pkgs) > 0L) return(pkgs)
-    data <- installed.packages()
-    is_base <- (data[, "Priority"] %in% "base")
-    pkgs <<- rownames(data)[is_base]
-    pkgs
+# Although the set of "base" packages rarely changes, it has happened
+# in R's history.  Beause of this, we avoid hardcoding the set of known
+# "base" packages and instead always look them up by the 'Priority'
+# field in their DESCRIPTION data and cache the results.
+#' @importFrom utils packageDescription
+is_base_pkg <- local({
+  cache <- list(
+    R_EmptyEnv  = FALSE,
+    R_GlobalEnv = FALSE
+  )
+  function(pkgs) {
+    pkgs <- gsub("^package:", "", pkgs)
+    npkgs <- length(pkgs)
+    res <- rep(FALSE, times = npkgs)
+    for (kk in seq_len(npkgs)) {
+      pkg <- pkgs[kk]
+      if (nzchar(pkg)) {
+        value <- cache[[pkg]]
+        if (is.null(value)) {
+          prio <- suppressWarnings(packageDescription(pkg, fields = "Priority"))
+          value <- (!is.na(prio) && prio == "base")
+          cache[[pkg]] <<- value
+        }
+      } else {
+        value <- FALSE
+      }
+      res[kk] <- value
+    }
+    res
   }
 })
-
-is_base_pkg <- function(pkgs) {
-  pkgs <- gsub("^package:", "", pkgs)
-  pkgs %in% find_base_pkgs()
-}
 
 # cf. is.primitive()
 is.base <- function(x) {
@@ -139,3 +154,53 @@ stop_if_not <- function(...) {
     }
   }
 }
+
+
+
+#' Gets the length of an object without dispatching
+#'
+#' @param x Any \R object.
+#'
+#' @return A non-negative integer.
+#'
+#' @details
+#' This function returns \code{length(unclass(x))}, but tries to avoid
+#' calling \code{unclass(x)} unless necessary.
+#' 
+#' @seealso \code{\link{.subset}()} and \code{\link{.subset2}()}.
+#' 
+#' @keywords internal
+#' @rdname private_length
+#' @importFrom utils getS3method
+.length <- function(x) {
+  nx <- length(x)
+  
+  ## Can we trust base::length(x), i.e. is there a risk that there is
+  ## a method that overrides with another definition?
+  classes <- class(x)
+  if (length(classes) == 1L && classes == "list") return(nx)
+
+  ## Identify all length() methods for this object
+  for (class in classes) {
+    fun <- getS3method("length", class, optional = TRUE)
+    if (!is.null(fun)) {
+      nx <- length(unclass(x))
+      break
+    }
+  }
+
+  nx
+} ## .length()
+
+
+## An lapply(X) without internal X <- as.list(X), without setting names,
+## and without dispatching using `[[`.
+list_apply <- function(X, FUN, ...) {
+  n <- .length(X)
+  res <- vector("list", length = n)
+  for (kk in seq_len(n)) {
+    res[[kk]] <- FUN(.subset2(X, kk), ...)
+  }
+  res
+}
+	
