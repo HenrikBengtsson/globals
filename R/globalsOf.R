@@ -70,7 +70,7 @@
 globalsOf <- function(expr, envir = parent.frame(), ...,
                       method = c("ordered", "conservative", "liberal"),
                       tweak = NULL, addS3 = TRUE,
-		      substitute = FALSE, mustExist = TRUE,
+                      substitute = FALSE, mustExist = TRUE,
                       unlist = TRUE, recursive = TRUE, skip = NULL) {
   method <- match.arg(method, choices = c("ordered", "conservative", "liberal"))
 
