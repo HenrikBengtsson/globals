@@ -4,7 +4,13 @@ Package: globals
 Version: 0.12.2-9000 [2018-08-25]
 
   * ...
-  
+
+NEW FEATURES:
+
+  * Add internal s3pkgs() for identify S3 generic functions among globals
+    and identify all loaded namespaces/packages that defines S3 methods
+    for a generic with the same name.  Still very ad hoc.
+    
 
 Version: 0.12.2 [2018-08-25]
 

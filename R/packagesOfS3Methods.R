@@ -28,3 +28,28 @@ packagesOfS3Methods <- function(generic, base = FALSE) {
   
   unique(c(namespaces, namespaces_unknown))
 }
+
+
+s3generics <- function(globals) {
+  stop_if_not(inherits(globals, "Globals"))
+  
+  is_fcn <- vapply(globals, FUN = is.function, FUN.VALUE = FALSE)
+  globals <- globals[is_fcn]
+  
+  if (length(globals) > 0) {
+    is_generic <- vapply(globals, FUN = isGenericS3, FUN.VALUE = FALSE)
+    globals <- globals[is_generic]
+  }
+
+  globals
+}
+
+
+s3pkgs <- function(globals) {
+  stop_if_not(inherits(globals, "Globals"))
+  
+  globals <- s3generics(globals)
+  if (length(globals) == 0L) return(character(0L))
+  pkgs <- lapply(names(globals), FUN = packagesOfS3Methods)
+  unique(unlist(pkgs, use.names = FALSE))
+}
