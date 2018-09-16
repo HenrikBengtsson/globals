@@ -178,8 +178,10 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
                           ...) {
   names <- as.character(names)
 
+  nnames <- length(names)
+  
   mdebug("globalsByName(<%d names>, mustExist = %s) ...",
-         length(names), mustExist)
+         nnames, mustExist)
   mdebug("- search from environment: %s", sQuote(envname(envir)))
 
   ## Locate and retrieve the specified globals
@@ -233,7 +235,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
   attr(globals, "where") <- where
 
   mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE",
-         length(names), mustExist)
+         nnames, mustExist)
 
   globals
 } ## globalsByName()

@@ -1,10 +1,14 @@
 Package: globals
 ================
 
-Version: 0.12.2-9000 [2018-08-25]
+Version: 0.12.2-9000 [2018-09-15]
 
-  * ...
+BUG FIXES:
   
+  * globals::findGlobals() would not identify 'a' as a global in expressions
+    of type 'a[1] = ...' and 'names(a) = ...' although it did for
+    'a[1] <- ...' and 'names(a) <- ...'.
+
 
 Version: 0.12.2 [2018-08-25]
 
@@ -19,7 +23,7 @@ DOCUMENTAITON:
 
   * Added help for globals::findGlobals().
   
-BUG FIX:
+BUG FIXES:
 
   * globals::findGlobals(x), where 'x' is a list, iterated over 'x' incorrectly
     assuming no method dispatching on 'x' would take place. For instance, if
@@ -47,7 +51,7 @@ NEW FEATURES:
   * Now globals::findGlobals() identifies 'a' as a global also when it is
     part of LHS expressions of type 'a[1] <- ...' and 'names(a) <- ...'.
 
-BUG FIX:
+BUG FIXES:
 
   * globals::findGlobals() incorrectly identified 'a' as a global in
     expression of type 'a <- pkg::a'.

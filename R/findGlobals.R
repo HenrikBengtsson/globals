@@ -71,7 +71,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     ## LH <- RH: Handle cases where a global variable exists in RH and LH
     ##           assigns a local variable with the same name, e.g. x <- x + 1.
     ##           In such case we want to detect 'x' as a global variable.
-    if (selfassign && type == "<-") {
+    if (selfassign && (type == "<-" || type == "=")) {
       rhs <- e[[3]]
       globals <- all.names(rhs)
       if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
@@ -102,7 +102,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
             name <<- c(name, globals)
           }
         }
-      } else if (selfassign && v == "<-") {
+      } else if (selfassign && (v == "<-" || v == "=")) {
         ## LH <- RH: Handle cases where a global variable exists in LH in the
         ##           form of x[1] <- 0, which will cause 'x' to be called a
         ##           local variable later unless called global here.
