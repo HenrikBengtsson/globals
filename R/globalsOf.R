@@ -101,7 +101,8 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     ## Don't enter functions in namespaces / packages
     where <- attr(globals, "where", exact = TRUE)
     stop_if_not(length(where) == length(globals))
-    where <- sapply(where, FUN = envname)
+    where <- vapply(where, FUN = envname, FUN.VALUE = NA_character_,
+                    USE.NAMES = FALSE)
     globals_t <- globals[!(where %in% loadedNamespaces())]
 
     debug && mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globals_t), hpaste(sQuote(names(globals_t)))) #nolint
@@ -109,7 +110,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     ## Enter only functions
     ## NOTE: This excludes functions "not found", but also primitives
     ##       not dropped above.
-    globals_t <- globals_t[sapply(globals_t, FUN = typeof) == "closure"]
+    globals_t <- globals_t[vapply(globals_t, FUN = typeof, FUN.VALUE = NA_character_, USE.NAMES = FALSE) == "closure"]
 
     if (length(globals_t) > 0) {
       debug && mdebug(" - subset of globals to be scanned: [%d] %s",
@@ -125,7 +126,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
         fcn <- globals_t[[gg]]
 
         ## Is function 'fcn' among the already identified globals?
-        already_scanned <- any(sapply(skip, FUN = identical, fcn))
+        already_scanned <- any(vapply(skip, FUN = identical, fcn, FUN.VALUE = NA, USE.NAMES = FALSE))
         if (already_scanned) next;
 
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
@@ -138,7 +139,7 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
         if (length(globals_gg) > 0) {
           globals <- c(globals, globals_gg)
 
-          skip_gg <- globals_gg[sapply(globals_gg, FUN = typeof) == "closure"]
+          skip_gg <- globals_gg[vapply(globals_gg, FUN = typeof, FUN.VALUE = NA_character_, USE.NAMES = FALSE) == "closure"]
           skip_t <- c(skip_t, skip_gg)
         }
       }
