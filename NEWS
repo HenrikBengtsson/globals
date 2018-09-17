@@ -3,6 +3,11 @@ Package: globals
 
 Version: 0.12.2-9000 [2018-09-16]
 
+NEW FEATURES:
+
+  * findGlobals(), globalsOf(), and packagesOf() no longer return elements
+    sorted by name.
+    
 BUG FIXES:
   
   * globals::findGlobals() would not identify 'a' as a global in expressions

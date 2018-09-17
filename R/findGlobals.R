@@ -214,7 +214,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
         }
       }
       globals <- unlist(globals, use.names = FALSE)
-      if (length(globals) > 1L) globals <- sort(unique(globals))
+      if (length(globals) > 1L) globals <- unique(globals)
       if (needs_dotdotdot) globals <- c(globals, "...")
     }
 

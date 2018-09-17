@@ -27,7 +27,7 @@ packagesOf.Globals <- function(globals, ...) {
   pkgs <- intersect(pkgs, loadedNamespaces())
 
   ## Packages to be loaded
-  pkgs <- sort(unique(pkgs))
+  pkgs <- unique(pkgs)
 
   ## Sanity check
   stop_if_not(all(nzchar(pkgs)))
