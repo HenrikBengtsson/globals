@@ -1,5 +1,5 @@
-# CRAN submission globals 0.12.2
-on 2018-08-25
+# CRAN submission globals 0.12.3
+on 2018-09-16
 
 I've verified that this submission causes no issues for any of the
 41 reverse (children & grandchildren) package dependencies available
@@ -21,7 +21,11 @@ The package has been verified using `R CMD check --as-cran` on:
 * Platform x86_64-unknown-linux-gnu (64-bit) [Travis CI]:
   - R version 3.4.4 (2017-01-27) [sic!]
   - R version 3.5.0 (2017-01-27) [sic!]
-  - R Under development (unstable) (2018-08-24 r75178)
+  - R Under development (unstable) (2018-09-17 r75319)
+
+* Platform x86_64-pc-linux-gnu (64-bit) [r-hub]:
+  - R version 3.4.4 (2018-03-15)
+  - R Under development (unstable) (2018-09-16 r75317)
 
 * Platform x86_64-pc-linux-gnu (64-bit):
   - R version 3.1.2 (2014-10-31)
@@ -33,18 +37,18 @@ The package has been verified using `R CMD check --as-cran` on:
 * Platform i686-pc-linux-gnu (32-bit):
   - R version 3.4.4 (2018-03-15)
 
-* Platform i386-pc-solaris2.10 (32-bit):
+* Platform i386-pc-solaris2.10 (32-bit) [r-hub]:
   -  R version 3.5.0 Patched (2018-04-30 r74674)
 
 * Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-08-22 r75177)
+  - R Under development (unstable) (2018-09-15 r75316)
 
 * Platform x86_64-w64-mingw32 (64-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-08-22 r75177)
+  - R Under development (unstable) (2018-09-15 r75316)
 
 * Platform x86_64-w64-mingw32 (64-bit) [r-hub]:
   - R Under development (unstable) (2018-07-30 r75016)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit) [win-builder]:
   - R version 3.5.1 (2018-07-02)
-  - R Under development (unstable) (2018-08-24 r75178)
+  - R Under development (unstable) (2018-09-16 r75318)

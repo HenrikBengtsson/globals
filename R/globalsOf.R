@@ -71,13 +71,13 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
   if (substitute) expr <- substitute(expr)
   stop_if_not(is.null(skip) || is.list(skip))
   
-  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive) #nolint
+  debug <- mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ...", method, mustExist, unlist, recursive) #nolint
 
   ## 1. Identify global variables (static code inspection)
   names <- findGlobals(expr, envir = envir, ..., method = method,
                        tweak = tweak, substitute = FALSE, unlist = unlist)
-  mdebug(" - preliminary globals (by name): [%d] %s",
-         length(names), hpaste(sQuote(names)))
+  debug && mdebug(" - preliminary globals (by name): [%d] %s",
+                  length(names), hpaste(sQuote(names)))
 
   ## 2. Locate them (run time)
   globals <- tryCatch({
@@ -90,41 +90,43 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
     stop(ex)
   })
 
-  mdebug(" - preliminary globals (by value): [%d] %s",
-         length(globals), hpaste(sQuote(names(globals))))
+  debug && mdebug(" - preliminary globals (by value): [%d] %s",
+                  length(globals), hpaste(sQuote(names(globals))))
 
   ## 3. Among globals that are closures (functions) and that exist outside
   ##    of namespaces ("packages"), check for additional globals?
   if (recursive) {
-    mdebug(" - recursive scan of preliminary globals ...")
+    debug && mdebug(" - recursive scan of preliminary globals ...")
 
     ## Don't enter functions in namespaces / packages
-    where <- attr(globals, "where")
+    where <- attr(globals, "where", exact = TRUE)
     stop_if_not(length(where) == length(globals))
-    where <- sapply(where, FUN = envname)
+    where <- vapply(where, FUN = envname, FUN.VALUE = NA_character_,
+                    USE.NAMES = FALSE)
     globals_t <- globals[!(where %in% loadedNamespaces())]
 
-    mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globals_t), hpaste(sQuote(names(globals_t)))) #nolint
+    debug && mdebug(" - subset of globals to be scanned (not in loaded namespaces): [%d] %s", length(globals_t), hpaste(sQuote(names(globals_t)))) #nolint
 
     ## Enter only functions
     ## NOTE: This excludes functions "not found", but also primitives
     ##       not dropped above.
-    globals_t <- globals_t[sapply(globals_t, FUN = typeof) == "closure"]
+    globals_t <- globals_t[vapply(globals_t, FUN = typeof, FUN.VALUE = NA_character_, USE.NAMES = FALSE) == "closure"]
 
     if (length(globals_t) > 0) {
-      mdebug(" - subset of globals to be scanned: [%d] %s",
-             length(globals_t), hpaste(sQuote(names(globals_t))))
+      debug && mdebug(" - subset of globals to be scanned: [%d] %s",
+                      length(globals_t), hpaste(sQuote(names(globals_t))))
       names_t <- names(globals_t)
 
       ## Avoid recursive scanning of already scanned ("known") globals
       skip_t <- c(skip, globals_t)
       
       for (gg in seq_along(globals_t)) {
-        mdebug("   + scanning global #%d (%s) ...", gg, sQuote(names_t[[gg]]))
+        debug && mdebug("   + scanning global #%d (%s) ...",
+	                gg, sQuote(names_t[[gg]]))
         fcn <- globals_t[[gg]]
 
         ## Is function 'fcn' among the already identified globals?
-        already_scanned <- any(sapply(skip, FUN = identical, fcn))
+        already_scanned <- any(vapply(skip, FUN = identical, fcn, FUN.VALUE = NA, USE.NAMES = FALSE))
         if (already_scanned) next;
 
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
@@ -137,24 +139,24 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
         if (length(globals_gg) > 0) {
           globals <- c(globals, globals_gg)
 
-          skip_gg <- globals_gg[sapply(globals_gg, FUN = typeof) == "closure"]
+          skip_gg <- globals_gg[vapply(globals_gg, FUN = typeof, FUN.VALUE = NA_character_, USE.NAMES = FALSE) == "closure"]
           skip_t <- c(skip_t, skip_gg)
         }
       }
       globals <- unique(globals)
-      mdebug(" - updated set of globals found: [%d] %s",
-             length(globals), hpaste(sQuote(names(globals))))
+      debug && mdebug(" - updated set of globals found: [%d] %s",
+                      length(globals), hpaste(sQuote(names(globals))))
     } else {
-      mdebug(" - subset of globals to be scanned: [0]")
+      debug && mdebug(" - subset of globals to be scanned: [0]")
     }
 
-    mdebug(" - recursive scan of preliminary globals ... DONE")
+    debug && mdebug(" - recursive scan of preliminary globals ... DONE")
   }
 
-  mdebug(" - globals found: [%d] %s",
-         length(globals), hpaste(sQuote(names(globals))))
+  debug && mdebug(" - globals found: [%d] %s",
+                  length(globals), hpaste(sQuote(names(globals))))
 
-  mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ... DONE", method, mustExist, unlist, recursive) #nolint
+  debug && mdebug("globalsOf(..., method = '%s', mustExist = %s, unlist = %s, recursive = %s) ... DONE", method, mustExist, unlist, recursive) #nolint
 
   globals
 } ## globalsOf()
@@ -178,23 +180,25 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
                           ...) {
   names <- as.character(names)
 
-  mdebug("globalsByName(<%d names>, mustExist = %s) ...",
-         length(names), mustExist)
-  mdebug("- search from environment: %s", sQuote(envname(envir)))
+  nnames <- length(names)
+  
+  debug <- mdebug("globalsByName(<%d names>, mustExist = %s) ...",
+                  nnames, mustExist)
+  debug && mdebug("- search from environment: %s", sQuote(envname(envir)))
 
   ## Locate and retrieve the specified globals
   idxs <- which(names == "...")
   needs_dotdotdot <- (length(idxs) > 0)
   if (needs_dotdotdot) names <- names[-idxs]
-  mdebug("- dotdotdot: %s", needs_dotdotdot)
+  debug && mdebug("- dotdotdot: %s", needs_dotdotdot)
 
   globals <- structure(list(), class = c("Globals", "list"))
   where <- list()
   for (kk in seq_along(names)) {
     name <- names[kk]
-    mdebug("- locating #%d (%s)", kk, sQuote(name))
+    debug && mdebug("- locating #%d (%s)", kk, sQuote(name))
     env <- where(name, envir = envir, inherits = TRUE)
-    mdebug("  + found in environment: %s", sQuote(envname(env)))
+    debug && mdebug("  + found in environment: %s", sQuote(envname(env)))
     if (!is.null(env)) {
       where[[name]] <- env
       value <- get(name, envir = env, inherits = FALSE)
@@ -232,8 +236,8 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
 
   attr(globals, "where") <- where
 
-  mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE",
-         length(names), mustExist)
+  debug && mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE",
+                  nnames, mustExist)
 
   globals
 } ## globalsByName()

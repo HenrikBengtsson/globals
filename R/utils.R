@@ -103,8 +103,9 @@ hexpr <- function(expr, trim = TRUE, collapse = "; ", max_head = 6L,
 
 ## From future 1.3.0
 mdebug <- function(...) {
-  if (!getOption("globals.debug", FALSE)) return()
+  if (!getOption("globals.debug", FALSE)) return(invisible(FALSE))
   message(sprintf(...))
+  invisible(TRUE)
 } ## mdebug()
 
 #' @importFrom utils capture.output str
