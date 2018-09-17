@@ -1,3 +1,18 @@
+# aroma.affymetrix
+
+Version: 3.1.1
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.8Mb
+      sub-directories of 1Mb or more:
+        R             2.2Mb
+        help          1.1Mb
+        testScripts   1.3Mb
+    ```
+
 # aroma.core
 
 Version: 3.1.3
@@ -7,41 +22,20 @@ Version: 3.1.3
 *   checking package dependencies ... NOTE
     ```
     Packages suggested but not available for checking:
-      ‘sfit’ ‘expectile’ ‘HaarSeg’ ‘mpcbs’
+      ‘expectile’ ‘HaarSeg’ ‘mpcbs’
     ```
 
-# batchtools
+# BAMBI
 
-Version: 0.9.11
+Version: 2.0.1
 
 ## In both
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking installed package size ... NOTE
     ```
-    Error in re-building vignettes:
-      ...
-    No readable configuration file found
-    Created registry in '/scratch/hb/RtmpDmYIpe/registry4c9c76523a32' using cluster functions 'Interactive'
-    No readable configuration file found
-    Created registry in '/scratch/hb/RtmpDmYIpe/registry4c9c15698369' using cluster functions 'Interactive'
-    No readable configuration file found
-    Created registry in '/scratch/hb/RtmpDmYIpe/registry4c9c36cb32d4' using cluster functions 'Interactive'
-    No readable configuration file found
-    Created registry in '/scratch/hb/RtmpDmYIpe/registry4c9c3a564e6e' using cluster functions 'Interactive'
-    Error in (function (value)  : Ooops.
-    ! LaTeX Error: File `framed.sty' not found.
-    
-    ! Emergency stop.
-    <read *> 
-    
-    Error: processing vignette 'batchtools.Rmd' failed with diagnostics:
-    Failed to compile batchtools.tex. See batchtools.log for more info.
-    Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    libmpi.so: cannot open shared object file: No such file or directory
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        libs   4.7Mb
     ```
 
 # biotmle
@@ -63,29 +57,16 @@ Version: 1.4.0
 
 # brms
 
-Version: 2.4.0
+Version: 2.5.0
 
 ## In both
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking installed package size ... NOTE
     ```
-    Error in re-building vignettes:
-      ...
-    Error: processing vignette 'brms_multilevel.ltx' failed with diagnostics:
-    Running 'texi2dvi' on 'brms_multilevel.ltx' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `inconsolata.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    
-    ! Emergency stop.
-    <read *> 
-             
-    l.47 \RequirePackage
-                        [T1]{fontenc}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    Execution halted
+      installed size is  6.8Mb
+      sub-directories of 1Mb or more:
+        R     3.5Mb
+        doc   2.4Mb
     ```
 
 # codebook
@@ -127,16 +108,11 @@ Version: 0.10.0
       `my_potential_outcomes_formula(pop)` did not throw an error.
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 434 SKIPPED: 2 FAILED: 1
+      OK: 436 SKIPPED: 1 FAILED: 1
       1. Failure: error if you try to draw POs at a level using a variable that doesn't exist at that level (@test-potential-outcomes.R#160) 
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘sf’
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -168,21 +144,21 @@ Version: 0.3.2
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      > library(testthat)
       > library(jstor)
       > 
       > test_check("jstor")
       ── 1. Error: (unknown) (@test-journal-overview.R#4)  ───────────────────────────
-      You don't seem to have a connection to the internet.
+      cannot open URL 'https://www.jstor.org/titlelists/journals/archive?fileFormat=xls'
       1: jst_get_journal_overview(most_recent = T, quiet = T) at testthat/test-journal-overview.R:4
-      2: abort("You don't seem to have a connection to the internet.")
+      2: utils::download.file(link, journal_list, quiet = quiet, mode = "wb")
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 234 SKIPPED: 2 FAILED: 1
+      OK: 235 SKIPPED: 2 FAILED: 1
       1. Error: (unknown) (@test-journal-overview.R#4) 
       
       Error: testthat unit tests failed
       Execution halted
+      Error while shutting down parallel: unable to terminate some child processes
     ```
 
 # lidR
@@ -191,13 +167,18 @@ Version: 1.6.1
 
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking installed package size ... NOTE
     ```
-    Packages required but not available:
-      ‘concaveman’ ‘mapview’ ‘mapedit’ ‘rlas’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+      installed size is  7.6Mb
+      sub-directories of 1Mb or more:
+        libs   5.9Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Rcpp’ ‘memoise’
+      All declared Imports should be used.
     ```
 
 # MetamapsDB
@@ -211,34 +192,6 @@ Version: 0.0.2
     Namespaces in Imports field not imported from:
       ‘Matrix’ ‘shiny’
       All declared Imports should be used.
-    ```
-
-# penaltyLearning
-
-Version: 2017.12.08
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      Actual message: "The implementation of future_lapply() in the 'future' package is defunct. Please use the one in the 'future.apply' package instead."
-      
-      ── 3. Failure: error for NA and constant features (@test-errors.R#124)  ────────
-      `{ ... }` threw an error with unexpected message.
-      Expected match: "after filtering NA and constant features, none remain for training"
-      Actual message: "The implementation of future_lapply() in the 'future' package is defunct. Please use the one in the 'future.apply' package instead."
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 50 SKIPPED: 0 FAILED: 3
-      1. Error: (unknown) (@test-demo8.R#8) 
-      2. Failure: error for constant features (@test-errors.R#110) 
-      3. Failure: error for NA and constant features (@test-errors.R#124) 
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # QDNAseq
@@ -256,44 +209,16 @@ Version: 1.16.0
     Extensions’ manual.
     ```
 
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    ...
-    34902848153068186.562.3707735014899778378113.7612687612349815327.394.3
-    FINISHED!
-    
-    Total time:0minutes
-    
-    Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
-      Running 'texi2dvi' on 'QDNAseq.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `titlesec.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    
-    ! Emergency stop.
-    <read *> 
-             
-    l.95 \makeatletter
-                      ^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    Calls: buildVignettes -> texi2pdf -> texi2dvi
-    Execution halted
-    ```
-
 # reproducible
 
 Version: 0.2.3
 
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking dependencies in R code ... NOTE
     ```
-    Package required but not available: ‘sf’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+    Namespace in Imports field not imported from: ‘gdalUtils’
+      All declared Imports should be used.
     ```
 
 # robotstxt
@@ -301,17 +226,6 @@ Version: 0.2.3
 Version: 0.6.2
 
 ## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    
-     google.com                      Quitting from lines 48-51 (using_robotstxt.Rmd) 
-    Error: processing vignette 'using_robotstxt.Rmd' failed with diagnostics:
-    Could not resolve host: google.com; Name or service not known
-    Execution halted
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -327,39 +241,8 @@ Version: 0.54.3
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.1Mb
+      installed size is 46.4Mb
       sub-directories of 1Mb or more:
-        libs   4.8Mb
-    ```
-
-# sperrorest
-
-Version: 2.1.5
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    pandoc: Could not fetch https://raw.githubusercontent.com/pat-s/sperrorest/master/man/figures/resamp-plot.png
-    FailedConnectionException2 "raw.githubusercontent.com" 443 True getAddrInfo: does not exist (Name or service not known)
-    Error: processing vignette 'spatial-modeling-use-case.Rmd' failed with diagnostics:
-    pandoc document conversion failed with error 67
-    Execution halted
-    ```
-
-# vinereg
-
-Version: 0.5.0
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘rvinecopulib’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+        libs  44.9Mb
     ```
 
