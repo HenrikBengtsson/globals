@@ -179,7 +179,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
                     "raw", "NULL")
 
     ## Skip elements in 'expr' of basic types that cannot contain globals
-    types <- unlist(list_apply(expr, FUN = typeof))
+    types <- unlist(list_apply(expr, FUN = typeof), use.names = FALSE)
     keep <- !(types %in% basicTypes)
 
     ## Don't use expr[keep] here, because that may use S3 dispatching
@@ -213,7 +213,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
           globals[[kk]] <- s
         }
       }
-      globals <- unlist(globals, use.names = TRUE)
+      globals <- unlist(globals, use.names = FALSE)
       if (length(globals) > 1L) globals <- sort(unique(globals))
       if (needs_dotdotdot) globals <- c(globals, "...")
     }
