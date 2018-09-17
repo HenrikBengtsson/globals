@@ -166,11 +166,10 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
 
   if (substitute) expr <- substitute(expr)
 
-  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...",
-         dotdotdot, method, unlist)
+  debug <- mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...", dotdotdot, method, unlist)
 
   if (is.list(expr)) {
-    mdebug(" - expr: <a list of length %d>", .length(expr))
+    debug && mdebug(" - expr: <a list of length %d>", .length(expr))
 
     ## NOTE: Do *not* look for types that we are interested in, but instead
     ## look for types that we are *not* interested.  The reason for this that
@@ -189,8 +188,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
 
     ## Early stopping?
     if (.length(expr) == 0) {
-      mdebug(" - globals found: [0] <none>")
-      mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+      debug && mdebug(" - globals found: [0] <none>")
+      debug && mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
       return(character(0L))
     }
     
@@ -200,8 +199,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     
     keep <- types <- NULL ## Not needed anymore
     
-    mdebug(" - preliminary globals found: [%d] %s",
-           length(globals), hpaste(sQuote(names(globals))))
+    debug && mdebug(" - preliminary globals found: [%d] %s",
+                    length(globals), hpaste(sQuote(names(globals))))
 
     if (unlist) {
       needs_dotdotdot <- FALSE
@@ -219,15 +218,15 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
       if (needs_dotdotdot) globals <- c(globals, "...")
     }
 
-    mdebug(" - globals found: [%d] %s",
-           length(globals), hpaste(sQuote(globals)))
-
-    mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+    debug && mdebug(" - globals found: [%d] %s",
+                    length(globals), hpaste(sQuote(globals)))
+    debug && mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+    
     return(globals)
   }
 
   if (is.function(tweak)) {
-    mdebug(" - tweaking expression using function")
+    debug && mdebug(" - tweaking expression using function")
     expr <- tweak(expr)
   }
 
@@ -256,7 +255,7 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
     ## such a change will not go unnoticed.  /HB 2017-03-08
     pattern <- "... may be used in an incorrect context"
     if (grepl(pattern, w$message, fixed = TRUE)) {
-      mdebug(" - detected: %s", dQuote(trim(w$message)))
+      debug && mdebug(" - detected: %s", dQuote(trim(w$message)))
       needs_dotdotdot <<- TRUE
       if (dotdotdot == "return") {
         ## Consume / muffle warning
@@ -274,9 +273,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
 
   if (needs_dotdotdot) globals <- c(globals, "...")
 
-  mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
-
-  mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
+  debug && mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
+  debug && mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
 
   globals
 }

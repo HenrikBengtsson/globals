@@ -13,32 +13,31 @@ where <- function(x, where = -1,
   inherits <- as.logical(inherits)
   stop_if_not(inherits %in% c(FALSE, TRUE))
 
-  mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ...",
+  debug <- mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ...",
          sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
 
   ## Search
   env <- envir
   while (!identical(env, emptyenv())) {
-    mdebug("- searching %s: %s", sQuote(envname(env)),
-           hpaste(sQuote(ls(envir = env, all.names = TRUE))))
+    debug && mdebug("- searching %s: %s", sQuote(envname(env)),
+                    hpaste(sQuote(ls(envir = env, all.names = TRUE))))
     if (exists(x, envir = env, mode = mode, inherits = FALSE)) {
-      mdebug("  + found in location: %s", sQuote(envname(env)))
-      mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits) #nolint
+      debug && mdebug("  + found in location: %s", sQuote(envname(env)))
+      debug && mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits) #nolint
       return(env)
     }
 
     if (!inherits) {
-      mdebug("  + failed to locate: NULL")
-      mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits) #nolint
+      debug && mdebug("  + failed to locate: NULL")
+      debug && mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits) #nolint
       return(NULL)
     }
 
     env <- parent.env(env)
   }
 
-  mdebug("- failed to locate: NULL")
-  mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE",
-         sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
+  debug && mdebug("- failed to locate: NULL")
+  debug && mdebug("where(%s, where = %d, envir = %s, mode = %s, inherits = %s) ... DONE", sQuote(x), where, sQuote(envname(envir)), sQuote(mode), inherits)
 
   NULL
 }
