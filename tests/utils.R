@@ -8,12 +8,41 @@ is.base <- globals:::is.base
 is_internal <- globals:::is_internal
 where <- globals:::where
 mdebug <- globals:::mdebug
+envname <- globals:::envname
 
 ## WORKAROUND: Make sure tests also work with 'covr' package
 if ("covr" %in% loadedNamespaces()) {
   globalenv <- function() parent.frame()
   baseenv <- function() environment(base::sample)
 }
+
+message("- envname() ...")
+
+name <- envname(NULL)
+print(name)
+stopifnot(is.character(name), length(name) == 1L, is.na(name))
+
+env <- new.env()
+print(env)
+name <- utils::capture.output(print(env))
+stopifnot(is.character(name), length(name) == 1L)
+name <- envname(env)
+print(name)
+stopifnot(is.character(name), length(name) == 1L, !is.na(name),
+          class(env) == "environment")
+
+env <- structure(new.env(), class = "foo")
+print.foo <- function(x, ...) { str(as.list(letters[1:3])); invisible(x) }
+print(env)
+name <- utils::capture.output(print(env))
+stopifnot(is.character(name), length(name) > 1L)
+name <- envname(env)
+print(name)
+stopifnot(is.character(name), length(name) == 1L, !is.na(name),
+          class(env) == "foo")
+
+message("- envname() ... DONE")
+
 
 message("* hpaste() ...")
 

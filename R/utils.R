@@ -117,10 +117,24 @@ mstr <- function(...) {
 
 #' @importFrom utils capture.output
 envname <- function(env) {
+  if (!is.environment(env)) return(NA_character_)
   name <- environmentName(env)
   if (name == "") {
-    ## e.g. new.env()
-    name <- capture.output(print(env))
+    class <- class(env)
+    if (identical(class, "environment")) {
+      ## e.g. new.env()
+      name <- capture.output(print(env))
+    } else {
+      ## It might be that 'env' is on a class that extends 'environment',
+      ## e.g. R.oo::Object() or R6::R6Class().
+      ## IMPORTANT: The unset class must be temporary, because changing
+      ## the class of an environment will
+      name <- local({
+        on.exit(class(env) <- class)
+        class(env) <- NULL
+        capture.output(print(env))
+      })	
+    }
     name <- gsub("(.*: |>)", "", name)
   } else {
     ## e.g. globals:::where("plan")
