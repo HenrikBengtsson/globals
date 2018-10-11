@@ -133,32 +133,30 @@ Version: 1.1.0
       All declared Imports should be used.
     ```
 
-# jstor
+# ipc
 
-Version: 0.3.2
+Version: 0.1.0
 
 ## In both
 
-*   checking tests ...
+*   checking dependencies in R code ... NOTE
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      > library(jstor)
-      > 
-      > test_check("jstor")
-      ── 1. Error: (unknown) (@test-journal-overview.R#4)  ───────────────────────────
-      cannot open URL 'https://www.jstor.org/titlelists/journals/archive?fileFormat=xls'
-      1: jst_get_journal_overview(most_recent = T, quiet = T) at testthat/test-journal-overview.R:4
-      2: utils::download.file(link, journal_list, quiet = quiet, mode = "wb")
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 235 SKIPPED: 2 FAILED: 1
-      1. Error: (unknown) (@test-journal-overview.R#4) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-      Error while shutting down parallel: unable to terminate some child processes
+    Namespaces in Imports field not imported from:
+      ‘redux’ ‘txtq’
+      All declared Imports should be used.
+    ```
+
+# jstor
+
+Version: 0.3.3
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘curl’ ‘readxl’
+      All declared Imports should be used.
     ```
 
 # lidR
@@ -169,7 +167,7 @@ Version: 1.6.1
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  7.6Mb
+      installed size is  7.7Mb
       sub-directories of 1Mb or more:
         libs   5.9Mb
     ```
@@ -192,6 +190,28 @@ Version: 0.0.2
     Namespaces in Imports field not imported from:
       ‘Matrix’ ‘shiny’
       All declared Imports should be used.
+    ```
+
+# phylolm
+
+Version: 2.6
+
+## In both
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Packages unavailable to check Rd xrefs: ‘surface’, ‘bayou’, ‘geiger’, ‘caper’
+    ```
+
+# promises
+
+Version: 1.0.1
+
+## In both
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘purrr’
     ```
 
 # QDNAseq
@@ -235,13 +255,13 @@ Version: 0.6.2
 
 # skpr
 
-Version: 0.54.3
+Version: 0.56.1
 
 ## In both
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 46.4Mb
+      installed size is 46.3Mb
       sub-directories of 1Mb or more:
         libs  44.9Mb
     ```
