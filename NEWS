@@ -1,6 +1,16 @@
 Package: globals
 ================
 
+Version: 0.12.4 [2018-10-11]
+ 
+BUG FIXES:
+
+ * globalsOf() could produce "Error in vapply(where, FUN = envname, 
+   FUN.VALUE = NA_character_, USE.NAMES = FALSE) : values must be length 1,
+   but FUN(X[[...]]) result is length ...".  This was because the internal
+   envname(env) did not always handle when class(env) != "environment".
+   
+
 Version: 0.12.3 [2018-09-16]
 
 NEW FEATURES:

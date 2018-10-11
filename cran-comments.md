@@ -1,8 +1,8 @@
-# CRAN submission globals 0.12.3
-on 2018-09-16
+# CRAN submission globals 0.12.4
+on 2018-10-10
 
 I've verified that this submission causes no issues for any of the
-41 reverse (children & grandchildren) package dependencies available
+42 reverse (children & grandchildren) package dependencies available
 on CRAN and Bioconductor.
 
 Thanks in advance
@@ -20,12 +20,12 @@ The package has been verified using `R CMD check --as-cran` on:
 
 * Platform x86_64-unknown-linux-gnu (64-bit) [Travis CI]:
   - R version 3.4.4 (2017-01-27) [sic!]
-  - R version 3.5.0 (2017-01-27) [sic!]
-  - R Under development (unstable) (2018-09-17 r75319)
+  - R version 3.5.1 (2017-01-27) [sic!]
+  - R Under development (unstable) (2018-10-10 r75427)
 
 * Platform x86_64-pc-linux-gnu (64-bit) [r-hub]:
   - R version 3.4.4 (2018-03-15)
-  - R Under development (unstable) (2018-09-16 r75317)
+  - R Under development (unstable) (2018-10-05 r75407)
 
 * Platform x86_64-pc-linux-gnu (64-bit):
   - R version 3.1.2 (2014-10-31)
@@ -41,14 +41,14 @@ The package has been verified using `R CMD check --as-cran` on:
   -  R version 3.5.0 Patched (2018-04-30 r74674)
 
 * Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-09-15 r75316)
+  - R Under development (unstable) (2018-10-07 r75409)
 
 * Platform x86_64-w64-mingw32 (64-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-09-15 r75316)
+  - R Under development (unstable) (2018-10-07 r75409)
 
 * Platform x86_64-w64-mingw32 (64-bit) [r-hub]:
-  - R Under development (unstable) (2018-07-30 r75016)
+  - R Under development (unstable) (2018-09-27 r75377)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit) [win-builder]:
   - R version 3.5.1 (2018-07-02)
-  - R Under development (unstable) (2018-09-16 r75318)
+  - R Under development (unstable) (2018-10-10 r75427)
