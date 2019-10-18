@@ -2,76 +2,95 @@ Package: globals
 ================
 
 Version: 0.6.5-9000 [2016-04-10]
-o Now globalsOf() by default also incorporates all known
-  S3 methods if one of the globals is an S3 generic function.
 
-
+ * Now globalsOf() by default also incorporates all known
+   S3 methods if one of the globals is an S3 generic function.
+ 
+ 
 Version: 0.6.1 [2016-01-31]
-o Now the error message of globalsOf(..., mustExist=TRUE) when
-  it fails to locate a global also gives information on the
-  expression that is problematic.
-o BUG FIX: cleanup() for Globals did not cleanup functions
-  in core package environments named 'package:<name>'.
 
-
+ * Now the error message of globalsOf(..., mustExist=TRUE) when
+   it fails to locate a global also gives information on the
+   expression that is problematic.
+   
+ * BUG FIX: cleanup() for Globals did not cleanup functions
+   in core package environments named 'package:<name>'.
+ 
+ 
 Version: 0.6.0 [2015-12-12]
-o findGlobals() is updated to handle the case where a local
-  variable is overwriting a global one with the same name,
-  e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
-  as a global object.  Previously it would have been missed.
-  For backward compatibility, the previous behavior can be
-  obtained using argument method="conservative".
 
-
+ * findGlobals() is updated to handle the case where a local
+   variable is overwriting a global one with the same name,
+   e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
+   as a global object.  Previously it would have been missed.
+   For backward compatibility, the previous behavior can be
+   obtained using argument method="conservative".
+ 
+ 
 Version: 0.5.0 [2015-10-13]
-o globalsOf() now returns attribute 'where' specifying where
-  each global object is located.
-o BUG FIX: cleanup() now only drops objects that are *located*
-  in one of the "base" packages; previously it would also drop
-  copies of such objects, e.g. FUN <- base::sample.
 
-
+ * globalsOf() now returns attribute 'where' specifying where
+   each global object is located.
+   
+ * BUG FIX: cleanup() now only drops objects that are *located*
+   in one of the "base" packages; previously it would also drop
+   copies of such objects, e.g. FUN <- base::sample.
+ 
+ 
 Version: 0.4.1 [2015-10-05]
-o BUG FIX: globalsOf() failed to return global variables
-  with value NULL.  They were identified but silently dropped.
 
-
+ * BUG FIX: globalsOf() failed to return global variables
+   with value NULL.  They were identified but silently dropped.
+ 
+ 
 Version: 0.4.0 [2015-09-12]
-o findGlobals() and globalsOf() gained argument 'dotdotdot'.
-o Explicit namespace imports also from 'utils' package.
 
-
+ * findGlobals() and globalsOf() gained argument 'dotdotdot'.
+ 
+ * Explicit namespace imports also from 'utils' package.
+ 
+ 
 Version: 0.3.1 [2015-06-10]
-o More test coverage.
 
-
+ * More test coverage.
+ 
+ 
 Version: 0.3.0 [2015-06-08]
-o Renamed getGlobals() to globalsOf().
 
-
+ * Renamed getGlobals() to globalsOf().
+ 
+ 
 Version: 0.2.3 [2015-06-08]
-o Added [() for Globals.
-o findGlobals() and getGlobals() gained argument 'substitute'.
-o Added cleanup(..., method="internals").
 
-
+ * Added [() for Globals.
+ 
+ * findGlobals() and getGlobals() gained argument 'substitute'.
+ 
+ * Added cleanup(..., method="internals").
+ 
+ 
 Version: 0.2.2 [2015-05-20]
-o Added Globals class with methods cleanup() and packagesOf().
-  Added as.Globals() to coerce lists to Globals objects.
 
-
+ * Added Globals class with methods cleanup() and packagesOf().
+   Added as.Globals() to coerce lists to Globals objects.
+ 
+ 
 Version: 0.2.1 [2015-05-20]
-o getGlobals() gained argument 'mustExist' for controlling whether
-  to give an error when the corresponding object for an identified
-  global cannot be found or to silently drop the missing global.
-o findGlobals() and getGlobals() gained argument 'method' for
-  controlling whether a "conservative" or a "liberal" algorithm
-  for identifying true globals should be used.
 
-
+ * getGlobals() gained argument 'mustExist' for controlling whether
+   to give an error when the corresponding object for an identified
+   global cannot be found or to silently drop the missing global.
+   
+ * findGlobals() and getGlobals() gained argument 'method' for
+   controlling whether a "conservative" or a "liberal" algorithm
+   for identifying true globals should be used.
+ 
+ 
 Version: 0.2.0 [2015-05-19]
-o Moved globals function from an in-house package to this package.
 
-
+ * Moved globals function from an in-house package to this package.
+ 
+ 
 Version: 0.1.0 [2015-02-07]
-o Created.
+
+ * Created.
