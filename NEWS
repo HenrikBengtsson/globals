@@ -3,44 +3,43 @@ Package: globals
 
 Version: 0.6.5-9000 [2016-04-10]
 
- * Now globalsOf() by default also incorporates all known
-   S3 methods if one of the globals is an S3 generic function.
+ * Now globalsOf() by default also incorporates all known S3 methods if one of
+   the globals is an S3 generic function.
  
  
 Version: 0.6.1 [2016-01-31]
 
- * Now the error message of globalsOf(..., mustExist=TRUE) when
-   it fails to locate a global also gives information on the
-   expression that is problematic.
+ * Now the error message of globalsOf(..., mustExist=TRUE) when it fails to
+   locate a global also gives information on the expression that is
+   problematic.
    
- * BUG FIX: cleanup() for Globals did not cleanup functions
-   in core package environments named 'package:<name>'.
+ * BUG FIX: cleanup() for Globals did not cleanup functions in core package
+   environments named 'package:<name>'.
  
  
 Version: 0.6.0 [2015-12-12]
 
- * findGlobals() is updated to handle the case where a local
-   variable is overwriting a global one with the same name,
-   e.g. { a <- b; b <- 1 }.  Now 'b' is correctly identified
-   as a global object.  Previously it would have been missed.
-   For backward compatibility, the previous behavior can be
+ * findGlobals() is updated to handle the case where a local variable is
+   overwriting a global one with the same name, e.g. { a <- b; b <- 1 }.  Now
+   'b' is correctly identified as a global object.  Previously it would have
+   been missed.  For backward compatibility, the previous behavior can be
    obtained using argument method="conservative".
  
  
 Version: 0.5.0 [2015-10-13]
 
- * globalsOf() now returns attribute 'where' specifying where
-   each global object is located.
+ * globalsOf() now returns attribute 'where' specifying where each global
+   object is located.
    
- * BUG FIX: cleanup() now only drops objects that are *located*
-   in one of the "base" packages; previously it would also drop
-   copies of such objects, e.g. FUN <- base::sample.
+ * BUG FIX: cleanup() now only drops objects that are *located* in one of the
+   "base" packages; previously it would also drop copies of such objects, e.g.
+   FUN <- base::sample.
  
  
 Version: 0.4.1 [2015-10-05]
 
- * BUG FIX: globalsOf() failed to return global variables
-   with value NULL.  They were identified but silently dropped.
+ * BUG FIX: globalsOf() failed to return global variables with value NULL.
+   They were identified but silently dropped.
  
  
 Version: 0.4.0 [2015-09-12]
@@ -72,18 +71,19 @@ Version: 0.2.3 [2015-06-08]
 Version: 0.2.2 [2015-05-20]
 
  * Added Globals class with methods cleanup() and packagesOf().
-   Added as.Globals() to coerce lists to Globals objects.
+ 
+ * Added as.Globals() to coerce lists to Globals objects.
  
  
 Version: 0.2.1 [2015-05-20]
 
- * getGlobals() gained argument 'mustExist' for controlling whether
-   to give an error when the corresponding object for an identified
-   global cannot be found or to silently drop the missing global.
+ * getGlobals() gained argument 'mustExist' for controlling whether to give an
+   error when the corresponding object for an identified global cannot be found
+   or to silently drop the missing global.
    
- * findGlobals() and getGlobals() gained argument 'method' for
-   controlling whether a "conservative" or a "liberal" algorithm
-   for identifying true globals should be used.
+ * findGlobals() and getGlobals() gained argument 'method' for controlling
+   whether a "conservative" or a "liberal" algorithm for identifying true
+   globals should be used.
  
  
 Version: 0.2.0 [2015-05-19]
