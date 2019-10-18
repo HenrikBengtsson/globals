@@ -1,6 +1,7 @@
 .Rhistory
 *~
 .check
+.make/
 .test
 .o
 .dll
