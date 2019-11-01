@@ -34,21 +34,26 @@ exprs <- list(
          s <- sessionInfo()
        })
 )
-expr <- exprs$A
 
 message("*** findGlobals() ...")
 
 message(" ** findGlobals(..., method = 'conservative'):")
+
+expr <- exprs$A
 globals_c <- findGlobals(expr, method = "conservative")
 print(globals_c)
 stopifnot(all(globals_c %in% c("{", "<-", "c", "d", "+")))
 
 message(" ** findGlobals(..., method = 'liberal'):")
+
+expr <- exprs$A
 globals_l <- findGlobals(expr, method = "liberal")
 print(globals_l)
 stopifnot(all(globals_l %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(..., method = 'ordered'):")
+
+expr <- exprs$A
 globals_i <- findGlobals(expr, method = "ordered")
 print(globals_i)
 stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
@@ -57,10 +62,14 @@ message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {
   substitute({ x <- B; B <- 1; y <- C; z <- D }, env = list())
 }
+
+expr <- exprs$A
 globals_i <- findGlobals(expr, tweak = tweak_another_expression)
 stopifnot(all(globals_i %in% c("{", "<-", "B", "C", "D")))
 
 message(" ** findGlobals(..., trace = TRUE):")
+
+expr <- exprs$A
 globals_i <- findGlobals(expr, trace = TRUE)
 print(globals_i)
 stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
