@@ -25,7 +25,12 @@ stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {
-  substitute({ x <- B; B <- 1; y <- C; z <- D }, env = list())
+  quote({
+    x <- B
+    B <- 1
+    y <- C
+    z <- D
+  })
 }
 
 expr <- exprs$A

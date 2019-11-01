@@ -3,8 +3,8 @@ source("incl/start.R")
 options(warn = 1L)
 
 exprs <- list(
-  ok   = substitute(function(...) sum(x, ...)),
-  warn = substitute(sum(x, ...))
+  ok   = quote(function(...) sum(x, ...)),
+  warn = quote(sum(x, ...))
 )
 
 
