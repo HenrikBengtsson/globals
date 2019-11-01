@@ -1,39 +1,4 @@
-library("globals")
-
-## WORKAROUND: Make sure tests also work with 'covr' package
-covr <- ("covr" %in% loadedNamespaces())
-if (covr) {
-  globalenv <- function() parent.frame()
-  baseenv <- function() environment(base::sample)
-}
-
-a <- 0
-b <- 2
-c <- 3
-d <- NULL
-e <- function() TRUE
-
-exprs <- list(
-   A = quote({
-         x <- b
-         b <- 1
-         y <- c
-         z <- d
-         a <- a + 1
-         e <- e()
-       }),
-   B = parse(text = "a <- pkg::a"),  ## parse() to please R CMD check
-   C = quote({
-         foo(list(a = 1))
-       }),
-   D = quote({
-         x <- sample(10)
-         y <- sum(x)
-         x2 <- sample2(10)
-         y2 <- sum2(x)
-         s <- sessionInfo()
-       })
-)
+source("incl/start.R")
 
 message("*** findGlobals() ...")
 
@@ -348,3 +313,5 @@ res <- try({
 stopifnot(inherits(res, "try-error"))
 
 message("*** globalsOf() - exceptions ... DONE")
+
+source("incl/end.R")

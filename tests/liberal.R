@@ -1,7 +1,4 @@
-library("globals")
-
-ovars <- ls(envir = globalenv())
-
+source("incl/start.R")
 
 ## WORKAROUND: Avoid problem reported in testthat Issue #229, which
 ## causes covr::package_coverage() to given an error. /HB 2015-02-16
@@ -89,4 +86,4 @@ cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse = ", ")))
 
 
 ## Cleanup
-rm(list = setdiff(ls(envir = globalenv()), ovars), envir = globalenv())
+source("incl/end.R")

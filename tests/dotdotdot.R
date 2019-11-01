@@ -1,5 +1,6 @@
-library("globals")
-opts <- options(warn = 1L)
+source("incl/start.R")
+
+options(warn = 1L)
 
 exprs <- list(
   ok   = substitute(function(...) sum(x, ...)),
@@ -205,5 +206,5 @@ aux(x = 3:4, y = 1, z = 42L, exprs = exprs)
 message("*** function(x, ...) globalsOf() ... DONE")
 
 
-## Undo
-options(opts)
+## Cleanup
+source("incl/end.R")

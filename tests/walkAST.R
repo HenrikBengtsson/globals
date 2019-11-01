@@ -1,4 +1,4 @@
-library("globals")
+source("incl/start.R")
 
 message("*** walkAST() ...")
 
@@ -112,3 +112,5 @@ options(globals.walkAST.onUnknownType = "error")
 message("*** walkAST() - exceptions ... DONE")
 
 message("*** walkAST() ... DONE")
+
+source("incl/end.R")

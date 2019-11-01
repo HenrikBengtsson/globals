@@ -1,19 +1,6 @@
-library("globals")
-
-## WORKAROUND: Make sure tests also work with 'covr' package
-covr <- ("covr" %in% loadedNamespaces())
-if (covr) {
-  globalenv <- function() parent.frame()
-  baseenv <- function() environment(base::sample)
-}
+source("incl/start.R")
 
 message("*** globalsByName() ...")
-
-## Some globals
-a <- 0
-b <- 2
-c <- 3
-d <- NULL
 
 globals_c <- globalsByName(c("{", "<-", "c", "d"))
 str(globals_c)
@@ -96,3 +83,5 @@ stopifnot(all(names(globals) %in% c("a", "x", "...")),
           globals[["..."]]$y == 3, globals[["..."]]$z == 4)
 
 message("*** globalsByName() ... DONE")
+
+source("incl/end.R")
