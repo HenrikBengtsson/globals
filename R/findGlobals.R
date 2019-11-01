@@ -315,14 +315,14 @@ inject_tracer_to_function <- function(fcn, name) {
   b <- body(fcn)
   f <- formals(fcn)
   args <- setdiff(names(f), c("w", "..."))
-  title <- sprintf("%s():", name)
+  title <- sprintf("%s()", name)
   b <- bquote({
-    message(.(title))
-    if (length(.(args)) > 0) {
-      mstr <- get("mstr", envir = getNamespace("globals"), mode = "function")
-      mstr(mget(.(args)))
-    }
-    .(b)
+    message(.(title), ":")
+    if (length(.(args)) > 0)
+      message(paste(utils::capture.output(utils::str(mget(.(args)))), collapse = "\n"))
+    value <- .(b)
+    message(" ", .(title) , " => ", utils::capture.output(utils::str(value)))
+    value
   })
   body(fcn) <- b
   fcn
