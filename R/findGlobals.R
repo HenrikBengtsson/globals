@@ -320,7 +320,16 @@ inject_tracer_to_function <- function(fcn, name) {
     message(.(title), ":")
     if (length(.(args)) > 0)
       message(paste(utils::capture.output(utils::str(mget(.(args)))), collapse = "\n"))
+    env <- environment(w$enterLocal)
+    n <- length(env$name)
     value <- .(b)
+    nnew <- (length(env$name) - n)
+    if (nnew) {
+      message(" ", .(title), " variables:")
+      vars <- data.frame(name=env$name, class=env$class)
+      vars$added <- c(rep(FALSE, times = n), rep(TRUE, times = nnew))
+      message(paste(utils::capture.output(print(vars)), collapse = "\n"))
+    }
     message(" ", .(title) , " => ", utils::capture.output(utils::str(value)))
     value
   })
