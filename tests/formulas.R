@@ -1,4 +1,4 @@
-library("globals")
+source("incl/start.R")
 
 message("findGlobals() with formula ...")
 
@@ -27,4 +27,4 @@ stopifnot(all(
 
 message("globalsOf() with formula ... DONE")
 
-rm(list = "g")
+source("incl/end.R")

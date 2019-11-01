@@ -1,27 +1,27 @@
-library("globals")
+source("incl/start.R")
 
 message("*** walkAST() ...")
 
 exprs <- list(
-  null        = substitute(NULL),
-  atomic      = substitute(1),
-  atomic      = substitute("a"),
-  atomic      = substitute(TRUE),
-  assign      = substitute(a <- 1),
-  assign      = substitute(1 -> a),
-  assign      = substitute(a <- b + 1),
-  assign      = substitute(x <- rnorm(20, mu = 0)),
-  index       = substitute(x[1, 1]),
-  index       = substitute(x[1:2, 1:2]),
-  index       = substitute(x[, 1:2]),
-  index       = substitute(x[, 1]),
-  fcn         = substitute(function(a = 1, b = 2) sum(c(a, b))),
-  fcn         = substitute(function(a = 1, b) sum(c(a, b))),
-  fcn         = substitute(function(a = 1, b = 2, ...) sum(c(a, b, ...))),
-  fcn         = substitute(function(a = NULL) a),
-  ok          = substitute(function(...) sum(x, ...)),
-  warn        = substitute(sum(x, ...)),
-  null        = substitute(NULL),
+  null        = quote(NULL),
+  atomic      = quote(1),
+  atomic      = quote("a"),
+  atomic      = quote(TRUE),
+  assign      = quote(a <- 1),
+  assign      = quote(1 -> a),
+  assign      = quote(a <- b + 1),
+  assign      = quote(x <- rnorm(20, mu = 0)),
+  index       = quote(x[1, 1]),
+  index       = quote(x[1:2, 1:2]),
+  index       = quote(x[, 1:2]),
+  index       = quote(x[, 1]),
+  fcn         = quote(function(a = 1, b = 2) sum(c(a, b))),
+  fcn         = quote(function(a = 1, b) sum(c(a, b))),
+  fcn         = quote(function(a = 1, b = 2, ...) sum(c(a, b, ...))),
+  fcn         = quote(function(a = NULL) a),
+  ok          = quote(function(...) sum(x, ...)),
+  warn        = quote(sum(x, ...)),
+  null        = quote(NULL),
   builtin     = base::length,
   closure     = function() NULL,
   closure     = function() a,
@@ -30,7 +30,7 @@ exprs <- list(
   list        = substitute(FUN(a = A), list(A = list())),
   pairlist    = substitute(FUN(a = A), list(A = pairlist(a = 1))),
   expression  = substitute(FUN(a = A), list(A = expression()))
-#  environment = new.env()
+# environment = new.env()
 )
 if (requireNamespace("methods")) {
   exprs$s4 <- methods::getClass("MethodDefinition")
@@ -67,7 +67,7 @@ for (kk in seq_along(exprs)) {
 
   ## Nullify
   expr_n <- walkAST(expr, atomic = nullify, name = nullify,
-                   call = nullify, pairlist = nullify)
+                    call = nullify, pairlist = nullify)
   disp(expr_n)
 
   message("*** walkAST() - nullify ... DONE")
@@ -112,3 +112,5 @@ options(globals.walkAST.onUnknownType = "error")
 message("*** walkAST() - exceptions ... DONE")
 
 message("*** walkAST() ... DONE")
+
+source("incl/end.R")
