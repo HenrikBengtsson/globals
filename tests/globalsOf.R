@@ -12,7 +12,29 @@ b <- 2
 c <- 3
 d <- NULL
 e <- function() TRUE
-expr <- substitute({ x <- b; b <- 1; y <- c; z <- d; a <- a + 1; e <- e() }, env = list())
+
+exprs <- list(
+   A = quote({
+         x <- b
+         b <- 1
+         y <- c
+         z <- d
+         a <- a + 1
+         e <- e()
+       }),
+   B = parse(text = "a <- pkg::a"),  ## parse() to please R CMD check
+   C = quote({
+         foo(list(a = 1))
+       }),
+   D = quote({
+         x <- sample(10)
+         y <- sum(x)
+         x2 <- sample2(10)
+         y2 <- sum2(x)
+         s <- sessionInfo()
+       })
+)
+expr <- exprs$A
 
 message("*** findGlobals() ...")
 
@@ -44,8 +66,8 @@ print(globals_i)
 stopifnot(all(globals_i %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
 
 message(" ** findGlobals(a <- pkg::a):")
-expr2 <- parse(text = "a <- pkg::a") ## To please R CMD check
-globals_i <- findGlobals(expr2)
+expr <- exprs$B
+globals_i <- findGlobals(expr)
 print(globals_i)
 stopifnot(all(globals_i %in% c("<-", "::")))
 
@@ -198,6 +220,7 @@ message("*** globalsByName() ... DONE")
 message("*** globalsOf() ...")
 
 message(" ** globalsOf(..., method = 'conservative'):")
+expr <- exprs$A
 globals_c <- globalsOf(expr, method = "conservative")
 str(globals_c)
 stopifnot(all(names(globals_c) %in% c("{", "<-", "c", "d", "+")))
@@ -212,6 +235,7 @@ stopifnot(
 )
 
 message(" ** globalsOf(..., method = 'liberal'):")
+expr <- exprs$A
 globals_l <- globalsOf(expr, method = "liberal")
 str(globals_l)
 stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
@@ -227,6 +251,7 @@ stopifnot(
 )
 
 message(" ** globalsOf(..., method = 'ordered'):")
+expr <- exprs$A
 globals_i <- globalsOf(expr, method = "ordered")
 str(globals_i)
 stopifnot(all(names(globals_i) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
@@ -301,6 +326,7 @@ message("*** globalsOf() ... DONE")
 
 
 message("*** Subsetting of Globals:")
+expr <- exprs$A
 globals_l <- globalsOf(expr, method = "liberal")
 globals_s <- globals_l[-1]
 stopifnot(length(globals_s) == length(globals_l) - 1L)
@@ -312,6 +338,7 @@ stopifnot(identical(where_s, where_l[-1]))
 
 
 message("*** cleanup() & packagesOf():")
+expr <- exprs$A
 globals <- globalsOf(expr, method = "conservative")
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
@@ -339,7 +366,7 @@ stopifnot(length(pkgs) == 0L)
 
 message("*** globalsOf() and package functions:")
 foo <- globals::Globals
-expr <- substitute({ foo(list(a = 1)) })
+expr <- exprs$C
 globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
 stopifnot(all(names(globals) %in% c("{", "foo", "list")))
@@ -361,13 +388,7 @@ stopifnot(pkgs == "globals")
 message("*** globalsOf() and core-package functions:")
 sample2 <- base::sample
 sum2 <- base::sum
-expr <- substitute({
-  x <- sample(10)
-  y <- sum(x)
-  x2 <- sample2(10)
-  y2 <- sum2(x)
-  s <- sessionInfo()
-}, env = list())
+expr <- exprs$D
 globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
 stopifnot(all(names(globals) %in%
@@ -403,17 +424,3 @@ res <- try({
 stopifnot(inherits(res, "try-error"))
 
 message("*** globalsOf() - exceptions ... DONE")
-
-
-message("*** Globals() - exceptions ...")
-
-res <- tryCatch({ Globals(NULL) }, error = identity)
-stopifnot(inherits(res, "simpleError"))
-
-res <- tryCatch({ Globals(list(1, 2)) }, error = identity)
-stopifnot(inherits(res, "simpleError"))
-
-res <- tryCatch({ Globals(list(a = 1, 2)) }, error = identity)
-stopifnot(inherits(res, "simpleError"))
-
-message("*** Globals() - exceptions ... DONE")
