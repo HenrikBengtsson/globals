@@ -301,7 +301,8 @@ collect_usage_function <- function(fun, name, w) {
   parnames <- names(formals)
 
   formals_clean <- drop_missing_formals(formals)
-  locals <- findLocalsList(c(list(body), formals_clean))
+#  locals <- findLocalsList(c(list(body), formals_clean))
+  locals <- findLocalsList(formals_clean)
 
   w$env <- new.env(hash = TRUE, parent = w$env)
   for (n in c(parnames, locals)) assign(n, TRUE, w$env)

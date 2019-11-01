@@ -1,9 +1,12 @@
 Package: globals
 ================
 
-Version: 0.12.4-9000 [2018-10-11]
+Version: 0.12.4-9000 [2018-11-01]
 
- * ...
+BUG FIXES:
+
+ * findGlobals() would fail to identify 'a' as a global variable in expression
+   { a; a <- a + 1 } whereas it was properly identify in { a <- a + 1; a }.
  
 
 Version: 0.12.4 [2018-10-11]
