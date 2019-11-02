@@ -26,13 +26,5 @@ exprs <- list(
          x2 <- sample2(10)
          y2 <- sum2(x)
          s <- sessionInfo()
-       }),
-   E = quote({
-     a <- a + 1
-     a
-   }),
-   F = quote({
-     a
-     a <- a + 1
-   })
+       })
 )

@@ -24,13 +24,17 @@ globals_i <- findGlobals(expr, method = "ordered")
 print(globals_i)
 assert_identical_sets(globals_i, c("{", "<-", "b", "c", "d", "+", "a", "e"))
 
-expr <- exprs$E
-globals_i <- findGlobals(expr)
+globals_i <- findGlobals(function() {
+  a <- a + 1
+  a
+})
 print(globals_i)
 assert_identical_sets(globals_i, c("{", "<-", "a", "+"))
 
-expr <- exprs$F
-globals_i <- findGlobals(expr)
+globals_i <- findGlobals(function() {
+  a
+  a <- a + 1
+})
 print(globals_i)
 if (packageVersion("globals") <= "0.12.4") {
   assert_identical_sets(globals_i, c("{", "<-", "+"))
