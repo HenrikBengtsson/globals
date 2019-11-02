@@ -16,7 +16,7 @@ exprs <- list(
          a <- a + 1
          e <- e()
        }),
-   B = parse(text = "a <- pkg::a"),  ## parse() to please R CMD check
+   B = substitute(a <- pkg::a, env=environment()),
    C = quote({
          foo(list(a = 1))
        }),
@@ -26,5 +26,13 @@ exprs <- list(
          x2 <- sample2(10)
          y2 <- sum2(x)
          s <- sessionInfo()
-       })
+       }),
+   E = quote({
+     a <- a + 1
+     a
+   }),
+   F = quote({
+     a
+     a <- a + 1
+   })
 )
