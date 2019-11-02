@@ -6,10 +6,10 @@ message(" ** globalsOf(..., method = 'conservative'):")
 expr <- exprs$A
 globals_c <- globalsOf(expr, method = "conservative")
 str(globals_c)
-stopifnot(all(names(globals_c) %in% c("{", "<-", "c", "d", "+")))
+assert_identical_sets(names(globals_c), c("{", "<-", "c", "d", "+"))
 globals_c <- cleanup(globals_c)
 str(globals_c)
-stopifnot(all(names(globals_c) %in% c("c", "d")))
+assert_identical_sets(names(globals_c), c("c", "d"))
 where <- attr(globals_c, "where")
 stopifnot(
   length(where) == length(globals_c),
@@ -21,10 +21,10 @@ message(" ** globalsOf(..., method = 'liberal'):")
 expr <- exprs$A
 globals_l <- globalsOf(expr, method = "liberal")
 str(globals_l)
-stopifnot(all(names(globals_l) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
+assert_identical_sets(names(globals_l), c("{", "<-", "b", "c", "d", "+", "a", "e"))
 globals_l <- cleanup(globals_l)
 str(globals_l)
-stopifnot(all(names(globals_l) %in% c("b", "c", "d", "a", "e")))
+assert_identical_sets(names(globals_l), c("b", "c", "d", "a", "e"))
 where <- attr(globals_l, "where")
 stopifnot(
   length(where) == length(globals_l),
@@ -37,10 +37,10 @@ message(" ** globalsOf(..., method = 'ordered'):")
 expr <- exprs$A
 globals_i <- globalsOf(expr, method = "ordered")
 str(globals_i)
-stopifnot(all(names(globals_i) %in% c("{", "<-", "b", "c", "d", "+", "a", "e")))
+assert_identical_sets(names(globals_i), c("{", "<-", "b", "c", "d", "+", "a", "e"))
 globals_i <- cleanup(globals_i)
 str(globals_i)
-stopifnot(all(names(globals_i) %in% c("b", "c", "d", "a", "e")))
+assert_identical_sets(names(globals_i), c("b", "c", "d", "a", "e"))
 where <- attr(globals_i, "where")
 stopifnot(
   length(where) == length(globals_i),
@@ -58,26 +58,26 @@ foo <- function(x) bar(x)
 for (method in c("ordered", "conservative", "liberal")) {
   globals <- globalsOf({ foo(3) }, substitute = TRUE, method = method,
                          recursive = FALSE, mustExist = FALSE)
-  stopifnot(all(names(globals) %in% c("{", "foo")),
-            !any("a" %in% names(globals)))
+  assert_identical_sets(names(globals), c("{", "foo"))
+  stopifnot(!any("a" %in% names(globals)))
   globals <- cleanup(globals)
   str(globals)
-  stopifnot(all(names(globals) %in% c("foo"),
-                !any("a" %in% names(globals))))
+  assert_identical_sets(names(globals), c("foo"))
+  stopifnot(!any("a" %in% names(globals)))
 
   globals <- globalsOf({ foo(3) }, substitute = TRUE, method = "ordered",
                          recursive = TRUE, mustExist = FALSE)
-  stopifnot(all(names(globals) %in% c("{", "foo", "bar", "-", "a")))
+  assert_identical_sets(names(globals), c("{", "foo", "bar", "-", "a"))
   globals <- cleanup(globals)
   str(globals)
-  stopifnot(all(names(globals) %in% c("foo", "bar", "a")))
+  assert_identical_sets(names(globals), c("foo", "bar", "a"))
 
   globals <- globalsOf({ foo(3) }, substitute = TRUE,
                          recursive = TRUE, mustExist = FALSE)
-  stopifnot(all(names(globals) %in% c("{", "foo", "bar", "-", "a")))
+  assert_identical_sets(names(globals), c("{", "foo", "bar", "-", "a"))
   globals <- cleanup(globals)
   str(globals)
-  stopifnot(all(names(globals) %in% c("foo", "bar", "a")))
+  assert_identical_sets(names(globals), c("foo", "bar", "a"))
 }
 
 
@@ -124,15 +124,15 @@ message("*** cleanup() & packagesOf():")
 expr <- exprs$A
 globals <- globalsOf(expr, method = "conservative")
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
+assert_identical_sets(names(globals), c("{", "<-", "c", "d", "+"))
 
 globals <- as.Globals(globals)
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
+assert_identical_sets(names(globals), c("{", "<-", "c", "d", "+"))
 
 globals <- as.Globals(unclass(globals))
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "<-", "c", "d", "+")))
+assert_identical_sets(names(globals), c("{", "<-", "c", "d", "+"))
 
 pkgs <- packagesOf(globals)
 print(pkgs)
@@ -140,7 +140,7 @@ stopifnot(length(pkgs) == 0L)
 
 globals <- cleanup(globals)
 str(globals)
-stopifnot(all(names(globals) %in% c("c", "d")))
+assert_identical_sets(names(globals), c("c", "d"))
 
 pkgs <- packagesOf(globals)
 print(pkgs)
@@ -152,7 +152,7 @@ foo <- globals::Globals
 expr <- exprs$C
 globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
-stopifnot(all(names(globals) %in% c("{", "foo", "list")))
+assert_identical_sets(names(globals), c("{", "foo", "list"))
 where <- attr(globals, "where")
 stopifnot(length(where) == length(globals))
 if (!covr) stopifnot(
@@ -163,7 +163,7 @@ if (!covr) stopifnot(
 
 globals <- cleanup(globals)
 str(globals)
-stopifnot(all(names(globals) %in% c("foo")))
+assert_identical_sets(names(globals), c("foo"))
 pkgs <- packagesOf(globals)
 stopifnot(pkgs == "globals")
 
@@ -174,8 +174,7 @@ sum2 <- base::sum
 expr <- exprs$D
 globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
-stopifnot(all(names(globals) %in%
-              c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2")))
+assert_identical_sets(names(globals), c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2"))
 where <- attr(globals, "where")
 stopifnot(length(where) == length(globals))
 if (!covr) stopifnot(
@@ -187,7 +186,7 @@ if (!covr) stopifnot(
 
 globals <- cleanup(globals)
 str(globals)
-stopifnot(all(names(globals) %in% c("sample2", "sum2")))
+assert_identical_sets(names(globals), c("sample2", "sum2"))
 where <- attr(globals, "where")
 stopifnot(length(where) == length(globals))
 if (!covr) stopifnot(identical(where$sample2, globalenv()))
@@ -195,7 +194,7 @@ if (!covr) stopifnot(identical(where$sample2, globalenv()))
 
 globals <- cleanup(globals, drop = "primitives")
 str(globals)
-stopifnot(all(names(globals) %in% c("sample2")))
+assert_identical_sets(names(globals), c("sample2"))
 
 
 message("*** globalsOf() - exceptions ...")
