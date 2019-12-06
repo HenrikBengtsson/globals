@@ -148,6 +148,10 @@ if ("--reset" %in% args) {
 } else if ("--add-broken" %in% args) {
   revdep_add_broken()
   todo()
+} else if ("--add-error" %in% args) {
+  pkgs <- revdep_pkgs_with_status("error")
+  revdep_add(packages = pkgs)
+  todo()
 } else if ("--add-all" %in% args) {
   revdep_init()
   pkgs <- revdep_children()
@@ -188,11 +192,16 @@ if ("--reset" %in% args) {
   cat(sprintf("[n=%d] %s\n", length(pkgs), paste(pkgs, collapse = " ")))
 } else if ("--list-error" %in% args) {
   cat(paste(revdep_pkgs_with_status("error"), collapse = " "), "\n", sep="")
-} else if ("--add-error" %in% args) {
-  revdepcheck::revdep_add(packages = revdep_pkgs_with_status("error"))
 } else if ("--preinstall-children" %in% args) {
   pkg <- revdep_this_package()
   pkgs <- revdepcheck:::cran_revdeps(pkg)
+  revdep_preinstall(pkgs)
+} else if ("--preinstall-grandchildren" %in% args) {
+  pkgs <- NULL
+  for (pkg in revdep_children()) {
+    pkgs <- c(pkgs, revdepcheck:::cran_revdeps(pkg))
+  }
+  pkgs <- unique(pkgs)
   revdep_preinstall(pkgs)
 } else if ("--preinstall-error" %in% args) {
   res <- revdepcheck::revdep_summary()
