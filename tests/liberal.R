@@ -1,7 +1,4 @@
-library("globals")
-
-ovars <- ls(envir = globalenv())
-
+source("incl/start.R")
 
 ## WORKAROUND: Avoid problem reported in testthat Issue #229, which
 ## causes covr::package_coverage() to given an error. /HB 2015-02-16
@@ -13,24 +10,27 @@ suppressWarnings({
 
 message("Setting up expressions")
 exprs <- list(
-  A = substitute({ Sys.sleep(1); x <- 0.1 }, env = list()),
-  B = substitute({ y <- 0.2 }, env = list()),
-  C = substitute({ z <- a + 0.3 }, env = list()),
-  D = substitute({ pathname <- file.path(dirname(url), filename) },
-                 env = list()),
-  E = substitute({ b <- c }, env = list()),
-  F = substitute({
+  A = quote({
+    Sys.sleep(1)
+    x <- 0.1
+  }),
+  B = quote({ y <- 0.2 }),
+  C = quote({ z <- a + 0.3 }),
+  D = quote({ pathname <- file.path(dirname(url), filename) }),
+  E = quote({ b <- c }),
+  F = quote({
     a <- { runif(1) }
     b <- { rnorm(1) }
-    x <- a * b; abs(x)
-  }, env = list()),
-  G = substitute({
+    x <- a * b
+    abs(x)
+  }),
+  G = quote({
     y <- square(a)
-  }, env = list()),
-  H = substitute({
+  }),
+  H = quote({
     b <- a
     a <- 1
-  }, env = list())
+  })
 )
 
 atleast <- list(
@@ -89,4 +89,4 @@ cat(sprintf("Globals: %s\n", paste(sQuote(names), collapse = ", ")))
 
 
 ## Cleanup
-rm(list = setdiff(ls(envir = globalenv()), ovars), envir = globalenv())
+source("incl/end.R")

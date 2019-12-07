@@ -1,20 +1,6 @@
-library("globals")
+source("incl/start.R")
 
 message("*** utils ...")
-
-as_function <- globals:::as_function
-is_base_pkg <- globals:::is_base_pkg
-is.base <- globals:::is.base
-is_internal <- globals:::is_internal
-where <- globals:::where
-mdebug <- globals:::mdebug
-envname <- globals:::envname
-
-## WORKAROUND: Make sure tests also work with 'covr' package
-if ("covr" %in% loadedNamespaces()) {
-  globalenv <- function() parent.frame()
-  baseenv <- function() environment(base::sample)
-}
 
 message("- envname() ...")
 
@@ -186,3 +172,5 @@ options(oopts)
 message("* mdebug() ... DONE")
 
 message("*** utils ... DONE")
+
+source("incl/end.R")

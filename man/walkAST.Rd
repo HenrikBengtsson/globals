@@ -4,8 +4,14 @@
 \alias{walkAST}
 \title{Walk the Abstract Syntax Tree (AST) of an R Expression}
 \usage{
-walkAST(expr, atomic = NULL, name = NULL, call = NULL,
-  pairlist = NULL, substitute = FALSE)
+walkAST(
+  expr,
+  atomic = NULL,
+  name = NULL,
+  call = NULL,
+  pairlist = NULL,
+  substitute = FALSE
+)
 }
 \arguments{
 \item{expr}{R \link[base]{expression}.}

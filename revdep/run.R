@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 library("revdepcheck")
 options(warn = 1L)
 
@@ -27,26 +28,32 @@ check <- function() {
     cat(sprintf("R CMD check will use env vars from %s\n", sQuote(p)))
     cat(sprintf("To disable, set 'R_CHECK_ENVIRON=false' (a fake pathname)\n"))
   }
-  
-  envs <- grep("^_R_CHECK_", names(Sys.getenv()), value = TRUE)
+
+  envs <- Sys.getenv()
+  envs <- envs[grep("^_?R_CHECK_", names(envs))]
   if (length(envs) > 0L) {
-    cat(sprintf("Detected _R_CHECK_* env vars that will affect R CMD check: %s\n",
-                paste(sQuote(envs), collapse = ", ")))
+    envs <- sprintf(" %02d. %s=%s", seq_along(envs), names(envs), envs)
+    envs <- paste(envs, collapse="\n")
+    cat(sprintf("Detected R-specific env vars that may affect R CMD check:\n%s\n", envs))
   }
 
   precheck()
   revdep_check(bioc = TRUE, num_workers = available_cores(),
-               timeout = as.difftime(20, units = "mins"), quiet = FALSE)
+               timeout = as.difftime(30, units = "mins"), quiet = FALSE)
 }
+
 
 todo <- function() {
   pkgs <- tryCatch(revdep_todo(), error = function(ex) NA)
-  if (is.na(pkgs)) {
+  if (identical(pkgs, NA)) {
     cat("Revdepcheck has not been initiated\n")
-  } else if (length(pkgs) == 0) {
+    return()
+  }
+  pkgs <- subset(pkgs, status == "todo")
+  if (nrow(pkgs) == 0) {
     cat("There are no packages on the revdepcheck todo list\n")
   } else {
-    cat(sprintf("%d. %s\n", seq_along(pkgs), pkgs))
+    cat(sprintf("%d. %s\n", seq_len(nrow(pkgs)), pkgs$package))
   }
 }
 
@@ -67,10 +74,18 @@ revdep_todo_reset <- function() {
   DBI::dbWriteTable(db, "todo", df, overwrite = TRUE, append = FALSE)
 }
 
+revdep_this_package <- local({
+  pkg <- NULL
+  function() {
+    if (is.null(pkg)) pkg <<- desc::desc(file = "DESCRIPTION")$get("Package")
+    pkg
+  }
+})
+
 revdep_children <- local({
   cache <- list()
   function(pkg = NULL) {
-    if (is.null(pkg)) pkg <- desc::desc(file = "DESCRIPTION")$get("Package")
+    if (is.null(pkg)) pkg <- revdep_this_package()
     pkgs <- cache[[pkg]]
     if (is.null(pkgs)) {
       pkgs <- revdepcheck:::cran_revdeps(pkg)
@@ -81,7 +96,38 @@ revdep_children <- local({
   }
 })
 
-args <- base::commandArgs()
+revdep_pkgs_with_status <- function(status = "error") {
+  status <- match.arg(status)
+  res <- revdepcheck::revdep_summary()
+  field <- switch(status, error = "errors")
+  has_status <- vapply(res, FUN = function(x) {
+    z <- x[["new"]][[field]]
+    is.character(z) && any(nchar(z) > 0)
+  }, FUN.VALUE = NA, USE.NAMES = TRUE)
+  has_status <- !is.na(has_status) & has_status
+  names(has_status)[has_status]
+}
+
+revdep_preinstall <- function(pkgs) {
+  pkgs <- unique(pkgs)
+  lib_paths_org <- lib_paths <- .libPaths()
+  on.exit(.libPaths(lib_paths_org))
+  lib_paths[1] <- sprintf("%s-revdepcheck", lib_paths[1])
+  dir.create(lib_paths[1], recursive = TRUE, showWarnings = FALSE)
+  .libPaths(lib_paths)
+  message(sprintf("Triggering crancache builds by pre-installing %d packages: %s", length(pkgs), paste(sQuote(pkgs), collapse = ", ")))
+  message(".libPaths():")
+  message(paste(paste0(" - ", .libPaths()), collapse = "\n"))
+  ## Install one-by-one to update cache sooner
+  for (kk in seq_along(pkgs)) {
+    pkg <- pkgs[kk]
+    message(sprintf("Pre-installing package %d of %d: %s",
+                    kk, length(pkgs), pkg))
+    crancache::install_packages(pkg)
+  }
+}
+
+args <- base::commandArgs(trailingOnly = TRUE)
 if ("--reset" %in% args) {
   revdep_reset()
 } else if ("--todo-reset" %in% args) {
@@ -94,8 +140,17 @@ if ("--reset" %in% args) {
   pkgs <- parse_pkgs(args[seq(from = pos + 1L, to = length(args))])
   revdep_add(packages = pkgs)
   todo()
+} else if ("--rm" %in% args) {
+  pos <- which("--rm" == args)
+  pkgs <- parse_pkgs(args[seq(from = pos + 1L, to = length(args))])
+  revdep_rm(packages = pkgs)
+  todo()
 } else if ("--add-broken" %in% args) {
   revdep_add_broken()
+  todo()
+} else if ("--add-error" %in% args) {
+  pkgs <- revdep_pkgs_with_status("error")
+  revdep_add(packages = pkgs)
   todo()
 } else if ("--add-all" %in% args) {
   revdep_init()
@@ -115,10 +170,52 @@ if ("--reset" %in% args) {
   pkgs <- unique(pkgs)
   revdep_add(packages = pkgs)
   todo()
-} else if ("--install" %in% args) {
-  pos <- which("--install" == args)
+} else if ("--show-check" %in% args) {
+  pos <- which("--show-check" == args)
   pkgs <- parse_pkgs(args[seq(from = pos + 1L, to = length(args))])
-  crancache::install_packages(pkgs)
+  for (pkg in pkgs) {
+    for (dir in c("old", "new")) {
+      path <- file.path("revdep", "checks", pkg, dir, sprintf("%s.Rcheck", pkg))
+      if (!utils::file_test("-d", path)) next
+      pathname <- file.path(path, "00check.log")
+      cat("-----------------------------------------------\n")
+      cat(sprintf("%s (%s):\n", pkg, dir))
+      cat("-----------------------------------------------\n")
+      bfr <- readLines(pathname, warn = FALSE)
+      tail <- tail(bfr, n = 20L)
+      writeLines(tail)
+    }
+  }
+} else if ("--list-children" %in% args) {
+  pkg <- revdep_this_package()
+  pkgs <- revdepcheck:::cran_revdeps(pkg)
+  cat(sprintf("[n=%d] %s\n", length(pkgs), paste(pkgs, collapse = " ")))
+} else if ("--list-error" %in% args) {
+  cat(paste(revdep_pkgs_with_status("error"), collapse = " "), "\n", sep="")
+} else if ("--preinstall-children" %in% args) {
+  pkg <- revdep_this_package()
+  pkgs <- revdepcheck:::cran_revdeps(pkg)
+  revdep_preinstall(pkgs)
+} else if ("--preinstall-grandchildren" %in% args) {
+  pkgs <- NULL
+  for (pkg in revdep_children()) {
+    pkgs <- c(pkgs, revdepcheck:::cran_revdeps(pkg))
+  }
+  pkgs <- unique(pkgs)
+  revdep_preinstall(pkgs)
+} else if ("--preinstall-error" %in% args) {
+  res <- revdepcheck::revdep_summary()
+  revdep_preinstall(revdep_pkgs_with_status("error"))
+} else if ("--preinstall-todo" %in% args) {
+  todo <- revdep_todo()
+  revdep_preinstall(todo$package)
+} else if ("--preinstall" %in% args) {
+  pos <- which("--preinstall" == args)
+  pkgs <- parse_pkgs(args[seq(from = pos + 1L, to = length(args))])
+  revdep_preinstall(pkgs)
 } else {
+  stopifnot(length(args) == 0L)
   check()
+  revdep_report(all = TRUE)
 }
+

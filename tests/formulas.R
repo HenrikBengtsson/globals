@@ -1,14 +1,14 @@
-library("globals")
+source("incl/start.R")
 
 message("findGlobals() with formula ...")
 
 g <- findGlobals(. ~ x + y : z, substitute = TRUE)
 print(g)
-stopifnot(all(c("~", ".", "+", "x", ":", "y", "z") %in% g))
+assert_identical_sets(g, c("~", ".", "+", "x", ":", "y", "z"))
 
 g <- findGlobals(map(1L, ~ typeof(.x)), substitute = TRUE)
 print(g)
-stopifnot(all(c("map", "~", "typeof", ".x") %in% g))
+assert_identical_sets(g, c("map", "~", "typeof", ".x"))
 
 message("findGlobals() with formula ... DONE")
 
@@ -21,10 +21,8 @@ foo <- function(x) {
 
 g <- globalsOf(foo(1L), substitute = TRUE, mustExist = FALSE)
 str(g)
-stopifnot(all(
-  c("foo", "map", "{", "~", "typeof", "+", "x", ".x") %in% names(g)
-))
+assert_identical_sets(names(g), c("foo", "map", "{", "~", "typeof", "+", "x", ".x"))
 
 message("globalsOf() with formula ... DONE")
 
-rm(list = "g")
+source("incl/end.R")

@@ -1,4 +1,4 @@
-library("globals")
+source("incl/start.R")
 
 a <- 1
 b <- 2
@@ -269,3 +269,5 @@ stopifnot(inherits(res, "simpleError"))
 message("*** Globals() - exceptions ... DONE")
 
 message("*** Globals() ... DONE")
+
+source("incl/end.R")

@@ -5,14 +5,30 @@
 \alias{globalsOf}
 \title{Get all global objects of an expression}
 \usage{
-findGlobals(expr, envir = parent.frame(), ..., tweak = NULL,
+findGlobals(
+  expr,
+  envir = parent.frame(),
+  ...,
+  tweak = NULL,
   dotdotdot = c("warning", "error", "return", "ignore"),
-  method = c("ordered", "conservative", "liberal"), substitute = FALSE,
-  unlist = TRUE, trace = FALSE)
+  method = c("ordered", "conservative", "liberal"),
+  substitute = FALSE,
+  unlist = TRUE,
+  trace = FALSE
+)
 
-globalsOf(expr, envir = parent.frame(), ..., method = c("ordered",
-  "conservative", "liberal"), tweak = NULL, substitute = FALSE,
-  mustExist = TRUE, unlist = TRUE, recursive = TRUE, skip = NULL)
+globalsOf(
+  expr,
+  envir = parent.frame(),
+  ...,
+  method = c("ordered", "conservative", "liberal"),
+  tweak = NULL,
+  substitute = FALSE,
+  mustExist = TRUE,
+  unlist = TRUE,
+  recursive = TRUE,
+  skip = NULL
+)
 }
 \arguments{
 \item{expr}{An R expression.}

@@ -301,7 +301,8 @@ collect_usage_function <- function(fun, name, w) {
   parnames <- names(formals)
 
   formals_clean <- drop_missing_formals(formals)
-  locals <- findLocalsList(c(list(body), formals_clean))
+#  locals <- findLocalsList(c(list(body), formals_clean))
+  locals <- findLocalsList(formals_clean)
 
   w$env <- new.env(hash = TRUE, parent = w$env)
   for (n in c(parnames, locals)) assign(n, TRUE, w$env)
@@ -315,14 +316,23 @@ inject_tracer_to_function <- function(fcn, name) {
   b <- body(fcn)
   f <- formals(fcn)
   args <- setdiff(names(f), c("w", "..."))
-  title <- sprintf("%s():", name)
+  title <- sprintf("%s()", name)
   b <- bquote({
-    message(.(title))
-    if (length(.(args)) > 0) {
-      mstr <- get("mstr", envir = getNamespace("globals"), mode = "function")
-      mstr(mget(.(args)))
+    message(.(title), ":")
+    if (length(.(args)) > 0)
+      message(paste(utils::capture.output(utils::str(mget(.(args)))), collapse = "\n"))
+    env <- environment(w$enterLocal)
+    n <- length(env$name)
+    value <- .(b)
+    nnew <- (length(env$name) - n)
+    if (nnew) {
+      message(" ", .(title), " variables:")
+      vars <- data.frame(name=env$name, class=env$class)
+      vars$added <- c(rep(FALSE, times = n), rep(TRUE, times = nnew))
+      message(paste(utils::capture.output(print(vars)), collapse = "\n"))
     }
-    .(b)
+    message(" ", .(title) , " => ", utils::capture.output(utils::str(value)))
+    value
   })
   body(fcn) <- b
   fcn
