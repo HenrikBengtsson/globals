@@ -327,7 +327,7 @@ inject_tracer_to_function <- function(fcn, name) {
     nnew <- (length(env$name) - n)
     if (nnew) {
       message(" ", .(title), " variables:")
-      vars <- data.frame(name=env$name, class=env$class)
+      vars <- data.frame(name=env$name, class=env$class, stringsAsFactors = FALSE)
       vars$added <- c(rep(FALSE, times = n), rep(TRUE, times = nnew))
       message(paste(utils::capture.output(print(vars)), collapse = "\n"))
     }
