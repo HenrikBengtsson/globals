@@ -26,5 +26,6 @@ exprs <- list(
          x2 <- sample2(10)
          y2 <- sum2(x)
          s <- sessionInfo()
+         ns <- isNamespaceLoaded("foobar")
        })
 )
