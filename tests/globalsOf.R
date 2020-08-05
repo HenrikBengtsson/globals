@@ -194,7 +194,7 @@ if (!covr) stopifnot(identical(where$sample2, globalenv()))
 
 globals <- cleanup(globals, drop = "primitives")
 str(globals)
-assert_identical_sets(names(globals), c("sample2"))
+assert_identical_sets(names(globals), c("sample2", "sum2"))
 
 
 message("*** globalsOf() - exceptions ...")
