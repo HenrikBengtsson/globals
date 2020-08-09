@@ -2,19 +2,17 @@ source("incl/start.R")
 
 message("*** cleanup() ...")
 
+message("- cleanup() with remapped base functions")
+
 ## Don't clean out renamed base functions
+## https://github.com/HenrikBengtsson/globals/issues/57
 globals <- as.Globals(list(
   identity    = base::identity,
   my_identity = base::identity   ## should not be deleted
 ))
-
-stopifnot(all(c("identity", "my_identity") %in% names(globals)))
-
-globals2 <- cleanup(globals)
-stopifnot(
-  !"identity" %in% names(globals2),
-  "my_identity" %in% names(globals2)
-)
+globals <- cleanup(globals)
+str(globals)
+assert_identical_sets(names(globals), "my_identity")
 
 message("*** cleanup() ... DONE")
 

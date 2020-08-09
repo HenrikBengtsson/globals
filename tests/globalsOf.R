@@ -174,7 +174,7 @@ sum2 <- base::sum
 expr <- exprs$D
 globals <- globalsOf(expr, recursive = FALSE)
 str(globals)
-assert_identical_sets(names(globals), c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2"))
+assert_identical_sets(names(globals), c("{", "<-", "sample", "sample2", "sessionInfo", "sum", "sum2", "isNamespaceLoaded"))
 where <- attr(globals, "where")
 stopifnot(length(where) == length(globals))
 if (!covr) stopifnot(
@@ -183,6 +183,13 @@ if (!covr) stopifnot(
   identical(where$sample2, globalenv())
 )
 
+globals <- cleanup(globals, drop = "primitives")
+str(globals)
+assert_identical_sets(names(globals), c("sample", "sample2", "sum2", "sessionInfo", "isNamespaceLoaded"))
+
+globals <- cleanup(globals, drop = "internals")
+str(globals)
+assert_identical_sets(names(globals), c("sample", "sample2", "sum2", "sessionInfo"))
 
 globals <- cleanup(globals)
 str(globals)
@@ -190,11 +197,6 @@ assert_identical_sets(names(globals), c("sample2", "sum2"))
 where <- attr(globals, "where")
 stopifnot(length(where) == length(globals))
 if (!covr) stopifnot(identical(where$sample2, globalenv()))
-
-
-globals <- cleanup(globals, drop = "primitives")
-str(globals)
-assert_identical_sets(names(globals), c("sample2"))
 
 
 message("*** globalsOf() - exceptions ...")
