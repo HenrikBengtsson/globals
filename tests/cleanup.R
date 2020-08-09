@@ -2,12 +2,18 @@ source("incl/start.R")
 
 message("*** cleanup() ...")
 
-message("*** cleanup() with remapped base functions")
+message("- cleanup() with remapped base functions")
 
-globals <- list(fun = base::identity, identity = base::identity)
-globals <- as.Globals(globals)
+## Don't clean out renamed base functions
+## https://github.com/HenrikBengtsson/globals/issues/57
+globals <- as.Globals(list(
+  identity    = base::identity,
+  my_identity = base::identity   ## should not be deleted
+))
 globals <- cleanup(globals)
 str(globals)
-assert_identical_sets(names(globals), "fun")
+assert_identical_sets(names(globals), "my_identity")
+
+message("*** cleanup() ... DONE")
 
 source("incl/end.R")
