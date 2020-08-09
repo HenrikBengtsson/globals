@@ -13,7 +13,7 @@ globals <- list(
 )
 expected <- c("my_fcn", "my_identity")
 
-## Add an internal object
+## Add internal objects - they should be keep
 ns <- asNamespace("utils")
 pkg <- as.environment("package:utils")
 internals <- setdiff(ls(ns, all.names = TRUE), ls(pkg, all.names = TRUE))
@@ -23,6 +23,7 @@ if (length(internals) > 0L) {
   obj <- get(name, envir = ns, inherits = FALSE)
   stopifnot(!exists(name, envir = pkg, inherits = FALSE))
   globals[[name]] <- obj
+  expected <- c(expected, name)
   name <- sprintf("my-%s", name)
   globals[[name]] <- obj
   expected <- c(expected, name)
