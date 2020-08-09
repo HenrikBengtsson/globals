@@ -1,10 +1,15 @@
 Package: globals
 ================
 
-Version: 0.12.5-9000 [2019-12-07]
+Version: 0.12.5-9000 [2020-08-09]
 
- * ...
- 
+BUG FIXES:
+
+ * cleanup(..., drop = c(..., "base-packages")) for Globals would drop base
+   R objects with names that do not exist in the corresponding base R package
+   namespaces.  Similarly, drop = c(..., "primitive") would drop primitive R
+   objects with names not part of any base R package namespace.
+
 
 Version: 0.12.5 [2019-12-07]
 
