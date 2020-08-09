@@ -47,6 +47,13 @@ is_internal <- function(x) {
   any(grepl(".Internal", body, fixed = TRUE))
 }
 
+# From future 1.18.0
+asPkgEnvironment <- function(pkg) {
+  name <- sprintf("package:%s", pkg)
+  if (!name %in% search()) return(emptyenv())
+  as.environment(name)
+}
+
 ## From R.utils 2.0.2 (2015-05-23)
 hpaste <- function(..., sep="", collapse=", ", last_collapse=NULL,
                    max_head=if (missing(last_collapse)) 3 else Inf,
