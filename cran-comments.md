@@ -1,9 +1,8 @@
-# CRAN submission globals 0.12.4
-on 2018-10-10
+# CRAN submission globals 0.12.5
 
-I've verified that this submission causes no issues for any of the
-42 reverse (children & grandchildren) package dependencies available
-on CRAN and Bioconductor.
+on 2019-12-07
+
+I've verified that this submission causes no issues for any of the 101 first and second-generation package dependencies on CRAN and Bioconductor.
 
 Thanks in advance
 
@@ -15,40 +14,42 @@ Thanks in advance
 The package has been verified using `R CMD check --as-cran` on:
 
 * Platform x86_64-apple-darwin15.6.0 (64-bit) [Travis CI]:
-  - R version 3.4.4 (2018-03-15)
-  - R version 3.5.0 (2018-04-23)
+  - R version 3.5.3 (2019-03-11)
+  - R version 3.6.1 (2019-07-05)
 
 * Platform x86_64-unknown-linux-gnu (64-bit) [Travis CI]:
-  - R version 3.4.4 (2017-01-27) [sic!]
-  - R version 3.5.1 (2017-01-27) [sic!]
-  - R Under development (unstable) (2018-10-10 r75427)
-
-* Platform x86_64-pc-linux-gnu (64-bit) [r-hub]:
-  - R version 3.4.4 (2018-03-15)
-  - R Under development (unstable) (2018-10-05 r75407)
+  - R version 3.5.3 (2017-01-27) [sic!]
+  - R version 3.6.1 (2017-01-27) [sic!]
+  - R Under development (unstable) (2019-12-06 r77536)
 
 * Platform x86_64-pc-linux-gnu (64-bit):
   - R version 3.1.2 (2014-10-31)
   - R version 3.2.0 (2015-04-16)
-  - R version 3.3.0 (2016-05-03)
   - R version 3.4.0 (2017-04-21)
-  - R version 3.5.1 (2018-07-02)
+  - R version 3.6.0 (2019-04-26)
+  - R version 3.6.1 (2019-07-05)
+
+* Platform x86_64-pc-linux-gnu (64-bit) [r-hub]:
+  - R version 3.6.1 (2019-07-05)
+  - R Under development (unstable) (2019-12-01 r77489)
 
 * Platform i686-pc-linux-gnu (32-bit):
   - R version 3.4.4 (2018-03-15)
+  - R version 3.6.1 (2019-07-05)
 
 * Platform i386-pc-solaris2.10 (32-bit) [r-hub]:
-  -  R version 3.5.0 Patched (2018-04-30 r74674)
-
-* Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-10-07 r75409)
-
-* Platform x86_64-w64-mingw32 (64-bit) [Appveyor CI]:
-  - R Under development (unstable) (2018-10-07 r75409)
+  - R version 3.6.0 (2019-04-26)
 
 * Platform x86_64-w64-mingw32 (64-bit) [r-hub]:
-  - R Under development (unstable) (2018-09-27 r75377)
+  - R Under development (unstable) (2019-11-08 r77393)
+
+* Platform i386-w64-mingw32 (32-bit) [Appveyor CI]:
+  - R Under development (unstable) (2019-12-05 r77528)
+
+* Platform x86_64-w64-mingw32/x64 (64-bit) [Appveyor CI]:
+  - R version 3.6.1 (2019-07-05)
+  - R Under development (unstable) (2019-12-05 r77528)
 
 * Platform x86_64-w64-mingw32/x64 (64-bit) [win-builder]:
-  - R version 3.5.1 (2018-07-02)
-  - R Under development (unstable) (2018-10-10 r75427)
+  - R version 3.6.1 (2019-07-05)
+  - R Under development (unstable) (2019-12-02 r77499)
