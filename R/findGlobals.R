@@ -93,10 +93,9 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
-        stop_if_not(identical(e[[1]], as.symbol("~")))
-        expr <- e[-1]
-        for (kk in seq_along(expr)) {
-          globals <- find_globals_ordered(expr = expr[[kk]], envir = w$env)
+        stop_if_not(length(e) >= 2L, identical(e[[1]], as.symbol("~")))
+        for (kk in 2:length(e)) {
+          globals <- find_globals_ordered(expr = e[[kk]], envir = w$env)
           if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)

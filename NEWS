@@ -1,9 +1,15 @@
 Package: globals
 ================
 
-Version: 0.12.5-9000 [2020-08-09]
+Version: 0.12.5-9000 [2020-08-14]
 
 BUG FIXES:
+
+ * Calls like findGlobals(~ NULL) with NULLs on the right-hand side could throw
+   "Error in if (length(ans) == 0L || as.character(ans[[1L]])[1L] == "~") { : 
+   missing value where TRUE/FALSE needed". Solved by working around what looks
+   like a bug in the 'stats' package causing subsetting on formulas with NULLs
+   to fail.
 
  * cleanup(..., drop = c(..., "base-packages")) for Globals would drop base
    R objects with names not exported by the corresponding base R package.
