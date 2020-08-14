@@ -320,6 +320,7 @@ inject_tracer_to_function <- function(fcn, name) {
     message(.(title), ":")
     if (length(.(args)) > 0)
       message(paste(utils::capture.output(utils::str(mget(.(args)))), collapse = "\n"))
+    if (!exists("w", mode = "list")) return()
     env <- environment(w$enterLocal)
     n <- length(env$name)
     value <- .(b)

@@ -16,6 +16,9 @@ BUG FIXES:
    namespaces.  Similarly, drop = c(..., "primitive") would drop primitive R
    objects with names not exported by any base R package.
 
+ * globals::findGlobals(function() NULL, substitute = TRUE, trace = TRUE)
+   would throw "Error in environment(w$enterLocal) : object 'w' not found".
+
 
 Version: 0.12.5 [2019-12-07]
 
