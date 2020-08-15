@@ -20,7 +20,7 @@ find_globals_conservative <- function(expr, envir, ..., trace = FALSE) {
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
-      globals <- find_globals_conservative(expr = e, envir = envir)
+      globals <- find_globals_conservative(expr = e, envir = envir, ..., trace = trace)
       if (length(globals) > 0) objs <- c(objs, globals)
     }
   } else {
@@ -59,7 +59,7 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
-      globals <- find_globals_liberal(expr = e, envir = envir)
+      globals <- find_globals_liberal(expr = e, envir = envir, ..., trace = trace)
       if (length(globals) > 0) objs <- c(objs, globals)
     }
   } else {
@@ -144,7 +144,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
-      globals <- find_globals_ordered(expr = e, envir = envir)
+      globals <- find_globals_ordered(expr = e, envir = envir, ..., trace = trace)
       if (length(globals) > 0) {
         class <- c(class, rep("global", times = length(globals)))
         name <- c(name, globals)
