@@ -1,9 +1,12 @@
 Package: globals
 ================
 
-Version: 0.12.5-9000 [2020-08-14]
+Version: 0.12.5-9000 [2020-08-15]
 
 BUG FIXES:
+
+ * findGlobals(expr) would fail to identify globals in anonymous function
+   calls, e.g. expr <- as.call(list(function(...) NOT_FOUND, quote(FOUND))).
 
  * Calls like findGlobals(~ NULL) with NULLs on the right-hand side could throw
    "Error in if (length(ans) == 0L || as.character(ans[[1L]])[1L] == "~") { : 
@@ -16,8 +19,8 @@ BUG FIXES:
    namespaces.  Similarly, drop = c(..., "primitive") would drop primitive R
    objects with names not exported by any base R package.
 
- * globals::findGlobals(function() NULL, substitute = TRUE, trace = TRUE)
-   would throw "Error in environment(w$enterLocal) : object 'w' not found".
+ * findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw
+   "Error in environment(w$enterLocal) : object 'w' not found".
 
 
 Version: 0.12.5 [2019-12-07]

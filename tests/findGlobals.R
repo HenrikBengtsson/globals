@@ -126,6 +126,14 @@ print(globals_i)
 false_globals <- c("[", "[<-")
 assert_identical_sets(setdiff(globals_i, false_globals), c("{", "=", "a", "names", "names<-"))
 
+# BUG: https://github.com/HenrikBengtsson/globals/issues/60
+expr <- as.call(list(function(...) GLOBAL, quote(ARG)))
+for (method in c("conservative", "liberal", "ordered")) {
+  globals_i <- findGlobals(expr, method = method)
+  print(globals_i)
+  assert_identical_sets(globals_i, c("GLOBAL", "ARG"))
+}
+
 message("*** findGlobals() ... DONE")
 
 source("incl/end.R")
