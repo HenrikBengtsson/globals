@@ -1,8 +1,15 @@
 Package: globals
 ================
 
-Version: 0.12.5-9000 [2020-08-15]
+Version: 0.12.5-9000 [2020-08-16]
 
+SIGNIFICANT CHANGES:
+
+ * findGlobals(expr) now also scans any attributes of 'expr' for globals, e.g.
+   purrr::partial() put the original function in attribute 'body'.  Argument
+   'attributes' controls which attributes, if any, should be scanned.  Default
+   is to scan all attributes.
+ 
 BUG FIXES:
 
  * findGlobals(expr) would fail to identify globals in anonymous function

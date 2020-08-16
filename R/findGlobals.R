@@ -168,6 +168,10 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
 }
 
 
+#' @param attributes If TRUE, attributes of `expr` are also searched.
+#' If FALSE (default), they are not.
+#' If a character vector, then attributes with matching names are searched.
+#'
 #' @param dotdotdot TBD.
 #'
 #' @param trace TBD.
@@ -176,7 +180,9 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
 #'
 #' @rdname globalsOf
 #' @export
-findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
+findGlobals <- function(expr, envir = parent.frame(), ...,
+                        attributes = TRUE,
+                        tweak = NULL,
                         dotdotdot = c("warning", "error", "return", "ignore"),
                         method = c("ordered", "conservative", "liberal"),
                         substitute = FALSE, unlist = TRUE, trace = FALSE) {
@@ -187,6 +193,13 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
 
   debug <- mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...", dotdotdot, method, unlist)
 
+  if (is.logical(attributes)) {
+    stop_if_not(length(attributes) == 1L, !is.na(attributes))
+    if (!attributes) attributes <- character(0L)
+  } else {
+    stop_if_not(is.character(attributes), !anyNA(attributes))
+  }
+  
   if (is.list(expr)) {
     debug && mdebug(" - expr: <a list of length %d>", .length(expr))
 
@@ -212,7 +225,8 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
       return(character(0L))
     }
     
-    globals <- list_apply(expr, FUN = findGlobals, envir = envir, ...,
+    globals <- list_apply(expr, FUN = findGlobals, envir = envir,
+                      attributes = attributes, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       substitute = FALSE, unlist = FALSE)
     
@@ -291,6 +305,29 @@ findGlobals <- function(expr, envir = parent.frame(), ..., tweak = NULL,
   })
 
   if (needs_dotdotdot) globals <- c(globals, "...")
+  
+  ## Search attributes?
+  if (length(attributes) > 0) {
+    attrs <- attributes(expr)
+    if (is.character(attributes)) {
+      attrs <- attrs[names(attrs) %in% attributes]
+    }
+
+    ## Attributes to be searched, if any
+    if (length(attrs) > 0) {
+      debug && mdebug(" - searching attributes")
+      attrs_globals <- list_apply(attrs, FUN = findGlobals, envir = envir,
+                                  ## Don't look for attributes recursively
+                                  attributes = FALSE, ...,
+                                  tweak = tweak, dotdotdot = dotdotdot,
+                                  substitute = FALSE, unlist = FALSE)
+      if (unlist) attrs_globals <- unlist(attrs_globals, use.names = FALSE)
+      if (length(attrs_globals) > 1L) attrs_globals <- unique(attrs_globals)
+      debug && mdebug(" - globals found in attributes: [%d] %s",
+                      length(attrs_globals), hpaste(sQuote(attrs_globals)))
+      globals <- unique(c(globals, attrs_globals))
+    }
+  }
 
   debug && mdebug(" - globals found: [%d] %s", length(globals), hpaste(sQuote(globals)))
   debug && mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ... DONE", dotdotdot, method, unlist) #nolint
