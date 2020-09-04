@@ -639,45 +639,6 @@ Run `revdep_details(, "evaluator")` for more info
       Execution halted
     ```
 
-# fastpos
-
-<details>
-
-* Version: 0.4.0
-* Source code: https://github.com/cran/fastpos
-* URL: https://github.com/johannes-titz/fastpos
-* BugReports: https://github.com/johannes-titz/fastpos/issues
-* Date/Publication: 2020-08-10 14:40:02 UTC
-* Number of recursive dependencies: 55
-
-Run `revdep_details(, "fastpos")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        8. future::makeClusterPSOCK(workers, ...)
-        9. future:::makeNode(...)
-       10. (function() {...
-       11. base::tryCatch(...)
-       12. base:::tryCatchList(expr, classes, parentenv, handlers)
-       13. base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
-       14. value[[3L]](cond)
-       15. (function() {...
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 3 | SKIPPED: 0 | WARNINGS: 3 | FAILED: 1 ]
-      1. Error: (unknown) (@test-fastpos.R#25) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # foieGras
 
 <details>
@@ -727,71 +688,6 @@ Run `revdep_details(, "forecastML")` for more info
     ```
     Namespace in Imports field not imported from: ‘dtplyr’
       All declared Imports should be used.
-    ```
-
-# future
-
-<details>
-
-* Version: 1.18.0
-* Source code: https://github.com/cran/future
-* URL: https://github.com/HenrikBengtsson/future
-* BugReports: https://github.com/HenrikBengtsson/future/issues
-* Date/Publication: 2020-07-09 05:40:03 UTC
-* Number of recursive dependencies: 13
-
-Run `revdep_details(, "future")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > ### Aliases: future futureCall futureAssign %<-% %->%
-    > 
-    > ### ** Examples
-    > 
-    > ## Evaluate futures in parallel
-    > plan(multisession)
-    Warning in socketConnection("localhost", port = port, server = TRUE, blocking = TRUE,  :
-      port 37400 cannot be opened
-    Error in socketConnection("localhost", port = port, server = TRUE, blocking = TRUE,  : 
-      Failed to launch and connect to R worker on local machine ‘localhost’ from local machine ‘c4-dev1’.
-     * The error produced by socketConnection() was: ‘cannot open the connection’
-     * In addition, socketConnection() produced 1 warning(s):
-       - Warning #1: ‘port 37400 cannot be opened’ (which suggests that this port is either already occupied by another process or blocked by the firewall on your local machine)
-     * The localhost socket connection that failed to connect to the R worker used port 37400 using a communication timeout of 120 seconds and a connection timeout of 120 seconds.
-     * Worker launch call: '/software/c4/cbi/software/R-4.0.2/lib64/R/bin/Rscript' --default-packages=datasets,utils,grDevices,graphics,stats,methods -e '#label=UNKNOWN:25333:c4-dev1:henrik' -e 'try(suppressWarnings(cat(Sys.getpid(),file="/scratch/henrik/RtmpBgUx64/future.parent=25333.62f54be94eea.pid")), silent = TRUE)' -e 'workRSOCK <- tryCatch(parallel:::.slaveRSOCK, error=function(e) parallel:::.workRSOCK); workRSOCK()' MASTER=localhost PORT=37400 OUT=/dev/null TIMEOUT=120 XDR=TRUE.
-     * Worker (PID 25601) was successfully killed: TRUE
-     * Troubleshooting suggestions:
-       - Suggestion #1: Set 'verbose=TRUE' to see more details.
-       - Suggestion #2: Set 'outfile=NULL' to see output from worker.
-    Calls: plan ... tryCatchList -> tryCatchOne -> <Anonymous> -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/futureCall.R’ failed.
-    Last 13 lines of output:
-      [21:55:51.562] - success
-      [21:55:51.563] Attempting to find a working pid_exists_*() function ... done
-      Worker (PID 41221) was successfully killed: TRUE
-      Error in socketConnection("localhost", port = port, server = TRUE, blocking = TRUE,  : 
-        Failed to launch and connect to R worker on local machine 'localhost' from local machine 'c4-dev1'.
-       * The error produced by socketConnection() was: 'cannot open the connection'
-       * In addition, socketConnection() produced 1 warning(s):
-         - Warning #1: 'port 21121 cannot be opened' (which suggests that this port is either already occupied by another process or blocked by the firewall on your local machine)
-       * The localhost socket connection that failed to connect to the R worker used port 21121 using a communication timeout of 120 seconds and a connection timeout of 120 seconds.
-       * Worker launch call: '/software/c4/cbi/software/R-4.0.2/lib64/R/bin/Rscript' --default-packages=datasets,utils,grDevices,graphics,stats,methods -e '#label=future/tests/futureCall.R:c4-dev1:henrik:40114' -e 'try(suppressWarnings(cat(Sys.getpid(),file="/scratch/henrik/Rtmp2FTdMQ/future.parent=40114.9cb24fd23524.pid")), silent = TRUE)' -e 'workRSOCK <- tryCatch(parallel:::.slaveRSOCK, error=function(e) parallel:::.workRSOCK); workRSOCK()' MASTER=localhost PORT=21121 OUT=/dev/null TIMEOUT=120 XDR=TRUE.
-       * Worker (PID 41221) was successfully killed: TRUE
-       * Troubleshooting suggestions:
-         - Suggestion #1: Set 'outfile=NULL' to see output from worker.
-      Calls: plan ... tryCatchList -> tryCatchOne -> <Anonymous> -> <Anonymous>
-      Execution halted
     ```
 
 # geospark
@@ -1083,11 +979,11 @@ Run `revdep_details(, "lidR")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.6Mb
+      installed size is 11.9Mb
       sub-directories of 1Mb or more:
         doc       1.2Mb
         extdata   1.1Mb
-        libs      8.7Mb
+        libs      8.1Mb
     ```
 
 # lmtp

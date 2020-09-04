@@ -26,12 +26,10 @@
 |:----------------------------|:-------|:-----|:-------|:----|
 |[Signac](failures.md#signac) |1.0.0   |1     |        |     |
 
-## New problems (5)
+## New problems (3)
 
 |package                                |version |error    |warning |note |
 |:--------------------------------------|:-------|:--------|:-------|:----|
-|[fastpos](problems.md#fastpos)         |0.4.0   |__+1__   |        |     |
-|[future](problems.md#future)           |1.18.0  |__+2__   |        |     |
 |[lidR](problems.md#lidr)               |3.0.3   |__+1__   |        |1    |
 |[MineICA](problems.md#mineica)         |1.28.0  |1 __+1__ |2       |4    |
 |[rangeMapper](problems.md#rangemapper) |0.3-7   |__+1__   |        |     |
@@ -71,7 +69,7 @@
 |dhReg                                           |0.1.0     |         |        |     |
 |dipsaus                                         |0.1.0     |         |        |     |
 |discrim                                         |0.1.0     |         |        |     |
-|disk.frame                                      |0.3.7     |-1       |        |     |
+|disk.frame                                      |0.3.7     |         |        |     |
 |doFuture                                        |0.9.0     |         |        |     |
 |[dragon](problems.md#dragon)                    |1.0.2     |1        |        |1    |
 |drake                                           |7.12.5    |         |        |     |
@@ -83,7 +81,7 @@
 |ezcox                                           |0.7.0     |         |        |     |
 |fabletools                                      |0.2.1     |         |        |     |
 |FAMoS                                           |0.3.0     |         |        |     |
-|[fastpos](problems.md#fastpos)                  |0.4.0     |__+1__   |        |     |
+|fastpos                                         |0.4.0     |         |        |     |
 |fiery                                           |1.1.2     |         |        |     |
 |fipe                                            |0.0.1     |         |        |     |
 |[foieGras](problems.md#foiegras)                |0.6-9     |         |        |1    |
@@ -91,7 +89,7 @@
 |forestControl                                   |0.2.1     |         |        |     |
 |funGp                                           |0.1.0     |         |        |     |
 |furrr                                           |0.1.0     |         |        |     |
-|[future](problems.md#future)                    |1.18.0    |__+2__   |        |     |
+|future                                          |1.18.0    |         |        |     |
 |future.apply                                    |1.6.0     |         |        |     |
 |future.BatchJobs                                |0.16.2    |         |        |     |
 |future.batchtools                               |0.9.0     |         |        |     |
