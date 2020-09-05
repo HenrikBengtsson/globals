@@ -168,9 +168,12 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
 }
 
 
-#' @param attributes If TRUE, attributes of `expr` are also searched.
-#' If FALSE (default), they are not.
+#' @param attributes If TRUE (default), attributes of `expr` are also searched.
+#' If FALSE, they are not.
 #' If a character vector, then attributes with matching names are searched.
+#' Note, the attributes of the attributes elements are not searched, that is,
+#' attributes are not searched recursively.  Also, attributes are searched
+#' with `dotdotdot = "ignore".
 #'
 #' @param dotdotdot TBD.
 #'
@@ -318,8 +321,11 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
       debug && mdebug(" - searching attributes")
       attrs_globals <- list_apply(attrs, FUN = findGlobals, envir = envir,
                                   ## Don't look for attributes recursively
-                                  attributes = FALSE, ...,
-                                  tweak = tweak, dotdotdot = dotdotdot,
+                                  attributes = FALSE,
+                                  tweak = tweak,
+                                  ...,
+                                  ## Don't complain about '...'
+                                  dotdotdot = "ignore",
                                   substitute = FALSE, unlist = FALSE)
       if (unlist) attrs_globals <- unlist(attrs_globals, use.names = FALSE)
       if (length(attrs_globals) > 1L) attrs_globals <- unique(attrs_globals)
