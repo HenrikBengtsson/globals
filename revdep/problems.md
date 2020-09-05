@@ -41,7 +41,33 @@ Run `revdep_details(, "alookr")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/wynton/home/cbi/hb/repositories/globals/revdep/checks/alookr/new/alookr.Rcheck/00install.out’ for details.
+    See ‘/home/henrik/c4/repositories/globals/revdep/checks/alookr/new/alookr.Rcheck/00install.out’ for details.
+    ```
+
+# aroma.affymetrix
+
+<details>
+
+* Version: 3.2.0
+* Source code: https://github.com/cran/aroma.affymetrix
+* URL: https://www.aroma-project.org/, https://github.com/HenrikBengtsson/aroma.affymetrix
+* BugReports: https://github.com/HenrikBengtsson/aroma.affymetrix/issues
+* Date/Publication: 2019-06-23 06:00:14 UTC
+* Number of recursive dependencies: 70
+
+Run `revdep_details(, "aroma.affymetrix")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.4Mb
+      sub-directories of 1Mb or more:
+        R             2.3Mb
+        help          1.1Mb
+        testScripts   1.1Mb
     ```
 
 # aroma.core
@@ -67,11 +93,6 @@ Run `revdep_details(, "aroma.core")` for more info
       'GLAD', 'sfit', 'expectile', 'HaarSeg', 'mpcbs'
     ```
 
-*   checking Rd cross-references ... NOTE
-    ```
-    Unknown package ‘GLAD’ in Rd xrefs
-    ```
-
 # BAMBI
 
 <details>
@@ -88,6 +109,13 @@ Run `revdep_details(, "BAMBI")` for more info
 </details>
 
 ## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+      installed size is  6.1Mb
+      sub-directories of 1Mb or more:
+        libs   5.5Mb
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -112,9 +140,14 @@ Run `revdep_details(, "batchtools")` for more info
 
 ## In both
 
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘doMPI’
+    ```
+
 *   checking Rd cross-references ... NOTE
     ```
-    Unknown package ‘Rmpi’ in Rd xrefs
+    Package unavailable to check Rd xrefs: ‘Rmpi’
     ```
 
 # bcmaps
@@ -156,9 +189,9 @@ Run `revdep_details(, "blavaan")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.6Mb
+      installed size is 62.7Mb
       sub-directories of 1Mb or more:
-        libs   4.6Mb
+        libs  60.8Mb
     ```
 
 *   checking for GNU extensions in Makefiles ... NOTE
@@ -209,6 +242,14 @@ Run `revdep_details(, "brms")` for more info
     Package suggested but not available for checking: ‘cmdstanr’
     ```
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.7Mb
+      sub-directories of 1Mb or more:
+        R     3.1Mb
+        doc   2.6Mb
+    ```
+
 # butcher
 
 <details>
@@ -236,12 +277,12 @@ Run `revdep_details(, "butcher")` for more info
 
 <details>
 
-* Version: 0.6.0
+* Version: 0.7.0
 * Source code: https://github.com/cran/CLVTools
 * URL: https://github.com/bachmannpatrick/CLVTools
 * BugReports: https://github.com/bachmannpatrick/CLVTools/issues
-* Date/Publication: 2020-06-24 22:10:02 UTC
-* Number of recursive dependencies: 87
+* Date/Publication: 2020-08-26 20:10:02 UTC
+* Number of recursive dependencies: 82
 
 Run `revdep_details(, "CLVTools")` for more info
 
@@ -251,9 +292,9 @@ Run `revdep_details(, "CLVTools")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.0Mb
+      installed size is 12.6Mb
       sub-directories of 1Mb or more:
-        libs   5.2Mb
+        libs  11.4Mb
     ```
 
 # codebook
@@ -273,11 +314,6 @@ Run `revdep_details(, "codebook")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘userfriendlyscience’
-    ```
-
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
@@ -288,6 +324,73 @@ Run `revdep_details(, "codebook")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 65 marked UTF-8 strings
+    ```
+
+# corrr
+
+<details>
+
+* Version: 0.4.2
+* Source code: https://github.com/cran/corrr
+* URL: https://github.com/tidymodels/corrr
+* BugReports: https://github.com/tidymodels/corrr/issues
+* Date/Publication: 2020-03-22 06:40:15 UTC
+* Number of recursive dependencies: 111
+
+Run `revdep_details(, "corrr")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      
+          filter, lag
+      
+      The following objects are masked from 'package:base':
+      
+          intersect, setdiff, setequal, union
+      
+      > 
+      > test_check("corrr")
+      -- 1. Error: Converts to proper structure (@test-stretch.R#16)  ----------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output("stretch.txt", str(stretch(d)))
+       2. grDevices::png(filename = tempfile())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 78 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 1 ]
+      1. Error: Converts to proper structure (@test-stretch.R#16) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# cort
+
+<details>
+
+* Version: 0.3.1
+* Source code: https://github.com/cran/cort
+* URL: https://github.com/lrnv/cort
+* BugReports: https://github.com/lrnv/cort/issues
+* Date/Publication: 2020-05-13 23:40:09 UTC
+* Number of recursive dependencies: 63
+
+Run `revdep_details(, "cort")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        libs   4.4Mb
     ```
 
 # cSEM
@@ -307,32 +410,10 @@ Run `revdep_details(, "cSEM")` for more info
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking package dependencies ... NOTE
     ```
     Namespace in Imports field not imported from: ‘Rdpack’
       All declared Imports should be used.
-    ```
-
-# cvms
-
-<details>
-
-* Version: 1.0.2
-* Source code: https://github.com/cran/cvms
-* URL: https://github.com/ludvigolsen/cvms
-* BugReports: https://github.com/ludvigolsen/cvms/issues
-* Date/Publication: 2020-05-29 00:00:10 UTC
-* Number of recursive dependencies: 118
-
-Run `revdep_details(, "cvms")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘rsvg’
     ```
 
 # datapackage.r
@@ -386,11 +467,11 @@ Run `revdep_details(, "delayed")` for more info
 
 <details>
 
-* Version: 1.0.1
+* Version: 1.0.2
 * Source code: https://github.com/cran/dragon
 * URL: https://github.com/sjspielman/dragon
 * BugReports: https://github.com/sjspielman/dragon/issues
-* Date/Publication: 2020-07-19 00:10:03 UTC
+* Date/Publication: 2020-08-31 14:00:03 UTC
 * Number of recursive dependencies: 124
 
 Run `revdep_details(, "dragon")` for more info
@@ -401,23 +482,42 @@ Run `revdep_details(, "dragon")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespaces in Imports field not imported from:
-      ‘htmltools’ ‘magrittr’ ‘promises’
+    Namespace in Imports field not imported from: ‘htmltools’
       All declared Imports should be used.
     ```
 
-# drake
+# EFAtools
 
 <details>
 
-* Version: 7.12.4
-* Source code: https://github.com/cran/drake
-* URL: https://github.com/ropensci/drake, https://docs.ropensci.org/drake, https://books.ropensci.org/drake/
-* BugReports: https://github.com/ropensci/drake/issues
-* Date/Publication: 2020-06-29 17:20:03 UTC
-* Number of recursive dependencies: 142
+* Version: 0.1.1
+* Source code: https://github.com/cran/EFAtools
+* Date/Publication: 2020-07-13 15:50:18 UTC
+* Number of recursive dependencies: 78
 
-Run `revdep_details(, "drake")` for more info
+Run `revdep_details(, "EFAtools")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.4Mb
+      sub-directories of 1Mb or more:
+        libs   5.4Mb
+    ```
+
+# EpiNow2
+
+<details>
+
+* Version: 1.1.0
+* Source code: https://github.com/cran/EpiNow2
+* Date/Publication: 2020-09-01 16:10:03 UTC
+* Number of recursive dependencies: 138
+
+Run `revdep_details(, "EpiNow2")` for more info
 
 </details>
 
@@ -425,137 +525,26 @@ Run `revdep_details(, "drake")` for more info
 
 *   checking package dependencies ... NOTE
     ```
-    Package suggested but not available for checking: ‘clustermq’
+    Package suggested but not available for checking: ‘EpiSoon’
     ```
 
-# evaluator
-
-<details>
-
-* Version: 0.4.2
-* Source code: https://github.com/cran/evaluator
-* URL: https://evaluator.tidyrisk.org
-* BugReports: https://github.com/davidski/evaluator/issues
-* Date/Publication: 2020-04-16 09:20:09 UTC
-* Number of recursive dependencies: 136
-
-Run `revdep_details(, "evaluator")` for more info
-
-</details>
-
-## In both
-
-*   checking tests ...
+*   checking installed package size ... NOTE
     ```
-    ...
-      +   message("Using phantom.js from ", shinytest:::find_phantom(), "\n")
-      + }
-      > 
-      > test_check("evaluator")
-      pandoc: Could not determine mime type for `/wynton/home/cbi/hb/repositories/globals/revdep/library/evaluator/rmarkdown/rmd/h/fontawesome/css/../webfonts/fa-brands-400.woff2'
-      ── 1. Error: Risk Dashboard renders (@test-reports.R#50)  ──────────────────────
-      pandoc document conversion failed with error 1
-      Backtrace:
-       1. testthat::evaluate_promise(...)
-       6. evaluator::risk_dashboard(...)
-       7. rmarkdown::render(...)
-       8. rmarkdown:::convert(output_file, run_citeproc)
-       9. rmarkdown::pandoc_convert(...)
-      
-      # Scenario model: openfair_tef_tc_diff_lm
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 137 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: Risk Dashboard renders (@test-reports.R#50) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# fabletools
-
-<details>
-
-* Version: 0.2.0
-* Source code: https://github.com/cran/fabletools
-* URL: http://fabletools.tidyverts.org/, https://github.com/tidyverts/fabletools
-* BugReports: https://github.com/tidyverts/fabletools/issues
-* Date/Publication: 2020-06-15 23:40:08 UTC
-* Number of recursive dependencies: 95
-
-Run `revdep_details(, "fabletools")` for more info
-
-</details>
-
-## In both
-
-*   checking S3 generic/method consistency ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    See section ‘Generic functions and methods’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking replacement functions ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    The argument of a replacement function which corresponds to the right
-    hand side must be named ‘value’.
-    ```
-
-*   checking Rd files ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    prepare_Rd: running command 'timedatectl' had status 1
-    ```
-
-*   checking for missing documentation entries ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    All user-level objects in a package should have documentation entries.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking for code/documentation mismatches ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    Failed to query server: Connection timed out
-    Failed to query server: Connection timed out
-    ```
-
-*   checking for unstated dependencies in examples ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    Warning in system("timedatectl", intern = TRUE) :
-      running command 'timedatectl' had status 1
+      installed size is 83.8Mb
+      sub-directories of 1Mb or more:
+        help   1.2Mb
+        libs  82.1Mb
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
-    Failed to query server: Connection timed out
-    Namespace in Imports field not imported from: ‘lifecycle’
+    Namespace in Imports field not imported from: ‘rstantools’
       All declared Imports should be used.
     ```
 
-*   checking foreign function calls ... NOTE
+*   checking for GNU extensions in Makefiles ... NOTE
     ```
-    Failed to query server: Connection timed out
-    See chapter ‘System and foreign language interfaces’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    ```
-
-*   checking Rd \usage sections ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    The \usage entries for S3 methods should use the \method markup and not
-    their full name.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
+    GNU make is a SystemRequirements.
     ```
 
 # foieGras
@@ -567,7 +556,7 @@ Run `revdep_details(, "fabletools")` for more info
 * URL: <https://cran.r-project.org/package=foieGras>
 * BugReports: https://github.com/ianjonsen/foieGras/issues
 * Date/Publication: 2020-07-22 21:50:02 UTC
-* Number of recursive dependencies: 119
+* Number of recursive dependencies: 120
 
 Run `revdep_details(, "foieGras")` for more info
 
@@ -577,10 +566,28 @@ Run `revdep_details(, "foieGras")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.8Mb
+      installed size is 38.4Mb
       sub-directories of 1Mb or more:
-        libs  12.7Mb
+        libs  37.2Mb
     ```
+    Namespace in Imports field not imported from: ‘dtplyr’
+      All declared Imports should be used.
+    ```
+
+# future
+
+<details>
+
+* Version: 1.18.0
+* Source code: https://github.com/cran/future
+* URL: https://github.com/HenrikBengtsson/future
+* BugReports: https://github.com/HenrikBengtsson/future/issues
+* Date/Publication: 2020-07-09 05:40:03 UTC
+* Number of recursive dependencies: 13
+
+Run `revdep_details(, "future")` for more info
+
+</details>
 
 # forecastML
 
@@ -602,49 +609,6 @@ Run `revdep_details(, "forecastML")` for more info
     ```
     Namespace in Imports field not imported from: ‘dtplyr’
       All declared Imports should be used.
-    ```
-
-# future
-
-<details>
-
-* Version: 1.18.0
-* Source code: https://github.com/cran/future
-* URL: https://github.com/HenrikBengtsson/future
-* BugReports: https://github.com/HenrikBengtsson/future/issues
-* Date/Publication: 2020-07-09 05:40:03 UTC
-* Number of recursive dependencies: 13
-
-Run `revdep_details(, "future")` for more info
-
-</details>
-
-## In both
-
-*   checking tests ...
-    ```
-    ...
-      [15:44:55.217]     ...future.result
-      [15:44:55.217] }
-      [15:44:55.223] requestCore(): workers = 2
-      [15:44:55.226] MulticoreFuture started
-      [15:44:55.239] plan(): Setting new future strategy stack:
-      [15:44:55.241] List of future strategies:
-      [15:44:55.241] 1. sequential:
-      [15:44:55.241]    - args: function (expr, envir = parent.frame(), substitute = TRUE, lazy = FALSE, seed = NULL, globals = TRUE, local = TRUE, earlySignal = FALSE, label = NULL, ...)
-      [15:44:55.241]    - tweaked: FALSE
-      [15:44:55.241]    - call: NULL
-      [15:44:55.245] plan(): nbrOfWorkers() = 1
-      [15:44:55.250] plan(): Setting new future strategy stack:
-      [15:44:55.251] List of future strategies:
-      [15:44:55.251] 1. multicore:
-      [15:44:55.251]    - args: function (expr, envir = parent.frame(), substitute = TRUE, lazy = FALSE, seed = NULL, globals = TRUE, workers = availableCores(constraints = "multicore"), earlySignal = FALSE, label = NULL, ...)
-      [15:44:55.251]    - tweaked: FALSE
-      [15:44:55.251]    - call: plan(multicore)
-      [15:44:55.256] plan(): nbrOfWorkers() = 2
-      Number of OpenMP threads in 'MulticoreFuture' future: 1
-      Error: enable && nthreads > 1L is not TRUE
-      Execution halted
     ```
 
 # geospark
@@ -723,7 +687,7 @@ Run `revdep_details(, "grattan")` for more info
 * Version: 3.0.0
 * Source code: https://github.com/cran/gWQS
 * Date/Publication: 2020-06-23 13:00:03 UTC
-* Number of recursive dependencies: 104
+* Number of recursive dependencies: 101
 
 Run `revdep_details(, "gWQS")` for more info
 
@@ -737,26 +701,28 @@ Run `revdep_details(, "gWQS")` for more info
       All declared Imports should be used.
     ```
 
-# idmodelr
+# hal9001
 
 <details>
 
-* Version: 0.3.2
-* Source code: https://github.com/cran/idmodelr
-* URL: http://www.samabbott.co.uk/idmodelr, https://github.com/seabbs/idmodelr
-* BugReports: https://github.com/seabbs/idmodelr/issues
-* Date/Publication: 2020-06-11 14:20:03 UTC
-* Number of recursive dependencies: 129
+* Version: 0.2.6
+* Source code: https://github.com/cran/hal9001
+* URL: https://github.com/tlverse/hal9001
+* BugReports: https://github.com/tlverse/hal9001/issues
+* Date/Publication: 2020-06-27 04:50:07 UTC
+* Number of recursive dependencies: 90
 
-Run `revdep_details(, "idmodelr")` for more info
+Run `revdep_details(, "hal9001")` for more info
 
 </details>
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking installed package size ... NOTE
     ```
-    Package suggested but not available for checking: ‘vdiffr’
+      installed size is  6.3Mb
+      sub-directories of 1Mb or more:
+        libs   5.5Mb
     ```
 
 # iml
@@ -799,6 +765,39 @@ Run `revdep_details(, "infercnv")` for more info
 
 ## In both
 
+*   checking examples ... ERROR
+    ```
+    ...
+    +          ref_title="References (Cells)",
+    +          cluster_by_groups=TRUE,
+    +          x.center=1,
+    +          x.range="auto",
+    +          hclust_method='ward.D',
+    +          color_safe_pal=FALSE,
+    +          output_filename="infercnv",
+    +          output_format="png",
+    +          png_res=300,
+    +          dynamic_resize=0
+    +          )
+    INFO [2020-09-05 09:27:46] ::plot_cnv:Start
+    INFO [2020-09-05 09:27:46] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-09-05 09:27:46] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-09-05 09:27:46] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
+      unable to open connection to X11 display ''
+    Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
+      unable to start device PNG
+    Calls: plot_cnv -> png
+    Execution halted
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.1Mb
+      sub-directories of 1Mb or more:
+        extdata   3.1Mb
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
     Unexported object imported by a ':::' call: ‘HiddenMarkov:::makedensity’
@@ -832,51 +831,82 @@ Run `revdep_details(, "inlinedocs")` for more info
 
 *   checking Rd cross-references ... NOTE
     ```
-    Unknown package ‘R.methodsS3’ in Rd xrefs
+    Package unavailable to check Rd xrefs: ‘R.methodsS3’
+    ```
+
+# JointAI
+
+<details>
+
+* Version: 1.0.0
+* Source code: https://github.com/cran/JointAI
+* URL: https://nerler.github.io/JointAI/
+* BugReports: https://github.com/nerler/JointAI/issues/
+* Date/Publication: 2020-08-31 06:40:09 UTC
+* Number of recursive dependencies: 131
+
+Run `revdep_details(, "JointAI")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘mathjaxr’
+      All declared Imports should be used.
     ```
 
 # ipc
 
 <details>
 
-* Version: 0.1.3
-* Source code: https://github.com/cran/ipc
-* URL: https://github.com/fellstat/ipc
-* BugReports: https://github.com/fellstat/ipc/issues
-* Date/Publication: 2019-06-23 06:00:03 UTC
-* Number of recursive dependencies: 56
+* Version: 3.0.3
+* Source code: https://github.com/cran/lidR
+* URL: https://github.com/Jean-Romain/lidR
+* BugReports: https://github.com/Jean-Romain/lidR/issues
+* Date/Publication: 2020-08-03 06:30:10 UTC
+* Number of recursive dependencies: 155
 
-Run `revdep_details(, "ipc")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘redux’
-    ```
-
-# lgr
-
-<details>
-
-* Version: 0.3.4
-* Source code: https://github.com/cran/lgr
-* URL: https://s-fleck.github.io/lgr
-* BugReports: https://github.com/s-fleck/lgr/issues
-* Date/Publication: 2020-03-20 11:50:02 UTC
-* Number of recursive dependencies: 79
-
-Run `revdep_details(, "lgr")` for more info
+Run `revdep_details(, "lidR")` for more info
 
 </details>
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking tests ...
     ```
-    Packages suggested but not available for checking: 'RMariaDB', 'RPostgres'
+    ...
+    Complete output:
+      > Sys.setenv("R_TESTS" = "")
+      > 
+      > library(testthat)
+      > library(lidR)
+      Loading required package: raster
+      Loading required package: sp
+      > 
+      > options(lidR.progress = FALSE)
+      > rgdal::set_thin_PROJ6_warnings(TRUE)
+      > test_check("lidR")
+      ── 1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-gr
+      `x` not equal to `y`.
+      Attributes: < Component "data": Attributes: < Component "values": Mean relative difference: 0.000831213 > >
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 1163 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 1 ]
+      1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-grid_canopy.R#102) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.6Mb
+      sub-directories of 1Mb or more:
+        doc       1.2Mb
+        extdata   1.1Mb
+        libs      8.7Mb
     ```
 
 # lmtp
@@ -893,6 +923,32 @@ Run `revdep_details(, "lmtp")` for more info
 </details>
 
 ## In both
+
+*   checking tests ...
+    ```
+    ...
+      > 
+      > test_check("lmtp")
+      -- 1. Error: contrast output is correct (@test-contrasts.R#29)  ----------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      -- 2. Error: create proper node lists, t > 1 (@test-node_list.R#5)  ------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 24 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 2 ]
+      1. Error: contrast output is correct (@test-contrasts.R#29) 
+      2. Error: create proper node lists, t > 1 (@test-node_list.R#5) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 *   checking package dependencies ... NOTE
     ```
@@ -984,7 +1040,7 @@ Run `revdep_details(, "MineICA")` for more info
     +     mart = mart, level = "genes", selCutoffWrite = 2.5)
     
       When sourcing ‘MineICA.R’:
-    Error: task 1 failed - "Multiple cache results found"
+    Error: task 5 failed - "Multiple cache results found"
     Execution halted
     ```
 
@@ -1059,7 +1115,7 @@ Run `revdep_details(, "MineICA")` for more info
       See the note in ?`:::` about the use of this operator.
     ```
 
-*   checking R code for possible problems ... NOTE
+*   checking for missing documentation entries ... WARNING
     ```
     ...
       position_jitter pushViewport quantile rainbow_hcl rcorr read.table
@@ -1085,6 +1141,49 @@ Run `revdep_details(, "MineICA")` for more info
     contains 'methods').
     ```
 
+# modeltime
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/modeltime
+* URL: https://github.com/business-science/modeltime
+* BugReports: https://github.com/business-science/modeltime/issues
+* Date/Publication: 2020-09-02 17:50:03 UTC
+* Number of recursive dependencies: 190
+
+Run `revdep_details(, "modeltime")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      
+      The following object is masked from 'package:kernlab':
+      
+          error
+      
+      ── 1. Error: (unknown) (@test-results-forecast-plots.R#34)  ────────────────────
+      unable to start device PNG
+      Backtrace:
+        1. base::suppressWarnings(...)
+        2. dplyr::mutate_at(., vars(.value:.conf_hi), exp)
+       10. modeltime::plot_modeltime_forecast(., .interactive = TRUE)
+       13. plotly:::ggplotly.ggplot(g, dynamicTicks = TRUE)
+       14. plotly::gg2list(...)
+       15. grDevices:::dev_fun(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 448 | SKIPPED: 7 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: (unknown) (@test-results-forecast-plots.R#34) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 # nlrx
 
 <details>
@@ -1105,6 +1204,7 @@ Run `revdep_details(, "nlrx")` for more info
 *   checking examples ... ERROR
     ```
     ...
+    +                 "https://raw.githubusercontent.com/nldoc/nldoc_pg/master/WSP.nls")
     > 
     > # Define output directory:
     > outdir <- tempdir()  # adjust path to your needs
@@ -1120,10 +1220,9 @@ Run `revdep_details(, "nlrx")` for more info
     +       theme = "cosmo",
     +       date = date(),
     +       toc = TRUE)
-    /usr/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /wynton/home/cbi/hb/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/hb/RtmpaNXJGZ/rmarkdown-str19837083724e.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
-    Fetching http://ccl.northwestern.edu/images/creativecommons/byncsa.png...
-    pandoc: Failed to retrieve http://ccl.northwestern.edu/images/creativecommons/byncsa.png
-    user error (openTCPConnection: host lookup failure for "ccl.northwestern.edu")
+    /home/shared/cbc/software_cbc/pandoc-2.1.2/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpOUgEvk/rmarkdown-str931e2d777a8a.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
+    Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
+    InvalidUrlException "c4-yum1:3128" "Invalid scheme"
     Error: pandoc document conversion failed with error 61
     Execution halted
     ```
@@ -1131,12 +1230,12 @@ Run `revdep_details(, "nlrx")` for more info
 *   checking tests ...
     ```
     ...
+      > library(nlrx)
       > 
       > test_check("nlrx", filter = "nldoc")
-      /usr/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /wynton/home/cbi/hb/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/hb/RtmpxcxXGZ/rmarkdown-str1cea6e6ffe4a.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
-      Fetching http://ccl.northwestern.edu/images/creativecommons/byncsa.png...
-      pandoc: Failed to retrieve http://ccl.northwestern.edu/images/creativecommons/byncsa.png
-      user error (openTCPConnection: host lookup failure for "ccl.northwestern.edu")
+      /home/shared/cbc/software_cbc/pandoc-2.1.2/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmpx9o3YD/rmarkdown-str976f4b66d43f.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
+      Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
+      InvalidUrlException "c4-yum1:3128" "Invalid scheme"
       ── 1. Error: nldoc (@test-nldoc.R#14)  ─────────────────────────────────────────
       pandoc document conversion failed with error 61
       Backtrace:
@@ -1173,7 +1272,7 @@ Run `revdep_details(, "origami")` for more info
 
 *   checking Rd cross-references ... NOTE
     ```
-    Unknown package ‘glmnet’ in Rd xrefs
+    Package unavailable to check Rd xrefs: ‘glmnet’
     ```
 
 # PCRedux
@@ -1217,7 +1316,7 @@ Run `revdep_details(, "phylolm")` for more info
 
 *   checking Rd cross-references ... NOTE
     ```
-    Unknown packages ‘geiger’, ‘caper’ in Rd xrefs
+    Packages unavailable to check Rd xrefs: ‘geiger’, ‘caper’
     ```
 
 # poissonreg
@@ -1237,11 +1336,54 @@ Run `revdep_details(, "poissonreg")` for more info
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking examples ... ERROR
     ```
     Namespaces in Imports field not imported from:
       ‘dplyr’ ‘tidyr’
       All declared Imports should be used.
+    ```
+
+# probably
+
+<details>
+
+* Version: 0.0.6
+* Source code: https://github.com/cran/probably
+* URL: https://github.com/tidymodels/probably/, https://probably.tidymodels.org
+* BugReports: https://github.com/tidymodels/probably/issues
+* Date/Publication: 2020-06-05 14:00:02 UTC
+* Number of recursive dependencies: 84
+
+Run `revdep_details(, "probably")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      
+      Attaching package: 'probably'
+      
+      The following objects are masked from 'package:base':
+      
+          as.factor, as.ordered
+      
+      > 
+      > test_check("probably")
+      -- 1. Error: slicing (@test-class-pred.R#210)  ---------------------------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 118 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
+      1. Error: slicing (@test-class-pred.R#210) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # promises
@@ -1263,7 +1405,7 @@ Run `revdep_details(, "promises")` for more info
 
 *   checking Rd cross-references ... NOTE
     ```
-    Unknown package ‘purrr’ in Rd xrefs
+    Package unavailable to check Rd xrefs: ‘purrr’
     ```
 
 # Prostar
@@ -1285,7 +1427,50 @@ Run `revdep_details(, "Prostar")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/wynton/home/cbi/hb/repositories/globals/revdep/checks/Prostar/new/Prostar.Rcheck/00install.out’ for details.
+    See ‘/home/henrik/c4/repositories/globals/revdep/checks/Prostar/new/Prostar.Rcheck/00install.out’ for details.
+    ```
+
+# PSCBS
+
+<details>
+
+* Version: 0.65.0
+* Source code: https://github.com/cran/PSCBS
+* URL: https://github.com/HenrikBengtsson/PSCBS
+* BugReports: https://github.com/HenrikBengtsson/PSCBS/issues
+* Date/Publication: 2019-05-05 22:40:09 UTC
+* Number of recursive dependencies: 85
+
+Run `revdep_details(, "PSCBS")` for more info
+
+</details>
+
+## In both
+
+*   checking running R code from vignettes ...
+    ```
+    ...
+    +     aspectRatio = 0.35, {
+    +         plotTracks(fit)
+    +     })
+    Warning in png("figures/PairedPSCBS,exData,chr01,CBS,tracks.png", width = 840,  :
+      unable to open connection to X11 display ''
+    
+      When sourcing ‘CBS.R’:
+    Error: unable to start device PNG
+    Execution halted
+    when running code in ‘PairedPSCBS.tex.rsp’
+      ...
+    > toPNG(fullname, tags = c(class(fit)[1], "tracks"), 
+    +     aspectRatio = 0.6, {
+    +         plotTracks(fit)
+    +     })
+    Warning in png("figures/PairedPSCBS,exData,chr01,PairedPSCBS,tracks.png",  :
+      unable to open connection to X11 display ''
+    
+      When sourcing ‘PairedPSCBS.R’:
+    Error: unable to start device PNG
+    Execution halted
     ```
 
 # QDNAseq
@@ -1305,10 +1490,23 @@ Run `revdep_details(, "QDNAseq")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking running R code from vignettes ...
     ```
-    Packages suggested but not available for checking:
-      'QDNAseq.hg19', 'QDNAseq.mm10'
+      ‘QDNAseq.Rnw’... failed
+     ERROR
+    Errors in running code in vignettes:
+    when running code in ‘QDNAseq.Rnw’
+      ...
+    experimentData: use 'experimentData(object)'
+    Annotation:  
+    
+    > png("rawprofile.png")
+    Warning in png("rawprofile.png") :
+      unable to open connection to X11 display ''
+    
+      When sourcing ‘QDNAseq.R’:
+    Error: unable to start device PNG
+    Execution halted
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -1357,31 +1555,9 @@ Run `revdep_details(, "qtl2pleio")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  7.5Mb
+      installed size is 23.8Mb
       sub-directories of 1Mb or more:
-        libs   7.4Mb
-    ```
-
-# rainette
-
-<details>
-
-* Version: 0.1.1
-* Source code: https://github.com/cran/rainette
-* URL: https://juba.github.io/rainette/
-* BugReports: https://github.com/juba/rainette/issues
-* Date/Publication: 2020-05-09 12:00:03 UTC
-* Number of recursive dependencies: 156
-
-Run `revdep_details(, "rainette")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘vdiffr’
+        libs  23.6Mb
     ```
 
 # regmedint
@@ -1407,37 +1583,15 @@ Run `revdep_details(, "regmedint")` for more info
       All declared Imports should be used.
     ```
 
-# resourcer
-
-<details>
-
-* Version: 1.0.1
-* Source code: https://github.com/cran/resourcer
-* BugReports: https://github.com/obiba/resourcer
-* Date/Publication: 2020-05-15 05:30:02 UTC
-* Number of recursive dependencies: 90
-
-Run `revdep_details(, "resourcer")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking:
-      'ssh', 'mongolite', 'RMariaDB', 'RPostgres'
-    ```
-
 # robotstxt
 
 <details>
 
-* Version: 0.7.8
+* Version: 0.7.13
 * Source code: https://github.com/cran/robotstxt
-* URL: https://docs.ropensci.org/robotstxt, https://github.com/ropensci/robotstxt
+* URL: https://docs.ropensci.org/robotstxt/, https://github.com/ropensci/robotstxt
 * BugReports: https://github.com/ropensci/robotstxt/issues
-* Date/Publication: 2020-07-25 21:30:08 UTC
+* Date/Publication: 2020-09-03 19:30:02 UTC
 * Number of recursive dependencies: 62
 
 Run `revdep_details(, "robotstxt")` for more info
@@ -1448,7 +1602,73 @@ Run `revdep_details(, "robotstxt")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘future’
+    Namespace in Imports field not imported from: ‘Deriv’
+      All declared Imports should be used.
+    ```
+
+# rsample
+
+<details>
+
+* Version: 0.0.7
+* Source code: https://github.com/cran/rsample
+* URL: https://rsample.tidymodels.org, https://github.com/tidymodels/rsample
+* BugReports: https://github.com/tidymodels/rsample/issues
+* Date/Publication: 2020-06-04 07:40:03 UTC
+* Number of recursive dependencies: 96
+
+Run `revdep_details(, "rsample")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      + }
+      Loading required namespace: xml2
+      -- 1. Error: printing with ... (@test_group.R#95)  -----------------------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      -- 2. Error: print methods (@test_rsplit.R#46)  --------------------------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 1844 | SKIPPED: 1 | WARNINGS: 2 | FAILED: 2 ]
+      1. Error: printing with ... (@test_group.R#95) 
+      2. Error: print methods (@test_rsplit.R#46) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# rsparkling
+
+<details>
+
+* Version: 0.2.19
+* Source code: https://github.com/cran/rsparkling
+* URL: https://github.com/h2oai/sparkling-water/tree/master/r
+* BugReports: http://jira.h2o.ai
+* Date/Publication: 2020-01-28 23:10:02 UTC
+* Number of recursive dependencies: 63
+
+Run `revdep_details(, "rsparkling")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘h2o’
       All declared Imports should be used.
     ```
 
@@ -1479,11 +1699,11 @@ Run `revdep_details(, "rsparkling")` for more info
 
 <details>
 
-* Version: 0.1.0
+* Version: 0.1.1
 * Source code: https://github.com/cran/sapfluxnetr
 * URL: https://github.com/sapfluxnet/sapfluxnetr
 * BugReports: https://github.com/sapfluxnet/sapfluxnetr/issues
-* Date/Publication: 2020-05-11 12:50:07 UTC
+* Date/Publication: 2020-08-27 12:50:02 UTC
 * Number of recursive dependencies: 73
 
 Run `revdep_details(, "sapfluxnetr")` for more info
@@ -1495,27 +1715,6 @@ Run `revdep_details(, "sapfluxnetr")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 4 marked UTF-8 strings
-    ```
-
-# SCtools
-
-<details>
-
-* Version: 0.3.0
-* Source code: https://github.com/cran/SCtools
-* BugReports: https://github.com/bcastanho/SCtools/issues
-* Date/Publication: 2019-12-12 13:40:02 UTC
-* Number of recursive dependencies: 84
-
-Run `revdep_details(, "SCtools")` for more info
-
-</details>
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 27 marked UTF-8 strings
     ```
 
 # seer
@@ -1556,22 +1755,15 @@ Run `revdep_details(, "Seurat")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking package dependencies ... ERROR
     ```
-    Package suggested but not available for checking: ‘loomR’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.4Mb
-      sub-directories of 1Mb or more:
-        R      1.2Mb
-        libs   3.7Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘loomR’
+    Package required but not available: ‘sctransform’
+    
+    Packages suggested but not available for checking:
+      'loomR', 'hdf5r', 'Rfast2'
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # shiny
@@ -1583,7 +1775,7 @@ Run `revdep_details(, "Seurat")` for more info
 * URL: http://shiny.rstudio.com
 * BugReports: https://github.com/rstudio/shiny/issues
 * Date/Publication: 2020-06-23 13:30:03 UTC
-* Number of recursive dependencies: 96
+* Number of recursive dependencies: 97
 
 Run `revdep_details(, "shiny")` for more info
 
@@ -1591,9 +1783,38 @@ Run `revdep_details(, "shiny")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking tests ...
     ```
-    Package suggested but not available for checking: ‘ragg’
+    ...
+      
+      -- 9. Error: reactiveValues() has useful print method (@test-reactivity.r#132)  
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 1012 | SKIPPED: 6 | WARNINGS: 9 | FAILED: 9 ]
+      1. Error: renderImage supported (@test-mock-session.R#89) 
+      2. Error: ggplot coordmap (@test-plot-coordmap.R#23) 
+      3. Error: ggplot coordmap with facet_wrap (@test-plot-coordmap.R#85) 
+      4. Error: ggplot coordmap with facet_grid (@test-plot-coordmap.R#134) 
+      5. Error: ggplot coordmap with 2D facet_grid (@test-plot-coordmap.R#219) 
+      6. Error: ggplot coordmap with various data types (@test-plot-coordmap.R#269) 
+      7. Error: ggplot coordmap with various scales and coords (@test-plot-coordmap.R#323) 
+      8. Error: ggplot coordmap maintains discrete limits (@test-plot-coordmap.R#381) 
+      9. Error: reactiveValues() has useful print method (@test-reactivity.r#132) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 11.4Mb
+      sub-directories of 1Mb or more:
+        R     1.7Mb
+        www   8.5Mb
     ```
 
 # shinyrecap
@@ -1620,6 +1841,35 @@ Run `revdep_details(, "shinyrecap")` for more info
       All declared Imports should be used.
     ```
 
+# sigminer
+
+<details>
+
+* Version: 1.0.13
+* Source code: https://github.com/cran/sigminer
+* URL: https://github.com/ShixiangWang/sigminer
+* BugReports: https://github.com/ShixiangWang/sigminer/issues
+* Date/Publication: 2020-08-27 11:30:03 UTC
+* Number of recursive dependencies: 191
+
+Run `revdep_details(, "sigminer")` for more info
+
+</details>
+
+## Newly broken
+
+*   R CMD check timed out
+    
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.4Mb
+      sub-directories of 1Mb or more:
+        extdata   3.5Mb
+    ```
+
 # Signac
 
 <details>
@@ -1635,25 +1885,68 @@ Run `revdep_details(, "Signac")` for more info
 
 </details>
 
-## Newly broken
-
-*   R CMD check timed out
-    
-
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking whether package ‘Signac’ can be installed ... ERROR
     ```
-    Namespaces in Imports field not imported from:
-      'Biobase' 'Rcpp' 'grid'
-      All declared Imports should be used.
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘cicero’
+    Installation failed.
+    See ‘/home/henrik/c4/repositories/globals/revdep/checks/Signac/new/Signac.Rcheck/00install.out’ for details.
     ```
 
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘Signac’ ...
+** package ‘Signac’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c filter.cpp -o filter.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c group.cpp -o group.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c validate.cpp -o validate.o
+g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.0.2/lib64/R/lib -L/usr/local/lib64 -o Signac.so RcppExports.o filter.o group.o validate.o -L/software/c4/cbi/software/R-4.0.2/lib64/R/lib -lR
+installing to /home/henrik/c4/repositories/globals/revdep/checks/Signac/new/Signac.Rcheck/00LOCK-Signac/00new/Signac/libs
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘sctransform’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘Signac’
+* removing ‘/home/henrik/c4/repositories/globals/revdep/checks/Signac/new/Signac.Rcheck/Signac’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘Signac’ ...
+** package ‘Signac’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c filter.cpp -o filter.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c group.cpp -o group.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.0.2/lib64/R/include" -DNDEBUG  -I'/home/henrik/c4/repositories/globals/revdep/library/Signac/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c validate.cpp -o validate.o
+g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.0.2/lib64/R/lib -L/usr/local/lib64 -o Signac.so RcppExports.o filter.o group.o validate.o -L/software/c4/cbi/software/R-4.0.2/lib64/R/lib -lR
+installing to /home/henrik/c4/repositories/globals/revdep/checks/Signac/old/Signac.Rcheck/00LOCK-Signac/00new/Signac/libs
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘sctransform’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘Signac’
+* removing ‘/home/henrik/c4/repositories/globals/revdep/checks/Signac/old/Signac.Rcheck/Signac’
+
+```
 # simhelpers
 
 <details>
@@ -1663,7 +1956,7 @@ Run `revdep_details(, "Signac")` for more info
 * URL: https://meghapsimatrix.github.io/simhelpers/index.html
 * BugReports: https://github.com/meghapsimatrix/simhelpers/issues
 * Date/Publication: 2020-03-31 15:00:06 UTC
-* Number of recursive dependencies: 98
+* Number of recursive dependencies: 94
 
 Run `revdep_details(, "simhelpers")` for more info
 
@@ -1697,9 +1990,9 @@ Run `revdep_details(, "skpr")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 13.5Mb
+      installed size is 41.5Mb
       sub-directories of 1Mb or more:
-        libs  13.0Mb
+        libs  39.9Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -1759,12 +2052,12 @@ Run `revdep_details(, "spacey")` for more info
 
 <details>
 
-* Version: 1.0.1
+* Version: 1.0.2
 * Source code: https://github.com/cran/SpaDES.core
 * URL: https://spades-core.predictiveecology.org/, https://github.com/PredictiveEcology/SpaDES.core
 * BugReports: https://github.com/PredictiveEcology/SpaDES.core/issues
-* Date/Publication: 2020-05-15 17:10:06 UTC
-* Number of recursive dependencies: 154
+* Date/Publication: 2020-08-28 08:00:02 UTC
+* Number of recursive dependencies: 158
 
 Run `revdep_details(, "SpaDES.core")` for more info
 
@@ -1772,48 +2065,33 @@ Run `revdep_details(, "SpaDES.core")` for more info
 
 ## In both
 
-*   checking tests ...
+*   checking dependencies in R code ... NOTE
     ```
-    ...
-      
-      The following objects are masked from 'package:stats':
-      
-          end, start
-      
-      The following object is masked from 'package:utils':
-      
-          citation
-      
-      ── 1. Error: Filenames for simList (@test-load.R#435)  ─────────────────────────
-      $ operator is invalid for atomic vectors
-      Backtrace:
-       1. testthat::expect_true(identical(Fns$b, fnsGrd))
-       4. base::identical(Fns$b, fnsGrd)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 530 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: Filenames for simList (@test-load.R#435) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Namespace in Imports field not imported from: ‘RCurl’
+      All declared Imports should be used.
     ```
 
-*   checking Rd cross-references ... WARNING
-    ```
-    Missing link or links in documentation object 'SpaDES.core-package.Rd':
-      ‘[reproducible]{cache}’
-    
-    See section 'Cross-references' in the 'Writing R Extensions' manual.
-    ```
+# sparklyr.flint
 
-*   checking for code/documentation mismatches ... WARNING
+<details>
+
+* Version: 0.1.1
+* Source code: https://github.com/cran/sparklyr.flint
+* URL: <https://github.com/r-spark/sparklyr.flint>
+* BugReports: https://github.com/r-spark/sparklyr.flint/issues
+* Date/Publication: 2020-08-24 16:10:03 UTC
+* Number of recursive dependencies: 59
+
+Run `revdep_details(, "sparklyr.flint")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
     ```
-    Codoc mismatches from documentation object '.checkCacheRepo,list-method':
-    \S4method{.checkCacheRepo}{list}
-      Code: function(object, create)
-      Docs: function(object, create = FALSE)
-      Mismatches in argument default values:
-        Name: 'create' Code:  Docs: FALSE
+    Namespace in Imports field not imported from: ‘tibble’
+      All declared Imports should be used.
     ```
 
 # spatialwarnings
@@ -1831,6 +2109,13 @@ Run `revdep_details(, "spatialwarnings")` for more info
 </details>
 
 ## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.7Mb
+      sub-directories of 1Mb or more:
+        libs   4.7Mb
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -1891,16 +2176,18 @@ Run `revdep_details(, "stars")` for more info
 
 *   checking package dependencies ... NOTE
     ```
-    Packages suggested but not available for checking:
-      'exactextractr', 'starsdata'
+    Package suggested but not available for checking: ‘starsdata’
     ```
 
-*   checking Rd cross-references ... NOTE
+*   checking installed package size ... NOTE
     ```
-    Package unavailable to check Rd xrefs: ‘exactextractr’
+      installed size is  8.1Mb
+      sub-directories of 1Mb or more:
+        doc   1.9Mb
+        nc    4.5Mb
     ```
 
-# tableschema.r
+# timetk
 
 <details>
 
@@ -1919,8 +2206,12 @@ Run `revdep_details(, "tableschema.r")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘iterators’
-      All declared Imports should be used.
+    Failed to query server: Connection timed out
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 2750 marked UTF-8 strings
     ```
 
 *   checking Rd cross-references ... NOTE
@@ -1956,11 +2247,11 @@ Run `revdep_details(, "tidymodels")` for more info
 
 <details>
 
-* Version: 2.2.0
+* Version: 2.2.1
 * Source code: https://github.com/cran/timetk
 * URL: https://github.com/business-science/timetk
 * BugReports: https://github.com/business-science/timetk/issues
-* Date/Publication: 2020-07-18 06:00:02 UTC
+* Date/Publication: 2020-09-01 12:00:02 UTC
 * Number of recursive dependencies: 184
 
 Run `revdep_details(, "timetk")` for more info
@@ -1969,14 +2260,36 @@ Run `revdep_details(, "timetk")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking examples ... ERROR
     ```
-    Package suggested but not available for checking: ‘modeltime’
+    ...
+    > library(tidyverse)
+    ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+    ✔ ggplot2 3.3.2     ✔ purrr   0.3.4
+    ✔ tibble  3.0.3     ✔ dplyr   1.0.2
+    ✔ tidyr   1.1.2     ✔ stringr 1.4.0
+    ✔ readr   1.3.1     ✔ forcats 0.5.0
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ dplyr::filter() masks stats::filter()
+    ✖ dplyr::lag()    masks stats::lag()
+    > library(timetk)
+    > 
+    > # DATA ----
+    > m750 <- m4_monthly %>% filter(id == "M750")
+    > 
+    > m750 %>% plot_time_series(date, value)
+    Warning in dev_fun(file = tempfile(), width = width %||% 640, height = height %||%  :
+      unable to open connection to X11 display ''
+    Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
+      unable to start device PNG
+    Calls: %>% ... <Anonymous> -> ggplotly.ggplot -> gg2list -> dev_fun
+    Execution halted
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
-    Failed to query server: Connection timed out
+    Namespace in Imports field not imported from: ‘generics’
+      All declared Imports should be used.
     ```
 
 *   checking data for non-ASCII characters ... NOTE
@@ -1984,7 +2297,16 @@ Run `revdep_details(, "timetk")` for more info
       Note: found 2750 marked UTF-8 strings
     ```
 
-# treeHMM
+*   checking Rd \usage sections ... NOTE
+    ```
+    Failed to query server: Connection timed out
+    The \usage entries for S3 methods should use the \method markup and not
+    their full name.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+# TSstudio
 
 <details>
 
@@ -2001,83 +2323,12 @@ Run `revdep_details(, "treeHMM")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘Matrix’
+    Failed to query server: Connection timed out
+    Namespace in Imports field not imported from: ‘forecastHybrid’
       All declared Imports should be used.
     ```
 
-# tsibble
-
-<details>
-
-* Version: 0.9.2
-* Source code: https://github.com/cran/tsibble
-* URL: https://tsibble.tidyverts.org
-* BugReports: https://github.com/tidyverts/tsibble/issues
-* Date/Publication: 2020-07-24 10:40:02 UTC
-* Number of recursive dependencies: 94
-
-Run `revdep_details(, "tsibble")` for more info
-
-</details>
-
-## In both
-
-*   checking S3 generic/method consistency ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    See section ‘Generic functions and methods’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking replacement functions ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    The argument of a replacement function which corresponds to the right
-    hand side must be named ‘value’.
-    ```
-
-*   checking for missing documentation entries ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    All user-level objects in a package should have documentation entries.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking for code/documentation mismatches ... WARNING
-    ```
-    Failed to query server: Connection timed out
-    Failed to query server: Connection timed out
-    Failed to query server: Connection timed out
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    ```
-
-*   checking foreign function calls ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    See chapter ‘System and foreign language interfaces’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    ```
-
-*   checking Rd \usage sections ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    The \usage entries for S3 methods should use the \method markup and not
-    their full name.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-# TSstudio
+# vip
 
 <details>
 
@@ -2096,32 +2347,50 @@ Run `revdep_details(, "TSstudio")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Failed to query server: Connection timed out
     Namespace in Imports field not imported from: ‘forecastHybrid’
       All declared Imports should be used.
     ```
 
-# vip
+# workflows
 
 <details>
 
-* Version: 0.2.2
-* Source code: https://github.com/cran/vip
-* URL: https://github.com/koalaverse/vip/
-* BugReports: https://github.com/koalaverse/vip/issues
-* Date/Publication: 2020-04-06 13:00:02 UTC
-* Number of recursive dependencies: 187
+* Version: 0.1.3
+* Source code: https://github.com/cran/workflows
+* URL: https://github.com/tidymodels/workflows, https://workflows.tidymodels.org
+* BugReports: https://github.com/tidymodels/workflows/issues
+* Date/Publication: 2020-08-10 21:20:08 UTC
+* Number of recursive dependencies: 80
 
-Run `revdep_details(, "vip")` for more info
+Run `revdep_details(, "workflows")` for more info
 
 </details>
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking tests ...
     ```
-    Performing one-time download of h2o.jar from
-         http://s3.amazonaws.com/h2o-release/h2o/rel-zahradnik/1/Rjar/h2o.jar 
-    (This could take a few minutes, please be patient...)
+    ...
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      -- 7. Error: can print workflow with >10 recipe steps (@test-printing.R#73)  ---
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 111 | SKIPPED: 1 | WARNINGS: 7 | FAILED: 7 ]
+      1. Error: can print empty workflow (@test-printing.R#2) 
+      2. Error: can print workflow with recipe (@test-printing.R#11) 
+      3. Error: can print workflow with formula (@test-printing.R#18) 
+      4. Error: can print workflow with model (@test-printing.R#27) 
+      5. Error: can print workflow with model with engine specific args (@test-printing.R#37) 
+      6. Error: can print workflow with fit model (@test-printing.R#51) 
+      7. Error: can print workflow with >10 recipe steps (@test-printing.R#73) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
