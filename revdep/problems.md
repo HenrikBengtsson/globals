@@ -192,30 +192,6 @@ Run `revdep_details(, "blavaan")` for more info
 
 </details>
 
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      Did you mean to create the future within a function?  Invalid future expression tries to use global '...' variables that do not exist: FUN()
-      Backtrace:
-       1. blavaan::ppmc(fitstan)
-       2. blavaan:::postpred(...)
-       4. future.apply::future_lapply(...)
-       5. future.apply:::future_xapply(...)
-       6. future.apply:::getGlobalsAndPackagesXApply(...)
-       7. future::getGlobalsAndPackages(expr, envir = envir, globals = globals)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 67 | SKIPPED: 0 | WARNINGS: 7 | FAILED: 1 ]
-      1. Error: blavaan object methods work (@tests.blavaanobject-methods.R#113) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 ## In both
 
 *   checking installed package size ... NOTE
@@ -376,9 +352,13 @@ Run `revdep_details(, "corrr")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      
+          filter, lag
+      
+      The following objects are masked from 'package:base':
+      
+          intersect, setdiff, setequal, union
       
       > 
       > test_check("corrr")
@@ -572,49 +552,6 @@ Run `revdep_details(, "EpiNow2")` for more info
 *   checking for GNU extensions in Makefiles ... NOTE
     ```
     GNU make is a SystemRequirements.
-    ```
-
-# evaluator
-
-<details>
-
-* Version: 0.4.2
-* Source code: https://github.com/cran/evaluator
-* URL: https://evaluator.tidyrisk.org
-* BugReports: https://github.com/davidski/evaluator/issues
-* Date/Publication: 2020-04-16 09:20:09 UTC
-* Number of recursive dependencies: 136
-
-Run `revdep_details(, "evaluator")` for more info
-
-</details>
-
-## In both
-
-*   checking tests ...
-    ```
-    ...
-      +   message("Using phantom.js from ", shinytest:::find_phantom(), "\n")
-      + }
-      > 
-      > test_check("evaluator")
-      pandoc: Could not determine mime type for `/home/henrik/c4/repositories/globals/revdep/library/evaluator/rmarkdown/rmd/h/fontawesome/css/../webfonts/fa-brands-400.woff2'
-      ── 1. Error: Risk Dashboard renders (@test-reports.R#50)  ──────────────────────
-      pandoc document conversion failed with error 1
-      Backtrace:
-       1. testthat::evaluate_promise(...)
-       6. evaluator::risk_dashboard(...)
-       7. rmarkdown::render(...)
-       8. rmarkdown:::convert(output_file, run_citeproc)
-       9. rmarkdown::pandoc_convert(...)
-      
-      # Scenario model: openfair_tef_tc_diff_lm
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 137 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: Risk Dashboard renders (@test-reports.R#50) 
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # foieGras
@@ -831,10 +768,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-09-04 16:56:15] ::plot_cnv:Start
-    INFO [2020-09-04 16:56:15] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-09-04 16:56:15] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-09-04 16:56:15] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-09-05 09:27:46] ::plot_cnv:Start
+    INFO [2020-09-05 09:27:46] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-09-05 09:27:46] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-09-05 09:27:46] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
@@ -924,31 +861,33 @@ Run `revdep_details(, "lidR")` for more info
 
 </details>
 
-## Newly broken
+## In both
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-       5. future::SequentialFuture(...)
-       6. future::UniprocessFuture(...)
-       7. future::getGlobalsAndPackages(...)
+    ...
+    Complete output:
+      > Sys.setenv("R_TESTS" = "")
+      > 
+      > library(testthat)
+      > library(lidR)
+      Loading required package: raster
+      Loading required package: sp
+      > 
+      > options(lidR.progress = FALSE)
+      > rgdal::set_thin_PROJ6_warnings(TRUE)
+      > test_check("lidR")
+      ── 1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-gr
+      `x` not equal to `y`.
+      Attributes: < Component "data": Attributes: < Component "values": Mean relative difference: 0.000831213 > >
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 1134 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 6 ]
-      1. Error: catalog_apply automerge works with in memory RastersLayer (@test-catalog_apply-automerge.R#69) 
-      2. Error: catalog_apply automerge works with in memory RastersBrick (@test-catalog_apply-automerge.R#89) 
-      3. Error: catalog_apply automerge works with on disk RastersLayer (VRT) (@test-catalog_apply-automerge.R#114) 
-      4. Error: catalog_apply automerge works with on disk RastersBrick (VRT) (@test-catalog_apply-automerge.R#133) 
-      5. Error: catalog_sapply is the same than apply with automerge (@test-catalog_apply-automerge.R#271) 
-      6. Error: catalog_apply automerge disabled with opt_merge = FALSE (@test-catalog_apply-automerge.R#285) 
+      [ OK: 1163 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 1 ]
+      1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-grid_canopy.R#102) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
-
-## In both
 
 *   checking installed package size ... NOTE
     ```
@@ -1072,34 +1011,6 @@ Run `revdep_details(, "methyvim")` for more info
 Run `revdep_details(, "MineICA")` for more info
 
 </details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > ### ** Examples
-    > 
-    > ## generate a data
-    > set.seed(2004);
-    > M <- matrix(rnorm(5000*6,sd=0.3),ncol=10)
-    > M[1:100,1:3] <- M[1:100,1:3] + 2
-    > M[1:200,1:3] <- M[1:200,4:6] +1
-    > 
-    > ## Random initializations are used for each iteration of FastICA
-    > ## Estimates are clustered using hierarchical clustering with average linkage
-    > res <- clusterFastICARuns(X=M, nbComp=2, alg.type="deflation",
-    +                           nbIt=3, funClus="hclust", method="average")
-    FastICA iteration 1
-    Warning: executing %dopar% sequentially: no parallel backend registered
-    FastICA iteration 2
-    FastICA iteration 3
-    Error in getGlobalsAndPackages(expr, envir = envir, globals = globals) : 
-      Did you mean to create the future within a function?  Invalid future expression tries to use global '...' variables that do not exist: FUN(partition = c(1L, 2L, 1L, 2L, 1L, 2L), sim = structure(c(1,; 0.45525438763963, 0.999999980082089, 0.455209038564824, 0.765868100880116,; 0.306638516569895, 0.45525438763963, 1, 0.455432085034435, 0.999999998702932,; 0.223835533103493, 0.987067710821389, 0.999999980082089, 0.455432085034435,; 1, 0.455386740588239, 0.765739750270337, 0.306828484597841, 0.455209038564824,; 0.999999998702932, 0.455386740588239, 1, 0.223885173165408, 0.98707587424583,; 0.765868100880116, 0.223835533103493, 0.765739750270337, 0.223885173165408,; 1, 0.377177306755503, 0.306638516569895, 0.987067710821389, 0.306828484597841,; 0.98707587424583, 0.377177306755503, 1), .Dim = c(6L, 6L)), funClus = "hclust")
-    Calls: clusterFastICARuns ... getGlobalsAndPackagesXApply -> getGlobalsAndPackages
-    Execution halted
-    ```
 
 ## In both
 
@@ -1238,9 +1149,13 @@ Run `revdep_details(, "modeltime")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      
+      The following object is masked from 'package:kernlab':
+      
+          error
+      
+      ── 1. Error: (unknown) (@test-results-forecast-plots.R#34)  ────────────────────
       unable to start device PNG
       Backtrace:
         1. base::suppressWarnings(...)
@@ -1253,6 +1168,75 @@ Run `revdep_details(, "modeltime")` for more info
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 448 | SKIPPED: 7 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: (unknown) (@test-results-forecast-plots.R#34) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# nlrx
+
+<details>
+
+* Version: 0.4.1
+* Source code: https://github.com/cran/nlrx
+* URL: https://docs.ropensci.org/nlrx, https://github.com/ropensci/nlrx/
+* BugReports: https://github.com/ropensci/nlrx/issues/
+* Date/Publication: 2020-02-07 09:40:02 UTC
+* Number of recursive dependencies: 114
+
+Run `revdep_details(, "nlrx")` for more info
+
+</details>
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    +                 "https://raw.githubusercontent.com/nldoc/nldoc_pg/master/WSP.nls")
+    > 
+    > # Define output directory:
+    > outdir <- tempdir()  # adjust path to your needs
+    > 
+    > # Create documentation:
+    > nldoc(modelfiles = modelfiles,
+    +       infotab=TRUE,
+    +       gui=TRUE,
+    +       bs=TRUE,
+    +       outpath = outdir,
+    +       output_format = "html",
+    +       number_sections = TRUE,
+    +       theme = "cosmo",
+    +       date = date(),
+    +       toc = TRUE)
+    /home/shared/cbc/software_cbc/pandoc-2.1.2/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpOUgEvk/rmarkdown-str931e2d777a8a.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
+    Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
+    InvalidUrlException "c4-yum1:3128" "Invalid scheme"
+    Error: pandoc document conversion failed with error 61
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      > library(nlrx)
+      > 
+      > test_check("nlrx", filter = "nldoc")
+      /home/shared/cbc/software_cbc/pandoc-2.1.2/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmpx9o3YD/rmarkdown-str976f4b66d43f.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
+      Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
+      InvalidUrlException "c4-yum1:3128" "Invalid scheme"
+      ── 1. Error: nldoc (@test-nldoc.R#14)  ─────────────────────────────────────────
+      pandoc document conversion failed with error 61
+      Backtrace:
+       1. nlrx::nldoc(...)
+       2. nlrx:::nldoc_write_nldoc(...)
+       3. rmarkdown::render(mdfile)
+       4. rmarkdown:::convert(output_file, run_citeproc)
+       5. rmarkdown::pandoc_convert(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: nldoc (@test-nldoc.R#14) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -1367,9 +1351,13 @@ Run `revdep_details(, "probably")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      
+      Attaching package: 'probably'
+      
+      The following objects are masked from 'package:base':
+      
+          as.factor, as.ordered
       
       > 
       > test_check("probably")
@@ -1561,44 +1549,6 @@ Run `revdep_details(, "qtl2pleio")` for more info
         libs  23.6Mb
     ```
 
-# rangeMapper
-
-<details>
-
-* Version: 0.3-7
-* Source code: https://github.com/cran/rangeMapper
-* URL: https://github.com/valcu/rangeMapper
-* Date/Publication: 2019-10-25 18:20:02 UTC
-* Number of recursive dependencies: 96
-
-Run `revdep_details(, "rangeMapper")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-       2. rangeMapper::processRanges(dir = wd, con = dbcon, metadata = rangeTraits())
-       3. rangeMapper:::.local(con, dir = dir, metadata = metadata, parallel = parallel)
-       4. `%dopar%`(...)
-       5. e$fun(obj, substitute(ex), parent.frame(), e$data)
-       6. doFuture:::getGlobalsAndPackages_doFuture(...)
-       7. future::getGlobalsAndPackages(expr, envir = globals_envir, globals = TRUE)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 31 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: MULTIPLE SpPolyDF-s WITH metadata (@test-2_processRanges.R#71) 
-      
-      Error: testthat unit tests failed
-      In addition: Warning message:
-      call dbDisconnect() when finished working with a connection 
-      Execution halted
-    ```
-
 # regmedint
 
 <details>
@@ -1664,9 +1614,13 @@ Run `revdep_details(, "rsample")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      + }
+      Loading required namespace: xml2
+      -- 1. Error: printing with ... (@test_group.R#95)  -----------------------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
        2. grDevices::png(filename = tempfile())
       
       -- 2. Error: print methods (@test_rsplit.R#46)  --------------------------------
@@ -1750,6 +1704,34 @@ Run `revdep_details(, "seer")` for more info
       All declared Imports should be used.
     ```
 
+# Seurat
+
+<details>
+
+* Version: 3.2.0
+* Source code: https://github.com/cran/Seurat
+* URL: http://www.satijalab.org/seurat, https://github.com/satijalab/seurat
+* BugReports: https://github.com/satijalab/seurat/issues
+* Date/Publication: 2020-07-16 04:30:12 UTC
+* Number of recursive dependencies: 224
+
+Run `revdep_details(, "Seurat")` for more info
+
+</details>
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Package required but not available: ‘sctransform’
+    
+    Packages suggested but not available for checking:
+      'loomR', 'hdf5r', 'Rfast2'
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
 # shiny
 
 <details>
@@ -1769,9 +1751,13 @@ Run `revdep_details(, "shiny")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
+    ...
+      
+      -- 9. Error: reactiveValues() has useful print method (@test-reactivity.r#132)  
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 1012 | SKIPPED: 6 | WARNINGS: 9 | FAILED: 9 ]
@@ -2151,8 +2137,7 @@ Run `revdep_details(, "stars")` for more info
 
 *   checking package dependencies ... NOTE
     ```
-    Packages suggested but not available for checking:
-      'exactextractr', 'starsdata'
+    Package suggested but not available for checking: ‘starsdata’
     ```
 
 *   checking installed package size ... NOTE
@@ -2161,11 +2146,6 @@ Run `revdep_details(, "stars")` for more info
       sub-directories of 1Mb or more:
         doc   1.9Mb
         nc    4.5Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘exactextractr’
     ```
 
 # tableschema.r
@@ -2337,9 +2317,13 @@ Run `revdep_details(, "workflows")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+       1. testthat::verify_output(...)
+       2. grDevices::png(filename = tempfile())
+      
+      -- 7. Error: can print workflow with >10 recipe steps (@test-printing.R#73)  ---
+      unable to start device PNG
+      Backtrace:
        1. testthat::verify_output(...)
        2. grDevices::png(filename = tempfile())
       
