@@ -49,7 +49,7 @@
 |[batchtools](problems.md#batchtools)            |0.9.13    |         |        |2    |
 |[bcmaps](problems.md#bcmaps)                    |0.18.1    |         |        |1    |
 |bigdist                                         |0.1.4     |         |        |     |
-|[biotmle](problems.md#biotmle)                  |1.12.0    |         |        |1    |
+|biotmle                                         |1.12.0    |         |        |     |
 |[blavaan](problems.md#blavaan)                  |0.3-10    |__+1__   |        |2    |
 |[blockCV](problems.md#blockcv)                  |2.1.1     |         |        |1    |
 |[brms](problems.md#brms)                        |2.13.5    |         |        |2    |
@@ -58,7 +58,7 @@
 |civis                                           |3.0.0     |         |        |     |
 |[CLVTools](problems.md#clvtools)                |0.7.0     |         |        |1    |
 |codalm                                          |0.1.0     |         |        |     |
-|[codebook](problems.md#codebook)                |0.9.2     |         |        |3    |
+|[codebook](problems.md#codebook)                |0.9.2     |         |        |2    |
 |[corrr](problems.md#corrr)                      |0.4.2     |1        |        |     |
 |[cort](problems.md#cort)                        |0.3.1     |         |        |1    |
 |[cSEM](problems.md#csem)                        |0.2.0     |         |        |1    |
@@ -72,7 +72,7 @@
 |discrim                                         |0.1.0     |         |        |     |
 |disk.frame                                      |0.3.7     |         |        |     |
 |doFuture                                        |0.9.0     |         |        |     |
-|[dragon](problems.md#dragon)                    |1.0.2     |1        |        |1    |
+|[dragon](problems.md#dragon)                    |1.0.2     |         |        |1    |
 |drake                                           |7.12.5    |         |        |     |
 |drtmle                                          |1.0.5     |         |        |     |
 |[EFAtools](problems.md#efatools)                |0.1.1     |         |        |1    |
@@ -86,7 +86,7 @@
 |fiery                                           |1.1.2     |         |        |     |
 |fipe                                            |0.0.1     |         |        |     |
 |[foieGras](problems.md#foiegras)                |0.6-9     |         |        |1    |
-|[forecastML](problems.md#forecastml)            |0.9.0     |         |        |2    |
+|[forecastML](problems.md#forecastml)            |0.9.0     |         |        |1    |
 |forestControl                                   |0.2.1     |         |        |     |
 |funGp                                           |0.1.0     |         |        |     |
 |furrr                                           |0.1.0     |         |        |     |
@@ -129,7 +129,7 @@
 |lightr                                          |1.3       |         |        |     |
 |[lmtp](problems.md#lmtp)                        |0.0.5     |1        |        |2    |
 |mcp                                             |0.3.0     |         |        |     |
-|[merTools](problems.md#mertools)                |0.5.2     |         |        |1    |
+|merTools                                        |0.5.2     |         |        |     |
 |metagam                                         |0.1.2     |         |        |     |
 |[methyvim](problems.md#methyvim)                |1.10.0    |1        |        |1    |
 |[MineICA](problems.md#mineica)                  |1.28.0    |1 __+1__ |2       |4    |
@@ -143,7 +143,7 @@
 |nlrx                                            |0.4.1     |         |        |     |
 |onemapsgapi                                     |1.0.0     |         |        |     |
 |[origami](problems.md#origami)                  |1.0.3     |         |        |1    |
-|[parsnip](problems.md#parsnip)                  |0.1.3     |         |        |1    |
+|parsnip                                         |0.1.3     |         |        |     |
 |pavo                                            |2.4.0     |         |        |     |
 |[PCRedux](problems.md#pcredux)                  |1.0-6     |         |        |1    |
 |PeakSegDisk                                     |2020.8.13 |         |        |     |
@@ -177,7 +177,7 @@
 |[shiny](problems.md#shiny)                      |1.5.0     |1        |        |1    |
 |shinyML                                         |0.2.0     |         |        |     |
 |[shinyrecap](problems.md#shinyrecap)            |0.1.0     |         |        |1    |
-|[sigminer](problems.md#sigminer)                |1.0.13    |1        |        |1    |
+|[sigminer](problems.md#sigminer)                |1.0.13    |         |        |1    |
 |[Signac](failures.md#signac)                    |1.0.0     |1        |        |     |
 |simglm                                          |0.8.0     |         |        |     |
 |[simhelpers](problems.md#simhelpers)            |0.1.0     |         |        |1    |
@@ -206,7 +206,7 @@
 |tcensReg                                        |0.1.7     |         |        |     |
 |tealeaves                                       |1.0.5     |         |        |     |
 |[tidymodels](problems.md#tidymodels)            |0.1.1     |         |        |1    |
-|[tidypredict](problems.md#tidypredict)          |0.4.6     |         |        |1    |
+|tidypredict                                     |0.4.6     |         |        |     |
 |tidyqwi                                         |0.1.2     |         |        |     |
 |[timetk](problems.md#timetk)                    |2.2.1     |1        |        |2    |
 |[treeHMM](problems.md#treehmm)                  |0.1.1     |         |        |1    |
@@ -215,6 +215,6 @@
 |[TSstudio](problems.md#tsstudio)                |0.1.6     |         |        |1    |
 |tune                                            |0.1.1     |         |        |     |
 |variantspark                                    |0.1.1     |         |        |     |
-|[vip](problems.md#vip)                          |0.2.2     |         |        |2    |
+|vip                                             |0.2.2     |         |        |     |
 |[workflows](problems.md#workflows)              |0.1.3     |1        |        |     |
 

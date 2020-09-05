@@ -179,28 +179,6 @@ Run `revdep_details(, "bcmaps")` for more info
     Package suggested but not available for checking: ‘bcmapsdata’
     ```
 
-# biotmle
-
-<details>
-
-* Version: 1.12.0
-* Source code: https://github.com/cran/biotmle
-* URL: https://code.nimahejazi.org/biotmle
-* BugReports: https://github.com/nhejazi/biotmle/issues
-* Date/Publication: 2020-04-27
-* Number of recursive dependencies: 158
-
-Run `revdep_details(, "biotmle")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
-    ```
-
 # blavaan
 
 <details>
@@ -297,7 +275,7 @@ Run `revdep_details(, "brms")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.8Mb
+      installed size is  6.7Mb
       sub-directories of 1Mb or more:
         R     3.1Mb
         doc   2.6Mb
@@ -366,11 +344,6 @@ Run `revdep_details(, "codebook")` for more info
 </details>
 
 ## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘userfriendlyscience’
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -534,28 +507,6 @@ Run `revdep_details(, "dragon")` for more info
 
 ## In both
 
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      > test_check("dragon")
-      ── 1. Error: app ui (@test_golem_recommended.R#2)  ─────────────────────────────
-      'length(x) = 3 > 1' in coercion to 'logical(1)'
-      Backtrace:
-        1. dragon:::app_ui()
-       13. dragon:::mod_ui_choose_color_sd_palette(...)
-       25. colourpicker::colourInput(ns("color"), "Color:", value = color_default)
-       28. label %AND% shiny::tags$label(label, `for` = inputId)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 169 | SKIPPED: 3 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: app ui (@test_golem_recommended.R#2) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 *   checking dependencies in R code ... NOTE
     ```
     Namespace in Imports field not imported from: ‘htmltools’
@@ -642,9 +593,13 @@ Run `revdep_details(, "evaluator")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      +   message("Using phantom.js from ", shinytest:::find_phantom(), "\n")
+      + }
+      > 
+      > test_check("evaluator")
+      pandoc: Could not determine mime type for `/home/henrik/c4/repositories/globals/revdep/library/evaluator/rmarkdown/rmd/h/fontawesome/css/../webfonts/fa-brands-400.woff2'
+      ── 1. Error: Risk Dashboard renders (@test-reports.R#50)  ──────────────────────
       pandoc document conversion failed with error 1
       Backtrace:
        1. testthat::evaluate_promise(...)
@@ -701,11 +656,6 @@ Run `revdep_details(, "forecastML")` for more info
 </details>
 
 ## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -1026,9 +976,13 @@ Run `revdep_details(, "lmtp")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > 
+      > test_check("lmtp")
+      -- 1. Error: contrast output is correct (@test-contrasts.R#29)  ----------------
+      unable to start device PNG
+      Backtrace:
+       1. testthat::verify_output(...)
        2. grDevices::png(filename = tempfile())
       
       -- 2. Error: create proper node lists, t > 1 (@test-node_list.R#5)  ------------
@@ -1058,27 +1012,6 @@ Run `revdep_details(, "lmtp")` for more info
       All declared Imports should be used.
     ```
 
-# merTools
-
-<details>
-
-* Version: 0.5.2
-* Source code: https://github.com/cran/merTools
-* BugReports: https://www.github.com/jknowles/merTools
-* Date/Publication: 2020-06-23 10:30:12 UTC
-* Number of recursive dependencies: 147
-
-Run `revdep_details(, "merTools")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘rstanarm’
-    ```
-
 # methyvim
 
 <details>
@@ -1098,9 +1031,13 @@ Run `revdep_details(, "methyvim")` for more info
 
 *   checking tests ...
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
+    ...
+      > library(testthat)
+      > library(methyvim)
+      Setting options('download.file.method.GEOquery'='auto')
+      Setting options('GEOquery.inmemory.gpl'=FALSE)
+      methyvim v1.10.0: Targeted, Robust, and Model-free Differential Methylation Analysis
+      > 
       > set.seed(43719)
       > test_check("methyvim")
       ── 1. Error: (unknown) (@test-methyvim.R#22)  ──────────────────────────────────
@@ -1341,28 +1278,6 @@ Run `revdep_details(, "origami")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘glmnet’
-    ```
-
-# parsnip
-
-<details>
-
-* Version: 0.1.3
-* Source code: https://github.com/cran/parsnip
-* URL: https://parsnip.tidymodels.org, https://github.com/tidymodels/parsnip
-* BugReports: https://github.com/tidymodels/parsnip/issues
-* Date/Publication: 2020-08-04 21:50:12 UTC
-* Number of recursive dependencies: 107
-
-Run `revdep_details(, "parsnip")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
     ```
 
 # PCRedux
@@ -1923,30 +1838,6 @@ Run `revdep_details(, "sigminer")` for more info
 
 ## In both
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sigminer-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: show_group_mapping
-    > ### Title: Map Groups using Sankey
-    > ### Aliases: show_group_mapping
-    > 
-    > ### ** Examples
-    > 
-    > data <- dplyr::tibble(
-    +   Group1 = rep(LETTERS[1:5], each = 10),
-    +   Group2 = rep(LETTERS[6:15], each = 5),
-    +   zzzz = c(rep("xx", 20), rep("yy", 20), rep(NA, 10))
-    + )
-    > p1 <- show_group_mapping(data, col_to_flow = "Group1", cols_to_map = colnames(data)[-1])
-    > p1
-    Error in gpars$alpha < 0 || gpars$alpha > 1 : 
-      'length(x) = 8 > 1' in coercion to 'logical(1)'
-    Calls: <Anonymous> ... FUN -> <Anonymous> -> grob -> <Anonymous> -> validGP
-    Execution halted
-    ```
-
 *   checking installed package size ... NOTE
     ```
       installed size is  6.4Mb
@@ -2329,28 +2220,6 @@ Run `revdep_details(, "tidymodels")` for more info
       All declared Imports should be used.
     ```
 
-# tidypredict
-
-<details>
-
-* Version: 0.4.6
-* Source code: https://github.com/cran/tidypredict
-* URL: https://tidypredict.tidymodels.org, https://github.com/tidymodels/tidypredict
-* BugReports: https://github.com/tidymodels/tidypredict/issues
-* Date/Publication: 2020-07-23 14:20:03 UTC
-* Number of recursive dependencies: 93
-
-Run `revdep_details(, "tidypredict")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
-    ```
-
 # timetk
 
 <details>
@@ -2447,33 +2316,6 @@ Run `revdep_details(, "TSstudio")` for more info
     ```
     Namespace in Imports field not imported from: ‘forecastHybrid’
       All declared Imports should be used.
-    ```
-
-# vip
-
-<details>
-
-* Version: 0.2.2
-* Source code: https://github.com/cran/vip
-* URL: https://github.com/koalaverse/vip/
-* BugReports: https://github.com/koalaverse/vip/issues
-* Date/Publication: 2020-04-06 13:00:02 UTC
-* Number of recursive dependencies: 187
-
-Run `revdep_details(, "vip")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘xgboost’
     ```
 
 # workflows
