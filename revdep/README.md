@@ -26,10 +26,11 @@
 |:----------------------------|:-------|:-----|:-------|:----|
 |[Signac](failures.md#signac) |1.0.0   |1     |        |     |
 
-## New problems (3)
+## New problems (4)
 
 |package                                |version |error    |warning |note |
 |:--------------------------------------|:-------|:--------|:-------|:----|
+|[blavaan](problems.md#blavaan)         |0.3-10  |__+1__   |        |2    |
 |[lidR](problems.md#lidr)               |3.0.3   |__+1__   |        |1    |
 |[MineICA](problems.md#mineica)         |1.28.0  |1 __+1__ |2       |4    |
 |[rangeMapper](problems.md#rangemapper) |0.3-7   |__+1__   |        |     |
@@ -49,10 +50,10 @@
 |[bcmaps](problems.md#bcmaps)                    |0.18.1    |         |        |1    |
 |bigdist                                         |0.1.4     |         |        |     |
 |[biotmle](problems.md#biotmle)                  |1.12.0    |         |        |1    |
-|[blavaan](problems.md#blavaan)                  |0.3-10    |1        |        |     |
+|[blavaan](problems.md#blavaan)                  |0.3-10    |__+1__   |        |2    |
 |[blockCV](problems.md#blockcv)                  |2.1.1     |         |        |1    |
-|[brms](problems.md#brms)                        |2.13.5    |1        |        |     |
-|[butcher](problems.md#butcher)                  |0.1.2     |1        |        |2    |
+|[brms](problems.md#brms)                        |2.13.5    |         |        |2    |
+|[butcher](problems.md#butcher)                  |0.1.2     |         |        |1    |
 |ceRNAnetsim                                     |1.0.0     |         |        |     |
 |civis                                           |3.0.0     |         |        |     |
 |[CLVTools](problems.md#clvtools)                |0.7.0     |         |        |1    |
@@ -75,7 +76,7 @@
 |drake                                           |7.12.5    |         |        |     |
 |drtmle                                          |1.0.5     |         |        |     |
 |[EFAtools](problems.md#efatools)                |0.1.1     |         |        |1    |
-|[EpiNow2](problems.md#epinow2)                  |1.1.0     |1        |        |     |
+|[EpiNow2](problems.md#epinow2)                  |1.1.0     |         |        |4    |
 |epwshiftr                                       |0.1.1     |         |        |     |
 |[evaluator](problems.md#evaluator)              |0.4.2     |1        |        |     |
 |ezcox                                           |0.7.0     |         |        |     |
@@ -138,7 +139,7 @@
 |[modeltime](problems.md#modeltime)              |0.1.0     |1        |        |     |
 |mrgsim.parallel                                 |0.1.1     |         |        |     |
 |mvrsquared                                      |0.1.0     |         |        |     |
-|[nflfastR](problems.md#nflfastr)                |2.2.1     |1        |        |     |
+|nflfastR                                        |2.2.1     |         |        |     |
 |nlrx                                            |0.4.1     |         |        |     |
 |onemapsgapi                                     |1.0.0     |         |        |     |
 |[origami](problems.md#origami)                  |1.0.3     |         |        |1    |
@@ -169,7 +170,7 @@
 |[rsample](problems.md#rsample)                  |0.0.7     |1        |        |     |
 |[rsparkling](problems.md#rsparkling)            |0.2.19    |         |        |1    |
 |RTransferEntropy                                |0.2.12    |         |        |     |
-|[rules](problems.md#rules)                      |0.0.2     |2        |        |2    |
+|rules                                           |0.0.2     |         |        |     |
 |[sapfluxnetr](problems.md#sapfluxnetr)          |0.1.1     |         |        |1    |
 |SCtools                                         |0.3.1     |         |        |     |
 |[seer](problems.md#seer)                        |1.1.5     |         |        |1    |
@@ -197,7 +198,7 @@
 |[spatialwarnings](problems.md#spatialwarnings)  |2.0.0     |         |        |2    |
 |sperrorest                                      |3.0.1     |         |        |     |
 |[sRACIPE](problems.md#sracipe)                  |1.4.0     |         |        |1    |
-|[SSLR](problems.md#sslr)                        |0.9.2     |2        |        |1    |
+|SSLR                                            |0.9.2     |         |        |     |
 |[stars](problems.md#stars)                      |0.4-3     |         |        |3    |
 |startR                                          |2.0.1     |         |        |     |
 |steps                                           |1.1.0     |         |        |     |
@@ -207,7 +208,7 @@
 |[tidymodels](problems.md#tidymodels)            |0.1.1     |         |        |1    |
 |[tidypredict](problems.md#tidypredict)          |0.4.6     |         |        |1    |
 |tidyqwi                                         |0.1.2     |         |        |     |
-|[timetk](problems.md#timetk)                    |2.2.1     |1        |        |3    |
+|[timetk](problems.md#timetk)                    |2.2.1     |1        |        |2    |
 |[treeHMM](problems.md#treehmm)                  |0.1.1     |         |        |1    |
 |tsfeatures                                      |1.0.2     |         |        |     |
 |tsibble                                         |0.9.2     |         |        |     |

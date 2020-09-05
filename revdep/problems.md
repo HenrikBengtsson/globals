@@ -214,14 +214,42 @@ Run `revdep_details(, "blavaan")` for more info
 
 </details>
 
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      Did you mean to create the future within a function?  Invalid future expression tries to use global '...' variables that do not exist: FUN()
+      Backtrace:
+       1. blavaan::ppmc(fitstan)
+       2. blavaan:::postpred(...)
+       4. future.apply::future_lapply(...)
+       5. future.apply:::future_xapply(...)
+       6. future.apply:::getGlobalsAndPackagesXApply(...)
+       7. future::getGlobalsAndPackages(expr, envir = envir, globals = globals)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 67 | SKIPPED: 0 | WARNINGS: 7 | FAILED: 1 ]
+      1. Error: blavaan object methods work (@tests.blavaanobject-methods.R#113) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking installed package size ... NOTE
     ```
-    Package required but not available: ‘rstan’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+      installed size is 62.7Mb
+      sub-directories of 1Mb or more:
+        libs  60.8Mb
+    ```
+
+*   checking for GNU extensions in Makefiles ... NOTE
+    ```
+    GNU make is a SystemRequirements.
     ```
 
 # blockCV
@@ -262,14 +290,17 @@ Run `revdep_details(, "brms")` for more info
 
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking package dependencies ... NOTE
     ```
-    Packages required but not available: 'rstan', 'shinystan'
-    
     Package suggested but not available for checking: ‘cmdstanr’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.8Mb
+      sub-directories of 1Mb or more:
+        R     3.1Mb
+        doc   2.6Mb
     ```
 
 # butcher
@@ -288,28 +319,6 @@ Run `revdep_details(, "butcher")` for more info
 </details>
 
 ## In both
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘butcher-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: axe-xgb.Booster
-    > ### Title: Axing a xgb.Booster.
-    > ### Aliases: axe-xgb.Booster axe_call.xgb.Booster axe_ctrl.xgb.Booster
-    > ###   axe_env.xgb.Booster axe_fitted.xgb.Booster
-    > 
-    > ### ** Examples
-    > 
-    > suppressWarnings(suppressMessages(library(xgboost)))
-    Error in library(xgboost) : there is no package called ‘xgboost’
-    Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -590,14 +599,28 @@ Run `revdep_details(, "EpiNow2")` for more info
 
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking package dependencies ... NOTE
     ```
-    Package required but not available: ‘rstan’
-    
     Package suggested but not available for checking: ‘EpiSoon’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 83.8Mb
+      sub-directories of 1Mb or more:
+        help   1.2Mb
+        libs  82.1Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘rstantools’
+      All declared Imports should be used.
+    ```
+
+*   checking for GNU extensions in Makefiles ... NOTE
+    ```
+    GNU make is a SystemRequirements.
     ```
 
 # evaluator
@@ -858,10 +881,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-09-03 22:15:18] ::plot_cnv:Start
-    INFO [2020-09-03 22:15:18] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-09-03 22:15:18] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-09-03 22:15:18] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-09-04 16:56:15] ::plot_cnv:Start
+    INFO [2020-09-04 16:56:15] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-09-04 16:56:15] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-09-04 16:56:15] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
@@ -979,11 +1002,11 @@ Run `revdep_details(, "lidR")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 11.9Mb
+      installed size is 12.6Mb
       sub-directories of 1Mb or more:
         doc       1.2Mb
         extdata   1.1Mb
-        libs      8.1Mb
+        libs      8.7Mb
     ```
 
 # lmtp
@@ -1158,7 +1181,7 @@ Run `revdep_details(, "MineICA")` for more info
     +     mart = mart, level = "genes", selCutoffWrite = 2.5)
     
       When sourcing ‘MineICA.R’:
-    Error: task 1 failed - "subscript out of bounds"
+    Error: task 5 failed - "Multiple cache results found"
     Execution halted
     ```
 
@@ -1276,39 +1299,26 @@ Run `revdep_details(, "modeltime")` for more info
 
 ## In both
 
-*   checking package dependencies ... ERROR
+*   checking tests ...
     ```
-    Packages required but not available: 'xgboost', 'prophet'
-    
-    Package suggested but not available for checking: ‘rstan’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# nflfastR
-
-<details>
-
-* Version: 2.2.1
-* Source code: https://github.com/cran/nflfastR
-* URL: https://mrcaseb.github.io/nflfastR/, https://github.com/mrcaseb/nflfastR
-* BugReports: https://github.com/mrcaseb/nflfastR/issues
-* Date/Publication: 2020-09-01 09:00:02 UTC
-* Number of recursive dependencies: 65
-
-Run `revdep_details(, "nflfastR")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘xgboost’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      unable to start device PNG
+      Backtrace:
+        1. base::suppressWarnings(...)
+        2. dplyr::mutate_at(., vars(.value:.conf_hi), exp)
+       10. modeltime::plot_modeltime_forecast(., .interactive = TRUE)
+       13. plotly:::ggplotly.ggplot(g, dynamicTicks = TRUE)
+       14. plotly::gg2list(...)
+       15. grDevices:::dev_fun(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 448 | SKIPPED: 7 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: (unknown) (@test-results-forecast-plots.R#34) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # origami
@@ -1782,80 +1792,6 @@ Run `revdep_details(, "rsparkling")` for more info
       All declared Imports should be used.
     ```
 
-# rules
-
-<details>
-
-* Version: 0.0.2
-* Source code: https://github.com/cran/rules
-* URL: https://github.com/tidymodels/rules, https://rules.tidymodels.org
-* Date/Publication: 2020-06-10 13:30:02 UTC
-* Number of recursive dependencies: 95
-
-Run `revdep_details(, "rules")` for more info
-
-</details>
-
-## In both
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > set.seed(6907)
-    > rule_fit_rules <-
-    +   rule_fit(trees = 3, penalty = 0.1) %>%
-    +   set_mode("classification") %>%
-    +   fit(Species ~ ., data = iris)
-    Error: This engine requires some package installs: 'xrf'
-    Backtrace:
-         █
-      1. └─`%>%`(...)
-      2.   ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-      3.   └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-      4.     └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-      5.       └─`_fseq`(`_lhs`)
-      6.         └─magrittr::freduce(value, `_function_list`)
-      7.           ├─base::withVisible(function_list[[k]](value))
-      8.           └─function_list[[k]](value)
-      9.             ├─generics::fit(., Species ~ ., data = iris)
-     10.             └─parsnip::fit.model_spec(., Species ~ ., data = iris)
-     11.               └─parsnip:::check_installs(object)
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-       2. base::getExportedValue(pkg, name)
-       3. base::asNamespace(ns)
-       4. base::getNamespace(ns)
-       5. base::loadNamespace(name)
-       6. base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-       7. base:::withOneRestart(expr, restarts[[1L]])
-       8. base:::doWithOneRestart(return(expr), restart)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 38 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 2 ]
-      1. Error: formula method (@test-rule-fit-binomial.R#13) 
-      2. Error: non-formula method (@test-rule-fit-binomial.R#93) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xrf’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘xrf’
-    ```
-
 # sapfluxnetr
 
 <details>
@@ -2305,75 +2241,6 @@ Run `revdep_details(, "sRACIPE")` for more info
       outFileParamsTmp plan registerDoFuture
     ```
 
-# SSLR
-
-<details>
-
-* Version: 0.9.2
-* Source code: https://github.com/cran/SSLR
-* URL: https://dicits.ugr.es/software/SSLR/
-* Date/Publication: 2020-07-20 11:10:02 UTC
-* Number of recursive dependencies: 157
-
-Run `revdep_details(, "SSLR")` for more info
-
-</details>
-
-## In both
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > m <- democratic(learners = list(rf,bt)) %>% fit(Wine ~ ., data = train)
-    Error: This engine requires some package installs: 'xgboost'
-    Backtrace:
-         █
-      1. └─democratic(learners = list(rf, bt)) %>% fit(Wine ~ ., data = train)
-      2.   ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-      3.   └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-      4.     └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-      5.       └─`_fseq`(`_lhs`)
-      6.         └─magrittr::freduce(value, `_function_list`)
-      7.           ├─base::withVisible(function_list[[k]](value))
-      8.           └─function_list[[k]](value)
-      9.             ├─generics::fit(., Wine ~ ., data = train)
-     10.             └─SSLR::fit.model_sslr(., Wine ~ ., data = train)
-     11.               ├─base::system.time(model <- object$fit_function(eval_env$x, eval_env$y))
-     12.               └─object$fit_function(eval_env$x, eval_env$y)
-     13.                 └─SSLR:::democraticG(y, m_learners_base, m_preds_base)
-     14.                   └─gen.learners[[i]](labeled, y[lab
-    Timing stopped at: 0.564 0.048 0.613
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      This engine requires some package installs: 'xgboost'
-      Backtrace:
-        9. generics::fit(., Wine ~ ., data = wine$train)
-       12. object$fit_function(eval_env$x, eval_env$y)
-       13. SSLR:::democraticG(y, m_learners_base, m_preds_base)
-       14. gen.learners[[i]](labeled, y[labeled])
-       13. parsnip::fit_xy(...)
-       25. parsnip:::check_installs(object)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 163 | SKIPPED: 0 | WARNINGS: 6 | FAILED: 1 ]
-      1. Error: (unknown) (@test-Democratic.R#29) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘xgboost’
-    ```
-
 # stars
 
 <details>
@@ -2525,11 +2392,6 @@ Run `revdep_details(, "timetk")` for more info
       unable to start device PNG
     Calls: %>% ... <Anonymous> -> ggplotly.ggplot -> gg2list -> dev_fun
     Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘modeltime’
     ```
 
 *   checking dependencies in R code ... NOTE
