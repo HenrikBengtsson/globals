@@ -9,7 +9,10 @@ SIGNIFICANT CHANGES:
    purrr::partial() put the original function in attribute 'body'.  Argument
    'attributes' controls which attributes, if any, should be scanned.  Default
    is to scan all attributes.
- 
+
+ * findGlobals(), globalsOf(), and globalsByName() now recognizes and return
+   values for '..1', '..2', etc. like they do for '...'.
+
 BUG FIXES:
 
  * findGlobals(expr) would fail to identify globals in anonymous function
@@ -29,8 +32,8 @@ BUG FIXES:
  * findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw
    "Error in environment(w$enterLocal) : object 'w' not found".
 
- * findGlobals(), globalsOf(), and globalsByName() can now handle '..1', '..2',
-   etc. like they handle '...'.
+ * findGlobals(), globalsOf(), and globalsByName() did not handle '..1',
+   '..2', etc.
 
 
 Version: 0.12.5 [2019-12-07]
