@@ -289,8 +289,8 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
     ## this such that the below string matching fails, then the package
     ## tests (tests/dotdotdot.R) will detect that.  In other words,
     ## such a change will not go unnoticed.  /HB 2017-03-08
-    pattern <- "... may be used in an incorrect context"
-    if (grepl(pattern, w$message, fixed = TRUE)) {
+    pattern <- "[.][.]([.]|[0-9]+) may be used in an incorrect context"
+    if (grepl(pattern, w$message, fixed = FALSE)) {
       debug && mdebug(" - detected: %s", dQuote(trim(w$message)))
       needs_dotdotdot <<- TRUE
       if (dotdotdot == "return") {
