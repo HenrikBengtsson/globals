@@ -9,6 +9,12 @@ exprs <- list(
   warn2 = quote(sum(x, ..1, ..2, ..3))
 )
 
+truth <- list(
+  ok1 = c("sum", "x"),
+  ok2 = c("sum", "x"),
+  warn1 = c("sum", "x", "..."),
+  warn2 = c("sum", "x", "..1", "..2", "..3")
+)
 
 message("*** findGlobals() ...")
 
@@ -35,30 +41,22 @@ for (name in names(exprs)) {
   print(expr)
   globals <- findGlobals(expr, dotdotdot = "return")
   print(globals)
-  if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(globals, c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
-    assert_identical_sets(globals, c("sum", "x", "..."))
-  }
+  assert_identical_sets(globals, truth[[name]])
 
-  message("\n*** findGlobals(dotdotdot = 'warn'):")
+  message("\n*** findGlobals(dotdotdot = 'warning'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- findGlobals(expr, dotdotdot = "warn")
+  globals <- findGlobals(expr, dotdotdot = "warning")
   print(globals)
-  if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(globals, c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
-    assert_identical_sets(globals, c("sum", "x", "..."))
-  }
+  assert_identical_sets(globals, truth[[name]])
 
   message("\n*** findGlobals(dotdotdot = 'error'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
   globals <- tryCatch(findGlobals(expr, dotdotdot = "error"), error = identity)
   if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(globals, c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
+    assert_identical_sets(globals, truth[[name]])
+  } else {
     stopifnot(inherits(globals, "error"))
   }
 } # for (name ...)
@@ -67,7 +65,7 @@ message("\n*** findGlobals(<exprs>, dotdotdot = 'return'):")
 print(exprs)
 globals <- findGlobals(exprs, dotdotdot = "return")
 print(globals)
-
+assert_identical_sets(globals, unique(unlist(truth, use.names = FALSE)))
 
 message("*** findGlobals() ... DONE")
 
@@ -94,24 +92,20 @@ for (name in names(exprs)) {
   print(expr)
   globals <- globalsOf(expr, dotdotdot = "return")
   print(globals)
-  if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(names(globals), c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
-    assert_identical_sets(names(globals), c("sum", "x", "..."))
+  assert_identical_sets(names(globals), truth[[name]])
+  if (name == "warn1") {
     stopifnot(!is.list(globals$`...`) && is.na(globals$`...`))
   }
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot = 'warn'):")
+  message("\n*** globalsOf(dotdotdot = 'warning'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot = "warn")
+  globals <- globalsOf(expr, dotdotdot = "warning")
   print(globals)
-  if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(names(globals), c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
-    assert_identical_sets(names(globals), c("sum", "x", "..."))
+  assert_identical_sets(names(globals), truth[[name]])
+  if (name == "warn1") {
     stopifnot(!is.list(globals$`...`) && is.na(globals$`...`))
   }
   stopifnot(all.equal(globals$sum, base::sum))
@@ -122,10 +116,10 @@ for (name in names(exprs)) {
   print(expr)
   globals <- tryCatch(globalsOf(expr, dotdotdot = "error"), error = identity)
   if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(names(globals), c("sum", "x"))
+    assert_identical_sets(names(globals), truth[[name]])
     stopifnot(all.equal(globals$sum, base::sum))
     stopifnot(all.equal(globals$x, x))
-  } else if (name %in% c("warn1", "warn2")) {
+  } else {
     stopifnot(inherits(globals, "error"))
   }
 } # for (name ...)
@@ -161,24 +155,20 @@ for (name in names(exprs)) {
   print(expr)
   globals <- globalsOf(expr, dotdotdot = "return")
   print(globals)
-  if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(names(globals), c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
-    assert_identical_sets(names(globals), c("sum", "x", "..."))
+  assert_identical_sets(names(globals), truth[[name]])
+  if (name == "warn1") {
     stopifnot(all.equal(globals$`...`, args, check.attributes = FALSE))
   }
   stopifnot(all.equal(globals$sum, base::sum))
   stopifnot(all.equal(globals$x, x))
 
-  message("\n*** globalsOf(dotdotdot = 'warn'):")
+  message("\n*** globalsOf(dotdotdot = 'warning'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)
-  globals <- globalsOf(expr, dotdotdot = "warn")
+  globals <- globalsOf(expr, dotdotdot = "warning")
   print(globals)
-  if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(names(globals), c("sum", "x"))
-  } else if (name %in% c("warn1", "warn2")) {
-    assert_identical_sets(names(globals), c("sum", "x", "..."))
+  assert_identical_sets(names(globals), truth[[name]])
+  if (name == "warn1") {
     stopifnot(all.equal(globals$`...`, args, check.attributes = FALSE))
   }
   stopifnot(all.equal(globals$sum, base::sum))
@@ -189,10 +179,10 @@ for (name in names(exprs)) {
   print(expr)
   globals <- tryCatch(globalsOf(expr, dotdotdot = "error"), error = identity)
   if (name %in% c("ok1", "ok2")) {
-    assert_identical_sets(names(globals), c("sum", "x"))
+    assert_identical_sets(names(globals), truth[[name]])
     stopifnot(all.equal(globals$sum, base::sum))
     stopifnot(all.equal(globals$x, x))
-  } else if (name %in% c("warn1", "warn2")) {
+  } else {
     stopifnot(inherits(globals, "error"))
   }
 } # for (name ...)

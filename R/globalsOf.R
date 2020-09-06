@@ -187,10 +187,16 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
   debug && mdebug("- search from environment: %s", sQuote(envname(envir)))
 
   ## Locate and retrieve the specified globals
-  idxs <- which(names == "...")
-  needs_dotdotdot <- (length(idxs) > 0)
-  if (needs_dotdotdot) names <- names[-idxs]
-  debug && mdebug("- dotdotdot: %s", needs_dotdotdot)
+  idxs <- grep("^[.][.]([.]|[0-9]+)$", names)
+  if (length(idxs) > 0L) {
+    dotdotdots <- unique(names[idxs])
+    names <- names[-idxs]
+    idxs <- NULL
+    debug && mdebug("- dotdotdots: %s", paste(sQuote(dotdotdots), collapse = ", "))
+  } else {
+    dotdotdots <- NULL
+    debug && mdebug("- dotdotdots: <none>")
+  }
 
   globals <- structure(list(), class = c("Globals", "list"))
   where <- list()
@@ -216,16 +222,19 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     }
   }
 
-  if (needs_dotdotdot) {
-    if (exists("...", envir = envir, inherits = TRUE)) {
-      where[["..."]] <- where("...", envir = envir, inherits = TRUE)
-      ddd <- evalq(list(...), envir = envir, enclos = envir)
-    } else {
-      where["..."] <- list(NULL)
-      ddd <- NA
+  if (length(dotdotdots) > 0L) {
+    for (name in dotdotdots) {
+      if (exists(name, envir = envir, inherits = TRUE)) {
+        where[[name]] <- where(name, envir = envir, inherits = TRUE)
+        expr <- substitute(list(arg), list(arg = as.name(name)))
+        ddd <- eval(expr, envir = envir, enclos = envir)
+      } else {
+        where[name] <- list(NULL)
+        ddd <- NA
+      }
+      class(ddd) <- c("DotDotDotList", class(ddd))
+      globals[[name]] <- ddd
     }
-    class(ddd) <- c("DotDotDotList", class(ddd))
-    globals[["..."]] <- ddd
   }
 
   stop_if_not(

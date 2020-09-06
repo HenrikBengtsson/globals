@@ -29,9 +29,8 @@ BUG FIXES:
  * findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw
    "Error in environment(w$enterLocal) : object 'w' not found".
 
- * findGlobals() can now handle '..1', '..2', etc. like it handles '...' with
-   the difference that findGlobals() with dotdotdot = "return", or "warning",
-   returns "..." even if it is '..1', '..2', etc. that are specified.
+ * findGlobals(), globalsOf(), and globalsByName() can now handle '..1', '..2',
+   etc. like they handle '...'.
 
 
 Version: 0.12.5 [2019-12-07]
