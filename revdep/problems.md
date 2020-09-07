@@ -15,6 +15,13 @@ Run `revdep_details(, "adept")` for more info
 
 ## In both
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.5Mb
+      sub-directories of 1Mb or more:
+        doc   4.7Mb
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
     Namespace in Imports field not imported from: ‘tibble’
@@ -90,7 +97,7 @@ Run `revdep_details(, "aroma.core")` for more info
 *   checking package dependencies ... NOTE
     ```
     Packages suggested but not available for checking:
-      'GLAD', 'sfit', 'expectile', 'HaarSeg', 'mpcbs'
+      'sfit', 'expectile', 'HaarSeg', 'mpcbs'
     ```
 
 # BAMBI
@@ -110,7 +117,7 @@ Run `revdep_details(, "BAMBI")` for more info
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking installed package size ... NOTE
     ```
       installed size is  6.1Mb
       sub-directories of 1Mb or more:
@@ -244,7 +251,7 @@ Run `revdep_details(, "brms")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.7Mb
+      installed size is  6.8Mb
       sub-directories of 1Mb or more:
         R     3.1Mb
         doc   2.6Mb
@@ -292,9 +299,9 @@ Run `revdep_details(, "CLVTools")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.6Mb
+      installed size is 13.2Mb
       sub-directories of 1Mb or more:
-        libs  11.4Mb
+        libs  12.0Mb
     ```
 
 # codebook
@@ -388,9 +395,9 @@ Run `revdep_details(, "cort")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.2Mb
+      installed size is  5.4Mb
       sub-directories of 1Mb or more:
-        libs   4.4Mb
+        libs   4.6Mb
     ```
 
 # cSEM
@@ -410,7 +417,7 @@ Run `revdep_details(, "cSEM")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
     Namespace in Imports field not imported from: ‘Rdpack’
       All declared Imports should be used.
@@ -463,6 +470,31 @@ Run `revdep_details(, "delayed")` for more info
       All declared Imports should be used.
     ```
 
+# dipsaus
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/dipsaus
+* URL: https://github.com/dipterix/dipsaus
+* BugReports: https://github.com/dipterix/dipsaus/issues
+* Date/Publication: 2020-08-12 10:00:20 UTC
+* Number of recursive dependencies: 66
+
+Run `revdep_details(, "dipsaus")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.1Mb
+      sub-directories of 1Mb or more:
+        doc    1.1Mb
+        libs   2.7Mb
+    ```
+
 # dragon
 
 <details>
@@ -503,9 +535,9 @@ Run `revdep_details(, "EFAtools")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.4Mb
+      installed size is  5.8Mb
       sub-directories of 1Mb or more:
-        libs   5.4Mb
+        libs   4.8Mb
     ```
 
 # EpiNow2
@@ -547,6 +579,49 @@ Run `revdep_details(, "EpiNow2")` for more info
     GNU make is a SystemRequirements.
     ```
 
+# evaluator
+
+<details>
+
+* Version: 0.4.2
+* Source code: https://github.com/cran/evaluator
+* URL: https://evaluator.tidyrisk.org
+* BugReports: https://github.com/davidski/evaluator/issues
+* Date/Publication: 2020-04-16 09:20:09 UTC
+* Number of recursive dependencies: 136
+
+Run `revdep_details(, "evaluator")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      +   message("Using phantom.js from ", shinytest:::find_phantom(), "\n")
+      + }
+      > 
+      > test_check("evaluator")
+      pandoc: Could not determine mime type for `/home/henrik/c4/repositories/globals/revdep/library/evaluator/rmarkdown/rmd/h/fontawesome/css/../webfonts/fa-brands-400.woff2'
+      ── 1. Error: Risk Dashboard renders (@test-reports.R#50)  ──────────────────────
+      pandoc document conversion failed with error 1
+      Backtrace:
+       1. testthat::evaluate_promise(...)
+       6. evaluator::risk_dashboard(...)
+       7. rmarkdown::render(...)
+       8. rmarkdown:::convert(output_file, run_citeproc)
+       9. rmarkdown::pandoc_convert(...)
+      
+      # Scenario model: openfair_tef_tc_diff_lm
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 137 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: Risk Dashboard renders (@test-reports.R#50) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 # foieGras
 
 <details>
@@ -566,28 +641,10 @@ Run `revdep_details(, "foieGras")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 38.4Mb
+      installed size is 35.2Mb
       sub-directories of 1Mb or more:
-        libs  37.2Mb
+        libs  34.0Mb
     ```
-    Namespace in Imports field not imported from: ‘dtplyr’
-      All declared Imports should be used.
-    ```
-
-# future
-
-<details>
-
-* Version: 1.18.0
-* Source code: https://github.com/cran/future
-* URL: https://github.com/HenrikBengtsson/future
-* BugReports: https://github.com/HenrikBengtsson/future/issues
-* Date/Publication: 2020-07-09 05:40:03 UTC
-* Number of recursive dependencies: 13
-
-Run `revdep_details(, "future")` for more info
-
-</details>
 
 # forecastML
 
@@ -680,6 +737,13 @@ Run `revdep_details(, "grattan")` for more info
       'taxstats', 'taxstats1516'
     ```
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.3Mb
+      sub-directories of 1Mb or more:
+        libs   3.3Mb
+    ```
+
 # gWQS
 
 <details>
@@ -720,9 +784,9 @@ Run `revdep_details(, "hal9001")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.3Mb
+      installed size is  5.9Mb
       sub-directories of 1Mb or more:
-        libs   5.5Mb
+        libs   5.1Mb
     ```
 
 # iml
@@ -779,10 +843,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-09-05 09:27:46] ::plot_cnv:Start
-    INFO [2020-09-05 09:27:46] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-09-05 09:27:46] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-09-05 09:27:46] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-09-06 19:00:12] ::plot_cnv:Start
+    INFO [2020-09-06 19:00:12] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-09-06 19:00:12] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-09-06 19:00:12] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
@@ -857,7 +921,50 @@ Run `revdep_details(, "JointAI")` for more info
       All declared Imports should be used.
     ```
 
-# ipc
+# ldaPrototype
+
+<details>
+
+* Version: 0.2.0
+* Source code: https://github.com/cran/ldaPrototype
+* URL: https://github.com/JonasRieger/ldaPrototype, https://doi.org/10.5281/zenodo.3597978
+* BugReports: https://github.com/JonasRieger/ldaPrototype/issues
+* Date/Publication: 2020-07-16 11:10:02 UTC
+* Number of recursive dependencies: 110
+
+Run `revdep_details(, "ldaPrototype")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      The following object is masked from 'package:stats':
+      
+          cutree
+      
+      > 
+      > test_check("ldaPrototype")
+      ── 1. Error: (unknown) (@test_jaccardTopics.R#8)  ──────────────────────────────
+      wrong sign in 'by' argument
+      Backtrace:
+       1. ldaPrototype::jaccardTopics(mtopics, pm.backend = "socket")
+       2. ldaPrototype:::jaccardTopics.parallel(...)
+       3. base::lapply(...)
+       4. ldaPrototype:::FUN(X[[i]], ...)
+       6. base::seq.default(x, N - 2, max(ncpus, 2))
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 243 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
+      1. Error: (unknown) (@test_jaccardTopics.R#8) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# lidR
 
 <details>
 
@@ -890,7 +997,7 @@ Run `revdep_details(, "lidR")` for more info
       > test_check("lidR")
       ── 1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-gr
       `x` not equal to `y`.
-      Attributes: < Component "data": Attributes: < Component "values": Mean relative difference: 0.000831213 > >
+      Attributes: < Component "data": Attributes: < Component "values": Mean relative difference: 0.0008376085 > >
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 1163 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 1 ]
@@ -1115,7 +1222,7 @@ Run `revdep_details(, "MineICA")` for more info
       See the note in ?`:::` about the use of this operator.
     ```
 
-*   checking for missing documentation entries ... WARNING
+*   checking R code for possible problems ... NOTE
     ```
     ...
       position_jitter pushViewport quantile rainbow_hcl rcorr read.table
@@ -1184,75 +1291,6 @@ Run `revdep_details(, "modeltime")` for more info
       Execution halted
     ```
 
-# nlrx
-
-<details>
-
-* Version: 0.4.1
-* Source code: https://github.com/cran/nlrx
-* URL: https://docs.ropensci.org/nlrx, https://github.com/ropensci/nlrx/
-* BugReports: https://github.com/ropensci/nlrx/issues/
-* Date/Publication: 2020-02-07 09:40:02 UTC
-* Number of recursive dependencies: 114
-
-Run `revdep_details(, "nlrx")` for more info
-
-</details>
-
-## In both
-
-*   checking examples ... ERROR
-    ```
-    ...
-    +                 "https://raw.githubusercontent.com/nldoc/nldoc_pg/master/WSP.nls")
-    > 
-    > # Define output directory:
-    > outdir <- tempdir()  # adjust path to your needs
-    > 
-    > # Create documentation:
-    > nldoc(modelfiles = modelfiles,
-    +       infotab=TRUE,
-    +       gui=TRUE,
-    +       bs=TRUE,
-    +       outpath = outdir,
-    +       output_format = "html",
-    +       number_sections = TRUE,
-    +       theme = "cosmo",
-    +       date = date(),
-    +       toc = TRUE)
-    /home/shared/cbc/software_cbc/pandoc-2.1.2/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpOUgEvk/rmarkdown-str931e2d777a8a.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
-    Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
-    InvalidUrlException "c4-yum1:3128" "Invalid scheme"
-    Error: pandoc document conversion failed with error 61
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-    ...
-      > library(nlrx)
-      > 
-      > test_check("nlrx", filter = "nldoc")
-      /home/shared/cbc/software_cbc/pandoc-2.1.2/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmpx9o3YD/rmarkdown-str976f4b66d43f.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
-      Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
-      InvalidUrlException "c4-yum1:3128" "Invalid scheme"
-      ── 1. Error: nldoc (@test-nldoc.R#14)  ─────────────────────────────────────────
-      pandoc document conversion failed with error 61
-      Backtrace:
-       1. nlrx::nldoc(...)
-       2. nlrx:::nldoc_write_nldoc(...)
-       3. rmarkdown::render(mdfile)
-       4. rmarkdown:::convert(output_file, run_citeproc)
-       5. rmarkdown::pandoc_convert(...)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: nldoc (@test-nldoc.R#14) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # origami
 
 <details>
@@ -1273,6 +1311,30 @@ Run `revdep_details(, "origami")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘glmnet’
+    ```
+
+# pavo
+
+<details>
+
+* Version: 2.4.0
+* Source code: https://github.com/cran/pavo
+* URL: http://pavo.colrverse.com, https://github.com/rmaia/pavo/
+* BugReports: https://github.com/rmaia/pavo/issues
+* Date/Publication: 2020-02-08 16:20:08 UTC
+* Number of recursive dependencies: 90
+
+Run `revdep_details(, "pavo")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘pavo’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: no DISPLAY variable so Tk is not available
+    See ‘/home/henrik/c4/repositories/globals/revdep/checks/pavo/new/pavo.Rcheck/00install.out’ for details.
     ```
 
 # PCRedux
@@ -1336,7 +1398,7 @@ Run `revdep_details(, "poissonreg")` for more info
 
 ## In both
 
-*   checking examples ... ERROR
+*   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
       ‘dplyr’ ‘tidyr’
@@ -1555,9 +1617,9 @@ Run `revdep_details(, "qtl2pleio")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 23.8Mb
+      installed size is 20.7Mb
       sub-directories of 1Mb or more:
-        libs  23.6Mb
+        libs  20.4Mb
     ```
 
 # regmedint
@@ -1602,7 +1664,7 @@ Run `revdep_details(, "robotstxt")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘Deriv’
+    Namespace in Imports field not imported from: ‘future’
       All declared Imports should be used.
     ```
 
@@ -1647,29 +1709,6 @@ Run `revdep_details(, "rsample")` for more info
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-# rsparkling
-
-<details>
-
-* Version: 0.2.19
-* Source code: https://github.com/cran/rsparkling
-* URL: https://github.com/h2oai/sparkling-water/tree/master/r
-* BugReports: http://jira.h2o.ai
-* Date/Publication: 2020-01-28 23:10:02 UTC
-* Number of recursive dependencies: 63
-
-Run `revdep_details(, "rsparkling")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘h2o’
-      All declared Imports should be used.
     ```
 
 # rsparkling
@@ -1759,8 +1798,7 @@ Run `revdep_details(, "Seurat")` for more info
     ```
     Package required but not available: ‘sctransform’
     
-    Packages suggested but not available for checking:
-      'loomR', 'hdf5r', 'Rfast2'
+    Packages suggested but not available for checking: 'loomR', 'hdf5r'
     
     See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
     manual.
@@ -1855,11 +1893,6 @@ Run `revdep_details(, "shinyrecap")` for more info
 Run `revdep_details(, "sigminer")` for more info
 
 </details>
-
-## Newly broken
-
-*   R CMD check timed out
-    
 
 ## In both
 
@@ -1990,9 +2023,9 @@ Run `revdep_details(, "skpr")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 41.5Mb
+      installed size is 36.8Mb
       sub-directories of 1Mb or more:
-        libs  39.9Mb
+        libs  35.2Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -2112,9 +2145,9 @@ Run `revdep_details(, "spatialwarnings")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.7Mb
+      installed size is  5.6Mb
       sub-directories of 1Mb or more:
-        libs   4.7Mb
+        libs   4.6Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -2187,7 +2220,7 @@ Run `revdep_details(, "stars")` for more info
         nc    4.5Mb
     ```
 
-# timetk
+# tableschema.r
 
 <details>
 
@@ -2206,12 +2239,8 @@ Run `revdep_details(, "tableschema.r")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Failed to query server: Connection timed out
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 2750 marked UTF-8 strings
+    Namespace in Imports field not imported from: ‘iterators’
+      All declared Imports should be used.
     ```
 
 *   checking Rd cross-references ... NOTE
@@ -2297,16 +2326,7 @@ Run `revdep_details(, "timetk")` for more info
       Note: found 2750 marked UTF-8 strings
     ```
 
-*   checking Rd \usage sections ... NOTE
-    ```
-    Failed to query server: Connection timed out
-    The \usage entries for S3 methods should use the \method markup and not
-    their full name.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-# TSstudio
+# treeHMM
 
 <details>
 
@@ -2323,12 +2343,11 @@ Run `revdep_details(, "treeHMM")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Failed to query server: Connection timed out
-    Namespace in Imports field not imported from: ‘forecastHybrid’
+    Namespace in Imports field not imported from: ‘Matrix’
       All declared Imports should be used.
     ```
 
-# vip
+# TSstudio
 
 <details>
 

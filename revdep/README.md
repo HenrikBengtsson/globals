@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2020-09-05                   |
+|date     |2020-09-06                   |
 
 # Dependencies
 
@@ -59,7 +59,7 @@
 |DeclareDesign                                   |0.22.0    |      |        |     |
 |[delayed](problems.md#delayed)                  |0.3.0     |      |        |1    |
 |dhReg                                           |0.1.0     |      |        |     |
-|dipsaus                                         |0.1.0     |      |        |     |
+|[dipsaus](problems.md#dipsaus)                  |0.1.0     |      |        |1    |
 |discrim                                         |0.1.0     |      |        |     |
 |disk.frame                                      |0.3.7     |      |        |     |
 |doFuture                                        |0.9.0     |      |        |     |
@@ -69,7 +69,7 @@
 |[EFAtools](problems.md#efatools)                |0.1.1     |      |        |1    |
 |[EpiNow2](problems.md#epinow2)                  |1.1.0     |      |        |4    |
 |epwshiftr                                       |0.1.1     |      |        |     |
-|evaluator                                       |0.4.2     |      |        |     |
+|[evaluator](problems.md#evaluator)              |0.4.2     |1     |        |     |
 |ezcox                                           |0.7.0     |      |        |     |
 |fabletools                                      |0.2.1     |      |        |     |
 |FAMoS                                           |0.3.0     |      |        |     |
@@ -94,7 +94,7 @@
 |glmmboot                                        |0.5.1     |      |        |     |
 |googleComputeEngineR                            |0.3.0     |      |        |     |
 |graphframes                                     |0.1.2     |      |        |     |
-|[grattan](problems.md#grattan)                  |1.9.0.0   |      |        |1    |
+|[grattan](problems.md#grattan)                  |1.9.0.0   |      |        |2    |
 |greta                                           |0.3.1     |      |        |     |
 |GSODR                                           |2.1.1     |      |        |     |
 |gstat                                           |2.0-6     |      |        |     |
@@ -113,7 +113,7 @@
 |jstor                                           |0.3.9     |      |        |     |
 |kergp                                           |0.5.1     |      |        |     |
 |kernelboot                                      |0.1.7     |      |        |     |
-|ldaPrototype                                    |0.2.0     |      |        |     |
+|[ldaPrototype](problems.md#ldaprototype)        |0.2.0     |1     |        |     |
 |ldsr                                            |0.0.2     |      |        |     |
 |lgr                                             |0.3.4     |      |        |     |
 |[lidR](problems.md#lidr)                        |3.0.3     |1     |        |1    |
@@ -131,11 +131,11 @@
 |mrgsim.parallel                                 |0.1.1     |      |        |     |
 |mvrsquared                                      |0.1.0     |      |        |     |
 |nflfastR                                        |2.2.1     |      |        |     |
-|[nlrx](problems.md#nlrx)                        |0.4.1     |2     |        |     |
+|nlrx                                            |0.4.1     |      |        |     |
 |onemapsgapi                                     |1.0.0     |      |        |     |
 |[origami](problems.md#origami)                  |1.0.3     |      |        |1    |
 |parsnip                                         |0.1.3     |      |        |     |
-|pavo                                            |2.4.0     |      |        |     |
+|[pavo](problems.md#pavo)                        |2.4.0     |      |1       |     |
 |[PCRedux](problems.md#pcredux)                  |1.0-6     |      |        |1    |
 |PeakSegDisk                                     |2020.8.13 |      |        |     |
 |penaltyLearning                                 |2020.5.13 |      |        |     |
