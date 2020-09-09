@@ -35,6 +35,10 @@ BUG FIXES:
  * findGlobals(), globalsOf(), and globalsByName() did not handle '..1',
    '..2', etc.
 
+ * findGlobals() and globalsOf() would produce warnings on '<anonymous>: ...
+   may be used in an incorrect context' if formulas would contain '...',
+   '..1', '..2', etc.
+
 
 Version: 0.12.5 [2019-12-07]
 

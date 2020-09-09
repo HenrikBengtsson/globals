@@ -43,6 +43,13 @@ for (substitute in c(TRUE, FALSE)) {
 #   ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
 
 
+message("- findGlobals() with ellipsis in formulas ...")
+## BUG: https://github.com/HenrikBengtsson/globals/issues/62
+
+g <- findGlobals(list(..., ..3) ~ list(., .x, ..., ..1, ..2))
+print(g)
+assert_identical_sets(g, c("~", "list", ".", ".x"))
+
 message("findGlobals() with formula ... DONE")
 
 
