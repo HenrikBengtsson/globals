@@ -48,7 +48,7 @@ message("- findGlobals() with ellipsis in formulas ...")
 
 g <- findGlobals(list(..., ..3) ~ list(., .x, ..., ..1, ..2))
 print(g)
-assert_identical_sets(g, c("~", "list", ".", ".x"))
+assert_identical_sets(g, c("~", "list", "...", "..3", ".", ".x", "..1", "..2"))
 
 message("findGlobals() with formula ... DONE")
 
