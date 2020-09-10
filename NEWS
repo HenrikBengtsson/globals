@@ -6,11 +6,11 @@ Version: 0.12.5-9000 [2020-09-06]
 SIGNIFICANT CHANGES:
 
  * findGlobals(expr) now also scans any attributes of 'expr' for globals, e.g.
-   purrr::partial() put the original function in attribute 'body'.  Argument
+   purrr::partial() puts the original function in attribute 'body'.  Argument
    'attributes' controls which attributes, if any, should be scanned.  Default
    is to scan all attributes.
 
- * findGlobals(), globalsOf(), and globalsByName() now recognizes and return
+ * findGlobals(), globalsOf(), and globalsByName() now recognizes and returns
    values for '..1', '..2', etc. like they do for '...'.
 
 BUG FIXES:
@@ -29,15 +29,14 @@ BUG FIXES:
    namespaces.  Similarly, drop = c(..., "primitive") would drop primitive R
    objects with names not exported by any base R package.
 
- * findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw
-   "Error in environment(w$enterLocal) : object 'w' not found".
-
  * findGlobals(), globalsOf(), and globalsByName() did not handle '..1',
    '..2', etc.
 
- * findGlobals() and globalsOf() would produce warnings on '<anonymous>: ...
-   may be used in an incorrect context' if formulas would contain '...',
-   '..1', '..2', etc.
+ * findGlobals() and globalsOf() produces warnings on '<anonymous>: ... may be
+   used in an incorrect context' when formulas had '...', '..1', '..2', etc.
+
+ * findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw
+   "Error in environment(w$enterLocal) : object 'w' not found".
 
 
 Version: 0.12.5 [2019-12-07]
