@@ -23,7 +23,7 @@ if (length(internals) > 0L) {
   obj <- get(name, envir = ns, inherits = FALSE)
   stopifnot(!exists(name, envir = pkg, inherits = FALSE))
   globals[[name]] <- obj
-  expected <- c(expected, name)
+#  expected <- c(expected, name)
   name <- sprintf("my-%s", name)
   globals[[name]] <- obj
   expected <- c(expected, name)

@@ -47,7 +47,8 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
 
     ## Never drop globals that have been re-mapped to a non-standard name
     ## https://github.com/HenrikBengtsson/globals/issues/56
-    if (!exists(name, envir = asPkgEnvironment(env_name))) {
+    if (!exists(name, envir = env) &&
+        !exists(name, envir = asPkgEnvironment(env_name))) {
       next
     }
 
