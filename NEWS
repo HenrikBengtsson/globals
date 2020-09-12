@@ -13,6 +13,8 @@ SIGNIFICANT CHANGES:
  * findGlobals(), globalsOf(), and globalsByName() now recognizes and returns
    values for '..1', '..2', etc. like they do for '...'.
 
+ * cleanup() now also drop exported and non-exported NativeSymbolInfo objects.
+
 NEW FEATURES:
 
  * cleanup() gained support for dropping NativeSymbolInfo objects.

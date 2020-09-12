@@ -9,8 +9,7 @@ cleanup <- function(...) UseMethod("cleanup")
 #'
 #' @aliases cleanup
 #' @export
-cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
-                            ...) {
+cleanup.Globals <- function(globals, drop = c("missing", "base-packages", "nativesymbolinfo"), ...) {
   where <- attr(globals, "where", exact = TRUE)
 
   names <- names(globals)
