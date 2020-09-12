@@ -1,7 +1,7 @@
 Package: globals
 ================
 
-Version: 0.12.5-9000 [2020-09-06]
+Version: 0.12.5-9000 [2020-09-12]
 
 SIGNIFICANT CHANGES:
 
@@ -12,6 +12,10 @@ SIGNIFICANT CHANGES:
 
  * findGlobals(), globalsOf(), and globalsByName() now recognizes and returns
    values for '..1', '..2', etc. like they do for '...'.
+
+NEW FEATURES:
+
+ * cleanup() gained support for dropping NativeSymbolInfo objects.
 
 BUG FIXES:
 

@@ -47,6 +47,15 @@ is_internal <- function(x) {
   any(grepl(".Internal", body, fixed = TRUE))
 }
 
+# Example: base::.C_R_removeTaskCallback
+is_native_symbol_info <- function(x) {
+  if (!inherits(x, "NativeSymbolInfo")) return(FALSE)
+  if (typeof(x) != "list") return(FALSE)
+  address <- x$address
+  if (!inherits(address, "RegisteredNativeSymbol")) return(FALSE)
+  TRUE
+}
+
 isPackageNamespace <- function(env) {
   if (!is.environment(env)) return(FALSE)
   name <- environmentName(env)

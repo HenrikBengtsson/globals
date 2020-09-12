@@ -29,6 +29,11 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
   ## Drop objects that calls .Internal()
   drop_internals <- "internals" %in% drop
 
+  ## Drop objects that are of class NativeSymbolInfo used in calls
+  ## to .Call(), .Call.graphics(), .External(), .External2(), and
+  ## .External.graphics()
+  drop_native_symbol_info <- "nativesymbolinfo" %in% drop
+  
   for (name in names) {
     env <- where[[name]]
 
@@ -66,12 +71,20 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
 
     global <- globals[[name]]
 
+    ## Example: base::rm()
     if (is_exported && drop_primitives && is.primitive(global)) {
       keep[[name]] <- FALSE
       next
     }
 
+    ## Example: base::quit()
     if (is_exported && drop_internals && is_internal(global)) {
+      keep[[name]] <- FALSE
+      next
+    }
+    
+    ## Example: base::.C_R_addTaskCallback
+    if (drop_native_symbol_info && is_native_symbol_info(global)) {
       keep[[name]] <- FALSE
       next
     }
