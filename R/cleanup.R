@@ -45,8 +45,9 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
     env_name <- environmentName(env)
     env_name <- gsub("^package:", "", env_name)
 
-    ## Never drop globals that have been re-mapped to a non-standard name
-    ## https://github.com/HenrikBengtsson/globals/issues/56
+    ## Never drop a global that is copy of an exported package object but has
+    ## different name than the exported object, e.g. myView <- utils::View
+    ## See also: https://github.com/HenrikBengtsson/globals/issues/56
     if (!exists(name, envir = asPkgEnvironment(env_name))) {
       next
     }
