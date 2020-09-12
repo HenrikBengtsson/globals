@@ -13,7 +13,8 @@ globals <- list(
 )
 expected <- c("my_fcn", "my_identity")
 
-## Add internal objects - they should be keep
+## Add internal/non-exported package objects.  They need to be keep because
+## they will not be on the search path even if the package is attached
 ns <- asNamespace("utils")
 pkg <- as.environment("package:utils")
 internals <- setdiff(ls(ns, all.names = TRUE), ls(pkg, all.names = TRUE))
