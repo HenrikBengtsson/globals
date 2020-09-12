@@ -57,23 +57,21 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
     ##   my_print.aspell = utils:::print.aspell  ## should be kept
     ## ))
     ## https://github.com/HenrikBengtsson/globals/issues/57
-    if (!exists(name, envir = asPkgEnvironment(env_name))) {
-      next
-    }
+    is_exported <- exists(name, envir = asPkgEnvironment(env_name))
 
-    if (drop_base && is_base_pkg(env_name)) {
+    if (is_exported && drop_base && is_base_pkg(env_name)) {
       keep[[name]] <- FALSE
       next
     }
 
     global <- globals[[name]]
 
-    if (drop_primitives && is.primitive(global)) {
+    if (is_exported && drop_primitives && is.primitive(global)) {
       keep[[name]] <- FALSE
       next
     }
 
-    if (drop_internals && is_internal(global)) {
+    if (is_exported && drop_internals && is_internal(global)) {
       keep[[name]] <- FALSE
       next
     }
