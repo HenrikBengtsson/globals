@@ -26,8 +26,8 @@ BUG FIXES:
 
  * cleanup(..., drop = c(..., "base-packages")) for Globals would drop base
    R objects with names not exported by the corresponding base R package.
-   namespaces.  Similarly, drop = c(..., "primitive") would drop primitive R
-   objects with names not exported by any base R package.
+   Similarly, drop = c(..., "primitive") would drop primitive R objects with
+   names not exported by any base R package.
 
  * findGlobals(), globalsOf(), and globalsByName() did not handle '..1',
    '..2', etc.
