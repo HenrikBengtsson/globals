@@ -7,7 +7,7 @@
 * URL: https://github.com/timoast/signac, https://satijalab.org/signac
 * BugReports: https://github.com/timoast/signac/issues
 * Date/Publication: 2020-08-16 15:50:03 UTC
-* Number of recursive dependencies: 227
+* Number of recursive dependencies: 226
 
 Run `revdep_details(, "Signac")` for more info
 

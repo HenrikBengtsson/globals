@@ -251,7 +251,7 @@ Run `revdep_details(, "brms")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.8Mb
+      installed size is  6.7Mb
       sub-directories of 1Mb or more:
         R     3.1Mb
         doc   2.6Mb
@@ -299,9 +299,9 @@ Run `revdep_details(, "CLVTools")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 13.2Mb
+      installed size is 12.6Mb
       sub-directories of 1Mb or more:
-        libs  12.0Mb
+        libs  11.4Mb
     ```
 
 # codebook
@@ -395,9 +395,9 @@ Run `revdep_details(, "cort")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.4Mb
+      installed size is  5.2Mb
       sub-directories of 1Mb or more:
-        libs   4.6Mb
+        libs   4.4Mb
     ```
 
 # cSEM
@@ -470,31 +470,6 @@ Run `revdep_details(, "delayed")` for more info
       All declared Imports should be used.
     ```
 
-# dipsaus
-
-<details>
-
-* Version: 0.1.0
-* Source code: https://github.com/cran/dipsaus
-* URL: https://github.com/dipterix/dipsaus
-* BugReports: https://github.com/dipterix/dipsaus/issues
-* Date/Publication: 2020-08-12 10:00:20 UTC
-* Number of recursive dependencies: 66
-
-Run `revdep_details(, "dipsaus")` for more info
-
-</details>
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.1Mb
-      sub-directories of 1Mb or more:
-        doc    1.1Mb
-        libs   2.7Mb
-    ```
-
 # dragon
 
 <details>
@@ -535,9 +510,9 @@ Run `revdep_details(, "EFAtools")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.8Mb
+      installed size is  6.4Mb
       sub-directories of 1Mb or more:
-        libs   4.8Mb
+        libs   5.4Mb
     ```
 
 # EpiNow2
@@ -579,49 +554,6 @@ Run `revdep_details(, "EpiNow2")` for more info
     GNU make is a SystemRequirements.
     ```
 
-# evaluator
-
-<details>
-
-* Version: 0.4.2
-* Source code: https://github.com/cran/evaluator
-* URL: https://evaluator.tidyrisk.org
-* BugReports: https://github.com/davidski/evaluator/issues
-* Date/Publication: 2020-04-16 09:20:09 UTC
-* Number of recursive dependencies: 136
-
-Run `revdep_details(, "evaluator")` for more info
-
-</details>
-
-## In both
-
-*   checking tests ...
-    ```
-    ...
-      +   message("Using phantom.js from ", shinytest:::find_phantom(), "\n")
-      + }
-      > 
-      > test_check("evaluator")
-      pandoc: Could not determine mime type for `/home/henrik/c4/repositories/globals/revdep/library/evaluator/rmarkdown/rmd/h/fontawesome/css/../webfonts/fa-brands-400.woff2'
-      ── 1. Error: Risk Dashboard renders (@test-reports.R#50)  ──────────────────────
-      pandoc document conversion failed with error 1
-      Backtrace:
-       1. testthat::evaluate_promise(...)
-       6. evaluator::risk_dashboard(...)
-       7. rmarkdown::render(...)
-       8. rmarkdown:::convert(output_file, run_citeproc)
-       9. rmarkdown::pandoc_convert(...)
-      
-      # Scenario model: openfair_tef_tc_diff_lm
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 137 | SKIPPED: 4 | WARNINGS: 0 | FAILED: 1 ]
-      1. Error: Risk Dashboard renders (@test-reports.R#50) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # foieGras
 
 <details>
@@ -641,9 +573,9 @@ Run `revdep_details(, "foieGras")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 35.2Mb
+      installed size is 38.4Mb
       sub-directories of 1Mb or more:
-        libs  34.0Mb
+        libs  37.2Mb
     ```
 
 # forecastML
@@ -714,6 +646,28 @@ Run `revdep_details(, "GetBCBData")` for more info
       All declared Imports should be used.
     ```
 
+# googleTagManageR
+
+<details>
+
+* Version: 0.1.5
+* Source code: https://github.com/cran/googleTagManageR
+* Date/Publication: 2020-09-09 08:40:08 UTC
+* Number of recursive dependencies: 63
+
+Run `revdep_details(, "googleTagManageR")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘assertthat’ ‘future’ ‘httr’ ‘jsonlite’
+      All declared Imports should be used.
+    ```
+
 # grattan
 
 <details>
@@ -735,13 +689,6 @@ Run `revdep_details(, "grattan")` for more info
     ```
     Packages suggested but not available for checking:
       'taxstats', 'taxstats1516'
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.3Mb
-      sub-directories of 1Mb or more:
-        libs   3.3Mb
     ```
 
 # gWQS
@@ -784,9 +731,9 @@ Run `revdep_details(, "hal9001")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.9Mb
+      installed size is  6.3Mb
       sub-directories of 1Mb or more:
-        libs   5.1Mb
+        libs   5.5Mb
     ```
 
 # iml
@@ -843,10 +790,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-09-06 19:00:12] ::plot_cnv:Start
-    INFO [2020-09-06 19:00:12] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-09-06 19:00:12] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-09-06 19:00:12] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-09-11 17:02:50] ::plot_cnv:Start
+    INFO [2020-09-11 17:02:50] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-09-11 17:02:50] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-09-11 17:02:50] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
@@ -921,49 +868,6 @@ Run `revdep_details(, "JointAI")` for more info
       All declared Imports should be used.
     ```
 
-# ldaPrototype
-
-<details>
-
-* Version: 0.2.0
-* Source code: https://github.com/cran/ldaPrototype
-* URL: https://github.com/JonasRieger/ldaPrototype, https://doi.org/10.5281/zenodo.3597978
-* BugReports: https://github.com/JonasRieger/ldaPrototype/issues
-* Date/Publication: 2020-07-16 11:10:02 UTC
-* Number of recursive dependencies: 110
-
-Run `revdep_details(, "ldaPrototype")` for more info
-
-</details>
-
-## In both
-
-*   checking tests ...
-    ```
-    ...
-      The following object is masked from 'package:stats':
-      
-          cutree
-      
-      > 
-      > test_check("ldaPrototype")
-      ── 1. Error: (unknown) (@test_jaccardTopics.R#8)  ──────────────────────────────
-      wrong sign in 'by' argument
-      Backtrace:
-       1. ldaPrototype::jaccardTopics(mtopics, pm.backend = "socket")
-       2. ldaPrototype:::jaccardTopics.parallel(...)
-       3. base::lapply(...)
-       4. ldaPrototype:::FUN(X[[i]], ...)
-       6. base::seq.default(x, N - 2, max(ncpus, 2))
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 243 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
-      1. Error: (unknown) (@test_jaccardTopics.R#8) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # lidR
 
 <details>
@@ -980,32 +884,6 @@ Run `revdep_details(, "lidR")` for more info
 </details>
 
 ## In both
-
-*   checking tests ...
-    ```
-    ...
-    Complete output:
-      > Sys.setenv("R_TESTS" = "")
-      > 
-      > library(testthat)
-      > library(lidR)
-      Loading required package: raster
-      Loading required package: sp
-      > 
-      > options(lidR.progress = FALSE)
-      > rgdal::set_thin_PROJ6_warnings(TRUE)
-      > test_check("lidR")
-      ── 1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-gr
-      `x` not equal to `y`.
-      Attributes: < Component "data": Attributes: < Component "values": Mean relative difference: 0.0008376085 > >
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 1163 | SKIPPED: 1 | WARNINGS: 1 | FAILED: 1 ]
-      1. Failure: grid_canopy pit-free works both with LAS and LAScatalog (@test-grid_canopy.R#102) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
 
 *   checking installed package size ... NOTE
     ```
@@ -1286,6 +1164,75 @@ Run `revdep_details(, "modeltime")` for more info
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 448 | SKIPPED: 7 | WARNINGS: 0 | FAILED: 1 ]
       1. Error: (unknown) (@test-results-forecast-plots.R#34) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# nlrx
+
+<details>
+
+* Version: 0.4.1
+* Source code: https://github.com/cran/nlrx
+* URL: https://docs.ropensci.org/nlrx, https://github.com/ropensci/nlrx/
+* BugReports: https://github.com/ropensci/nlrx/issues/
+* Date/Publication: 2020-02-07 09:40:02 UTC
+* Number of recursive dependencies: 114
+
+Run `revdep_details(, "nlrx")` for more info
+
+</details>
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    ...
+    +                 "https://raw.githubusercontent.com/nldoc/nldoc_pg/master/WSP.nls")
+    > 
+    > # Define output directory:
+    > outdir <- tempdir()  # adjust path to your needs
+    > 
+    > # Create documentation:
+    > nldoc(modelfiles = modelfiles,
+    +       infotab=TRUE,
+    +       gui=TRUE,
+    +       bs=TRUE,
+    +       outpath = outdir,
+    +       output_format = "html",
+    +       number_sections = TRUE,
+    +       theme = "cosmo",
+    +       date = date(),
+    +       toc = TRUE)
+    /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpYdilm9/rmarkdown-straa8f13062687.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
+    Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
+    InvalidUrlException "c4-yum1:3128" "Invalid scheme"
+    Error: pandoc document conversion failed with error 61
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      > library(nlrx)
+      > 
+      > test_check("nlrx", filter = "nldoc")
+      /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpiNTDst/rmarkdown-strac3f4afacd5e.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/lua/latex-div.lua 
+      Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
+      InvalidUrlException "c4-yum1:3128" "Invalid scheme"
+      ── 1. Error: nldoc (@test-nldoc.R#14)  ─────────────────────────────────────────
+      pandoc document conversion failed with error 61
+      Backtrace:
+       1. nlrx::nldoc(...)
+       2. nlrx:::nldoc_write_nldoc(...)
+       3. rmarkdown::render(mdfile)
+       4. rmarkdown:::convert(output_file, run_citeproc)
+       5. rmarkdown::pandoc_convert(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 0 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 1 ]
+      1. Error: nldoc (@test-nldoc.R#14) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -1577,27 +1524,6 @@ Run `revdep_details(, "QDNAseq")` for more info
       All declared Imports should be used.
     ```
 
-# qgcomp
-
-<details>
-
-* Version: 2.4.0
-* Source code: https://github.com/cran/qgcomp
-* Date/Publication: 2020-07-01 12:00:02 UTC
-* Number of recursive dependencies: 128
-
-Run `revdep_details(, "qgcomp")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘markdown’
-      All declared Imports should be used.
-    ```
-
 # qtl2pleio
 
 <details>
@@ -1617,9 +1543,9 @@ Run `revdep_details(, "qtl2pleio")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 20.7Mb
+      installed size is 23.8Mb
       sub-directories of 1Mb or more:
-        libs  20.4Mb
+        libs  23.6Mb
     ```
 
 # regmedint
@@ -1781,11 +1707,11 @@ Run `revdep_details(, "seer")` for more info
 
 <details>
 
-* Version: 3.2.0
+* Version: 3.2.1
 * Source code: https://github.com/cran/Seurat
-* URL: http://www.satijalab.org/seurat, https://github.com/satijalab/seurat
+* URL: https://satijalab.org/seurat, https://github.com/satijalab/seurat
 * BugReports: https://github.com/satijalab/seurat/issues
-* Date/Publication: 2020-07-16 04:30:12 UTC
+* Date/Publication: 2020-09-07 10:20:15 UTC
 * Number of recursive dependencies: 224
 
 Run `revdep_details(, "Seurat")` for more info
@@ -1798,7 +1724,7 @@ Run `revdep_details(, "Seurat")` for more info
     ```
     Package required but not available: ‘sctransform’
     
-    Packages suggested but not available for checking: 'loomR', 'hdf5r'
+    Package suggested but not available for checking: ‘loomR’
     
     See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
     manual.
@@ -1912,7 +1838,7 @@ Run `revdep_details(, "sigminer")` for more info
 * URL: https://github.com/timoast/signac, https://satijalab.org/signac
 * BugReports: https://github.com/timoast/signac/issues
 * Date/Publication: 2020-08-16 15:50:03 UTC
-* Number of recursive dependencies: 227
+* Number of recursive dependencies: 226
 
 Run `revdep_details(, "Signac")` for more info
 
@@ -1989,7 +1915,7 @@ ERROR: lazy loading failed for package ‘Signac’
 * URL: https://meghapsimatrix.github.io/simhelpers/index.html
 * BugReports: https://github.com/meghapsimatrix/simhelpers/issues
 * Date/Publication: 2020-03-31 15:00:06 UTC
-* Number of recursive dependencies: 94
+* Number of recursive dependencies: 97
 
 Run `revdep_details(, "simhelpers")` for more info
 
@@ -2023,9 +1949,9 @@ Run `revdep_details(, "skpr")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 36.8Mb
+      installed size is 41.5Mb
       sub-directories of 1Mb or more:
-        libs  35.2Mb
+        libs  39.9Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -2098,6 +2024,58 @@ Run `revdep_details(, "SpaDES.core")` for more info
 
 ## In both
 
+*   checking examples ... ERROR
+    ```
+    ...
+    > # set modulePath
+    > setPaths(modulePath = system.file("sampleModules", package = "SpaDES.core"))
+    Setting:
+      options(
+        spades.modulePath = '/home/henrik/c4/repositories/globals/revdep/checks/SpaDES.core/new/SpaDES.core.Rcheck/SpaDES.core/sampleModules'
+      )
+    Paths set to:
+      options(
+        rasterTmpDir = '/scratch/henrik/RtmpkMEFZH/raster'
+        reproducible.cachePath = '/scratch/henrik/RtmpkMEFZH/myProject/cache'
+        spades.inputPath = '/scratch/henrik/RtmpkMEFZH/myProject/inputs'
+        spades.outputPath = '/scratch/henrik/RtmpkMEFZH/myProject/outputs'
+        spades.modulePath = '/home/henrik/c4/repositories/globals/revdep/checks/SpaDES.core/new/SpaDES.core.Rcheck/SpaDES.core/sampleModules'
+      )
+    > # use Require and reqdPkgs
+    > if (!interactive()) chooseCRANmirror(ind = 1) #
+    > Require(unlist(reqdPkgs(module = c("caribouMovement", "randomLandscapes", "fireSpread"))))
+    Error in `[.data.table`(pkgDT, packageFullName %in% packagesOrig[origPackagesHaveNames],  : 
+      Supplied 7 items to be assigned to 8 items of column 'Package'. If you wish to 'recycle' the RHS please use rep() to make this intent clear to readers of your code.
+    Calls: Require -> [ -> [.data.table
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+    ...
+      
+      The following objects are masked from 'package:stats':
+      
+          end, start
+      
+      The following object is masked from 'package:utils':
+      
+          citation
+      
+      ── 1. Error: /home/henrik/c4/repositories/globals/revdep/checks/SpaDES.core/new/
+      Supplied 7 items to be assigned to 8 items of column 'Package'. If you wish to 'recycle' the RHS please use rep() to make this intent clear to readers of your code.
+      Backtrace:
+       1. Require::Require(...)
+       3. data.table:::`[.data.table`(...)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 507 | SKIPPED: 19 | WARNINGS: 1 | FAILED: 1 ]
+      1. Error: /home/henrik/c4/repositories/globals/revdep/checks/SpaDES.core/new/SpaDES.core.Rcheck/00_pkg_src/SpaDES.core/man/simList-accessors-metadata.Rd 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
     Namespace in Imports field not imported from: ‘RCurl’
@@ -2145,9 +2123,9 @@ Run `revdep_details(, "spatialwarnings")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.6Mb
+      installed size is  5.7Mb
       sub-directories of 1Mb or more:
-        libs   4.6Mb
+        libs   4.7Mb
     ```
 
 *   checking dependencies in R code ... NOTE
