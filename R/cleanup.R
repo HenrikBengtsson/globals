@@ -62,6 +62,8 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
     ##   my_print.aspell = utils:::print.aspell  ## should be kept
     ## ))
     ## https://github.com/HenrikBengtsson/globals/issues/57
+
+    ## Is the global an exported package object?
     is_exported <- exists(name, envir = asPkgEnvironment(env_name))
 
     if (is_exported && drop_base && is_base_pkg(env_name)) {
@@ -83,8 +85,13 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
       next
     }
     
+
+    ## Is the the global a non-exported package object?
+    is_private <- !is_exported && exists(name, envir = env)
+
     ## Example: base::.C_R_addTaskCallback
-    if (drop_native_symbol_info && is_native_symbol_info(global)) {
+    if ((is_exported || is_private) &&
+        drop_native_symbol_info && is_native_symbol_info(global)) {
       keep[[name]] <- FALSE
       next
     }
