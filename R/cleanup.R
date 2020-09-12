@@ -37,7 +37,9 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
       next
     }
 
-    ## Never drop globals that are not in package environments
+    ## Never drop globals that are not in package environments.
+    ## This will drop local copies of package objects, e.g.
+    ## myView <- utils::View and format.aspell <- utils:::format.aspell
     if (is.environment(env) && !isPackageNamespace(env)) {
       next
     }
@@ -45,9 +47,16 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages"),
     env_name <- environmentName(env)
     env_name <- gsub("^package:", "", env_name)
 
-    ## Never drop a global that is copy of an exported package object but has
-    ## different name than the exported object, e.g. myView <- utils::View
-    ## See also: https://github.com/HenrikBengtsson/globals/issues/56
+    ## Never drop a global that is copy of an exported package object but
+    ## has different name than the exported object.  This avoids dropping
+    ## local, renamed copies of package objects in a list, e.g.
+    ## globals <- globals::as.Globals(list(
+    ##   identity        = base::identity,
+    ##   my_identity     = base::identity,       ## should be kept
+    ##   print.aspell    = utils:::print.aspell, ## should be kept
+    ##   my_print.aspell = utils:::print.aspell  ## should be kept
+    ## ))
+    ## https://github.com/HenrikBengtsson/globals/issues/57
     if (!exists(name, envir = asPkgEnvironment(env_name))) {
       next
     }
