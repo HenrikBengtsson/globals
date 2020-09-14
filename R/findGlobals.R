@@ -276,6 +276,7 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
     globals <- list_apply(expr, FUN = findGlobals, envir = envir,
                       attributes = attributes, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
+                      method = method,
                       substitute = FALSE, unlist = FALSE)
     
     keep <- types <- NULL ## Not needed anymore
@@ -330,6 +331,7 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
                                   ...,
                                   ## Don't complain about '...', '..1', etc.
                                   dotdotdot = "ignore",
+                                  method = method,
                                   substitute = FALSE, unlist = FALSE)
       if (unlist) attrs_globals <- unlist(attrs_globals, use.names = FALSE)
       if (length(attrs_globals) > 1L) attrs_globals <- unique(attrs_globals)
