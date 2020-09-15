@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2020-09-12                   |
+|date     |2020-09-14                   |
 
 # Dependencies
 
@@ -26,7 +26,7 @@
 |:----------------------------|:-------|:-----|:-------|:----|
 |[Signac](failures.md#signac) |1.0.0   |1     |        |     |
 
-## All (182)
+## All (183)
 
 |package                                          |version   |error |warning |note |
 |:------------------------------------------------|:---------|:-----|:-------|:----|
@@ -128,7 +128,7 @@
 |[methyvim](problems.md#methyvim)                 |1.10.0    |1     |        |1    |
 |[MineICA](problems.md#mineica)                   |1.28.0    |1     |2       |4    |
 |mleap                                            |1.0.0     |      |        |     |
-|mlr3                                             |0.5.0     |      |        |     |
+|mlr3                                             |0.6.0     |      |        |     |
 |mlr3db                                           |0.1.5     |      |        |     |
 |[modeltime](problems.md#modeltime)               |0.1.0     |1     |        |     |
 |mrgsim.parallel                                  |0.1.1     |      |        |     |
@@ -145,6 +145,7 @@
 |photosynthesis                                   |2.0.0     |      |        |     |
 |[phylolm](problems.md#phylolm)                   |2.6.2     |      |        |1    |
 |plsmod                                           |0.0.1     |      |        |     |
+|[plumber](problems.md#plumber)                   |1.0.0     |1     |        |     |
 |pointblank                                       |0.5.2     |      |        |     |
 |[poissonreg](problems.md#poissonreg)             |0.0.1     |      |        |1    |
 |[probably](problems.md#probably)                 |0.0.6     |1     |        |     |
