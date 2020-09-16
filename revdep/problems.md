@@ -147,14 +147,18 @@ Run `revdep_details(, "batchtools")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
-    Package suggested but not available for checking: ‘doMPI’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘Rmpi’
+    --------------------------------------------------------------------------
+    [[59062,1],0]: A high-performance Open MPI point-to-point messaging module
+    was unable to find any relevant network interfaces:
+    
+    Module: OpenFabrics (openib)
+      Host: c4-dev1
+    
+    Another transport will be used instead, although this may result in
+    lower performance.
+    --------------------------------------------------------------------------
     ```
 
 # bcmaps
@@ -1689,7 +1693,7 @@ Run `revdep_details(, "rsample")` for more info
 * URL: https://github.com/h2oai/sparkling-water/tree/master/r
 * BugReports: http://jira.h2o.ai
 * Date/Publication: 2020-01-28 23:10:02 UTC
-* Number of recursive dependencies: 63
+* Number of recursive dependencies: 65
 
 Run `revdep_details(, "rsparkling")` for more info
 
