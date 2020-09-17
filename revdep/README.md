@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/Los_Angeles          |
-|date     |2020-09-14                   |
+|date     |2020-09-16                   |
 
 # Dependencies
 
@@ -37,7 +37,7 @@
 |baguette                                         |0.0.1     |      |        |     |
 |[BAMBI](problems.md#bambi)                       |2.3.0     |      |        |2    |
 |BatchGetSymbols                                  |2.5.7     |      |        |     |
-|[batchtools](problems.md#batchtools)             |0.9.13    |      |        |2    |
+|[batchtools](problems.md#batchtools)             |0.9.13    |      |        |1    |
 |[bcmaps](problems.md#bcmaps)                     |0.18.1    |      |        |1    |
 |bigdist                                          |0.1.4     |      |        |     |
 |biotmle                                          |1.12.0    |      |        |     |
