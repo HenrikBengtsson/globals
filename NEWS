@@ -1,6 +1,52 @@
 Package: globals
 ================
 
+Version: 0.13.0 [2020-09-16]
+
+SIGNIFICANT CHANGES:
+
+ * findGlobals(expr) now also scans any attributes of 'expr' for globals, e.g.
+   purrr::partial() puts the original function in attribute 'body'.  Argument
+   'attributes' controls which attributes, if any, should be scanned.  Default
+   is to scan all attributes.
+
+ * findGlobals(), globalsOf(), and globalsByName() now recognizes and returns
+   values for '..1', '..2', etc. like they do for '...'.
+
+ * cleanup() now also drop exported and non-exported NativeSymbolInfo objects.
+
+NEW FEATURES:
+
+ * cleanup() gained support for dropping NativeSymbolInfo objects.
+
+BUG FIXES:
+
+ * findGlobals() did not pass down argument 'method' in recursive calls.
+
+ * findGlobals(expr) would fail to identify globals in anonymous function
+   calls, e.g. expr <- as.call(list(function(...) NOT_FOUND, quote(FOUND))).
+
+ * Calls like findGlobals(~ NULL) with NULLs on the right-hand side could throw
+   "Error in if (length(ans) == 0L || as.character(ans[[1L]])[1L] == "~") { : 
+   missing value where TRUE/FALSE needed". Solved by working around what looks
+   like a bug in the 'stats' package causing subsetting on formulas with NULLs
+   to fail.
+
+ * cleanup(..., drop = c(..., "base-packages")) for Globals would drop base
+   R objects with names not exported by the corresponding base R package.
+   Similarly, drop = c(..., "primitive") would drop primitive R objects with
+   names not exported by any base R package.
+
+ * findGlobals(), globalsOf(), and globalsByName() did not handle '..1',
+   '..2', etc.
+
+ * findGlobals() and globalsOf() produces warnings on '<anonymous>: ... may be
+   used in an incorrect context' when formulas had '...', '..1', '..2', etc.
+
+ * findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw
+   "Error in environment(w$enterLocal) : object 'w' not found".
+
+
 Version: 0.12.5 [2019-12-07]
 
 BUG FIXES:
@@ -42,7 +88,7 @@ PERFORMANCE:
     if the user had a large number of packages installed and/or the package
     libraries were on slow drives.
 
-DOCUMENTAITON:
+DOCUMENTATION:
 
   * Added help for globals::findGlobals().
   
@@ -219,7 +265,7 @@ Version: 0.6.0 [2015-12-12]
 NEW FEATURES:
 
   * findGlobals() is updated to handle the case where a local variable is
-    *verwriting a global one with the same name, e.g. { a <- b; b <- 1 }.
+    overwriting a global one with the same name, e.g. { a <- b; b <- 1 }.
     Now 'b' is correctly identified as a global object.  Previously it would
     have been missed.  For backward compatibility, the previous behavior can
     be obtained using argument method="conservative".
@@ -230,7 +276,7 @@ Version: 0.5.0 [2015-10-13]
 NEW FEATURES:
 
   * globalsOf() now returns attribute 'where' specifying where each global
-    *bject is located.
+    object is located.
 
 BUG FIXES:
 

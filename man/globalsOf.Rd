@@ -9,6 +9,7 @@ findGlobals(
   expr,
   envir = parent.frame(),
   ...,
+  attributes = TRUE,
   tweak = NULL,
   dotdotdot = c("warning", "error", "return", "ignore"),
   method = c("ordered", "conservative", "liberal"),
@@ -36,6 +37,13 @@ globalsOf(
 \item{envir}{The environment from where to search for globals.}
 
 \item{\dots}{Not used.}
+
+\item{attributes}{If TRUE (default), attributes of `expr` are also searched.
+If FALSE, they are not.
+If a character vector, then attributes with matching names are searched.
+Note, the attributes of the attributes elements are not searched, that is,
+attributes are not searched recursively.  Also, attributes are searched
+with `dotdotdot = "ignore".}
 
 \item{tweak}{An optional function that takes an expression
 and returns a tweaked expression.}
