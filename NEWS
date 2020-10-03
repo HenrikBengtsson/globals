@@ -1,9 +1,14 @@
 Package: globals
 ================
 
-Version: 0.13.0-9000 [2020-09-17]
+Version: 0.13.0-9000 [2020-10-03]
 
- * ...
+BUG FIXES:
+
+ * globalsOf() could produce "Error in vapply(where, FUN = envname, FUN.VALUE
+   = NA_character_, USE.NAMES = FALSE) : values must be length 1, but 
+   FUN(X[[2]]) result is length 10".  This would happen if for instance
+   argument 'envir' has attributes set.
  
 
 Version: 0.13.0 [2020-09-16]

@@ -2,6 +2,7 @@
 *~
 .check
 .make/
+.local/
 .test
 .o
 .dll
