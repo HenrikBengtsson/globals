@@ -9,7 +9,10 @@ BUG FIXES:
    = NA_character_, USE.NAMES = FALSE) : values must be length 1, but 
    FUN(X[[2]]) result is length 10".  This would happen if for instance
    argument 'envir' has attributes set.
- 
+
+ * findGlobals() works around a bug in stats:::`[.formula` of R (< 4.1.0) that
+   revealed itself when scanning formulas with NULL components.
+
 
 Version: 0.13.0 [2020-09-16]
 
