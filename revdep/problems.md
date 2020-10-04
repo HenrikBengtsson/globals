@@ -171,13 +171,13 @@ Run `revdep_details(, "batchtools")` for more info
 *   checking re-building of vignette outputs ... WARNING
     ```
     ...
-    Created registry in '/scratch/henrik/Rtmp6bDTog/registry1603476afe4d' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d376e059122' using cluster functions 'Interactive'
     No readable configuration file found
-    Created registry in '/scratch/henrik/Rtmp6bDTog/registry16034541515' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d37549162d4' using cluster functions 'Interactive'
     No readable configuration file found
-    Created registry in '/scratch/henrik/Rtmp6bDTog/registry1603511e94d1' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d37508d5414' using cluster functions 'Interactive'
     No readable configuration file found
-    Created registry in '/scratch/henrik/Rtmp6bDTog/registry16033bddf1e0' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d377bb1acb2' using cluster functions 'Interactive'
     ! LaTeX Error: File `framed.sty' not found.
     
     ! Emergency stop.
@@ -197,7 +197,7 @@ Run `revdep_details(, "batchtools")` for more info
 *   checking dependencies in R code ... NOTE
     ```
     --------------------------------------------------------------------------
-    [[16815,1],0]: A high-performance Open MPI point-to-point messaging module
+    [[39053,1],0]: A high-performance Open MPI point-to-point messaging module
     was unable to find any relevant network interfaces:
     
     Module: OpenFabrics (openib)
@@ -645,48 +645,6 @@ Run `revdep_details(, "EpiNow2")` for more info
     GNU make is a SystemRequirements.
     ```
 
-# fastpos
-
-<details>
-
-* Version: 0.4.1
-* GitHub: https://github.com/johannes-titz/fastpos
-* Source code: https://github.com/cran/fastpos
-* Date/Publication: 2020-09-29 08:50:08 UTC
-* Number of recursive dependencies: 55
-
-Run `revdep_details(, "fastpos")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ...
-    ```
-    ...
-      Backtrace:
-        1. fastpos::find_critical_pos(...)
-        2. base::mapply(...)
-        4. future::future(...)
-        5. future:::makeFuture(...)
-        6. future:::ClusterRegistry("start", workers = workers)
-        7. future:::makeCluster(workers, ...)
-        8. future::makeClusterPSOCK(workers, ...)
-       10. parallel:::stopCluster.default(cl[nodes])
-       11. parallel:::stopNode(n)
-       12. parallel:::postNode(n, "DONE")
-       14. parallel:::sendData.SOCKnode(...)
-       15. base::serialize(data, node$con)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 3 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 2 ]
-      1. Error: (unknown) (@test-fastpos.R#25) 
-      2. Error: (unknown) (@test-fastpos.R#25) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # foieGras
 
 <details>
@@ -730,106 +688,6 @@ Run `revdep_details(, "forecastML")` for more info
     ```
     Namespace in Imports field not imported from: ‘dtplyr’
       All declared Imports should be used.
-    ```
-
-# furrr
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/DavisVaughan/furrr
-* Source code: https://github.com/cran/furrr
-* Date/Publication: 2018-05-16 16:04:29 UTC
-* Number of recursive dependencies: 38
-
-Run `revdep_details(, "furrr")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Packages required but not available: 'future', 'rlang', 'purrr'
-    
-    Packages suggested but not available for checking: 'dplyr', 'testthat'
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
-# future
-
-<details>
-
-* Version: 1.19.1
-* GitHub: https://github.com/HenrikBengtsson/future
-* Source code: https://github.com/cran/future
-* Date/Publication: 2020-09-22 16:30:10 UTC
-* Number of recursive dependencies: 13
-
-Run `revdep_details(, "future")` for more info
-
-</details>
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-        cat, commandArgs, getOption, inherits, isOpen, nullfile, parse,
-        warnings
-    
-    Error: processing vignette 'future-5-startup.md.rsp' failed with diagnostics:
-    there is no package called ‘xfun’
-    --- failed re-building ‘future-5-startup.md.rsp’
-    
-    --- re-building ‘future-6-future-api-backend-specification.md.rsp’ using rsp
-    Error: processing vignette 'future-6-future-api-backend-specification.md.rsp' failed with diagnostics:
-    there is no package called ‘xfun’
-    --- failed re-building ‘future-6-future-api-backend-specification.md.rsp’
-    
-    SUMMARY: processing the following files failed:
-      ‘future-1-overview.md.rsp’ ‘future-2-output.md.rsp’
-      ‘future-3-topologies.md.rsp’ ‘future-4-issues.md.rsp’
-      ‘future-4-non-exportable-objects.md.rsp’ ‘future-5-startup.md.rsp’
-      ‘future-6-future-api-backend-specification.md.rsp’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# future.apply
-
-<details>
-
-* Version: 1.6.0
-* GitHub: https://github.com/HenrikBengtsson/future.apply
-* Source code: https://github.com/cran/future.apply
-* Date/Publication: 2020-07-01 07:50:02 UTC
-* Number of recursive dependencies: 13
-
-Run `revdep_details(, "future.apply")` for more info
-
-</details>
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘future.apply-1-overview.md.rsp’ using rsp
-    Error: processing vignette 'future.apply-1-overview.md.rsp' failed with diagnostics:
-    there is no package called ‘xfun’
-    --- failed re-building ‘future.apply-1-overview.md.rsp’
-    
-    SUMMARY: processing the following file failed:
-      ‘future.apply-1-overview.md.rsp’
-    
-    Error: Vignette re-building failed.
-    Execution halted
     ```
 
 # genBaRcode
@@ -1187,10 +1045,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-10-03 11:25:51] ::plot_cnv:Start
-    INFO [2020-10-03 11:25:51] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-10-03 11:25:51] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-10-03 11:25:51] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-10-03 17:01:17] ::plot_cnv:Start
+    INFO [2020-10-03 17:01:17] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-10-03 17:01:17] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-10-03 17:01:17] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
@@ -1280,6 +1138,48 @@ Run `revdep_details(, "JointAI")` for more info
     ```
     Namespace in Imports field not imported from: ‘mathjaxr’
       All declared Imports should be used.
+    ```
+
+# ldaPrototype
+
+<details>
+
+* Version: 0.2.0
+* GitHub: https://github.com/JonasRieger/ldaPrototype
+* Source code: https://github.com/cran/ldaPrototype
+* Date/Publication: 2020-07-16 11:10:02 UTC
+* Number of recursive dependencies: 111
+
+Run `revdep_details(, "ldaPrototype")` for more info
+
+</details>
+
+## In both
+
+*   checking tests ...
+    ```
+    ...
+      The following object is masked from 'package:stats':
+      
+          cutree
+      
+      > 
+      > test_check("ldaPrototype")
+      ── 1. Error: (unknown) (@test_jaccardTopics.R#8)  ──────────────────────────────
+      wrong sign in 'by' argument
+      Backtrace:
+       1. ldaPrototype::jaccardTopics(mtopics, pm.backend = "socket")
+       2. ldaPrototype:::jaccardTopics.parallel(...)
+       3. base::lapply(...)
+       4. ldaPrototype:::FUN(X[[i]], ...)
+       6. base::seq.default(x, N - 2, max(ncpus, 2))
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 243 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
+      1. Error: (unknown) (@test_jaccardTopics.R#8) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # lidR
@@ -1588,7 +1488,7 @@ Run `revdep_details(, "MineICA")` for more info
 *   checking re-building of vignette outputs ... NOTE
     ```
     ...
-    Ensembl site unresponsive, trying asia mirror
+    
     ..Features annotation with package hgu133a.db..
     
     ...Annotation into SYMBOL..
@@ -1653,6 +1553,48 @@ Run `revdep_details(, "modeltime")` for more info
       Execution halted
     ```
 
+# mvrsquared
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/TommyJones/mvrsquared
+* Source code: https://github.com/cran/mvrsquared
+* Date/Publication: 2020-06-25 06:00:06 UTC
+* Number of recursive dependencies: 94
+
+Run `revdep_details(, "mvrsquared")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+    ...
+      > library(testthat)
+      > library(mvrsquared)
+      > 
+      > test_check("mvrsquared")
+      ── 1. Failure: Multithreading works as expected (@test-mvrsquared.R#44)  ───────
+      round(r2, 3) not equal to round(s$r.squared, 3).
+      1/1 mismatches
+      [1] 0.817 - 0.849 == -0.032
+      
+      ── 2. Failure: Multithreading works as expected (@test-mvrsquared.R#50)  ───────
+      `r2` not equal to 1 - ss[[1]]/ss[[2]].
+      1/1 mismatches
+      [1] 0.817 - 0.849 == -0.0321
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      [ OK: 23 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
+      1. Failure: Multithreading works as expected (@test-mvrsquared.R#44) 
+      2. Failure: Multithreading works as expected (@test-mvrsquared.R#50) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 # nlrx
 
 <details>
@@ -1688,7 +1630,7 @@ Run `revdep_details(, "nlrx")` for more info
     +       theme = "cosmo",
     +       date = date(),
     +       toc = TRUE)
-    /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpnR93Xi/rmarkdown-str96c662f3299a.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
+    /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmpc6lgPr/rmarkdown-str8217177f4d13.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
     Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
     InvalidUrlException "c4-yum1:3128" "Invalid scheme"
     Error: pandoc document conversion failed with error 61
@@ -1701,7 +1643,7 @@ Run `revdep_details(, "nlrx")` for more info
       > library(nlrx)
       > 
       > test_check("nlrx", filter = "nldoc")
-      /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmp1AGUSz/rmarkdown-str9aa26ff5c77c.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
+      /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpszsCzo/rmarkdown-str8abf39570632.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
       Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
       InvalidUrlException "c4-yum1:3128" "Invalid scheme"
       ── 1. Error: nldoc (@test-nldoc.R#14)  ─────────────────────────────────────────
@@ -2203,7 +2145,7 @@ Run `revdep_details(, "QDNAseq")` for more info
     --- failed re-building ‘QDNAseq.Rnw’
     
     Warning in file.remove(f) :
-      cannot remove file '.nfs0000000c14adcc0a000000c7', reason 'Device or resource busy'
+      cannot remove file '.nfs00000019347cf806000000d1', reason 'Device or resource busy'
     SUMMARY: processing the following file failed:
       ‘QDNAseq.Rnw’
     
@@ -2305,14 +2247,14 @@ Run `revdep_details(, "rBiasCorrection")` for more info
 *   checking re-building of vignette outputs ... WARNING
     ```
     ...
-    [20201003_114219]: Entered 'cubic_regression'-Function
-    [20201003_114219]: 'cubic_regression': minmax = FALSE
+    [20201003_170605]: Entered 'cubic_regression'-Function
+    [20201003_170605]: 'cubic_regression': minmax = FALSE
     Warning: UNRELIABLE VALUE: Future ('future_sapply-1') unexpectedly generated random numbers without specifying argument '[future.]seed'. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, specify argument '[future.]seed', e.g. 'seed=TRUE'. This ensures that proper, parallel-safe random numbers are produced via the L'Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set option 'future.rng.onMisuse' to "ignore".
-    [20201003_114220]: ### Starting with plotting ###
-    [20201003_114220]: Creating  plot No. 1 - filename: /scratch/henrik/Rtmp7QUTEA/png/CDH1_CpG1.png
-    [20201003_114220]: # CpG-site: CpG#1
+    [20201003_170606]: ### Starting with plotting ###
+    [20201003_170606]: Creating  plot No. 1 - filename: /scratch/henrik/RtmplKRNaR/png/CDH1_CpG1.png
+    [20201003_170606]: # CpG-site: CpG#1
     Hyperbolic: Using bias_weight = -937.71907950138 , a = -108.568032237737 , b = -937.71907950138 , d = -232.057189220457
-    [20201003_114220]: # CpG-site: CpG#1
+    [20201003_170606]: # CpG-site: CpG#1
     Cubic: Using a = 6.53413423120091e-05 , b = -0.0055806968734969 , c = 0.784061853455188 , d = 1.93182659932656
     Warning in grDevices::png(..., res = dpi, units = "in") :
       unable to open connection to X11 display ''
@@ -2591,6 +2533,29 @@ Run `revdep_details(, "shiny")` for more info
         www   8.5Mb
     ```
 
+# shinyML
+
+<details>
+
+* Version: 1.0.0
+* GitHub: NA
+* Source code: https://github.com/cran/shinyML
+* Date/Publication: 2020-10-03 21:40:03 UTC
+* Number of recursive dependencies: 114
+
+Run `revdep_details(, "shinyML")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘lifecycle’ ‘shinydashboard’
+      All declared Imports should be used.
+    ```
+
 # shinyrecap
 
 <details>
@@ -2705,32 +2670,6 @@ Run `revdep_details(, "simhelpers")` for more info
 </details>
 
 ## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    
-    Attaching package: 'kableExtra'
-    
-    The following object is masked from 'package:dplyr':
-    
-        group_rows
-    
-    --- finished re-building ‘visualization.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘simulation_workflow.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -3010,7 +2949,7 @@ Run `revdep_details(, "tidypredict")` for more info
         verification. Please open an issue if you find above cases.
       
       
-      [12:08:59] WARNING: amalgamation/../src/learner.cc:516: 
+      [17:31:06] WARNING: amalgamation/../src/learner.cc:516: 
       Parameters: { silent } might not be used.
       
         This may not be accurate due to some parameters are only used in language bindings but

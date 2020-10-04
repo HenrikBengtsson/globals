@@ -10,6 +10,6 @@ Issues with CRAN packages are summarised below.
 ### New problems
 (This reports the first line of each new failure)
 
-* fastpos
+* mvrsquared
   checking tests ...
 

@@ -22,9 +22,9 @@
 
 ## New problems (1)
 
-|package                        |version |error  |warning |note |
-|:------------------------------|:-------|:------|:-------|:----|
-|[fastpos](problems.md#fastpos) |0.4.1   |__+1__ |        |     |
+|package                              |version |error  |warning |note |
+|:------------------------------------|:-------|:------|:-------|:----|
+|[mvrsquared](problems.md#mvrsquared) |0.1.0   |__+1__ |        |     |
 
 ## All (189)
 
@@ -77,16 +77,16 @@
 |ezcox                                                    |0.8.0     |       |        |     |
 |fabletools                                               |0.2.1     |       |        |     |
 |FAMoS                                                    |0.3.0     |       |        |     |
-|[fastpos](problems.md#fastpos)                           |0.4.1     |__+1__ |        |     |
+|fastpos                                                  |0.4.1     |       |        |     |
 |fiery                                                    |1.1.2     |       |        |     |
 |fipe                                                     |0.0.1     |       |        |     |
 |[foieGras](problems.md#foiegras)                         |0.6-9     |       |        |1    |
 |[forecastML](problems.md#forecastml)                     |0.9.0     |       |        |1    |
 |forestControl                                            |0.2.1     |       |        |     |
 |funGp                                                    |0.1.0     |       |        |     |
-|[furrr](problems.md#furrr)                               |0.1.0     |1      |        |     |
-|[future](problems.md#future)                             |1.19.1    |       |1       |     |
-|[future.apply](problems.md#futureapply)                  |1.6.0     |       |1       |     |
+|furrr                                                    |0.1.0     |       |        |     |
+|future                                                   |1.19.1    |       |        |     |
+|future.apply                                             |1.6.0     |       |        |     |
 |future.BatchJobs                                         |0.16.2    |       |        |     |
 |future.batchtools                                        |0.9.0     |       |        |     |
 |future.callr                                             |0.5.0     |       |        |     |
@@ -118,7 +118,7 @@
 |jstor                                                    |0.3.9     |       |        |     |
 |kergp                                                    |0.5.1     |       |        |     |
 |kernelboot                                               |0.1.7     |       |        |     |
-|ldaPrototype                                             |0.2.0     |       |        |     |
+|[ldaPrototype](problems.md#ldaprototype)                 |0.2.0     |1      |        |     |
 |ldsr                                                     |0.0.2     |       |        |     |
 |lgr                                                      |0.3.4     |       |        |     |
 |[lidR](problems.md#lidr)                                 |3.0.3     |       |1       |1    |
@@ -134,7 +134,7 @@
 |mlr3db                                                   |0.2.0     |       |        |     |
 |[modeltime](problems.md#modeltime)                       |0.2.0     |1      |        |     |
 |mrgsim.parallel                                          |0.1.1     |       |        |     |
-|mvrsquared                                               |0.1.0     |       |        |     |
+|[mvrsquared](problems.md#mvrsquared)                     |0.1.0     |__+1__ |        |     |
 |nflfastR                                                 |3.0.0     |       |        |     |
 |[nlrx](problems.md#nlrx)                                 |0.4.1     |2      |        |     |
 |onemapsgapi                                              |1.0.0     |       |        |     |
@@ -175,13 +175,13 @@
 |[seer](problems.md#seer)                                 |1.1.5     |       |        |1    |
 |[Seurat](problems.md#seurat)                             |3.2.2     |       |        |3    |
 |[shiny](problems.md#shiny)                               |1.5.0     |1      |        |1    |
-|shinyML                                                  |0.2.0     |       |        |     |
+|[shinyML](problems.md#shinyml)                           |1.0.0     |       |        |1    |
 |[shinyrecap](problems.md#shinyrecap)                     |0.1.0     |       |        |1    |
 |[sigminer](problems.md#sigminer)                         |1.0.19    |       |        |1    |
 |[Signac](problems.md#signac)                             |1.0.0     |       |        |2    |
 |[simfinapi](problems.md#simfinapi)                       |0.1.0     |1      |        |     |
 |simglm                                                   |0.8.0     |       |        |     |
-|[simhelpers](problems.md#simhelpers)                     |0.1.0     |       |1       |1    |
+|[simhelpers](problems.md#simhelpers)                     |0.1.0     |       |        |1    |
 |[skpr](problems.md#skpr)                                 |0.64.2    |       |        |2    |
 |[solitude](problems.md#solitude)                         |1.1.1     |       |        |1    |
 |[spacey](problems.md#spacey)                             |0.1.1     |       |        |1    |
