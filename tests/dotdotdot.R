@@ -67,6 +67,15 @@ globals <- findGlobals(exprs, dotdotdot = "return")
 print(globals)
 assert_identical_sets(globals, unique(unlist(truth, use.names = FALSE)))
 
+message("\n*** findGlobals(<attribute-with-formula-and-dots>, dotdotdot = 'return'):")
+formula_attr <- bquote(~ .(call("fn", quote(...))))
+x <- structure(integer(), formula_attr = formula_attr)
+print(x)
+# Attributes always use `dotdotdot = "ignore"`
+globals <- findGlobals(x, dotdotdot = "return", attributes = TRUE)
+print(globals)
+assert_identical_sets(globals, c("~", "fn"))
+
 message("*** findGlobals() ... DONE")
 
 
