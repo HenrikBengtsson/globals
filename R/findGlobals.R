@@ -107,7 +107,15 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
       if (v == "~") {
         stop_if_not(length(e) >= 2L, identical(e[[1]], as.symbol("~")))
         for (kk in 2:length(e)) {
-          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = "return")
+          ## Ignoring dots overrides the default of silently returning
+          ## them from formulas
+          ## Fixes https://github.com/HenrikBengtsson/globals/issues/63
+          if (dotdotdot == "ignore") {
+            formula_dotdotdot <- "ignore"
+          } else {
+            formula_dotdotdot <- "return"
+          }
+          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot)
             if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
