@@ -42,7 +42,7 @@ Run `revdep_details(, "adept")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.5Mb
+      installed size is  5.4Mb
       sub-directories of 1Mb or more:
         doc   4.7Mb
     ```
@@ -73,32 +73,7 @@ Run `revdep_details(, "alookr")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/home/henrik/c4/repositories/globals/revdep/checks/alookr/new/alookr.Rcheck/00install.out’ for details.
-    ```
-
-# aroma.affymetrix
-
-<details>
-
-* Version: 3.2.0
-* GitHub: https://github.com/HenrikBengtsson/aroma.affymetrix
-* Source code: https://github.com/cran/aroma.affymetrix
-* Date/Publication: 2019-06-23 06:00:14 UTC
-* Number of recursive dependencies: 70
-
-Run `revdep_details(, "aroma.affymetrix")` for more info
-
-</details>
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.4Mb
-      sub-directories of 1Mb or more:
-        R             2.3Mb
-        help          1.1Mb
-        testScripts   1.1Mb
+    See ‘/c4/home/henrik/repositories/globals/revdep/checks/alookr/new/alookr.Rcheck/00install.out’ for details.
     ```
 
 # aroma.core
@@ -141,7 +116,7 @@ Run `revdep_details(, "BAMBI")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.1Mb
+      installed size is  6.0Mb
       sub-directories of 1Mb or more:
         libs   5.5Mb
     ```
@@ -171,20 +146,20 @@ Run `revdep_details(, "batchtools")` for more info
 *   checking re-building of vignette outputs ... WARNING
     ```
     ...
-    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d376e059122' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/RtmpIZXoP9/registry8fa076898de3' using cluster functions 'Interactive'
     No readable configuration file found
-    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d37549162d4' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/RtmpIZXoP9/registry8fa01fe88b33' using cluster functions 'Interactive'
     No readable configuration file found
-    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d37508d5414' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/RtmpIZXoP9/registry8fa04dbc787' using cluster functions 'Interactive'
     No readable configuration file found
-    Created registry in '/scratch/henrik/Rtmpmbbqi2/registry8d377bb1acb2' using cluster functions 'Interactive'
+    Created registry in '/scratch/henrik/RtmpIZXoP9/registry8fa069b6ce53' using cluster functions 'Interactive'
     ! LaTeX Error: File `framed.sty' not found.
     
     ! Emergency stop.
     <read *> 
     
     Error: processing vignette 'batchtools.Rmd' failed with diagnostics:
-    LaTeX failed to compile /home/henrik/c4/repositories/globals/revdep/checks/batchtools/new/batchtools.Rcheck/vign_test/batchtools/vignettes/batchtools.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See batchtools.log for more info.
+    LaTeX failed to compile /c4/home/henrik/repositories/globals/revdep/checks/batchtools/new/batchtools.Rcheck/vign_test/batchtools/vignettes/batchtools.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See batchtools.log for more info.
     --- failed re-building ‘batchtools.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -194,18 +169,9 @@ Run `revdep_details(, "batchtools")` for more info
     Execution halted
     ```
 
-*   checking dependencies in R code ... NOTE
+*   checking Rd cross-references ... NOTE
     ```
-    --------------------------------------------------------------------------
-    [[39053,1],0]: A high-performance Open MPI point-to-point messaging module
-    was unable to find any relevant network interfaces:
-    
-    Module: OpenFabrics (openib)
-      Host: c4-dev1
-    
-    Another transport will be used instead, although this may result in
-    lower performance.
-    --------------------------------------------------------------------------
+    Package unavailable to check Rd xrefs: ‘Rmpi’
     ```
 
 # bcmaps
@@ -282,10 +248,10 @@ Run `revdep_details(, "blockCV")` for more info
 
 <details>
 
-* Version: 2.13.5
+* Version: 2.14.0
 * GitHub: https://github.com/paul-buerkner/brms
 * Source code: https://github.com/cran/brms
-* Date/Publication: 2020-07-31 08:40:03 UTC
+* Date/Publication: 2020-10-08 14:20:03 UTC
 * Number of recursive dependencies: 180
 
 Run `revdep_details(, "brms")` for more info
@@ -300,10 +266,10 @@ Run `revdep_details(, "brms")` for more info
       unable to open connection to X11 display ''
     Warning in (function (filename = "Rplot%03d.png", width = 480, height = 480,  :
       unable to open connection to X11 display ''
-    Quitting from lines 57-63 (brms_phylogenetics.Rmd) 
-    Error: processing vignette 'brms_phylogenetics.Rmd' failed with diagnostics:
+    Quitting from lines 37-72 (brms_threading.Rmd) 
+    Error: processing vignette 'brms_threading.Rmd' failed with diagnostics:
     unable to start device PNG
-    --- failed re-building ‘brms_phylogenetics.Rmd’
+    --- failed re-building ‘brms_threading.Rmd’
     
     --- re-building ‘brms_multilevel.ltx’ using tex
     --- finished re-building ‘brms_multilevel.ltx’
@@ -314,7 +280,7 @@ Run `revdep_details(, "brms")` for more info
     SUMMARY: processing the following files failed:
       ‘brms_customfamilies.Rmd’ ‘brms_distreg.Rmd’ ‘brms_missings.Rmd’
       ‘brms_monotonic.Rmd’ ‘brms_multivariate.Rmd’ ‘brms_nonlinear.Rmd’
-      ‘brms_phylogenetics.Rmd’
+      ‘brms_phylogenetics.Rmd’ ‘brms_threading.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
@@ -327,10 +293,10 @@ Run `revdep_details(, "brms")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.7Mb
+      installed size is  6.6Mb
       sub-directories of 1Mb or more:
-        R     3.1Mb
-        doc   2.6Mb
+        R     3.0Mb
+        doc   2.7Mb
     ```
 
 # butcher
@@ -383,7 +349,7 @@ Run `revdep_details(, "CLVTools")` for more info
     ! sh: xelatex: command not found
     
     Error: processing vignette 'CLVTools.Rmd' failed with diagnostics:
-    LaTeX failed to compile /home/henrik/c4/repositories/globals/revdep/checks/CLVTools/new/CLVTools.Rcheck/vign_test/CLVTools/vignettes/CLVTools.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See CLVTools.log for more info.
+    LaTeX failed to compile /c4/home/henrik/repositories/globals/revdep/checks/CLVTools/new/CLVTools.Rcheck/vign_test/CLVTools/vignettes/CLVTools.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See CLVTools.log for more info.
     --- failed re-building ‘CLVTools.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -488,7 +454,7 @@ Run `revdep_details(, "cort")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.2Mb
+      installed size is  5.1Mb
       sub-directories of 1Mb or more:
         libs   4.4Mb
     ```
@@ -501,7 +467,7 @@ Run `revdep_details(, "cort")` for more info
 * GitHub: https://github.com/M-E-Rademaker/cSEM
 * Source code: https://github.com/cran/cSEM
 * Date/Publication: 2020-03-29 11:00:20 UTC
-* Number of recursive dependencies: 113
+* Number of recursive dependencies: 114
 
 Run `revdep_details(, "cSEM")` for more info
 
@@ -523,7 +489,7 @@ Run `revdep_details(, "cSEM")` for more info
 * GitHub: https://github.com/frictionlessdata/datapackage-r
 * Source code: https://github.com/cran/datapackage.r
 * Date/Publication: 2020-05-06 22:10:09 UTC
-* Number of recursive dependencies: 109
+* Number of recursive dependencies: 110
 
 Run `revdep_details(, "datapackage.r")` for more info
 
@@ -602,7 +568,7 @@ Run `revdep_details(, "EFAtools")` for more info
     ```
       installed size is  7.0Mb
       sub-directories of 1Mb or more:
-        libs   5.4Mb
+        libs   5.3Mb
     ```
 
 # EpiNow2
@@ -628,10 +594,10 @@ Run `revdep_details(, "EpiNow2")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 83.8Mb
+      installed size is 83.6Mb
       sub-directories of 1Mb or more:
         help   1.2Mb
-        libs  82.1Mb
+        libs  82.0Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -663,7 +629,7 @@ Run `revdep_details(, "foieGras")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 38.4Mb
+      installed size is 38.3Mb
       sub-directories of 1Mb or more:
         libs  37.2Mb
     ```
@@ -710,7 +676,7 @@ Run `revdep_details(, "genBaRcode")` for more info
     ```
     ...
     Error: processing vignette 'genBaRcode_GUI_Vignette.Rmd' failed with diagnostics:
-    LaTeX failed to compile /home/henrik/c4/repositories/globals/revdep/checks/genBaRcode/new/genBaRcode.Rcheck/vign_test/genBaRcode/vignettes/genBaRcode_GUI_Vignette.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See genBaRcode_GUI_Vignette.log for more info.
+    LaTeX failed to compile /c4/home/henrik/repositories/globals/revdep/checks/genBaRcode/new/genBaRcode.Rcheck/vign_test/genBaRcode/vignettes/genBaRcode_GUI_Vignette.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See genBaRcode_GUI_Vignette.log for more info.
     --- failed re-building ‘genBaRcode_GUI_Vignette.Rmd’
     
     --- re-building ‘genBaRcode_Vignette.Rmd’ using rmarkdown
@@ -722,7 +688,7 @@ Run `revdep_details(, "genBaRcode")` for more info
     <read *> 
     
     Error: processing vignette 'genBaRcode_Vignette.Rmd' failed with diagnostics:
-    LaTeX failed to compile /home/henrik/c4/repositories/globals/revdep/checks/genBaRcode/new/genBaRcode.Rcheck/vign_test/genBaRcode/vignettes/genBaRcode_Vignette.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See genBaRcode_Vignette.log for more info.
+    LaTeX failed to compile /c4/home/henrik/repositories/globals/revdep/checks/genBaRcode/new/genBaRcode.Rcheck/vign_test/genBaRcode/vignettes/genBaRcode_Vignette.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See genBaRcode_Vignette.log for more info.
     --- failed re-building ‘genBaRcode_Vignette.Rmd’
     
     SUMMARY: processing the following files failed:
@@ -823,10 +789,10 @@ Run `revdep_details(, "googleComputeEngineR")` for more info
 
 <details>
 
-* Version: 0.1.5
+* Version: 0.1.6
 * GitHub: NA
 * Source code: https://github.com/cran/googleTagManageR
-* Date/Publication: 2020-09-09 08:40:08 UTC
+* Date/Publication: 2020-10-05 13:20:10 UTC
 * Number of recursive dependencies: 63
 
 Run `revdep_details(, "googleTagManageR")` for more info
@@ -861,7 +827,7 @@ Run `revdep_details(, "grattan")` for more info
 *   checking package dependencies ... NOTE
     ```
     Packages suggested but not available for checking:
-      'taxstats', 'taxstats1516'
+      'hutilscpp', 'taxstats', 'taxstats1516'
     ```
 
 # gstat
@@ -988,7 +954,7 @@ Run `revdep_details(, "hal9001")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.3Mb
+      installed size is  6.2Mb
       sub-directories of 1Mb or more:
         libs   5.5Mb
     ```
@@ -1001,7 +967,7 @@ Run `revdep_details(, "hal9001")` for more info
 * GitHub: https://github.com/christophM/iml
 * Source code: https://github.com/cran/iml
 * Date/Publication: 2020-09-24 12:30:14 UTC
-* Number of recursive dependencies: 153
+* Number of recursive dependencies: 154
 
 Run `revdep_details(, "iml")` for more info
 
@@ -1045,10 +1011,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-10-03 17:01:17] ::plot_cnv:Start
-    INFO [2020-10-03 17:01:17] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-10-03 17:01:17] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-10-03 17:01:17] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-10-10 14:37:31] ::plot_cnv:Start
+    INFO [2020-10-10 14:37:31] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-10-10 14:37:31] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-10-10 14:37:31] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
@@ -1078,7 +1044,7 @@ Run `revdep_details(, "infercnv")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.1Mb
+      installed size is  5.0Mb
       sub-directories of 1Mb or more:
         extdata   3.1Mb
     ```
@@ -1140,48 +1106,6 @@ Run `revdep_details(, "JointAI")` for more info
       All declared Imports should be used.
     ```
 
-# ldaPrototype
-
-<details>
-
-* Version: 0.2.0
-* GitHub: https://github.com/JonasRieger/ldaPrototype
-* Source code: https://github.com/cran/ldaPrototype
-* Date/Publication: 2020-07-16 11:10:02 UTC
-* Number of recursive dependencies: 111
-
-Run `revdep_details(, "ldaPrototype")` for more info
-
-</details>
-
-## In both
-
-*   checking tests ...
-    ```
-    ...
-      The following object is masked from 'package:stats':
-      
-          cutree
-      
-      > 
-      > test_check("ldaPrototype")
-      ── 1. Error: (unknown) (@test_jaccardTopics.R#8)  ──────────────────────────────
-      wrong sign in 'by' argument
-      Backtrace:
-       1. ldaPrototype::jaccardTopics(mtopics, pm.backend = "socket")
-       2. ldaPrototype:::jaccardTopics.parallel(...)
-       3. base::lapply(...)
-       4. ldaPrototype:::FUN(X[[i]], ...)
-       6. base::seq.default(x, N - 2, max(ncpus, 2))
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 243 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
-      1. Error: (unknown) (@test_jaccardTopics.R#8) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # lidR
 
 <details>
@@ -1226,7 +1150,7 @@ Run `revdep_details(, "lidR")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.6Mb
+      installed size is 12.5Mb
       sub-directories of 1Mb or more:
         doc       1.2Mb
         extdata   1.1Mb
@@ -1376,7 +1300,6 @@ Run `revdep_details(, "MineICA")` for more info
     Errors in running code in vignettes:
     when running code in ‘MineICA.Rnw’
       ...
-    
     > resPath(params)
     [1] "mainz/"
     
@@ -1384,7 +1307,8 @@ Run `revdep_details(, "MineICA")` for more info
     +     mart = mart, level = "genes", selCutoffWrite = 2.5)
     
       When sourcing ‘MineICA.R’:
-    Error: task 5 failed - "Multiple cache results found"
+    Error: task 1 failed - "failed to load external entity "http://www.ensembl.org/info/website/archives/index.html?redirect=no"
+    "
     Execution halted
     ```
 
@@ -1489,8 +1413,6 @@ Run `revdep_details(, "MineICA")` for more info
     ```
     ...
     
-    ..Features annotation with package hgu133a.db..
-    
     ...Annotation into SYMBOL..
     
     The number of probe sets not associated with a SYMBOL ID is 1422
@@ -1500,7 +1422,9 @@ Run `revdep_details(, "MineICA")` for more info
     
     Error: processing vignette 'MineICA.Rnw' failed with diagnostics:
      chunk 31 (label = writeProj) 
-    Error in { : task 5 failed - "Multiple cache results found"
+    Error in { : 
+      task 1 failed - "failed to load external entity "http://www.ensembl.org/info/website/archives/index.html?redirect=no"
+    "
     
     --- failed re-building ‘MineICA.Rnw’
     
@@ -1515,10 +1439,10 @@ Run `revdep_details(, "MineICA")` for more info
 
 <details>
 
-* Version: 0.2.0
+* Version: 0.2.1
 * GitHub: https://github.com/business-science/modeltime
 * Source code: https://github.com/cran/modeltime
-* Date/Publication: 2020-09-28 12:40:02 UTC
+* Date/Publication: 2020-10-08 17:10:03 UTC
 * Number of recursive dependencies: 190
 
 Run `revdep_details(, "modeltime")` for more info
@@ -1553,46 +1477,27 @@ Run `revdep_details(, "modeltime")` for more info
       Execution halted
     ```
 
-# mvrsquared
+# modeltime.ensemble
 
 <details>
 
-* Version: 0.1.0
-* GitHub: https://github.com/TommyJones/mvrsquared
-* Source code: https://github.com/cran/mvrsquared
-* Date/Publication: 2020-06-25 06:00:06 UTC
-* Number of recursive dependencies: 94
+* Version: 0.2.0
+* GitHub: https://github.com/business-science/modeltime.ensemble
+* Source code: https://github.com/cran/modeltime.ensemble
+* Date/Publication: 2020-10-09 10:20:02 UTC
+* Number of recursive dependencies: 184
 
-Run `revdep_details(, "mvrsquared")` for more info
+Run `revdep_details(, "modeltime.ensemble")` for more info
 
 </details>
 
-## Newly broken
+## In both
 
-*   checking tests ...
+*   checking dependencies in R code ... NOTE
     ```
-    ...
-      > library(testthat)
-      > library(mvrsquared)
-      > 
-      > test_check("mvrsquared")
-      ── 1. Failure: Multithreading works as expected (@test-mvrsquared.R#44)  ───────
-      round(r2, 3) not equal to round(s$r.squared, 3).
-      1/1 mismatches
-      [1] 0.817 - 0.849 == -0.032
-      
-      ── 2. Failure: Multithreading works as expected (@test-mvrsquared.R#50)  ───────
-      `r2` not equal to 1 - ss[[1]]/ss[[2]].
-      1/1 mismatches
-      [1] 0.817 - 0.849 == -0.0321
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 23 | SKIPPED: 0 | WARNINGS: 0 | FAILED: 2 ]
-      1. Failure: Multithreading works as expected (@test-mvrsquared.R#44) 
-      2. Failure: Multithreading works as expected (@test-mvrsquared.R#50) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Namespaces in Imports field not imported from:
+      ‘crayon’ ‘dials’ ‘glmnet’ ‘parsnip’ ‘timetk’
+      All declared Imports should be used.
     ```
 
 # nlrx
@@ -1630,7 +1535,7 @@ Run `revdep_details(, "nlrx")` for more info
     +       theme = "cosmo",
     +       date = date(),
     +       toc = TRUE)
-    /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmpc6lgPr/rmarkdown-str8217177f4d13.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
+    /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /c4/home/henrik/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /c4/home/henrik/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /c4/home/henrik/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpQb5Q4t/rmarkdown-str99fc66b52aac.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
     Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
     InvalidUrlException "c4-yum1:3128" "Invalid scheme"
     Error: pandoc document conversion failed with error 61
@@ -1643,7 +1548,7 @@ Run `revdep_details(, "nlrx")` for more info
       > library(nlrx)
       > 
       > test_check("nlrx", filter = "nldoc")
-      /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /home/henrik/c4/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/RtmpszsCzo/rmarkdown-str8abf39570632.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
+      /software/c4/cbi/software/pandoc-2.10.1/bin/pandoc +RTS -K512m -RTS nldoc.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output nldoc.html --lua-filter /c4/home/henrik/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /c4/home/henrik/repositories/globals/revdep/library/nlrx/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --standalone --section-divs --table-of-contents --toc-depth 3 --template /c4/home/henrik/repositories/globals/revdep/library/nlrx/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:cosmo' --include-in-header /scratch/henrik/Rtmp93Wina/rmarkdown-str9e1d3a483afb.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
       Could not fetch http://ccl.northwestern.edu/images/creativecommons/byncsa.png
       InvalidUrlException "c4-yum1:3128" "Invalid scheme"
       ── 1. Error: nldoc (@test-nldoc.R#14)  ─────────────────────────────────────────
@@ -1704,7 +1609,7 @@ Run `revdep_details(, "pavo")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/home/henrik/c4/repositories/globals/revdep/checks/pavo/new/pavo.Rcheck/00install.out’ for details.
+    See ‘/c4/home/henrik/repositories/globals/revdep/checks/pavo/new/pavo.Rcheck/00install.out’ for details.
     ```
 
 *   checking re-building of vignette outputs ... WARNING
@@ -1765,7 +1670,7 @@ Run `revdep_details(, "PCRedux")` for more info
     <read *> 
     
     Error: processing vignette 'SI1.Rmd' failed with diagnostics:
-    LaTeX failed to compile /home/henrik/c4/repositories/globals/revdep/checks/PCRedux/new/PCRedux.Rcheck/vign_test/PCRedux/vignettes/SI1.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See SI1.log for more info.
+    LaTeX failed to compile /c4/home/henrik/repositories/globals/revdep/checks/PCRedux/new/PCRedux.Rcheck/vign_test/PCRedux/vignettes/SI1.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See SI1.log for more info.
     --- failed re-building ‘SI1.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -1851,7 +1756,7 @@ Run `revdep_details(, "phylolm")` for more info
 * GitHub: https://github.com/rstudio/plumber
 * Source code: https://github.com/cran/plumber
 * Date/Publication: 2020-09-14 21:40:02 UTC
-* Number of recursive dependencies: 62
+* Number of recursive dependencies: 63
 
 Run `revdep_details(, "plumber")` for more info
 
@@ -1991,7 +1896,7 @@ Run `revdep_details(, "Prostar")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/home/henrik/c4/repositories/globals/revdep/checks/Prostar/new/Prostar.Rcheck/00install.out’ for details.
+    See ‘/c4/home/henrik/repositories/globals/revdep/checks/Prostar/new/Prostar.Rcheck/00install.out’ for details.
     ```
 
 *   checking re-building of vignette outputs ... NOTE
@@ -2144,8 +2049,6 @@ Run `revdep_details(, "QDNAseq")` for more info
     
     --- failed re-building ‘QDNAseq.Rnw’
     
-    Warning in file.remove(f) :
-      cannot remove file '.nfs00000019347cf806000000d1', reason 'Device or resource busy'
     SUMMARY: processing the following file failed:
       ‘QDNAseq.Rnw’
     
@@ -2161,7 +2064,7 @@ Run `revdep_details(, "QDNAseq")` for more info
 * GitHub: https://github.com/fboehm/qtl2pleio
 * Source code: https://github.com/cran/qtl2pleio
 * Date/Publication: 2020-06-30 19:00:02 UTC
-* Number of recursive dependencies: 116
+* Number of recursive dependencies: 117
 
 Run `revdep_details(, "qtl2pleio")` for more info
 
@@ -2247,14 +2150,14 @@ Run `revdep_details(, "rBiasCorrection")` for more info
 *   checking re-building of vignette outputs ... WARNING
     ```
     ...
-    [20201003_170605]: Entered 'cubic_regression'-Function
-    [20201003_170605]: 'cubic_regression': minmax = FALSE
+    [20201010_115552]: Entered 'cubic_regression'-Function
+    [20201010_115552]: 'cubic_regression': minmax = FALSE
     Warning: UNRELIABLE VALUE: Future ('future_sapply-1') unexpectedly generated random numbers without specifying argument '[future.]seed'. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, specify argument '[future.]seed', e.g. 'seed=TRUE'. This ensures that proper, parallel-safe random numbers are produced via the L'Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set option 'future.rng.onMisuse' to "ignore".
-    [20201003_170606]: ### Starting with plotting ###
-    [20201003_170606]: Creating  plot No. 1 - filename: /scratch/henrik/RtmplKRNaR/png/CDH1_CpG1.png
-    [20201003_170606]: # CpG-site: CpG#1
+    [20201010_115554]: ### Starting with plotting ###
+    [20201010_115554]: Creating  plot No. 1 - filename: /scratch/henrik/RtmpfuH1DO/png/CDH1_CpG1.png
+    [20201010_115554]: # CpG-site: CpG#1
     Hyperbolic: Using bias_weight = -937.71907950138 , a = -108.568032237737 , b = -937.71907950138 , d = -232.057189220457
-    [20201003_170606]: # CpG-site: CpG#1
+    [20201010_115554]: # CpG-site: CpG#1
     Cubic: Using a = 6.53413423120091e-05 , b = -0.0055806968734969 , c = 0.784061853455188 , d = 1.93182659932656
     Warning in grDevices::png(..., res = dpi, units = "in") :
       unable to open connection to X11 display ''
@@ -2409,11 +2312,11 @@ Run `revdep_details(, "sapfluxnetr")` for more info
 
 <details>
 
-* Version: 0.3
+* Version: 0.3.1
 * GitHub: https://github.com/ChristophH/sctransform
 * Source code: https://github.com/cran/sctransform
-* Date/Publication: 2020-09-20 14:40:02 UTC
-* Number of recursive dependencies: 64
+* Date/Publication: 2020-10-08 12:00:02 UTC
+* Number of recursive dependencies: 65
 
 Run `revdep_details(, "sctransform")` for more info
 
@@ -2423,8 +2326,7 @@ Run `revdep_details(, "sctransform")` for more info
 
 *   checking package dependencies ... NOTE
     ```
-    Packages which this enhances but not available for checking:
-      'speedglm', 'glmGamPoi'
+    Package which this enhances but not available for checking: ‘glmGamPoi’
     ```
 
 # seer
@@ -2457,7 +2359,7 @@ Run `revdep_details(, "seer")` for more info
 * GitHub: https://github.com/satijalab/seurat
 * Source code: https://github.com/cran/Seurat
 * Date/Publication: 2020-09-26 04:30:12 UTC
-* Number of recursive dependencies: 223
+* Number of recursive dependencies: 224
 
 Run `revdep_details(, "Seurat")` for more info
 
@@ -2472,7 +2374,7 @@ Run `revdep_details(, "Seurat")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 11.2Mb
+      installed size is 11.1Mb
       sub-directories of 1Mb or more:
         R      1.2Mb
         libs   9.1Mb
@@ -2491,7 +2393,7 @@ Run `revdep_details(, "Seurat")` for more info
 * GitHub: https://github.com/rstudio/shiny
 * Source code: https://github.com/cran/shiny
 * Date/Publication: 2020-06-23 13:30:03 UTC
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 98
 
 Run `revdep_details(, "shiny")` for more info
 
@@ -2527,10 +2429,10 @@ Run `revdep_details(, "shiny")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 11.4Mb
+      installed size is 10.8Mb
       sub-directories of 1Mb or more:
         R     1.7Mb
-        www   8.5Mb
+        www   8.1Mb
     ```
 
 # shinyML
@@ -2598,7 +2500,7 @@ Run `revdep_details(, "sigminer")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.6Mb
+      installed size is  6.5Mb
       sub-directories of 1Mb or more:
         extdata   3.7Mb
     ```
@@ -2631,30 +2533,6 @@ Run `revdep_details(, "Signac")` for more info
     Package unavailable to check Rd xrefs: ‘cicero’
     ```
 
-# simfinapi
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/Plebejer/simfinapi
-* Source code: https://github.com/cran/simfinapi
-* Date/Publication: 2020-09-28 09:20:02 UTC
-* Number of recursive dependencies: 57
-
-Run `revdep_details(, "simfinapi")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... ERROR
-    ```
-    Package required but not available: ‘RcppSimdJson’
-    
-    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-    manual.
-    ```
-
 # simhelpers
 
 <details>
@@ -2663,7 +2541,7 @@ Run `revdep_details(, "simfinapi")` for more info
 * GitHub: https://github.com/meghapsimatrix/simhelpers
 * Source code: https://github.com/cran/simhelpers
 * Date/Publication: 2020-03-31 15:00:06 UTC
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 98
 
 Run `revdep_details(, "simhelpers")` for more info
 
@@ -2686,7 +2564,7 @@ Run `revdep_details(, "simhelpers")` for more info
 * GitHub: https://github.com/tylermorganwall/skpr
 * Source code: https://github.com/cran/skpr
 * Date/Publication: 2020-03-04 20:20:02 UTC
-* Number of recursive dependencies: 131
+* Number of recursive dependencies: 132
 
 Run `revdep_details(, "skpr")` for more info
 
@@ -2696,7 +2574,7 @@ Run `revdep_details(, "skpr")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 41.5Mb
+      installed size is 41.4Mb
       sub-directories of 1Mb or more:
         libs  39.9Mb
     ```
@@ -2768,12 +2646,9 @@ Run `revdep_details(, "sparklyr")` for more info
 
 ## In both
 
-*   checking installed package size ... NOTE
+*   checking package dependencies ... NOTE
     ```
-      installed size is  5.1Mb
-      sub-directories of 1Mb or more:
-        R      1.4Mb
-        java   2.5Mb
+    Package suggested but not available for checking: ‘arrow’
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -2853,7 +2728,7 @@ Run `revdep_details(, "sRACIPE")` for more info
 * GitHub: https://github.com/r-spatial/stars
 * Source code: https://github.com/cran/stars
 * Date/Publication: 2020-07-08 11:20:03 UTC
-* Number of recursive dependencies: 130
+* Number of recursive dependencies: 131
 
 Run `revdep_details(, "stars")` for more info
 
@@ -2868,7 +2743,7 @@ Run `revdep_details(, "stars")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  8.1Mb
+      installed size is  8.0Mb
       sub-directories of 1Mb or more:
         doc   1.9Mb
         nc    4.5Mb
@@ -2928,11 +2803,11 @@ Run `revdep_details(, "tidymodels")` for more info
 
 <details>
 
-* Version: 0.4.6
+* Version: 0.4.7
 * GitHub: https://github.com/tidymodels/tidypredict
 * Source code: https://github.com/cran/tidypredict
-* Date/Publication: 2020-07-23 14:20:03 UTC
-* Number of recursive dependencies: 93
+* Date/Publication: 2020-10-05 13:50:03 UTC
+* Number of recursive dependencies: 94
 
 Run `revdep_details(, "tidypredict")` for more info
 
@@ -2940,40 +2815,19 @@ Run `revdep_details(, "tidypredict")` for more info
 
 ## In both
 
-*   checking tests ...
+*   checking package dependencies ... NOTE
     ```
-    ...
-      
-        This may not be accurate due to some parameters are only used in language bindings but
-        passed down to XGBoost core.  Or some parameters are not used but slip through this
-        verification. Please open an issue if you find above cases.
-      
-      
-      [17:31:06] WARNING: amalgamation/../src/learner.cc:516: 
-      Parameters: { silent } might not be used.
-      
-        This may not be accurate due to some parameters are only used in language bindings but
-        passed down to XGBoost core.  Or some parameters are not used but slip through this
-        verification. Please open an issue if you find above cases.
-      
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 110 | SKIPPED: 0 | WARNINGS: 1 | FAILED: 2 ]
-      1. Error: first degree earth model with different interfaces (@test-earth.R#90) 
-      2. Error: 2nd degree earth model with different interfaces (@test-earth.R#103) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Package suggested but not available for checking: ‘xgboost’
     ```
 
 # timetk
 
 <details>
 
-* Version: 2.3.0
+* Version: 2.4.0
 * GitHub: https://github.com/business-science/timetk
 * Source code: https://github.com/cran/timetk
-* Date/Publication: 2020-09-29 10:00:06 UTC
+* Date/Publication: 2020-10-08 17:40:03 UTC
 * Number of recursive dependencies: 184
 
 Run `revdep_details(, "timetk")` for more info
@@ -2990,7 +2844,7 @@ Run `revdep_details(, "timetk")` for more info
     ✔ ggplot2 3.3.2     ✔ purrr   0.3.4
     ✔ tibble  3.0.3     ✔ dplyr   1.0.2
     ✔ tidyr   1.1.2     ✔ stringr 1.4.0
-    ✔ readr   1.3.1     ✔ forcats 0.5.0
+    ✔ readr   1.4.0     ✔ forcats 0.5.0
     ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ✖ dplyr::filter() masks stats::filter()
     ✖ dplyr::lag()    masks stats::lag()
@@ -3071,7 +2925,7 @@ Run `revdep_details(, "TSstudio")` for more info
 * GitHub: https://github.com/nhejazi/txshift
 * Source code: https://github.com/cran/txshift
 * Date/Publication: 2020-09-25 13:50:02 UTC
-* Number of recursive dependencies: 94
+* Number of recursive dependencies: 95
 
 Run `revdep_details(, "txshift")` for more info
 
@@ -3093,10 +2947,10 @@ Run `revdep_details(, "txshift")` for more info
 
 <details>
 
-* Version: 0.2.0
+* Version: 0.2.1
 * GitHub: https://github.com/tidymodels/workflows
 * Source code: https://github.com/cran/workflows
-* Date/Publication: 2020-09-15 21:00:02 UTC
+* Date/Publication: 2020-10-08 20:10:03 UTC
 * Number of recursive dependencies: 80
 
 Run `revdep_details(, "workflows")` for more info
@@ -3117,7 +2971,7 @@ Run `revdep_details(, "workflows")` for more info
        2. grDevices::png(filename = tempfile())
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 141 | SKIPPED: 1 | WARNINGS: 8 | FAILED: 8 ]
+      [ OK: 145 | SKIPPED: 1 | WARNINGS: 8 | FAILED: 8 ]
       1. Error: can print empty workflow (@test-printing.R#2) 
       2. Error: can print workflow with recipe (@test-printing.R#11) 
       3. Error: can print workflow with formula (@test-printing.R#18) 
