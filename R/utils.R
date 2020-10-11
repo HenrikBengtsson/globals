@@ -161,6 +161,7 @@ envname <- function(env) {
         capture.output(print(env))
       })	
     }
+    if (length(name) > 1L) name <- name[1]
     name <- gsub("(.*: |>)", "", name)
   } else {
     ## e.g. globals:::where("plan")

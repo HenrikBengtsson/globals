@@ -3,8 +3,8 @@
 ##    codetools::findGlobals(fun, merge = TRUE)
 ## but we expand it here to make it more explicit
 ## what is going on.
-#' @importFrom codetools makeUsageCollector findLocalsList walkCode
-find_globals_conservative <- function(expr, envir, ..., trace = FALSE) {
+#' @importFrom codetools findLocalsList walkCode
+find_globals_conservative <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
   objs <- character()
 
   enter <- function(type, v, e, w) {
@@ -14,13 +14,13 @@ find_globals_conservative <- function(expr, envir, ..., trace = FALSE) {
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) # e.g. `<-`
     fun <- expr
-    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
     if (trace) w <- inject_tracer_to_walker(w)
     collect_usage_function(fun, name = "<anonymous>", w)
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
-      globals <- find_globals_conservative(expr = e, envir = envir, ..., trace = trace)
+      globals <- find_globals_conservative(expr = e, envir = envir, dotdotdot = dotdotdot, ..., trace = trace)
       if (length(globals) > 0) objs <- c(objs, globals)
     }
   } else {
@@ -29,7 +29,7 @@ find_globals_conservative <- function(expr, envir, ..., trace = FALSE) {
     # codetools::collectUsage(fun, enterGlobal = enter)
 
     ## The latter becomes equivalent to (after cleanup):
-    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
     w$env <- new.env(hash = TRUE, parent = w$env)
     if (trace) w <- inject_tracer_to_walker(w)
     
@@ -42,8 +42,8 @@ find_globals_conservative <- function(expr, envir, ..., trace = FALSE) {
 }
 
 
-#' @importFrom codetools makeUsageCollector walkCode
-find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
+#' @importFrom codetools walkCode
+find_globals_liberal <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
   objs <- character()
 
   enter <- function(type, v, e, w) {
@@ -53,18 +53,18 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
     fun <- expr
-    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
     if (trace) w <- inject_tracer_to_walker(w)
     collect_usage_function(fun, name = "<anonymous>", w)
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
-      globals <- find_globals_liberal(expr = e, envir = envir, ..., trace = trace)
+      globals <- find_globals_liberal(expr = e, envir = envir, dotdotdot = dotdotdot, ..., trace = trace)
       if (length(globals) > 0) objs <- c(objs, globals)
     }
   } else {
     fun <- as_function(expr, envir = envir, ...)
-    w <- makeUsageCollector(fun, name = "<anonymous>", enterGlobal = enter)
+    w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
     if (trace) w <- inject_tracer_to_walker(w)
     walkCode(expr, w)
   }
@@ -73,8 +73,8 @@ find_globals_liberal <- function(expr, envir, ..., trace = FALSE) {
 }
 
 
-#' @importFrom codetools makeUsageCollector walkCode
-find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
+#' @importFrom codetools walkCode
+find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
   selfassign <- getOption("globals.selfassign", TRUE)
   
   class <- name <- character()
@@ -106,8 +106,16 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     if (type == "function") {
       if (v == "~") {
         stop_if_not(length(e) >= 2L, identical(e[[1]], as.symbol("~")))
+        ## Ignoring dots overrides the default of silently returning
+        ## them from formulas
+        ## Fixes https://github.com/HenrikBengtsson/globals/issues/63
+        if (dotdotdot == "ignore") {
+          formula_dotdotdot <- "ignore"
+        } else {
+          formula_dotdotdot <- "return"
+        }
         for (kk in 2:length(e)) {
-          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = "return")
+          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot)
             if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
@@ -122,7 +130,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
           ## Cases: a[1] <- 0, names(a) <- "x", names(a)[1] <- "x"
           ## Skip first symbol, because it'll be handled up later as
           ## an assignment function, e.g. `[<-` and `names<-`
-          globals <- find_globals_ordered(expr = lhs, envir = w$env)
+          globals <- find_globals_ordered(expr = lhs, envir = w$env, dotdotdot = dotdotdot)
           if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
@@ -136,7 +144,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   if (is.function(expr)) {
     if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
     fun <- expr
-    w <- makeUsageCollector(fun, name = "<anonymous>",
+    w <- make_usage_collector(fun, name = "<anonymous>",
                             enterLocal = enter_local,
                             enterGlobal = enter_global)
     if (trace) w <- inject_tracer_to_walker(w)
@@ -144,7 +152,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
-      globals <- find_globals_ordered(expr = e, envir = envir, ..., trace = trace)
+      globals <- find_globals_ordered(expr = e, envir = envir, dotdotdot = dotdotdot, ..., trace = trace)
       if (length(globals) > 0) {
         class <- c(class, rep("global", times = length(globals)))
         name <- c(name, globals)
@@ -152,7 +160,7 @@ find_globals_ordered <- function(expr, envir, ..., trace = FALSE) {
     }
   } else {
     fun <- as_function(expr, envir = envir, ...)
-    w <- makeUsageCollector(fun, name = "<anonymous>",
+    w <- make_usage_collector(fun, name = "<anonymous>",
                             enterLocal = enter_local,
                             enterGlobal = enter_global)
     if (trace) w <- inject_tracer_to_walker(w)
@@ -175,7 +183,7 @@ call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "erro
   globals <- withCallingHandlers({
     oopts <- options(warn = 0L)
     on.exit(options(oopts))
-    FUN(expr, envir = envir, trace = trace)
+    FUN(expr, envir = envir, dotdotdot = dotdotdot, trace = trace)
   }, warning = function(w) {
     ## Warned about '...', '..1', '..2', etc.?
     ## NOTE: The warning we're looking for is the one generated by
@@ -430,3 +438,46 @@ inject_tracer_to_walker <- function(w) {
   
   w
 }
+
+
+#' @importFrom codetools makeUsageCollector walkCode
+make_usage_collector <- local({
+  ## WORKAROUND: Avoid calling codetools::collectUsageCall() if it hits the
+  ## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17935 bug in the
+  ## stats:::`[.formula` function
+  ## See also: https://github.com/HenrikBengtsson/globals/issues/64
+  if (getRversion() < "4.1.0" || is.null(ver <- R.version$`svn rev`) ||
+      is.na(ver <- as.integer(ver)) || ver < 79288) {
+    ## Local copy of codetools:::collectUsageCall()
+    .collectUsageCall <- NULL
+
+    collectUsageCall <- function(e, w) {
+      e1 <- e[[1]]
+      if (is.symbol(e1) && inherits(e, "formula") && is.null(e[[2]])) {
+        ## From codetools:::collectUsageCall()
+        fn <- as.character(e1)
+        if (w$isLocal(fn, w))  {
+           w$enterLocal("function", fn, e, w)
+        } else {
+           w$enterGlobal("function", fn, e, w)
+        }
+      } else {
+        .collectUsageCall(e, w)
+      }
+    }
+    
+    function(...) {
+      w <- makeUsageCollector(...)
+      if (is.function(w$call)) {
+        ## Memoize? (to avoid importing a private 'codetools' function)
+        if (is.null(.collectUsageCall)) .collectUsageCall <<- w$call
+        ## Patch
+        w$call <- collectUsageCall
+      }
+      w
+    }
+  } else {
+    makeUsageCollector
+  }
+})
+

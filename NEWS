@@ -1,6 +1,26 @@
 Package: globals
 ================
 
+Version: 0.13.1 [2020-10-11]
+
+BUG FIXES:
+
+ * globalsOf() could produce "Error in vapply(where, FUN = envname, FUN.VALUE
+   = NA_character_, USE.NAMES = FALSE) : values must be length 1, but 
+   FUN(X[[2]]) result is length 10".  This would happen if for instance
+   argument 'envir' has attributes set.
+
+ * findGlobals() works around a bug in stats:::`[.formula` of R (< 4.1.0) that
+   revealed itself when scanning formulas with NULL components.
+
+ * findGlobals() would not pass down argument 'dotdotdot' when recursively
+   parsing assignments.
+   
+ * findGlobals() could return '...' as a global also when used in formulas.
+   Now it respects argument dotdotdot = "ignore" and parses formulas
+   accordingly, otherwise formulas will be parsed using dotdotdot = "return".
+   
+
 Version: 0.13.0 [2020-09-16]
 
 SIGNIFICANT CHANGES:
@@ -134,7 +154,7 @@ Version: 0.11.0 [2018-01-09]
 NEW FEATURES:
 
  o Now findGlobals() identifies 'x' as a global variable in 'x <- x + 1'
-   and likewise for x + 1 -> x.  Note that ditto using `<<-` and `->>`
+   and likewise for 'x + 1 -> x'.  Note that ditto using `<<-` and `->>`
    was already identifying 'x' as a global.
 
 BUG FIXES:

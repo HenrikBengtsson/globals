@@ -27,6 +27,14 @@ print(name)
 stopifnot(is.character(name), length(name) == 1L, !is.na(name),
           class(env) == "foo")
 
+env <- structure(new.env(), handlers = "foo")
+print(env)
+name <- utils::capture.output(print(env))
+stopifnot(is.character(name), length(name) > 1L)
+name <- envname(env)
+print(name)
+stopifnot(is.character(name), length(name) == 1L, !is.na(name))
+
 message("- envname() ... DONE")
 
 
