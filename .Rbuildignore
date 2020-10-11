@@ -51,5 +51,5 @@ Rplots.pdf$
 #----------------------------
 ^[.]BatchJobs[.]R$
 [.]future
-
+^last.dump_.*
 

@@ -1,7 +1,9 @@
 Package: globals
 ================
 
-Version: 0.13.0-9000 [2020-10-03]
+Version: 0.13.0-9000 [2020-10-10]
+
+NEW FEATURES:
 
 BUG FIXES:
 
@@ -13,6 +15,13 @@ BUG FIXES:
  * findGlobals() works around a bug in stats:::`[.formula` of R (< 4.1.0) that
    revealed itself when scanning formulas with NULL components.
 
+ * findGlobals() would not pass down argument 'dotdotdot' when recursively
+   parsing assignments.
+   
+ * findGlobals() could return '...' as a global also when used in formulas.
+   Now it respects argument dotdotdot = "ignore" and parses formulas
+   accordingly, otherwise formulas will be parsed using dotdotdot = "return".
+   
 
 Version: 0.13.0 [2020-09-16]
 
@@ -147,7 +156,7 @@ Version: 0.11.0 [2018-01-09]
 NEW FEATURES:
 
  o Now findGlobals() identifies 'x' as a global variable in 'x <- x + 1'
-   and likewise for x + 1 -> x.  Note that ditto using `<<-` and `->>`
+   and likewise for 'x + 1 -> x'.  Note that ditto using `<<-` and `->>`
    was already identifying 'x' as a global.
 
 BUG FIXES:
