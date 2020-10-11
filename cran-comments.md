@@ -1,8 +1,8 @@
-# CRAN submission globals 0.13.0
+# CRAN submission globals 0.13.1
 
-on 2020-09-16
+on 2020-10-11
 
-I've verified that this submission causes no issues for any of the 183 first and second-generation package dependencies on CRAN and Bioconductor.
+I've verified that this submission causes no issues for any of the 189 first and second-generation package dependencies on CRAN (n=182) and Bioconductor (n=7).
 
 Thank you
 
