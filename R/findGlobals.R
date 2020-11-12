@@ -446,8 +446,8 @@ make_usage_collector <- local({
   ## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17935 bug in the
   ## stats:::`[.formula` function
   ## See also: https://github.com/HenrikBengtsson/globals/issues/64
-  if (getRversion() < "4.1.0" || is.null(ver <- R.version$`svn rev`) ||
-      is.na(ver <- as.integer(ver)) || ver < 79288) {
+  if (getRversion() <= "4.0.3" || is.null(ver <- R.version$`svn rev`) ||
+      is.na(ver <- as.integer(ver)) || ver < 79355) {
     ## Local copy of codetools:::collectUsageCall()
     .collectUsageCall <- NULL
 
