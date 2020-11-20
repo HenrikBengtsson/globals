@@ -1,9 +1,12 @@
 Package: globals
 ================
 
-Version: 0.13.1-9000 [2020-10-11]
+Version: 0.13.1-9000 [2020-11-20]
 
- * ...
+BUG FIXES:
+
+ * findGlobals(function(x) x <- x) would incorrectly identify 'x' as a global
+   variable.
  
 
 Version: 0.13.1 [2020-10-11]
