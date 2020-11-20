@@ -74,20 +74,18 @@ find_globals_liberal <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
 
 
 #' @importFrom codetools walkCode
-find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
+find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character(), class = character(), trace = FALSE) {
   selfassign <- getOption("globals.selfassign", TRUE)
-  
-  class <- name <- character()
   
   enter_local <- function(type, v, e, w) {
     hardcoded_locals <- names(w$env)
     if (trace) {
-      message("enter_local(): variables (on enter):")
+      message(sprintf("enter_local(type=%s, v=%s): variables (on enter):", sQuote(type), sQuote(v)))
       vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
       message(paste(utils::capture.output(print(vars)), collapse = "\n"))
       message("- hardcoded locals: ", paste(sQuote(hardcoded_locals), collapse = ", "))
       on.exit({
-        message("enter_local(): variables (on exit):")
+      message(sprintf("enter_local(type=%s, v=%s): variables (on exit):", sQuote(type), sQuote(v)))
         vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
         message(paste(utils::capture.output(print(vars)), collapse = "\n"))
       })
@@ -98,10 +96,11 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
       if (trace) message("- variable is a hardcoded local: ", sQuote(v))
     }
 
-    ## LH <- RH: Handle cases where a global variable exists in RH and LH
-    ##           assigns a local variable with the same name, e.g. x <- x + 1.
-    ##           In such case we want to detect 'x' as a global variable.
+    ## LHS <- RHS: Handle cases where a global variable exists in RHS and LHS
+    ##             assigns a local variable with the same name, e.g. x <- x + 1.
+    ##             In such case we want to detect 'x' as a global variable.
     if (selfassign && (type == "<-" || type == "=")) {
+      if (trace) message("- LHS <- RHS")
       rhs <- e[[3]]
       globals <- all.names(rhs)
       if (trace) {
@@ -123,12 +122,12 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
   enter_global <- function(type, v, e, w) {
     hardcoded_locals <- names(w$env)
     if (trace) {
-      message("enter_global(): variables (on enter):")
+      message(sprintf("enter_global(type=%s, v=%s): variables (on enter):", sQuote(type), sQuote(v)))
       vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
       message(paste(utils::capture.output(print(vars)), collapse = "\n"))
       message("- hardcoded locals: ", paste(sQuote(hardcoded_locals), collapse = ", "))
       on.exit({
-        message("enter_global(): variables (on exit):")
+        message(sprintf("enter_global(type=%s, v=%s): variables (on exit):", sQuote(type), sQuote(v)))
         vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
         message(paste(utils::capture.output(print(vars)), collapse = "\n"))
       })
@@ -141,12 +140,13 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
       }
     }
     
-    class <<- c(class, "global")
+    class <<- c(class, if (is_already_local) "local", "global")
     name <<- c(name, v)
     
     ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
+        if (trace) message("- ~ (formula)")
         stop_if_not(length(e) >= 2L, identical(e[[1]], as.symbol("~")))
         ## Ignoring dots overrides the default of silently returning
         ## them from formulas
@@ -157,22 +157,23 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
           formula_dotdotdot <- "return"
         }
         for (kk in 2:length(e)) {
-          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot)
+          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot, trace = trace)
             if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
           }
         }
       } else if (selfassign && (v == "<-" || v == "=")) {
-        ## LH <- RH: Handle cases where a global variable exists in LH in the
-        ##           form of x[1] <- 0, which will cause 'x' to be called a
-        ##           local variable later unless called global here.
+        ## LHS <- RHS: Handle cases where a global variable exists in LHS in
+        ##             the form of x[1] <- 0, which will cause 'x' to be called
+        ##             a local variable later unless called global here.
+        if (trace) message("- LHS <- RHS")
         lhs <- e[[2]]
         if (length(lhs) >= 2) {
           ## Cases: a[1] <- 0, names(a) <- "x", names(a)[1] <- "x"
           ## Skip first symbol, because it'll be handled up later as
           ## an assignment function, e.g. `[<-` and `names<-`
-          globals <- find_globals_ordered(expr = lhs, envir = w$env, dotdotdot = dotdotdot)
+          globals <- find_globals_ordered(expr = lhs, envir = w$env, dotdotdot = dotdotdot, name = hardcoded_locals, class = rep("local", times = length(hardcoded_locals)), trace = trace)
           if (length(globals) > 0) {
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
@@ -194,8 +195,8 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
     if (trace) message("- a function")
     fun <- expr
     w <- make_usage_collector(fun, name = "<anonymous>",
-                            enterLocal = enter_local,
-                            enterGlobal = enter_global)
+                              enterLocal = enter_local,
+                              enterGlobal = enter_global)
     if (trace) w <- inject_tracer_to_walker(w)
     collect_usage_function(fun, name = "<anonymous>", w, trace = trace)
   } else if (is.call(expr) && is.function(expr[[1]])) {
