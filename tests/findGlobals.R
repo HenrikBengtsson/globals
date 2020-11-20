@@ -42,6 +42,11 @@ if (packageVersion("globals") <= "0.12.4") {
   assert_identical_sets(globals_i, c("{", "a", "<-", "+"))
 }
 
+globals_i <- findGlobals(function(x) x <- x)
+print(globals_i)
+assert_identical_sets(globals_i, c("<-"))
+
+
 message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {
   quote({
