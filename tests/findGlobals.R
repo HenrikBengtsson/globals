@@ -36,11 +36,7 @@ globals_i <- findGlobals(function() {
   a <- a + 1
 })
 print(globals_i)
-if (packageVersion("globals") <= "0.12.4") {
-  assert_identical_sets(globals_i, c("{", "<-", "+"))
-} else {
-  assert_identical_sets(globals_i, c("{", "a", "<-", "+"))
-}
+assert_identical_sets(globals_i, c("{", "a", "<-", "+"))
 
 globals_i <- findGlobals(function(x) x <- x)
 print(globals_i)
