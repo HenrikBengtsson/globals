@@ -30,7 +30,6 @@ find_globals_conservative <- function(expr, envir, dotdotdot, ..., trace = FALSE
 
     ## The latter becomes equivalent to (after cleanup):
     w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
-    w$env <- new.env(hash = TRUE, parent = w$env)
     if (trace) w <- inject_tracer_to_walker(w)
     
     locals <- findLocalsList(list(expr))
@@ -568,7 +567,11 @@ make_usage_collector <- local({
       w
     }
   } else {
-    makeUsageCollector
+    function(...) {
+      w <- makeUsageCollector(...)
+      w$env <- new.env(hash = TRUE, parent = w$env)
+      w
+    }
   }
 })
 
