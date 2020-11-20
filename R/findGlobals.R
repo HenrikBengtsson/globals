@@ -140,7 +140,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       }
     }
     
-    class <<- c(class, if (is_already_local) "local", "global")
+    class <<- c(class, if (is_already_local) "local" else "global")
     name <<- c(name, v)
     
     ## Also walk formulas to identify globals
