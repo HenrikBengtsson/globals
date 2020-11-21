@@ -78,17 +78,17 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
   
   enter_local <- function(type, v, e, w) {
     hardcoded_locals <- names(w$env)
-    if (trace) {
+    if (trace) local({
       message(sprintf("enter_local(type=%s, v=%s): variables (on enter):", sQuote(type), sQuote(v)))
       vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
       message(paste(utils::capture.output(print(vars)), collapse = "\n"))
       message("- hardcoded locals: ", paste(sQuote(hardcoded_locals), collapse = ", "))
-      on.exit({
+      on.exit(local({
       message(sprintf("enter_local(type=%s, v=%s): variables (on exit):", sQuote(type), sQuote(v)))
         vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
         message(paste(utils::capture.output(print(vars)), collapse = "\n"))
-      })
-    }
+      }))
+    })
 
     is_already_local <- (v %in% hardcoded_locals)
     if (is_already_local) {
@@ -101,7 +101,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
     if (selfassign && (type == "<-" || type == "=")) {
       if (trace) message("- LHS <- RHS")
       rhs <- e[[3]]
-      globals <- find_globals_ordered(rhs, envir = w$env, trace = trace)
+      globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = rhs, envir = w$env, dotdotdot = "ignore", trace = trace)
       if (trace) {
         message("- RHS globals: ", paste(sQuote(globals), collapse = ", "))
       }
@@ -120,17 +120,17 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
 
   enter_global <- function(type, v, e, w) {
     hardcoded_locals <- names(w$env)
-    if (trace) {
+    if (trace) local({
       message(sprintf("enter_global(type=%s, v=%s): variables (on enter):", sQuote(type), sQuote(v)))
       vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
       message(paste(utils::capture.output(print(vars)), collapse = "\n"))
       message("- hardcoded locals: ", paste(sQuote(hardcoded_locals), collapse = ", "))
-      on.exit({
+      on.exit(local({
         message(sprintf("enter_global(type=%s, v=%s): variables (on exit):", sQuote(type), sQuote(v)))
         vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
         message(paste(utils::capture.output(print(vars)), collapse = "\n"))
-      })
-    }
+      }))
+    })
 
     is_already_local <- (v %in% hardcoded_locals)
     if (is_already_local) {
@@ -218,22 +218,22 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
     walkCode(expr, w)
   }
 
-  if (trace) {
+  if (trace) local({
     message(" variables (with duplicates):")
     vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
     message(paste(utils::capture.output(print(vars)), collapse = "\n"))
-  }
+  })
 
   ## Drop duplicated names
   dups <- duplicated(name)
   class <- class[!dups]
   name <- name[!dups]
 
-  if (trace) {
+  if (trace) local({
     message(" variables (no duplicates):")
     vars <- data.frame(name=name, class=class, stringsAsFactors = FALSE)
     message(paste(utils::capture.output(print(vars)), collapse = "\n"))
-  }
+  })
 
   unique(name[class == "global"])
 }
@@ -456,8 +456,12 @@ collect_usage_function <- function(fun, name, w, trace = FALSE) {
     message("  - locals: ", paste(sQuote(locals), collapse = ", "))
   }
 
-  w$env <- new.env(hash = TRUE, parent = w$env)
-  for (n in c(parnames, locals)) assign(n, TRUE, w$env)
+  ## Hardcode locals?
+  hardcoded_locals <- c(parnames, locals)
+  if (length(hardcoded_locals) > 0) {
+    w$env <- new.env(hash = TRUE, parent = w$env)
+    for (n in hardcoded_locals) assign(n, TRUE, w$env)
+  }
 
   if (trace) {
     message("  - hardcoded locals: ", paste(sQuote(names(w$env)), collapse = ", "))
