@@ -49,6 +49,42 @@ stopifnot(
   identical(where$d, globalenv())
 )
 
+globals_i <- globalsOf(function(x) x <- x)
+print(globals_i)
+globals_i <- cleanup(globals_i)
+str(globals_i)
+assert_identical_sets(names(globals_i), character(0L))
+where <- attr(globals_i, "where")
+stopifnot(
+  length(where) == length(globals_i),
+  identical(where, setNames(list(), character(0L)))
+)
+
+
+globals_i <- globalsOf(function(x) x[1] <- 0)
+print(globals_i)
+globals_i <- cleanup(globals_i)
+str(globals_i)
+assert_identical_sets(names(globals_i), character(0L))
+where <- attr(globals_i, "where")
+stopifnot(
+  length(where) == length(globals_i),
+  identical(where, setNames(list(), character(0L)))
+)
+
+globals_i <- globalsOf(function(x) a <- x$a)
+print(globals_i)
+globals_i <- cleanup(globals_i)
+str(globals_i)
+assert_identical_sets(names(globals_i), character(0L))
+where <- attr(globals_i, "where")
+stopifnot(
+  length(where) == length(globals_i),
+  identical(where, setNames(list(), character(0L)))
+)
+
+
+
 message(" ** globalsOf() w/ globals in local functions:")
 
 a <- 1
