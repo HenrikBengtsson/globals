@@ -11,6 +11,9 @@ BUG FIXES:
  * findGlobals(function(x) x[1] <- 0) would incorrectly identify 'x' as a
    global variable. Same for other variants like x[[1]] <- 0 and x$a <- 0.
 
+ * findGlobals(function(z) x <- z$x) would incorrectly identify 'x' as a
+   global variable.
+
 
 Version: 0.13.1 [2020-10-11]
 

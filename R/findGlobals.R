@@ -101,7 +101,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
     if (selfassign && (type == "<-" || type == "=")) {
       if (trace) message("- LHS <- RHS")
       rhs <- e[[3]]
-      globals <- all.names(rhs)
+      globals <- find_globals_ordered(rhs, envir = w$env, trace = trace)
       if (trace) {
         message("- RHS globals: ", paste(sQuote(globals), collapse = ", "))
       }
