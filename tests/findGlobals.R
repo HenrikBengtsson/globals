@@ -36,11 +36,28 @@ globals_i <- findGlobals(function() {
   a <- a + 1
 })
 print(globals_i)
-if (packageVersion("globals") <= "0.12.4") {
-  assert_identical_sets(globals_i, c("{", "<-", "+"))
-} else {
-  assert_identical_sets(globals_i, c("{", "a", "<-", "+"))
-}
+assert_identical_sets(globals_i, c("{", "a", "<-", "+"))
+
+globals_i <- findGlobals(function(x) x <- x)
+print(globals_i)
+assert_identical_sets(globals_i, c("<-"))
+
+globals_i <- findGlobals(function(x) x[1] <- 0)
+print(globals_i)
+assert_identical_sets(globals_i, c("<-", "[", "[<-"))
+
+globals_i <- findGlobals(function(x) a <- x$a)
+print(globals_i)
+assert_identical_sets(globals_i, c("<-", "$"))
+
+globals_i <- findGlobals(function(...) args <- list(...))
+print(globals_i)
+assert_identical_sets(globals_i, c("<-", "list"))
+
+globals_i <- findGlobals({ function(x) x; x }, substitute = TRUE)
+print(globals_i)
+assert_identical_sets(globals_i, c("{", "x"))
+
 
 message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {

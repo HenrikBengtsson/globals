@@ -16,7 +16,7 @@ find_globals_conservative <- function(expr, envir, dotdotdot, ..., trace = FALSE
     fun <- expr
     w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
     if (trace) w <- inject_tracer_to_walker(w)
-    collect_usage_function(fun, name = "<anonymous>", w)
+    collect_usage_function(fun, name = "<anonymous>", w, trace = trace)
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
@@ -30,7 +30,6 @@ find_globals_conservative <- function(expr, envir, dotdotdot, ..., trace = FALSE
 
     ## The latter becomes equivalent to (after cleanup):
     w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
-    w$env <- new.env(hash = TRUE, parent = w$env)
     if (trace) w <- inject_tracer_to_walker(w)
     
     locals <- findLocalsList(list(expr))
@@ -55,7 +54,7 @@ find_globals_liberal <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
     fun <- expr
     w <- make_usage_collector(fun, name = "<anonymous>", enterGlobal = enter)
     if (trace) w <- inject_tracer_to_walker(w)
-    collect_usage_function(fun, name = "<anonymous>", w)
+    collect_usage_function(fun, name = "<anonymous>", w, trace = trace)
   } else if (is.call(expr) && is.function(expr[[1]])) {
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
@@ -74,37 +73,84 @@ find_globals_liberal <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
 
 
 #' @importFrom codetools walkCode
-find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
+find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character(), class = character(), trace = FALSE) {
   selfassign <- getOption("globals.selfassign", TRUE)
   
-  class <- name <- character()
-  
   enter_local <- function(type, v, e, w) {
-    ## LH <- RH: Handle cases where a global variable exists in RH and LH
-    ##           assigns a local variable with the same name, e.g. x <- x + 1.
-    ##           In such case we want to detect 'x' as a global variable.
+    hardcoded_locals <- names(w$env)
+    if (trace) {
+      trace_msg <- trace_enter("enter_local(type=%s, v=%s)", sQuote(type), sQuote(v))
+      trace_printf("before:\n")
+      trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
+      trace_printf("hardcoded locals: %s\n", paste(sQuote(hardcoded_locals), collapse = ", "))
+      on.exit(local({
+        trace_printf("after:\n")
+        trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
+        trace_exit(trace_msg)
+      }))
+    }
+
+    is_already_local <- (v %in% hardcoded_locals)
+    if (is_already_local) {
+      if (trace) trace_printf("variable is a hardcoded local: %s\n", sQuote(v))
+    }
+
+    ## LHS <- RHS: Handle cases where a global variable exists in RHS and LHS
+    ##             assigns a local variable with the same name, e.g. x <- x + 1.
+    ##             In such case we want to detect 'x' as a global variable.
     if (selfassign && (type == "<-" || type == "=")) {
+      if (trace) trace_printf("LHS <- RHS:\n")
       rhs <- e[[3]]
-      globals <- all.names(rhs)
+      globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = rhs, envir = w$env, dotdotdot = "ignore", trace = trace)
+      if (trace) {
+        trace_printf("RHS globals: %s\n", paste(sQuote(globals), collapse = ", "))
+      }
+
       if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
         ## Case: a <- pkg::a
       } else if (v %in% globals) {
-        class <<- c(class, "global")
+        v_class <- if (v %in% hardcoded_locals) "local" else "global"
+        if (trace) trace_printf("Add %s variable %s\n", sQuote(v_class), sQuote(v))
+        class <<- c(class, v_class)
         name <<- c(name, v)
       }
     }
 
+    if (trace) trace_printf("Add %s variable %s\n", sQuote("local"), sQuote(v))
     class <<- c(class, "local")
     name <<- c(name, v)
   }
 
   enter_global <- function(type, v, e, w) {
-    class <<- c(class, "global")
+    hardcoded_locals <- names(w$env)
+    if (trace) {
+      trace_msg <- trace_enter("enter_global(type=%s, v=%s)", sQuote(type), sQuote(v))
+      trace_printf("before:\n")
+      trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
+      trace_printf("hardcoded locals: %s\n", paste(sQuote(hardcoded_locals), collapse = ", "))
+      on.exit(local({
+        trace_printf("after:\n")
+        trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
+        trace_exit(trace_msg)
+      }))
+    }
+
+    is_already_local <- (v %in% hardcoded_locals)
+    if (is_already_local) {
+      if (trace) {
+        trace_printf("variable is a hardcoded local: %s\n", sQuote(v))
+      }
+    }
+
+    v_class <- if (is_already_local) "local" else "global"
+    if (trace) trace_printf("Add %s variable %s\n", sQuote(v_class), sQuote(v))
+    class <<- c(class, v_class)
     name <<- c(name, v)
-    
+
     ## Also walk formulas to identify globals
     if (type == "function") {
       if (v == "~") {
+        if (trace) trace_printf("type = ~ (formula)\n")
         stop_if_not(length(e) >= 2L, identical(e[[1]], as.symbol("~")))
         ## Ignoring dots overrides the default of silently returning
         ## them from formulas
@@ -115,41 +161,58 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
           formula_dotdotdot <- "return"
         }
         for (kk in 2:length(e)) {
-          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot)
-            if (length(globals) > 0) {
+          globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot, trace = trace)
+          if (length(globals) > 0) {
+            if (trace) trace_printf("Add %s variables %s\n", sQuote("global"), paste(sQuote(globals), collapse = ", "))
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
           }
         }
       } else if (selfassign && (v == "<-" || v == "=")) {
-        ## LH <- RH: Handle cases where a global variable exists in LH in the
-        ##           form of x[1] <- 0, which will cause 'x' to be called a
-        ##           local variable later unless called global here.
+        ## LHS <- RHS: Handle cases where a global variable exists in LHS in
+        ##             the form of x[1] <- 0, which will cause 'x' to be called
+        ##             a local variable later unless called global here.
+        if (trace) trace_printf("LHS <- RHS:\n")
         lhs <- e[[2]]
         if (length(lhs) >= 2) {
           ## Cases: a[1] <- 0, names(a) <- "x", names(a)[1] <- "x"
           ## Skip first symbol, because it'll be handled up later as
           ## an assignment function, e.g. `[<-` and `names<-`
-          globals <- find_globals_ordered(expr = lhs, envir = w$env, dotdotdot = dotdotdot)
+          globals <- find_globals_ordered(expr = lhs, envir = w$env, dotdotdot = dotdotdot, name = hardcoded_locals, class = rep("local", times = length(hardcoded_locals)), trace = trace)
           if (length(globals) > 0) {
+            if (trace) trace_printf("Add %s variables %s\n", sQuote("global"), paste(sQuote(globals), collapse = ", "))
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
           }
         }
+      } else {
+        if (trace) trace_printf("a function not of interest\n")
       }
+    } else {
+      if (trace) trace_printf("nothing to else to explore\n")
     }
   }
 
+  if (trace) {
+    trace_msg <- trace_enter("find_globals_ordered()")
+    on.exit(trace_exit(trace_msg))
+  }
+  
   ## A function or an expression?
   if (is.function(expr)) {
-    if (typeof(expr) != "closure") return(character(0L)) ## e.g. `<-`
+    if (typeof(expr) != "closure") {
+    if (trace) trace_printf("typeof != closure\n")
+      return(character(0L)) ## e.g. `<-`
+    }
+    if (trace) trace_printf("type = function\n")
     fun <- expr
     w <- make_usage_collector(fun, name = "<anonymous>",
-                            enterLocal = enter_local,
-                            enterGlobal = enter_global)
+                              enterLocal = enter_local,
+                              enterGlobal = enter_global)
     if (trace) w <- inject_tracer_to_walker(w)
-    collect_usage_function(fun, name = "<anonymous>", w)
+    collect_usage_function(fun, name = "<anonymous>", w, trace = trace)
   } else if (is.call(expr) && is.function(expr[[1]])) {
+    if (trace) trace_printf("type = a call to a function\n")
     ## AD HOC: Fixes https://github.com/HenrikBengtsson/globals/issues/60
     for (e in list(expr[[1]], expr[-1])) {
       globals <- find_globals_ordered(expr = e, envir = envir, dotdotdot = dotdotdot, ..., trace = trace)
@@ -158,31 +221,71 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., trace = FALSE) {
         name <- c(name, globals)
       }
     }
+  } else if (is.call(expr) && is.symbol(expr[[1]]) && expr[[1]] == "{") {
+    if (trace) trace_printf("type = {\n")
+    class <- c(class, "global")
+    name <- c(name, "{")
+    nexpr <- length(expr)
+    if (trace) trace_printf("length(expr) = %d\n", nexpr)
+    if (nexpr >= 2) {
+      for (kk in 2:nexpr) {
+        e <- expr[[kk]]
+        globals <- find_globals_ordered(expr = e, envir = envir, dotdotdot = dotdotdot, ..., trace = trace)
+        if (length(globals) > 0) {
+          if (trace) trace_printf("Add %s variable %s\n", sQuote("global"), paste(sQuote(globals), collapse = ", "))
+          class <- c(class, rep("global", times = length(globals)))
+          name <- c(name, globals)
+        }
+        locals <- codetools::findLocals(e)
+        if (length(locals) > 0) {
+          if (trace) trace_printf("Add %s variable %s\n", sQuote("local"), paste(sQuote(locals), collapse = ", "))
+          class <- c(class, rep("locals", times = length(locals)))
+          name <- c(name, locals)
+        }
+      }
+    }
   } else {
+    if (trace) trace_printf("type = call\n")
     fun <- as_function(expr, envir = envir, ...)
+    if (trace) trace_print(fun)
     w <- make_usage_collector(fun, name = "<anonymous>",
-                            enterLocal = enter_local,
-                            enterGlobal = enter_global)
+                              enterLocal = enter_local,
+                              enterGlobal = enter_global)
     if (trace) w <- inject_tracer_to_walker(w)
     walkCode(expr, w)
   }
+
+  if (trace) local({
+    trace_printf("variables (with duplicates):\n")
+    trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
+  })
 
   ## Drop duplicated names
   dups <- duplicated(name)
   class <- class[!dups]
   name <- name[!dups]
 
+  if (trace) local({
+    trace_printf("variables (no duplicates):\n")
+    trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
+  })
+
   unique(name[class == "global"])
 }
 
 
 call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "error", trace = FALSE, debug = FALSE) {
+  if (trace) {
+    trace_msg <- trace_enter("call_find_globals_with_dotdotdot(dotdotdot = %s)", sQuote(dotdotdot))
+    on.exit(trace_exit(trace_msg))
+  }
+
   ## Is there a need for global '...', '..1', '..2', etc.?
   dotdotdots <- character(0L)
   
   globals <- withCallingHandlers({
     oopts <- options(warn = 0L)
-    on.exit(options(oopts))
+    on.exit(options(oopts), add = TRUE)
     FUN(expr, envir = envir, dotdotdot = dotdotdot, trace = trace)
   }, warning = function(w) {
     ## Warned about '...', '..1', '..2', etc.?
@@ -211,9 +314,16 @@ call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "erro
       }
     }
   })
-  
+
+  if (trace) {
+    trace_printf("globals: %s\n", paste(sQuote(globals), collapse = ", "))
+  }
+
   if (length(dotdotdots) > 0L) {
     dotdotdots <- unique(dotdotdots)
+    if (trace) {
+      trace_printf("dotdotdots: %s\n", paste(sQuote(dotdotdots), collapse = ", "))
+    }
     globals <- c(globals, dotdotdots)
   }
   
@@ -246,6 +356,11 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
   dotdotdot <- match.arg(dotdotdot, choices = c("warning", "error", "return", "ignore"))
 
   if (substitute) expr <- substitute(expr)
+
+  if (trace) {
+    trace_msg <- trace_enter("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s)", dotdotdot, method, unlist)
+    on.exit(trace_exit(trace_msg))
+  }
 
   debug <- mdebug("findGlobals(..., dotdotdot = '%s', method = '%s', unlist = %s) ...", dotdotdot, method, unlist)
 
@@ -285,7 +400,8 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
                       attributes = attributes, ...,
                       tweak = tweak, dotdotdot = dotdotdot,
                       method = method,
-                      substitute = FALSE, unlist = FALSE)
+                      substitute = FALSE, unlist = FALSE,
+                      trace = trace)
     
     keep <- types <- NULL ## Not needed anymore
     
@@ -340,7 +456,8 @@ findGlobals <- function(expr, envir = parent.frame(), ...,
                                   ## Don't complain about '...', '..1', etc.
                                   dotdotdot = "ignore",
                                   method = method,
-                                  substitute = FALSE, unlist = FALSE)
+                                  substitute = FALSE, unlist = FALSE,
+                                  trace = trace)
       if (unlist) attrs_globals <- unlist(attrs_globals, use.names = FALSE)
       if (length(attrs_globals) > 1L) attrs_globals <- unique(attrs_globals)
       debug && mdebug(" - globals found in attributes: [%d] %s",
@@ -369,22 +486,53 @@ drop_missing_formals <- function(x) {
 }
 
 #' @importFrom codetools walkCode findLocalsList
-collect_usage_function <- function(fun, name, w) {
+collect_usage_function <- function(fun, name, w, trace = FALSE) {
+  if (trace) {
+    trace_msg <- trace_enter("collect_usage_function()")
+    on.exit(trace_exit(trace_msg))
+  }
+  
   formals <- formals(fun)
   body <- body(fun)
 
   w$name <- c(w$name, name)
   parnames <- names(formals)
+  if (trace) {
+    trace_printf("parnames: %s\n", paste(sQuote(parnames), collapse = ", "))
+  }
 
   formals_clean <- drop_missing_formals(formals)
 #  locals <- findLocalsList(c(list(body), formals_clean))
   locals <- findLocalsList(formals_clean)
+  
+  if (trace) {
+    trace_printf("formals_clean: %s\n", paste(sQuote(formals_clean), collapse = ", "))
+    trace_printf("locals: %s\n", paste(sQuote(locals), collapse = ", "))
+  }
 
-  w$env <- new.env(hash = TRUE, parent = w$env)
-  for (n in c(parnames, locals)) assign(n, TRUE, w$env)
-  for (a in formals_clean) walkCode(a, w)
+  ## Hardcode locals?
+  hardcoded_locals <- c(parnames, locals)
+  if (length(hardcoded_locals) > 0) {
+    if (trace) trace_printf("Add hardcoded local variables %s", paste(sQuote(hardcoded_locals), collapse = ", "))
+    w$env <- new.env(hash = TRUE, parent = w$env)
+    for (n in hardcoded_locals) assign(n, TRUE, w$env)
+  }
 
-  walkCode(body, w)
+  if (trace) {
+    trace_printf("hardcoded locals: %s\n", paste(sQuote(names(w$env)), collapse = ", "))
+  }
+
+  for (a in formals_clean) {
+    if (trace) trace_enter("walkCode(%s)", sQuote(a))
+    walkCode(a, w)
+    if (trace) trace_exit("walkCode(%s)", sQuote(a))
+  }
+
+  if (trace) trace_enter("walkCode(body)")
+  res <- walkCode(body, w)
+  if (trace) trace_exit("walkCode(body)")
+  
+  res
 }
 
 
@@ -397,21 +545,36 @@ inject_tracer_to_function <- function(fcn, name) {
   }
   title <- sprintf("%s()", name)
   b <- bquote({
-    message(.(title), ":")
-    if (length(.(args)) > 0)
-      message(paste(utils::capture.output(utils::str(mget(.(args)))), collapse = "\n"))
-    if (!exists("w", mode = "list")) return()
+    ## Import private functions
+    ns <- getNamespace("globals")
+    trace_str <- get("trace_str", envir = ns, mode = "function")
+    trace_exit <- get("trace_exit", envir = ns, mode = "function")
+    trace_printf <- get("trace_printf", envir = ns, mode = "function")
+    trace_print <- get("trace_print", envir = ns, mode = "function")
+    
+    trace_msg <- trace_enter("%s", .(title))
+    trace_indent <- attr(trace_msg, "indent")
+    if (length(.(args)) > 0) trace_str(mget(.(args)), indent = trace_indent)
+    if (!exists("w", mode = "list")) {
+      trace_exit(trace_msg)
+      return()
+    }
     env <- environment(w$enterLocal)
     n <- length(env$name)
     value <- .(b)
     nnew <- (length(env$name) - n)
     if (nnew) {
-      message(" ", .(title), " variables:")
-      vars <- data.frame(name=env$name, class=env$class, stringsAsFactors = FALSE)
-      vars$added <- c(rep(FALSE, times = n), rep(TRUE, times = nnew))
-      message(paste(utils::capture.output(print(vars)), collapse = "\n"))
+      trace_printf("variables:\n", indent = trace_indent)
+      trace_print(data.frame(
+        name  = env$name,
+        class = env$class,
+        added = c(rep(FALSE, times = n), rep(TRUE, times = nnew)),
+        stringsAsFactors = FALSE
+      ), indent = trace_indent)
     }
-    message(" ", .(title) , " => ", utils::capture.output(utils::str(value)))
+    trace_printf("result: ", indent = trace_indent)
+    trace_str(value, indent = trace_indent)
+    trace_exit(trace_msg)
     value
   })
   body(fcn) <- b
@@ -432,7 +595,7 @@ inject_tracer_to_walker <- function(w) {
   for (key in names(w)) {
     fcn <- w[[key]] 
     if (!is.function(fcn)) next
-    fcn <- inject_tracer_to_function(fcn, key)
+#    fcn <- inject_tracer_to_function(fcn, key)
     w[[key]] <- fcn
   }
   
@@ -446,8 +609,8 @@ make_usage_collector <- local({
   ## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17935 bug in the
   ## stats:::`[.formula` function
   ## See also: https://github.com/HenrikBengtsson/globals/issues/64
-  if (getRversion() < "4.1.0" || is.null(ver <- R.version$`svn rev`) ||
-      is.na(ver <- as.integer(ver)) || ver < 79288) {
+  if (getRversion() <= "4.0.3" || is.null(ver <- R.version$`svn rev`) ||
+      is.na(ver <- as.integer(ver)) || ver < 79355) {
     ## Local copy of codetools:::collectUsageCall()
     .collectUsageCall <- NULL
 
@@ -468,6 +631,7 @@ make_usage_collector <- local({
     
     function(...) {
       w <- makeUsageCollector(...)
+      w$env <- new.env(parent = w$env)
       if (is.function(w$call)) {
         ## Memoize? (to avoid importing a private 'codetools' function)
         if (is.null(.collectUsageCall)) .collectUsageCall <<- w$call
@@ -477,7 +641,10 @@ make_usage_collector <- local({
       w
     }
   } else {
-    makeUsageCollector
+    function(...) {
+      w <- makeUsageCollector(...)
+      w$env <- new.env(hash = TRUE, parent = w$env)
+      w
+    }
   }
 })
-

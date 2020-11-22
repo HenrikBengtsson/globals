@@ -1,5 +1,6 @@
 as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
-  eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
+  fun_expr <- substitute(function() x, list(x = expr))
+  eval(fun_expr, envir = envir, enclos = enclos, ...)
 }
 
 # Although the set of "base" packages rarely changes, it has happened
@@ -244,4 +245,53 @@ list_apply <- function(X, FUN, ...) {
     res[[kk]] <- FUN(.subset2(X, kk), ...)
   }
   res
+}
+
+
+.trace <- new.env()
+.trace$indent <- 0L
+
+trace_indent <- function(x = "", indent = .trace$indent) {
+#  utils::str(list(indent = indent))
+#  indent <- max(0L, indent)
+  prefix <- paste(rep(" ", times = 3*indent), collapse = "")
+  paste(prefix, x, sep = "")
+}
+
+trace_printf <- function(..., indent = .trace$indent, collapse = "\n", appendLF = FALSE) {
+  msg <- sprintf(...)
+  out <- trace_indent(msg, indent = indent)
+  out <- paste(out, collapse = collapse)
+  message(out, appendLF = appendLF)
+  invisible(msg)
+}
+
+#' @importFrom utils capture.output
+trace_print <- function(..., envir = parent.frame(), indent = .trace$indent, collapse = "\n", appendLF = TRUE) {
+  bfr <- eval(capture.output(print(...)), envir = envir)
+  trace_printf(bfr, indent = indent, collapse = collapse, appendLF = appendLF)
+}
+
+#' @importFrom utils capture.output str
+trace_str <- function(..., envir = parent.frame(), indent = .trace$indent, collapse = "\n", appendLF = TRUE) {
+  bfr <- eval(capture.output(str(...)), envir = envir)
+  trace_printf(bfr, indent = indent, collapse = collapse, appendLF = appendLF)
+}
+
+trace_enter <- function(..., appendLF = TRUE) {
+  msg <- trace_printf(..., appendLF = FALSE)
+  message(" ...", appendLF = appendLF)
+  .trace$indent <- .trace$indent + 1L
+  attr(msg, "indent") <- .trace$indent
+  invisible(msg)
+}
+
+trace_exit <- function(fmtstr, ..., appendLF = TRUE) {
+  indent <- attr(fmtstr, "indent")
+  if (!is.null(indent)) .trace$indent <- indent
+  .trace$indent <- .trace$indent - 1L
+  msg <- trace_printf(fmtstr, ..., appendLF = FALSE)
+  message(" ... done", appendLF = appendLF)
+#  stop_if_not(.trace$indent >= 0L)
+  invisible(msg)
 }

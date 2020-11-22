@@ -1,6 +1,21 @@
 Package: globals
 ================
 
+Version: 0.14.0 [2020-11-22]
+
+NEW FEATURES:
+
+ * Now findGlobals(function(x) x <- x) identifies 'x' as a global variable.
+
+ * Now findGlobals(function(x) x[1] <- 0) identifies 'x' as a global variable.
+   Same for other variants like x[[1]] <- 0 and x$a <- 0.
+
+ * Now findGlobals(function(z) x <- z$x) identifies 'x' as a global variable.
+
+ * Now findGlobals(quote({ f <- function(x) x; x })) identifies 'x' as a global
+   variable.  Previously, the 'x' of the function would hide the global 'x'.
+
+
 Version: 0.13.1 [2020-10-11]
 
 BUG FIXES:
