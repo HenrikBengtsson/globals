@@ -54,6 +54,10 @@ globals_i <- findGlobals(function(...) args <- list(...))
 print(globals_i)
 assert_identical_sets(globals_i, c("<-", "list"))
 
+globals_i <- findGlobals({ function(x) x; x }, substitute = TRUE)
+print(globals_i)
+assert_identical_sets(globals_i, c("{", "x"))
+
 
 message(" ** findGlobals(..., tweak):")
 tweak_another_expression <- function(expr) {

@@ -95,6 +95,18 @@ stopifnot(
 )
 
 
+x <- 1
+globals_i <- globalsOf({ function(x) x; x }, substitute = TRUE)
+print(globals_i)
+globals_i <- cleanup(globals_i)
+str(globals_i)
+assert_identical_sets(names(globals_i), "x")
+where <- attr(globals_i, "where")
+stopifnot(
+  length(where) == length(globals_i)
+)
+
+
 
 message(" ** globalsOf() w/ globals in local functions:")
 

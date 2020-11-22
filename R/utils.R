@@ -1,5 +1,6 @@
 as_function <- function(expr, envir = parent.frame(), enclos = baseenv(), ...) {
-  eval(substitute(function() x, list(x = expr)), envir = envir, enclos = enclos, ...)
+  fun_expr <- substitute(function() x, list(x = expr))
+  eval(fun_expr, envir = envir, enclos = enclos, ...)
 }
 
 # Although the set of "base" packages rarely changes, it has happened
@@ -251,7 +252,8 @@ list_apply <- function(X, FUN, ...) {
 .trace$indent <- 0L
 
 trace_indent <- function(x = "", indent = .trace$indent) {
-  indent <- max(0L, indent)
+#  utils::str(list(indent = indent))
+#  indent <- max(0L, indent)
   prefix <- paste(rep(" ", times = 3*indent), collapse = "")
   paste(prefix, x, sep = "")
 }
@@ -280,13 +282,16 @@ trace_enter <- function(..., appendLF = TRUE) {
   msg <- trace_printf(..., appendLF = FALSE)
   message(" ...", appendLF = appendLF)
   .trace$indent <- .trace$indent + 1L
+  attr(msg, "indent") <- .trace$indent
   invisible(msg)
 }
 
-trace_exit <- function(..., appendLF = TRUE) {
+trace_exit <- function(fmtstr, ..., appendLF = TRUE) {
+  indent <- attr(fmtstr, "indent")
+  if (!is.null(indent)) .trace$indent <- indent
   .trace$indent <- .trace$indent - 1L
-  msg <- trace_printf(..., appendLF = FALSE)
+  msg <- trace_printf(fmtstr, ..., appendLF = FALSE)
   message(" ... done", appendLF = appendLF)
-  stop_if_not(.trace$indent >= 0L)
+#  stop_if_not(.trace$indent >= 0L)
   invisible(msg)
 }
