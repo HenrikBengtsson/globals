@@ -1,25 +1,19 @@
 Package: globals
 ================
 
-Version: 0.13.1-9000 [2020-11-21]
+Version: 0.13.9-9000 [2020-11-22]
 
 NEW FEATURES:
 
- * Now findGlobals(..., trace = TRUE) use nested indentation for output.
- 
-BUG FIXES:
+ * Now findGlobals(function(x) x <- x) identifies 'x' as a global variable.
 
- * findGlobals(function(x) x <- x) would incorrectly identify 'x' as a global
-   variable.
+ * Now findGlobals(function(x) x[1] <- 0) identifies 'x' as a global variable.
+   Same for other variants like x[[1]] <- 0 and x$a <- 0.
 
- * findGlobals(function(x) x[1] <- 0) would incorrectly identify 'x' as a
-   global variable. Same for other variants like x[[1]] <- 0 and x$a <- 0.
+ * Now findGlobals(function(z) x <- z$x) identifies 'x' as a global variable.
 
- * findGlobals(function(z) x <- z$x) would incorrectly identify 'x' as a
-   global variable.
-
- * findGlobals(quote({ function(x) x; x })) failed to identify 'x' as a global
-   variable.
+ * Now findGlobals(quote({ f <- function(x) x; x })) identifies 'x' as a global
+   variable.  Previously, the 'x' of the function would hide the global 'x'.
 
 
 Version: 0.13.1 [2020-10-11]
