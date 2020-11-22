@@ -168,7 +168,7 @@ Run `revdep_details(, "batchtools")` for more info
 *   checking dependencies in R code ... NOTE
     ```
     --------------------------------------------------------------------------
-    [[18252,1],0]: A high-performance Open MPI point-to-point messaging module
+    [[56035,1],0]: A high-performance Open MPI point-to-point messaging module
     was unable to find any relevant network interfaces:
     
     Module: OpenFabrics (openib)
@@ -569,7 +569,7 @@ Run `revdep_details(, "EFAtools")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/EpiNow2
 * Date/Publication: 2020-10-20 14:50:09 UTC
-* Number of recursive dependencies: 146
+* Number of recursive dependencies: 149
 
 Run `revdep_details(, "EpiNow2")` for more info
 
@@ -889,10 +889,10 @@ Run `revdep_details(, "infercnv")` for more info
     +          png_res=300,
     +          dynamic_resize=0
     +          )
-    INFO [2020-11-21 14:37:06] ::plot_cnv:Start
-    INFO [2020-11-21 14:37:06] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
-    INFO [2020-11-21 14:37:06] ::plot_cnv:Depending on the size of the matrix this may take a moment.
-    INFO [2020-11-21 14:37:06] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
+    INFO [2020-11-21 23:06:45] ::plot_cnv:Start
+    INFO [2020-11-21 23:06:45] ::plot_cnv:Current data dimensions (r,c)=4613,20 Total=94613.7345076583 Min=0.459691019720342 Max=2.53323815685956.
+    INFO [2020-11-21 23:06:45] ::plot_cnv:Depending on the size of the matrix this may take a moment.
+    INFO [2020-11-21 23:06:45] plot_cnv(): auto thresholding at: (0.510779 , 1.489221)
     Warning in png(paste(out_dir, paste(output_filename, ".png", sep = ""),  :
       unable to open connection to X11 display ''
     Error in .External2(C_X11, paste0("png::", filename), g$width, g$height,  : 
