@@ -1,8 +1,12 @@
 Package: globals
 ================
 
-Version: 0.13.1-9000 [2020-11-20]
+Version: 0.13.1-9000 [2020-11-21]
 
+NEW FEATURES:
+
+ * Now findGlobals(..., trace = TRUE) use nested indentation for output.
+ 
 BUG FIXES:
 
  * findGlobals(function(x) x <- x) would incorrectly identify 'x' as a global

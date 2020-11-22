@@ -245,3 +245,48 @@ list_apply <- function(X, FUN, ...) {
   }
   res
 }
+
+
+.trace <- new.env()
+.trace$indent <- 0L
+
+trace_indent <- function(x = "", indent = .trace$indent) {
+  indent <- max(0L, indent)
+  prefix <- paste(rep(" ", times = 3*indent), collapse = "")
+  paste(prefix, x, sep = "")
+}
+
+trace_printf <- function(..., indent = .trace$indent, collapse = "\n", appendLF = FALSE) {
+  msg <- sprintf(...)
+  out <- trace_indent(msg, indent = indent)
+  out <- paste(out, collapse = collapse)
+  message(out, appendLF = appendLF)
+  invisible(msg)
+}
+
+#' @importFrom utils capture.output
+trace_print <- function(..., envir = parent.frame(), indent = .trace$indent, collapse = "\n", appendLF = TRUE) {
+  bfr <- eval(capture.output(print(...)), envir = envir)
+  trace_printf(bfr, indent = indent, collapse = collapse, appendLF = appendLF)
+}
+
+#' @importFrom utils capture.output str
+trace_str <- function(..., envir = parent.frame(), indent = .trace$indent, collapse = "\n", appendLF = TRUE) {
+  bfr <- eval(capture.output(str(...)), envir = envir)
+  trace_printf(bfr, indent = indent, collapse = collapse, appendLF = appendLF)
+}
+
+trace_enter <- function(..., appendLF = TRUE) {
+  msg <- trace_printf(..., appendLF = FALSE)
+  message(" ...", appendLF = appendLF)
+  .trace$indent <- .trace$indent + 1L
+  invisible(msg)
+}
+
+trace_exit <- function(..., appendLF = TRUE) {
+  .trace$indent <- .trace$indent - 1L
+  msg <- trace_printf(..., appendLF = FALSE)
+  message(" ... done", appendLF = appendLF)
+  stop_if_not(.trace$indent >= 0L)
+  invisible(msg)
+}
