@@ -44,6 +44,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -55,9 +57,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,12 +86,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -178,7 +180,7 @@
 <li><p>Calls like findGlobals(~ NULL) with NULLs on the right-hand side could throw “Error in if (length(ans) == 0L || as.character(ans[[1L]])[1L] ==”~“) { : missing value where TRUE/FALSE needed”. Solved by working around what looks like a bug in the ‘stats’ package causing subsetting on formulas with NULLs to fail.</p></li>
 <li><p>cleanup(…, drop = c(…, “base-packages”)) for Globals would drop base R objects with names not exported by the corresponding base R package. Similarly, drop = c(…, “primitive”) would drop primitive R objects with names not exported by any base R package.</p></li>
 <li><p>findGlobals(), globalsOf(), and globalsByName() did not handle ‘..1’, ‘..2’, etc.</p></li>
-<li><p>findGlobals() and globalsOf() produces warnings on ‘<anonymous>: … may be used in an incorrect context’ when formulas had ‘…’, ‘..1’, ‘..2’, etc.</anonymous></p></li>
+<li><p>findGlobals() and globalsOf() produces warnings on ‘&lt;anonymous&gt;: … may be used in an incorrect context’ when formulas had ‘…’, ‘..1’, ‘..2’, etc.</p></li>
 <li><p>findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw “Error in environment(w$enterLocal) : object ‘w’ not found”.</p></li>
 </ul>
 </div>
@@ -461,8 +463,7 @@
 <h3 class="hasAnchor">
 <a href="#bug-fixes-15" class="anchor"></a>Bug Fixes</h3>
 <ul>
-<li>cleanup() for Globals did not cleanup functions in core package environments named ‘package:<name>’.</name>
-</li>
+<li>cleanup() for Globals did not cleanup functions in core package environments named ‘package:&lt;name&gt;’.</li>
 </ul>
 </div>
 </div>
@@ -600,11 +601,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Henrik Bengtsson.</p>
+  <p><p>Developed by Henrik Bengtsson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1 and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9000.</p>
 </div>
 
       </footer>
@@ -612,6 +613,8 @@
 
   
 
+
+  
 
   </body>
 </html>

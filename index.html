@@ -23,6 +23,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,12 +43,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -73,31 +69,33 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
+
 <div id="globals-identify-global-objects-in-r-expressions" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#globals-identify-global-objects-in-r-expressions" class="anchor"></a>globals: Identify Global Objects in R Expressions</h1></div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>R package globals is available on <a href="https://cran.r-project.org/package=globals">CRAN</a> and can be installed in R as:</p>
+<p>R package globals is available on <a href="https://cran.r-project.org/package=globals" class="external-link">CRAN</a> and can be installed in R as:</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"globals"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"globals"</span><span class="op">)</span></code></pre></div>
 <div id="pre-release-version" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pre-release-version" class="anchor"></a>Pre-release version</h3>
 <p>To install the pre-release version that is available in Git branch <code>develop</code> on GitHub, use:</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"HenrikBengtsson/globals"</span>, ref<span class="op">=</span><span class="st">"develop"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"HenrikBengtsson/globals"</span>, ref<span class="op">=</span><span class="st">"develop"</span><span class="op">)</span></code></pre></div>
 <p>This will install the package from source.</p>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=globals">https://​cloud.r-project.org/​package=globals</a>
 </li>
@@ -107,46 +105,52 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>LGPL (&gt;= 2.1)</li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Henrik Bengtsson <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/web/checks/check_results_globals.html"><img border="0" src="http://www.r-pkg.org/badges/version/globals" alt="CRAN version"></a></li>
-<li><a href="https://github.com/HenrikBengtsson/globals/actions?query=workflow%3AR-CMD-check"><img src="https://github.com/HenrikBengtsson/globals/workflows/R-CMD-check/badge.svg?branch=develop" alt="Build status"></a></li>
-<li><a href="https://travis-ci.org/HenrikBengtsson/globals"><img src="https://travis-ci.org/HenrikBengtsson/globals.svg" alt="Build status"></a></li>
-<li><a href="https://ci.appveyor.com/project/HenrikBengtsson/globals"><img src="https://ci.appveyor.com/api/projects/status/github/HenrikBengtsson/globals?svg=true" alt="Build status"></a></li>
-<li><a href="https://codecov.io/gh/HenrikBengtsson/globals"><img src="https://codecov.io/gh/HenrikBengtsson/globals/branch/develop/graph/badge.svg" alt="Coverage Status"></a></li>
+<li><a href="https://CRAN.R-project.org/web/checks/check_results_globals.html" class="external-link"><img border="0" src="https://www.r-pkg.org/badges/version/globals" alt="CRAN check status"></a></li>
+<li><a href="https://github.com/HenrikBengtsson/globals/actions?query=workflow%3AR-CMD-check" class="external-link"><img border="0" src="https://github.com/HenrikBengtsson/globals/workflows/R-CMD-check/badge.svg?branch=develop" alt="Build status"></a></li>
+<li><a href="https://travis-ci.org/HenrikBengtsson/globals" class="external-link"><img border="0" src="https://travis-ci.org/HenrikBengtsson/globals.svg" alt="Build status"></a></li>
+<li><a href="https://ci.appveyor.com/project/HenrikBengtsson/globals" class="external-link"><img border="0" src="https://ci.appveyor.com/api/projects/status/github/HenrikBengtsson/globals?svg=true" alt="Build status"></a></li>
+<li><a href="https://codecov.io/gh/HenrikBengtsson/globals" class="external-link"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/globals/branch/develop/graph/badge.svg" alt="Coverage Status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Henrik Bengtsson.</p>
+  <p></p>
+<p>Developed by Henrik Bengtsson.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1 and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000 and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9000.</p>
 </div>
 
       </footer>
@@ -154,6 +158,8 @@
 
   
 
+
+  
 
   </body>
 </html>
