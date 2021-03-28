@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://listenv.futureverse.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/Globals.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/cleanup.Globals.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/globalsByName.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/globalsOf.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/packagesOf.Globals.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/private_length.html</loc>
+  </url>
+  <url>
+    <loc>https://listenv.futureverse.org/reference/walkAST.html</loc>
+  </url>
+</urlset>
