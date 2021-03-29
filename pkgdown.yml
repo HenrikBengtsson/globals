@@ -1,8 +1,8 @@
 pandoc: 1.19.2.4
-pkgdown: 1.6.1.9000
-pkgdown_sha: ae4332d48aedc46be2b532b26661a9bc6b7244fc
+pkgdown: 1.6.1.9001
+pkgdown_sha: 5f1ef9785827a976afbdc09a2d2a626d6ef1f2b4
 articles: {}
-last_built: 2021-03-28T23:49Z
+last_built: 2021-03-29T00:09Z
 urls:
   reference: https://listenv.futureverse.org/reference
   article: https://listenv.futureverse.org/articles
