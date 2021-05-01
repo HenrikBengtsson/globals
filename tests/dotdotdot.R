@@ -1,6 +1,6 @@
 source("incl/start.R")
 
-options(warn = 1L)
+options(warn = 2L)
 
 exprs <- list(
   ok1   = quote(function(...) sum(x, ...)),
@@ -25,13 +25,16 @@ for (name in names(exprs)) {
   message("\n*** codetools::findGlobals():")
   fun <- globals:::as_function(expr)
   print(fun)
-  globals <- codetools::findGlobals(fun)
+  ## Suppress '... may be used in an incorrect context' warnings
+  suppressWarnings({
+    globals <- codetools::findGlobals(fun)
+  })
   print(globals)
   assert_identical_sets(globals, c("sum", "x"))
 
   message("\n*** findGlobals(dotdotdot = 'ignore'):")
   cat(sprintf("Expression '%s':\n", name))
-  print(expr)
+  print(expr)  
   globals <- findGlobals(expr, dotdotdot = "ignore")
   print(globals)
   assert_identical_sets(globals, c("sum", "x"))
