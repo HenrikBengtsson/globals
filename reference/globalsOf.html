@@ -58,8 +58,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -81,18 +79,9 @@
 </script>
 
 
-<!-- dependencies from examples -->
-
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -113,6 +102,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -164,6 +159,9 @@
       <a href="https://listenv.futureverse.org">listenv</a>
     </li>
     <li>
+      <a href="https://marshal.futureverse.org">marshal</a>
+    </li>
+    <li>
       <a href="https://parallelly.futureverse.org">parallelly</a>
     </li>
     <li>
@@ -211,7 +209,7 @@
     <p>Get all global objects of an expression</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='globalsOf.html'>findGlobals</a></span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>findGlobals</span><span class='op'>(</span>
   <span class='va'>expr</span>,
   envir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>...</span>,
@@ -224,7 +222,7 @@
   trace <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span>
 
-<span class='fu'><a href='globalsOf.html'>globalsOf</a></span><span class='op'>(</span>
+<span class='fu'>globalsOf</span><span class='op'>(</span>
   <span class='va'>expr</span>,
   envir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>...</span>,
@@ -310,8 +308,8 @@ additional globals.  Ignored unless <code>recursive</code> is TRUE.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='globalsOf.html'>findGlobals()</a></code> returns a character vector.</p>
-<p><code><a href='globalsOf.html'>globalsOf()</a></code> returns a <a href='Globals.html'>Globals</a> object.</p>
+    <p><code>findGlobals()</code> returns a character vector.</p>
+<p><code>globalsOf()</code> returns a <a href='Globals.html'>Globals</a> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>There currently three strategies for identifying global objects.</p>
@@ -341,11 +339,11 @@ code inspections.</p></div>
 <span class='va'>expr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='op'>{</span> <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='va'>b</span>; <span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fl'>1</span> <span class='op'>}</span><span class='op'>)</span>
 
 <span class='co'>## Will _not_ identify 'b' (because it's also a local)</span>
-<span class='va'>globalsC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='globalsOf.html'>globalsOf</a></span><span class='op'>(</span><span class='va'>expr</span>, method <span class='op'>=</span> <span class='st'>"conservative"</span><span class='op'>)</span>
+<span class='va'>globalsC</span> <span class='op'>&lt;-</span> <span class='fu'>globalsOf</span><span class='op'>(</span><span class='va'>expr</span>, method <span class='op'>=</span> <span class='st'>"conservative"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error: bad assignment: ‘2 &lt;- 1’</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>globalsC</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in print(globalsC): object 'globalsC' not found</span></div><div class='input'>
 <span class='co'>## Will identify 'b'</span>
-<span class='va'>globalsL</span> <span class='op'>&lt;-</span> <span class='fu'><a href='globalsOf.html'>globalsOf</a></span><span class='op'>(</span><span class='va'>expr</span>, method <span class='op'>=</span> <span class='st'>"liberal"</span><span class='op'>)</span>
+<span class='va'>globalsL</span> <span class='op'>&lt;-</span> <span class='fu'>globalsOf</span><span class='op'>(</span><span class='va'>expr</span>, method <span class='op'>=</span> <span class='st'>"liberal"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error: bad assignment: ‘2 &lt;- 1’</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>globalsL</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in print(globalsL): object 'globalsL' not found</span></div></pre>
   </div>
@@ -359,11 +357,11 @@ code inspections.</p></div>
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Henrik Bengtsson.</p></p>
+  <p>Developed by Henrik Bengtsson.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1 and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9002.</p>
 </div>
 
       </footer>
@@ -389,8 +387,6 @@ code inspections.</p></div>
 </script>
 
 
-
-  
 
   </body>
 </html>
