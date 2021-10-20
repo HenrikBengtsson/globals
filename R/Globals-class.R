@@ -15,7 +15,7 @@
 #' @export
 Globals <- function(object = list(), ...) {
   if (!is.list(object)) {
-    stop("Argument 'object' is not a list: ", class(object)[1])
+    stopf("Argument 'object' is not a list: %s", class(object)[1])
   }
 
   if (length(object) > 0) {
@@ -105,7 +105,7 @@ as.Globals.list <- function(x, ...) {
     ## Value must be Globals object of length one
     if (inherits(value, "Globals")) {
       if (length(value) != 1) {
-        stop("Cannot assign Globals object of length different than one: ",
+        stopf("Cannot assign Globals object of length different than one: %s",
              length(value))
       }
       x[[name]] <- value[[1]]
@@ -152,7 +152,7 @@ c.Globals <- function(x, ...) {
       names(w) <- names
     } else {
       if (is.null(name)) {
-        stop("Can only append named objects to Globals list: ", sQuote(mode(g)))
+        stopf("Can only append named objects to Globals list: %s", sQuote(mode(g)))
       }
       g <- structure(list(g), names = name)
       e <- environment(g)

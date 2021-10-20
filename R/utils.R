@@ -182,6 +182,14 @@ getOption <- local({
   }
 })
 
+stopf <- function(fmt, ..., call. = TRUE, domain = NULL) {  #nolint
+  stop(sprintf(fmt, ...), call. = call., domain = domain)
+}
+
+warnf <- function(fmt, ..., call. = TRUE, domain = NULL) {  #nolint
+  warning(sprintf(fmt, ...), call. = call., domain = domain)
+}
+
 stop_if_not <- function(...) {
   res <- list(...)
   n <- length(res)
