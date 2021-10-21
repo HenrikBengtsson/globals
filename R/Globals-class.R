@@ -3,9 +3,13 @@
 #' @usage Globals(object, ...)
 #'
 #' @param object A named list.
+#'
 #' @param \dots Not used.
 #'
-#' @return An object of class \code{Future}.
+#' @return An object of class \code{Globals}, which is a \emph{named} list
+#' of the value of the globals, where the element names are the names of
+#' the globals.  Attribute \code{where} is a named list of the same length
+#' and with the same names.
 #'
 #' @seealso
 #' The \code{\link{globalsOf}()} function identifies globals

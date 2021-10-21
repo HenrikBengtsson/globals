@@ -17,7 +17,10 @@ Globals(object, ...)
 \item{\dots}{Not used.}
 }
 \value{
-An object of class \code{Future}.
+An object of class \code{Globals}, which is a \emph{named} list
+of the value of the globals, where the element names are the names of
+the globals.  Attribute \code{where} is a named list of the same length
+and with the same names.
 }
 \description{
 A representation of a set of globals
