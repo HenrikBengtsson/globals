@@ -58,11 +58,7 @@ as.Globals.list <- function(x, ...) {
   ## (with emptyenv() as the fallback)
   where <- attr(x, "where", exact = TRUE)
   if (is.null(where)) {
-    where <- lapply(x, FUN = function(obj) {
-        e <- environment(obj)
-        if (is.null(e)) e <- emptyenv()
-        e
-    })
+    where <- lapply(x, FUN = environment_of)
     names(where) <- names(x)
     attr(x, "where") <- where
   }
@@ -115,10 +111,8 @@ as.Globals.list <- function(x, ...) {
       x[[name]] <- value[[1]]
       where[[name]] <- attr(value, "where", exact = TRUE)[[1]]
     } else {
-      w <- environment(value)
-      if (is.null(w)) w <- emptyenv()
       x[[name]] <- value
-      where[[name]] <- w
+      where[[name]] <- environment_of(value)
     }
   }
 
@@ -148,19 +142,14 @@ c.Globals <- function(x, ...) {
 
       names <- names(g)
       stop_if_not(!is.null(names))
-      w <- lapply(g, FUN = function(obj) {
-        e <- environment(obj)
-        if (is.null(e)) e <- emptyenv()
-        e
-      })
+      w <- lapply(g, FUN = environment_of)
       names(w) <- names
     } else {
       if (is.null(name)) {
         stopf("Can only append named objects to Globals list: %s", sQuote(mode(g)))
       }
       g <- structure(list(g), names = name)
-      e <- environment(g)
-      if (is.null(e)) e <- emptyenv()
+      e <- environment_of(g)
       w <- structure(list(e), names = name)
     }
     where <- c(where, w)

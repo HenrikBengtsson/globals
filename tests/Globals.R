@@ -246,6 +246,36 @@ globals <- as.Globals(list())
 message("*** Globals() - empty ... DONE")
 
 
+message("*** Globals() - NULL ...")
+## https://github.com/HenrikBengtsson/globals/issues/79
+
+globals <- as.Globals(list(a = NULL))
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 1L,
+  length(where) == length(globals),
+  all(names(where) == names(globals)),
+  identical(names(globals), c("a")),
+  is.null(globals[["a"]]),
+  identical(where[["a"]], emptyenv())
+)
+
+globals <- c(Globals(), list(a = NULL))
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 1L,
+  length(where) == length(globals),
+  all(names(where) == names(globals)),
+  identical(names(globals), c("a")),
+  is.null(globals[["a"]]),
+  identical(where[["a"]], emptyenv())
+)
+
+message("*** Globals() - NULL ... DONE")
+
+
 message("*** Globals() - exceptions ...")
 
 res <- tryCatch({ Globals(NULL) }, error = identity)
