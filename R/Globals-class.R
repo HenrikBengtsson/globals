@@ -3,9 +3,13 @@
 #' @usage Globals(object, ...)
 #'
 #' @param object A named list.
+#'
 #' @param \dots Not used.
 #'
-#' @return An object of class \code{Future}.
+#' @return An object of class \code{Globals}, which is a \emph{named} list
+#' of the value of the globals, where the element names are the names of
+#' the globals.  Attribute \code{where} is a named list of the same length
+#' and with the same names.
 #'
 #' @seealso
 #' The \code{\link{globalsOf}()} function identifies globals
@@ -15,7 +19,7 @@
 #' @export
 Globals <- function(object = list(), ...) {
   if (!is.list(object)) {
-    stop("Argument 'object' is not a list: ", class(object)[1])
+    stopf("Argument 'object' is not a list: %s", class(object)[1])
   }
 
   if (length(object) > 0) {
@@ -54,11 +58,7 @@ as.Globals.list <- function(x, ...) {
   ## (with emptyenv() as the fallback)
   where <- attr(x, "where", exact = TRUE)
   if (is.null(where)) {
-    where <- lapply(x, FUN = function(obj) {
-        e <- environment(obj)
-        if (is.null(e)) e <- emptyenv()
-        e
-    })
+    where <- lapply(x, FUN = environment_of)
     names(where) <- names(x)
     attr(x, "where") <- where
   }
@@ -105,16 +105,14 @@ as.Globals.list <- function(x, ...) {
     ## Value must be Globals object of length one
     if (inherits(value, "Globals")) {
       if (length(value) != 1) {
-        stop("Cannot assign Globals object of length different than one: ",
+        stopf("Cannot assign Globals object of length different than one: %s",
              length(value))
       }
       x[[name]] <- value[[1]]
       where[[name]] <- attr(value, "where", exact = TRUE)[[1]]
     } else {
-      w <- environment(value)
-      if (is.null(w)) w <- emptyenv()
       x[[name]] <- value
-      where[[name]] <- w
+      where[[name]] <- environment_of(value)
     }
   }
 
@@ -144,19 +142,14 @@ c.Globals <- function(x, ...) {
 
       names <- names(g)
       stop_if_not(!is.null(names))
-      w <- lapply(g, FUN = function(obj) {
-        e <- environment(obj)
-        if (is.null(e)) e <- emptyenv()
-        e
-      })
+      w <- lapply(g, FUN = environment_of)
       names(w) <- names
     } else {
       if (is.null(name)) {
-        stop("Can only append named objects to Globals list: ", sQuote(mode(g)))
+        stopf("Can only append named objects to Globals list: %s", sQuote(mode(g)))
       }
       g <- structure(list(g), names = name)
-      e <- environment(g)
-      if (is.null(e)) e <- emptyenv()
+      e <- environment_of(g)
       w <- structure(list(e), names = name)
     }
     where <- c(where, w)
