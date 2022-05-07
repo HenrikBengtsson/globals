@@ -24,6 +24,7 @@ globalsOf(
   ...,
   method = c("ordered", "conservative", "liberal"),
   tweak = NULL,
+  locals = NA,
   substitute = FALSE,
   mustExist = TRUE,
   unlist = TRUE,
@@ -60,6 +61,9 @@ otherwise not.}
 If FALSE, a list of \code{length(expr)} sublists.}
 
 \item{trace}{TBD.}
+
+\item{locals}{Should globals part of any "local" environment of
+a function be included or not?}
 
 \item{mustExist}{If TRUE, an error is thrown if the object of the
 identified global cannot be located.  Otherwise, the global

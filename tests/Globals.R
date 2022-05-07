@@ -249,6 +249,8 @@ message("*** Globals() - empty ... DONE")
 message("*** Globals() - NULL ...")
 ## https://github.com/HenrikBengtsson/globals/issues/79
 
+denv <- getOption("globals.environment_of.default", emptyenv())
+
 globals <- as.Globals(list(a = NULL))
 str(globals)
 where <- attr(globals, "where")
@@ -258,7 +260,7 @@ stopifnot(
   all(names(where) == names(globals)),
   identical(names(globals), c("a")),
   is.null(globals[["a"]]),
-  identical(where[["a"]], emptyenv())
+  identical(where[["a"]], denv)
 )
 
 globals <- c(Globals(), list(a = NULL))
@@ -270,7 +272,7 @@ stopifnot(
   all(names(where) == names(globals)),
   identical(names(globals), c("a")),
   is.null(globals[["a"]]),
-  identical(where[["a"]], emptyenv())
+  identical(where[["a"]], denv)
 )
 
 message("*** Globals() - NULL ... DONE")

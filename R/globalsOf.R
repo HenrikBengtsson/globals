@@ -12,6 +12,9 @@
 #' @param tweak An optional function that takes an expression
 #'        and returns a tweaked expression.
 #'
+#' @param locals Should globals part of any "local" environment of
+#'        a function be included or not?
+#'
 #' @param substitute If TRUE, the expression is \code{substitute()}:ed,
 #'        otherwise not.
 #'
@@ -64,10 +67,15 @@
 #' @export
 globalsOf <- function(expr, envir = parent.frame(), ...,
                       method = c("ordered", "conservative", "liberal"),
-                      tweak = NULL, substitute = FALSE, mustExist = TRUE,
+                      tweak = NULL,
+                      locals = NA,
+                      substitute = FALSE, mustExist = TRUE,
                       unlist = TRUE, recursive = TRUE, skip = NULL) {
   method <- match.arg(method, choices = c("ordered", "conservative", "liberal"))
 
+  if (is.na(locals)) locals <- getOption("globals.globalsOf.locals", TRUE)
+  stop_if_not(is.logical(locals), length(locals) == 1L, !is.na(locals))
+  
   if (substitute) expr <- substitute(expr)
   stop_if_not(is.null(skip) || is.list(skip))
   
@@ -92,6 +100,23 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
 
   debug && mdebug(" - preliminary globals (by value): [%d] %s",
                   length(globals), hpaste(sQuote(names(globals))))
+
+  ## If a function, drop any globals that are part of any of the functions
+  ## local environments, e.g. 'a' in f <- local({ a <- 1; function() a })
+  if (!locals && is.function(expr) && length(globals) > 0) {
+    env <- environment(expr) ## the environment of the function
+    eenv <- emptyenv()
+    genv <- globalenv()
+    where <- attr(globals, "where", exact = TRUE)
+    while (length(where) > 0 && !identical(env, eenv) && !identical(env, genv)) {
+      ## Any 'where' for the current environment?
+      keep <- !vapply(where, FUN.VALUE = FALSE, FUN = identical, env)
+      where <- where[keep]
+      env <- parent.env(env)
+    }
+    ## Anything to drop?
+    if (length(where) != length(globals)) globals <- globals[names(where)]
+  }
 
   ## 3. Among globals that are closures (functions) and that exist outside
   ##    of namespaces ("packages"), check for additional globals?
@@ -132,7 +157,9 @@ globalsOf <- function(expr, envir = parent.frame(), ...,
         env <- environment(fcn) ## was 'env <- envir' in globals 0.8.0.
 
         globals_gg <- globalsOf(fcn, envir = env, ..., method = method,
-                                tweak = tweak, substitute = FALSE,
+                                tweak = tweak,
+                                locals = locals,
+                                substitute = FALSE,
                                 mustExist = mustExist, unlist = unlist,
                                 recursive = recursive,
                                 skip = skip_t)

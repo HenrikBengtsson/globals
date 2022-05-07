@@ -108,7 +108,7 @@ stopifnot(
 
 
 
-message(" ** globalsOf() w/ globals in local functions:")
+message(" ** globalsOf() w/ globals in functions:")
 
 a <- 1
 bar <- function(x) x - a
