@@ -2,7 +2,7 @@
 
 on 2022-05-07
 
-I've verified this submission has no negative impact on any of the 335 first- and second-order reverse package dependencies available on CRAN (n=335) and Bioconductor (n=21).
+I've verified this submission has no negative impact on any of the 335 first- (n=11) and second-order (n=324) reverse package dependencies available on CRAN (n=335) and Bioconductor (n=21).
 
 Thanks in advance
 
@@ -18,7 +18,7 @@ The package has been verified using `R CMD check --as-cran` on:
 | 3.4.x         | L      |          |                 |
 | 3.5.x         | L      |          |                 |
 | 4.1.x         | L      |          |                 |
-| 4.2.x         | L M W  | L M M1 W | M1 W            |
+| 4.2.x         | L M W  | L M m1 W | M1 w            |
 | devel         | L      | L        |    W            |
 
 *Legend: OS: L = Linux, M = macOS, M1 = macOS M1, W = Windows*
