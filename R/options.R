@@ -88,16 +88,10 @@ update_package_option <- function(name, mode = "character", default = NULL, spli
 
 ## Set package options based on environment variables
 update_package_options <- function(debug = FALSE) {
+  ## WARNING: All but R option 'globals.debug' are internal options
+  ## that may be changed or removed at anytime.
+  
   update_package_option("globals.globalsOf.locals", mode = "logical", debug = debug)
-  
   update_package_option("globals.selfassign", mode = "logical", debug = debug)
-
   update_package_option("globals.walkAST.onUnknownType", debug = debug)
-  
-  update_package_option("globals.environment_of.default", debug = debug)
-  value <- getOption("globals.environment_of.default")
-  if (!is.null(value)) {
-    fcn <- get(value, mode = "function")
-    options(globals.environment_of.default = fcn())
-  }
 }
