@@ -1,6 +1,6 @@
 # CRAN submission globals 0.15.0
 
-on 2022-05-07
+on 2022-05-08
 
 I've verified this submission has no negative impact on any of the 335 first- (n=11) and second-order (n=324) reverse package dependencies available on CRAN (n=335) and Bioconductor (n=21).
 
@@ -18,8 +18,8 @@ The package has been verified using `R CMD check --as-cran` on:
 | 3.4.x         | L      |          |                 |
 | 3.5.x         | L      |          |                 |
 | 4.1.x         | L      |          |                 |
-| 4.2.x         | L M W  | L M m1 W | M1 w            |
-| devel         | L      | L        |    W            |
+| 4.2.x         | L M W  | L M m1 W | M1 W            |
+| devel         | L   W  | L        |    W            |
 
 *Legend: OS: L = Linux, M = macOS, M1 = macOS M1, W = Windows*
 
@@ -29,7 +29,8 @@ R-hub checks:
 ```r
 res <- rhub::check(platform = c(
   "debian-clang-devel", "debian-gcc-patched", "linux-x86_64-centos-epel",
-  "macos-highsierra-release-cran", "macos-m1-bigsur-release",
+  "macos-highsierra-release-cran",
+  ## "macos-m1-bigsur-release", ## not available at the time of testing
   "windows-x86_64-release"))
 print(res)
 ```
@@ -37,54 +38,48 @@ print(res)
 gives
 
 ```
-── globals 0.14.0-9004: OK
+── globals 0.15.0: OK
 
-  Build ID:   globals_0.14.0-9004.tar.gz-7f3ae44d069241b4a32441f700b5cc37
+  Build ID:   globals_0.15.0.tar.gz-364b6857b1ec42c9b62021c9f309ad64
   Platform:   Debian Linux, R-devel, clang, ISO-8859-15 locale
-  Submitted:  1m 39s ago
-  Build time: 1m 14.8s
+  Submitted:  1m 14.5s ago
+  Build time: 1m 12.8s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.14.0-9004: OK
+── globals 0.15.0: OK
 
-  Build ID:   globals_0.14.0-9004.tar.gz-4eb7c4b9932748e68b4b02306acb6cef
+  Build ID:   globals_0.15.0.tar.gz-2cfc2aafe60f4988ab51c6a7f5e1b4a0
   Platform:   Debian Linux, R-patched, GCC
-  Submitted:  1m 39s ago
-  Build time: 1m 6.9s
+  Submitted:  1m 14.5s ago
+  Build time: 1m 7.6s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.14.0-9004: OK
+── globals 0.15.0: OK
 
-  Build ID:   globals_0.14.0-9004.tar.gz-2c4e42c75793459786b58e95442353a7
+  Build ID:   globals_0.15.0.tar.gz-2fc07c3413ff4b17a243a9afaf470168
   Platform:   CentOS 8, stock R from EPEL
-  Submitted:  1m 39s ago
-  Build time: 1m 5s
+  Submitted:  1m 14.5s ago
+  Build time: 1m 3.9s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.14.0-9004: OK
+── globals 0.15.0: OK
 
-  Build ID:   globals_0.14.0-9004.tar.gz-4daeced4d1b34cb1ad62b62f59b0ce7a
+  Build ID:   globals_0.15.0.tar.gz-05453409c7904389a8593879ec90a5c7
   Platform:   macOS 10.13.6 High Sierra, R-release, CRAN's setup
-  Submitted:  1m 39s ago
-  Build time: 56s
+  Submitted:  1m 14.5s ago
+  Build time: 56.9s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.14.0-9004: CREATED
+── globals 0.15.0: OK
 
-  Build ID:   globals_0.14.0-9004.tar.gz-6108383694c04a4cb4f135f2f6ea8644
-  Platform:   Apple Silicon (M1), macOS 11.6 Big Sur, R-release
-  Submitted:  1m 39s ago
-  Build time: ??
-
-── globals 0.14.0-9004: OK
-
-  Build ID:   globals_0.14.0-9004.tar.gz-e620b7275f0e4d25978eac90f8eec526
+  Build ID:   globals_0.15.0.tar.gz-40fc949108ce4893a958ab819d8952b6
   Platform:   Windows Server 2008 R2 SP1, R-release, 32/64 bit
-  Build time: ??
+  Submitted:  3m 16.8s ago
+  Build time: 2m 23.6s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
