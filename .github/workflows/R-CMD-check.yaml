@@ -74,14 +74,12 @@ jobs:
 
       - name: Install R package dependencies
         run: |
-          if ("${{ runner.os }}" != "Linux") Sys.unsetenv("RSPM")
           remotes::install_deps(dependencies = TRUE)
           install.packages(".", repos = NULL, type = "source")  ## self vignette engine
         shell: Rscript {0}
 
       - name: Install 'rcmdcheck'
         run: |
-          if ("${{ runner.os }}" != "Linux") Sys.unsetenv("RSPM")
           remotes::install_cran("rcmdcheck")
           library(rcmdcheck)  ## triggers an error, if installation failed
         shell: Rscript {0}
