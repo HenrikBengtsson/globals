@@ -37,6 +37,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -49,18 +51,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.14.0-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -70,70 +66,70 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://www.futureverse.org/">
+  <a href="https://www.futureverse.org/" class="external-link">
     <span class="fas fa-fast-backward"></span>
      
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Packages
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://BiocParallel.FutureParam.futureverse.org">BiocParallel.FutureParam</a>
+      <a href="https://BiocParallel.FutureParam.futureverse.org" class="external-link">BiocParallel.FutureParam</a>
     </li>
     <li>
-      <a href="https://doFuture.futureverse.org">doFuture</a>
+      <a href="https://doFuture.futureverse.org" class="external-link">doFuture</a>
     </li>
     <li>
-      <a href="https://furrr.futureverse.org">furrr</a>
+      <a href="https://furrr.futureverse.org" class="external-link">furrr</a>
     </li>
     <li>
-      <a href="https://future.futureverse.org">future</a>
+      <a href="https://future.futureverse.org" class="external-link">future</a>
     </li>
     <li>
-      <a href="https://future.apply.futureverse.org">future.apply</a>
+      <a href="https://future.apply.futureverse.org" class="external-link">future.apply</a>
     </li>
     <li>
-      <a href="https://future.batchtools.futureverse.org">future.batchtools</a>
+      <a href="https://future.batchtools.futureverse.org" class="external-link">future.batchtools</a>
     </li>
     <li>
-      <a href="https://future.callr.futureverse.org">future.callr</a>
+      <a href="https://future.callr.futureverse.org" class="external-link">future.callr</a>
     </li>
     <li>
-      <a href="https://future.tests.futureverse.org">future.tests</a>
+      <a href="https://future.tests.futureverse.org" class="external-link">future.tests</a>
     </li>
     <li>
       <a href="https://globals.futureverse.org">globals</a>
     </li>
     <li>
-      <a href="https://listenv.futureverse.org">listenv</a>
+      <a href="https://listenv.futureverse.org" class="external-link">listenv</a>
     </li>
     <li>
-      <a href="https://parallelly.futureverse.org">parallelly</a>
+      <a href="https://parallelly.futureverse.org" class="external-link">parallelly</a>
     </li>
     <li>
-      <a href="https://progressr.futureverse.org">progressr</a>
+      <a href="https://progressr.futureverse.org" class="external-link">progressr</a>
     </li>
     <li>
-      <a href="https://future.mapreduce.futureverse.org">future.mapreduce (experimental)</a>
+      <a href="https://future.mapreduce.futureverse.org" class="external-link">future.mapreduce (experimental)</a>
     </li>
     <li>
-      <a href="https://marshal.futureverse.org">marshal (experimental)</a>
+      <a href="https://marshal.futureverse.org" class="external-link">marshal (experimental)</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="https://cloud.r-project.org/package=globals">
+  <a href="https://cloud.r-project.org/package=globals" class="external-link">
     <span class="fab fa-r-project"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/HenrikBengtsson/globals/">
+  <a href="https://github.com/HenrikBengtsson/globals/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -158,21 +154,21 @@
   <div class="contents col-md-9">
 
 
-<div id="globals-identify-global-objects-in-r-expressions" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#globals-identify-global-objects-in-r-expressions" class="anchor"></a>globals: Identify Global Objects in R Expressions</h1></div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>R package globals is available on <a href="https://cran.r-project.org/package=globals">CRAN</a> and can be installed in R as:</p>
-<div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"globals"</span><span class="op">)</span></code></pre></div>
-<div id="pre-release-version" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pre-release-version" class="anchor"></a>Pre-release version</h3>
+<div class="section level1">
+<div class="page-header"><h1 id="globals-identify-global-objects-in-r-expressions">globals: Identify Global Objects in R Expressions<a class="anchor" aria-label="anchor" href="#globals-identify-global-objects-in-r-expressions"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>R package globals is available on <a href="https://cran.r-project.org/package=globals" class="external-link">CRAN</a> and can be installed in R as:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"globals"</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="pre-release-version">Pre-release version<a class="anchor" aria-label="anchor" href="#pre-release-version"></a>
+</h3>
 <p>To install the pre-release version that is available in Git branch <code>develop</code> on GitHub, use:</p>
-<div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"HenrikBengtsson/globals"</span>, ref<span class="op">=</span><span class="st">"develop"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"HenrikBengtsson/globals"</span>, ref<span class="op">=</span><span class="st">"develop"</span><span class="op">)</span></code></pre></div>
 <p>This will install the package from source.</p>
 </div>
 </div>
@@ -182,60 +178,67 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=globals">https://​cloud.r-project.org/​package=globals</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/HenrikBengtsson/globals/">https://​github.com/​HenrikBengtsson/​globals/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/HenrikBengtsson/globals/issues">https://​github.com/​HenrikBengtsson/​globals/​issues</a>
-</li>
-<li>Roadmap/Milestones at <br><a href="https://github.com/HenrikBengtsson/globals/milestones">https://​github.com/​HenrikBengtsson/​globals/​milestones</a>
-</li>
-<li>The Futureverse Project at <br><a href="https://www.futureverse.org/">https://​www.futureverse.org/​</a>
-</li>
-<li>Futureverse User Forum (new!) at <br><a href="https://github.com/HenrikBengtsson/future/discussions">https://​github.com/​HenrikBengtsson/​future/​discussions</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=globals" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/HenrikBengtsson/globals/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/HenrikBengtsson/globals/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/HenrikBengtsson/globals/milestones" class="external-link">Roadmap/Milestones</a></li>
+<li><a href="https://www.futureverse.org/" class="external-link">The Futureverse Project</a></li>
+<li><a href="https://github.com/HenrikBengtsson/future/discussions" class="external-link">Futureverse User Forum (new!)</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>LGPL (&gt;= 2.1)</li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Henrik Bengtsson <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing globals</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/web/checks/check_results_globals.html"><img border="0" src="https://www.r-pkg.org/badges/version/globals" alt="CRAN check status"></a></li>
-<li><a href="https://github.com/HenrikBengtsson/globals/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/globals/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"></a></li>
-<li><a href="https://app.codecov.io/gh/HenrikBengtsson/globals"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/globals/branch/develop/graph/badge.svg" alt="Coverage Status"></a></li>
+<li>Henrik Bengtsson <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/web/checks/check_results_globals.html" class="external-link"><img border="0" src="https://www.r-pkg.org/badges/version/globals" alt="CRAN check status"></a></li>
+<li><a href="https://github.com/HenrikBengtsson/globals/actions?query=workflow%3AR-CMD-check" class="external-link"><img border="0" src="https://github.com/HenrikBengtsson/globals/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"></a></li>
+<li><a href="https://app.codecov.io/gh/HenrikBengtsson/globals" class="external-link"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/globals/branch/develop/graph/badge.svg" alt="Coverage Status"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Henrik Bengtsson.</p>
+  <p></p>
+<p>Developed by Henrik Bengtsson.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1 and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9003.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
 </div>
 
       </footer>

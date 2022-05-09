@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://globals.futureverse.org/404.html</loc>
+  </url>
+  <url>
+    <loc>https://globals.futureverse.org/CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://globals.futureverse.org/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://globals.futureverse.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://globals.futureverse.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://globals.futureverse.org/news/index.html</loc>
   </url>
   <url>
     <loc>https://globals.futureverse.org/reference/Globals.html</loc>
@@ -14,6 +29,9 @@
   </url>
   <url>
     <loc>https://globals.futureverse.org/reference/globalsOf.html</loc>
+  </url>
+  <url>
+    <loc>https://globals.futureverse.org/reference/index.html</loc>
   </url>
   <url>
     <loc>https://globals.futureverse.org/reference/packagesOf.Globals.html</loc>
