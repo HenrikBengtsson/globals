@@ -1,5 +1,5 @@
 Package: globals
-Version: 0.14.0
+Version: 0.15.0
 Depends:
     R (>= 3.1.2)
 Imports:
@@ -18,6 +18,6 @@ Description: Identifies global ("unknown" or "free") objects in R expressions
 License: LGPL (>= 2.1)
 LazyLoad: TRUE
 ByteCompile: TRUE
-URL: https://github.com/HenrikBengtsson/globals
+URL: https://globals.futureverse.org, https://github.com/HenrikBengtsson/globals
 BugReports: https://github.com/HenrikBengtsson/globals/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

@@ -1,6 +1,28 @@
 Package: globals
 ================
 
+Version: 0.15.0 [2022-05-08]
+
+NEW FEATURES:
+
+ * globalsOf() gained argument 'locals', which controls whether
+   globals that exist in "local" environments of a function should be
+   considered or not, e.g. in f <- local({ a <- 1; function() a }),
+   should 'a' be considered a global of f() or not.  For backward
+   compatibility reasons, the default is locals = TRUE, but this might
+   become locals = FALSE in a later release.
+
+ * Any 'globals.*' options specific to this packages can now be set
+   via environment variables 'R_GLOBALS_*' when the package is loaded.
+   For example, R_GLOBALS_DEBUG=true sets option globals.debug = TRUE.
+
+BUG FIXES:
+
+ * as.Globals(list(a = NULL)) and c(Globals(), list(a = NULL)) would
+   include the calling environment instead of an empty environment as
+   part of the 'where' attribute.
+   
+
 Version: 0.14.0 [2020-11-22]
 
 NEW FEATURES:

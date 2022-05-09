@@ -147,7 +147,7 @@ obj <- get("sample2", mode = "function", envir = env, inherits = FALSE)
 stopifnot(identical(obj, sample2))
 
 
-message("- where() - local objects of functions ...")
+message("- where() - objects inside functions ...")
 aa <- 1
 
 foo <- function() {

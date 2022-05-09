@@ -128,12 +128,23 @@ hexpr <- function(expr, trim = TRUE, collapse = "; ", max_head = 6L,
 } # hexpr()
 
 
+now <- function(x = Sys.time(), format = "[%H:%M:%OS3] ") {
+  ## format(x, format = format) ## slower
+  format(as.POSIXlt(x, tz = ""), format = format)
+}
+
 ## From future 1.3.0
 mdebug <- function(...) {
   if (!getOption("globals.debug", FALSE)) return(invisible(FALSE))
   message(sprintf(...))
   invisible(TRUE)
 } ## mdebug()
+
+
+mdebugf <- function(..., appendLF = TRUE, prefix = now(), debug = getOption("globals.debug", FALSE)) {
+  if (!debug) return()
+  message(prefix, sprintf(...), appendLF = appendLF)
+}
 
 #' @importFrom utils capture.output str
 mstr <- function(...) {
@@ -171,6 +182,8 @@ envname <- function(env) {
   name
 }
 
+commaq <- function(x, sep = ", ") paste(sQuote(x), collapse = sep)
+
 ## When 'default' is specified, this is 30x faster than
 ## base::getOption().  The difference is that here we use
 ## use names(.Options) whereas in 'base' names(options())
@@ -181,6 +194,14 @@ getOption <- local({
     if (missing(default) || match(x, table = names(.Options), nomatch = 0L) > 0L) go(x) else default
   }
 })
+
+stopf <- function(fmt, ..., call. = TRUE, domain = NULL) {  #nolint
+  stop(sprintf(fmt, ...), call. = call., domain = domain)
+}
+
+warnf <- function(fmt, ..., call. = TRUE, domain = NULL) {  #nolint
+  warning(sprintf(fmt, ...), call. = call., domain = domain)
+}
 
 stop_if_not <- function(...) {
   res <- list(...)
