@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9001</span>
       </span>
     </div>
 
@@ -116,306 +116,333 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/HenrikBengtsson/globals/blob/HEAD/NEWS" class="external-link"><code>NEWS</code></a></small>
+      <small>Source: <a href="https://github.com/HenrikBengtsson/globals/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.15.0-9000" id="globals-0150-9000">globals 0.15.0-9000<a class="anchor" aria-label="anchor" href="#globals-0150-9000"></a></h2>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.15.0" id="globals-0150">globals 0.15.0<small>2022-05-09</small><a class="anchor" aria-label="anchor" href="#globals-0150"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-15-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-15-0"></a></h4>
-<ul><li><p>globalsOf() gained argument ‘locals’, which controls whether globals that exist in “local” environments of a function should be considered or not, e.g. in f &lt;- local({ a &lt;- 1; function() a }), should ‘a’ be considered a global of f() or not. For backward compatibility reasons, the default is locals = TRUE, but this might become locals = FALSE in a later release.</p></li>
-<li><p>Any ‘globals.*’ options specific to this packages can now be set via environment variables ‘R_GLOBALS_*’ when the package is loaded. For example, R_GLOBALS_DEBUG=true sets option globals.debug = TRUE.</p></li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-15-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-15-0"></a></h4>
-<ul><li>as.Globals(list(a = NULL)) and c(Globals(), list(a = NULL)) would include the calling environment instead of an empty environment as part of the ‘where’ attribute.</li>
+<h2 class="page-header" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>
+<code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> assumed it was safe to call <code>env$.packageName</code> on each scanned environment, but that might not be true. A classed environment could be such that <code>$()</code> gives an error, rather than returning something.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.14.0" id="globals-0140">globals 0.14.0<small>2020-11-22</small><a class="anchor" aria-label="anchor" href="#globals-0140"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-14-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-14-0"></a></h4>
-<ul><li><p>Now findGlobals(function(x) x &lt;- x) identifies ‘x’ as a global variable.</p></li>
-<li><p>Now findGlobals(function(x) x[1] &lt;- 0) identifies ‘x’ as a global variable. Same for other variants like x[[1]] &lt;- 0 and x$a &lt;- 0.</p></li>
-<li><p>Now findGlobals(function(z) x &lt;- z$x) identifies ‘x’ as a global variable.</p></li>
-<li><p>Now findGlobals(quote({ f &lt;- function(x) x; x })) identifies ‘x’ as a global variable. Previously, the ‘x’ of the function would hide the global ‘x’.</p></li>
+<h2 class="page-header" data-toc-text="0.15.0" id="version-0150">Version 0.15.0<small>2022-05-09</small><a class="anchor" aria-label="anchor" href="#version-0150"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-15-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-15-0"></a></h3>
+<ul><li><p><code><a href="../reference/globalsOf.html">globalsOf()</a></code> gained argument <code>locals</code>, which controls whether globals that exist in “local” environments of a function should be considered or not, e.g. in <code>f &lt;- local({ a &lt;- 1; function() a })</code>, should <code>a</code> be considered a global of <code>f()</code> or not. For backward compatibility reasons, the default is <code>locals = TRUE</code>, but this might become <code>locals = FALSE</code> in a later release.</p></li>
+<li><p>Any <code>globals.*</code> options specific to this packages can now be set via environment variables <code>R_GLOBALS_*</code> when the package is loaded. For example, <code>R_GLOBALS_DEBUG=true</code> sets option <code>globals.debug =    TRUE</code>.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-15-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-15-0"></a></h3>
+<ul><li>
+<code>as.Globals(list(a = NULL))</code> and <code>c(Globals(), list(a = NULL))</code> would include the calling environment instead of an empty environment as part of the <code>where</code> attribute.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.13.1" id="globals-0131">globals 0.13.1<small>2020-10-11</small><a class="anchor" aria-label="anchor" href="#globals-0131"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-13-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-1"></a></h4>
-<ul><li><p>globalsOf() could produce “Error in vapply(where, FUN = envname, FUN.VALUE = NA_character_, USE.NAMES = FALSE) : values must be length 1, but FUN(X[[2]]) result is length 10”. This would happen if for instance argument ‘envir’ has attributes set.</p></li>
-<li><p>findGlobals() works around a bug in stats:::`[.formula` of R (&lt; 4.1.0) that revealed itself when scanning formulas with NULL components.</p></li>
-<li><p>findGlobals() would not pass down argument ‘dotdotdot’ when recursively parsing assignments.</p></li>
-<li><p>findGlobals() could return ‘…’ as a global also when used in formulas. Now it respects argument dotdotdot = “ignore” and parses formulas accordingly, otherwise formulas will be parsed using dotdotdot = “return”.</p></li>
+<h2 class="page-header" data-toc-text="0.14.0" id="version-0140">Version 0.14.0<small>2020-11-22</small><a class="anchor" aria-label="anchor" href="#version-0140"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-14-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-14-0"></a></h3>
+<ul><li><p>Now <code>findGlobals(function(x) x &lt;- x)</code> identifies <code>x</code> as a global variable.</p></li>
+<li><p>Now <code>findGlobals(function(x) x[1] &lt;- 0)</code> identifies <code>x</code> as a global variable. Same for other variants like <code>x[[1]] &lt;- 0</code> and x$a &lt;- 0.</p></li>
+<li><p>Now <code>findGlobals(function(z) x &lt;- z$x)</code> identifies <code>x</code> as a global variable.</p></li>
+<li><p>Now <code>findGlobals(quote({ f &lt;- function(x) x; x }))</code> identifies <code>x</code> as a global variable. Previously, the <code>x</code> of the function would hide the global <code>x</code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.13.0" id="globals-0130">globals 0.13.0<small>2020-09-17</small><a class="anchor" aria-label="anchor" href="#globals-0130"></a></h2>
-<div class="section level4">
-<h4 id="significant-changes-0-13-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-13-0"></a></h4>
-<ul><li><p>findGlobals(expr) now also scans any attributes of ‘expr’ for globals, e.g. purrr::partial() puts the original function in attribute ‘body’. Argument ‘attributes’ controls which attributes, if any, should be scanned. Default is to scan all attributes.</p></li>
-<li><p>findGlobals(), globalsOf(), and globalsByName() now recognizes and returns values for ‘..1’, ‘..2’, etc. like they do for ‘…’.</p></li>
-<li><p>cleanup() now also drop exported and non-exported NativeSymbolInfo objects.</p></li>
-</ul></div>
-<div class="section level4">
-<h4 id="new-features-0-13-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-13-0"></a></h4>
-<ul><li>cleanup() gained support for dropping NativeSymbolInfo objects.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-13-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-0"></a></h4>
-<ul><li><p>findGlobals() did not pass down argument ‘method’ in recursive calls.</p></li>
-<li><p>findGlobals(expr) would fail to identify globals in anonymous function calls, e.g. expr &lt;- as.call(list(function(…) NOT_FOUND, quote(FOUND))).</p></li>
-<li><p>Calls like findGlobals(~ NULL) with NULLs on the right-hand side could throw “Error in if (length(ans) == 0L || as.character(ans[[1L]])[1L] ==”~“) { : missing value where TRUE/FALSE needed”. Solved by working around what looks like a bug in the ‘stats’ package causing subsetting on formulas with NULLs to fail.</p></li>
-<li><p>cleanup(…, drop = c(…, “base-packages”)) for Globals would drop base R objects with names not exported by the corresponding base R package. Similarly, drop = c(…, “primitive”) would drop primitive R objects with names not exported by any base R package.</p></li>
-<li><p>findGlobals(), globalsOf(), and globalsByName() did not handle ‘..1’, ‘..2’, etc.</p></li>
-<li><p>findGlobals() and globalsOf() produces warnings on ‘&lt;anonymous&gt;: … may be used in an incorrect context’ when formulas had ‘…’, ‘..1’, ‘..2’, etc.</p></li>
-<li><p>findGlobals(function() NULL, substitute = TRUE, trace = TRUE) would throw “Error in environment(w$enterLocal) : object ‘w’ not found”.</p></li>
+<h2 class="page-header" data-toc-text="0.13.1" id="version-0131">Version 0.13.1<small>2020-10-11</small><a class="anchor" aria-label="anchor" href="#version-0131"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-13-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-1"></a></h3>
+<ul><li><p><code><a href="../reference/globalsOf.html">globalsOf()</a></code> could produce “Error in vapply(where, FUN = envname, FUN.VALUE = NA_character_, USE.NAMES = FALSE) : values must be length 1, but FUN(X[[2]]) result is length 10”. This would happen if for instance argument <code>envir</code> has attributes set.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> works around a bug in <code>stats:::[.formula</code> of R (&lt; 4.1.0) that revealed itself when scanning formulas with NULL components.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> would not pass down argument <code>dotdotdot</code> when recursively parsing assignments.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> could return <code>...</code> as a global also when used in formulas. Now it respects argument <code>dotdotdot = "ignore"</code> and parses formulas accordingly, otherwise formulas will be parsed using <code>dotdotdot = "return"</code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.5" id="globals-0125">globals 0.12.5<small>2019-12-07</small><a class="anchor" aria-label="anchor" href="#globals-0125"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-12-5">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-5"></a></h4>
-<ul><li>findGlobals(function() { a; a &lt;- a + 1 }) would fail to identify ‘a’ as a global variable whereas it was properly identified with { a &lt;- a + 1; a }.</li>
+<h2 class="page-header" data-toc-text="0.13.0" id="version-0130">Version 0.13.0<small>2020-09-17</small><a class="anchor" aria-label="anchor" href="#version-0130"></a></h2>
+<div class="section level3">
+<h3 id="significant-changes-0-13-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-13-0"></a></h3>
+<ul><li><p><code>findGlobals(expr)</code> now also scans any attributes of <code>expr</code> for globals, e.g. <code><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">purrr::partial()</a></code> puts the original function in attribute <code>body</code>. Argument <code>attributes</code> controls which attributes, if any, should be scanned. Default is to scan all attributes.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code>, <code><a href="../reference/globalsOf.html">globalsOf()</a></code>, and <code><a href="../reference/globalsByName.html">globalsByName()</a></code> now recognizes and returns values for <code>..1</code>, <code>..2</code>, etc. like they do for <code>...</code>.</p></li>
+<li><p><code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> now also drop exported and non-exported <code>NativeSymbolInfo</code> objects.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-0-13-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-13-0"></a></h3>
+<ul><li>
+<code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> gained support for dropping <code>NativeSymbolInfo</code> objects.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-13-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-0"></a></h3>
+<ul><li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> did not pass down argument <code>method</code> in recursive calls.</p></li>
+<li><p><code>findGlobals(expr)</code> would fail to identify globals in anonymous function calls, e.g. <code>expr &lt;- as.call(list(function(...) NOT_FOUND,    quote(FOUND)))</code>.</p></li>
+<li><p>Calls like <code>findGlobals(~ NULL)</code> with NULLs on the right-hand side could throw “Error in if (length(ans) == 0L || as.character(ans[[1L]])[1L] ==”~“) { : missing value where TRUE/FALSE needed”. Solved by working around what looks like a bug in the <strong>stats</strong> package causing subsetting on formulas with NULLs to fail.</p></li>
+<li><p><code>cleanup(..., drop = c(..., "base-packages"))</code> for <code>Globals</code> would drop base R objects with names not exported by the corresponding base R package. Similarly, <code>drop = c(..., "primitive")</code> would drop primitive R objects with names not exported by any base R package.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code>, <code><a href="../reference/globalsOf.html">globalsOf()</a></code>, and <code><a href="../reference/globalsByName.html">globalsByName()</a></code> did not handle <code>..1</code>, <code>..2</code>, etc.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> and <code><a href="../reference/globalsOf.html">globalsOf()</a></code> produces warnings on ‘<anonymous>: … may be used in an incorrect context’ when formulas had <code>...</code>, <code>..1</code>, <code>..2</code>, etc.</anonymous></p></li>
+<li><p><code>findGlobals(function() NULL, substitute = TRUE, trace = TRUE)</code> would throw “Error in environment(w$enterLocal) : object ‘w’ not found”.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.4" id="globals-0124">globals 0.12.4<small>2018-10-11</small><a class="anchor" aria-label="anchor" href="#globals-0124"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-12-4">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-4"></a></h4>
-<ul><li>globalsOf() could produce “Error in vapply(where, FUN = envname, FUN.VALUE = NA_character_, USE.NAMES = FALSE) : values must be length 1, but FUN(X[[…]]) result is length …”. This was because the internal envname(env) did not always handle when class(env) != “environment”.</li>
+<h2 class="page-header" data-toc-text="0.12.5" id="version-0125">Version 0.12.5<small>2019-12-07</small><a class="anchor" aria-label="anchor" href="#version-0125"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-12-5">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-5"></a></h3>
+<ul><li>
+<code>findGlobals(function() { a; a &lt;- a + 1 })</code> would fail to identify <code>a</code> as a global variable whereas it was properly identified with <code>{    a &lt;- a + 1; a }</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.3" id="globals-0123">globals 0.12.3<small>2018-09-17</small><a class="anchor" aria-label="anchor" href="#globals-0123"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-12-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-3"></a></h4>
-<ul><li>findGlobals(), globalsOf(), and packagesOf() no longer return elements sorted by name.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-12-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-3"></a></h4>
-<ul><li>globals::findGlobals() would not identify ‘a’ as a global in expressions of type ‘a[1] = …’ and ‘names(a) = …’ although it did for ‘a[1] &lt;- …’ and ‘names(a) &lt;- …’.</li>
+<h2 class="page-header" data-toc-text="0.12.4" id="version-0124">Version 0.12.4<small>2018-10-11</small><a class="anchor" aria-label="anchor" href="#version-0124"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-12-4">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-4"></a></h3>
+<ul><li>
+<code><a href="../reference/globalsOf.html">globalsOf()</a></code> could produce “Error in vapply(where, FUN = envname, FUN.VALUE = NA_character_, USE.NAMES = FALSE) : values must be length 1, but FUN(X[[…]]) result is length …”. This was because the internal <code>envname(env)</code> did not always handle when <code>class(env) != "environment"</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.2" id="globals-0122">globals 0.12.2<small>2018-08-25</small><a class="anchor" aria-label="anchor" href="#globals-0122"></a></h2>
-<div class="section level4">
-<h4 id="performance-0-12-2">Performance<a class="anchor" aria-label="anchor" href="#performance-0-12-2"></a></h4>
-<ul><li>cleanup() for Globals should now be much faster. Previously, it could be very slow the first time it was called in a fresh R session, especially if the user had a large number of packages installed and/or the package libraries were on slow drives.</li>
+<h2 class="page-header" data-toc-text="0.12.3" id="version-0123">Version 0.12.3<small>2018-09-17</small><a class="anchor" aria-label="anchor" href="#version-0123"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-12-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-3"></a></h3>
+<ul><li>
+<code><a href="../reference/globalsOf.html">findGlobals()</a></code>, <code><a href="../reference/globalsOf.html">globalsOf()</a></code>, and <code><a href="../reference/packagesOf.Globals.html">packagesOf()</a></code> no longer return elements sorted by name.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="documentation-0-12-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-12-2"></a></h4>
-<ul><li>Added help for globals::findGlobals().</li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-12-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-2"></a></h4>
-<ul><li><p>globals::findGlobals(x), where ‘x’ is a list, iterated over ‘x’ incorrectly assuming no method dispatching on ‘x’ would take place. For instance, if ‘x’ contained an fst::fst_table object, then “Error in .subset2(x, i, exact = exact) : subscript out of bounds” would be produced.</p></li>
-<li><p>globals::findGlobals() could produce a “Warning in is.na(x): is.na() applied to non-(list or vector) of type ‘NULL’” in R (&lt; 3.5.0).</p></li>
+<div class="section level3">
+<h3 id="bug-fixes-0-12-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-3"></a></h3>
+<ul><li>globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> would not identify <code>a</code> as a global in expressions of type <code>a[1] = ...</code> and <code>names(a) = ...</code> although it did for <code>a[1] &lt;- ...</code> and <code>names(a) &lt;- ...</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.1" id="globals-0121">globals 0.12.1<small>2018-06-25</small><a class="anchor" aria-label="anchor" href="#globals-0121"></a></h2>
-<div class="section level4">
-<h4 id="performance-0-12-1">Performance<a class="anchor" aria-label="anchor" href="#performance-0-12-1"></a></h4>
-<ul><li>globals::findGlobals() is now significantly faster for elements that are long lists with many elements of basic data types. This is because elements of such basic data type cannot contain globals and can therefore be skipped early in the search for globals.</li>
+<h2 class="page-header" data-toc-text="0.12.2" id="version-0122">Version 0.12.2<small>2018-08-25</small><a class="anchor" aria-label="anchor" href="#version-0122"></a></h2>
+<div class="section level3">
+<h3 id="performance-0-12-2">Performance<a class="anchor" aria-label="anchor" href="#performance-0-12-2"></a></h3>
+<ul><li>
+<code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> for <code>Globals</code> should now be much faster. Previously, it could be very slow the first time it was called in a fresh R session, especially if the user had a large number of packages installed and/or the package libraries were on slow drives.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-12-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-12-2"></a></h3>
+<ul><li>Added help for <code><a href="../reference/globalsOf.html">globals::findGlobals()</a></code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-12-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-2"></a></h3>
+<ul><li><p><code>globals::findGlobals(x)</code>, where <code>x</code> is a list, iterated over <code>x</code> incorrectly assuming no method dispatching on <code>x</code> would take place. For instance, if <code>x</code> contained an <code>fst::fst_table</code> object, then “Error in .subset2(x, i, exact = exact) : subscript out of bounds” would be produced.</p></li>
+<li><p>globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> could produce a “Warning in is.na(x): is.na() applied to non-(list or vector) of type ‘NULL’” in R (&lt; 3.5.0).</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.0" id="globals-0120">globals 0.12.0<small>2018-06-12</small><a class="anchor" aria-label="anchor" href="#globals-0120"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-12-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-0"></a></h4>
-<ul><li>Now globals::findGlobals() identifies ‘a’ as a global also when it is part of LHS expressions of type ‘a[1] &lt;- …’ and ‘names(a) &lt;- …’.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-12-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-0"></a></h4>
-<ul><li><p>globals::findGlobals() incorrectly identified ‘a’ as a global in expression of type ‘a &lt;- pkg::a’.</p></li>
-<li><p>If “…” was passed to globalsByName(names), an error would be produced unless it was the last entry in ‘names’.</p></li>
+<h2 class="page-header" data-toc-text="0.12.1" id="version-0121">Version 0.12.1<small>2018-06-25</small><a class="anchor" aria-label="anchor" href="#version-0121"></a></h2>
+<div class="section level3">
+<h3 id="performance-0-12-1">Performance<a class="anchor" aria-label="anchor" href="#performance-0-12-1"></a></h3>
+<ul><li>globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> is now significantly faster for elements that are long lists with many elements of basic data types. This is because elements of such basic data type cannot contain globals and can therefore be skipped early in the search for globals.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.11.0" id="globals-0110">globals 0.11.0<small>2018-01-10</small><a class="anchor" aria-label="anchor" href="#globals-0110"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-11-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-11-0"></a></h4>
-<ul><li>Now findGlobals() identifies ‘x’ as a global variable in ‘x &lt;- x + 1’ and likewise for ‘x + 1 -&gt; x’. Note that ditto using `&lt;&lt;-` and `-&gt;&gt;` was already identifying ‘x’ as a global.</li>
+<h2 class="page-header" data-toc-text="0.12.0" id="version-0120">Version 0.12.0<small>2018-06-12</small><a class="anchor" aria-label="anchor" href="#version-0120"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-12-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-0"></a></h3>
+<ul><li>Now globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> identifies <code>a</code> as a global also when it is part of LHS expressions of type <code>a[1] &lt;- ...</code> and <code>names(a)    &lt;- ...</code>.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-11-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-11-0"></a></h4>
-<ul><li>findGlobals(…, trace = TRUE) now outputs only to standard error. Previously, some of the output went to standard output.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.3" id="globals-0103">globals 0.10.3<small>2017-10-13</small><a class="anchor" aria-label="anchor" href="#globals-0103"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-10-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-3"></a></h4>
-<ul><li>globalsOf(…, recursive = TRUE) would result in “Error in match.fun(FUN) : node stack overflow” if one of the globals identified was a function that called itself recursively (either directly or indirectly).</li>
+<div class="section level3">
+<h3 id="bug-fixes-0-12-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-0"></a></h3>
+<ul><li><p>globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> incorrectly identified <code>a</code> as a global in expression of type <code>a &lt;- pkg::a</code>.</p></li>
+<li><p>If <code>...</code> was passed to <code>globalsByName(names)</code>, an error would be produced unless it was the last entry in <code>names</code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.2" id="globals-0102">globals 0.10.2<small>2017-08-08</small><a class="anchor" aria-label="anchor" href="#globals-0102"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-10-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-2"></a></h4>
-<ul><li>walkAST() could produce error “Cannot walk expression. Unknown object type ‘…’” for objects of type ‘environment’.</li>
+<h2 class="page-header" data-toc-text="0.11.0" id="version-0110">Version 0.11.0<small>2018-01-10</small><a class="anchor" aria-label="anchor" href="#version-0110"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-11-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-11-0"></a></h3>
+<ul><li>Now <code><a href="../reference/globalsOf.html">findGlobals()</a></code> identifies <code>x</code> as a global variable in <code>x &lt;- x + 1</code> and likewise for <code>x + 1 -&gt; x</code>. Note that ditto using <code>&lt;&lt;-</code> and <code>-&gt;&gt;</code> was already identifying <code>x</code> as a global.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-11-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-11-0"></a></h3>
+<ul><li>
+<code>findGlobals(..., trace = TRUE)</code> now outputs only to standard error. Previously, some of the output went to standard output.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.1" id="globals-0101">globals 0.10.1<small>2017-07-02</small><a class="anchor" aria-label="anchor" href="#globals-0101"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-10-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-1"></a></h4>
-<ul><li>walkAST() could produce error “Cannot walk expression. Unknown object type ‘…’” for objects of type ‘list’, ‘expression’ and ‘S4’.</li>
+<h2 class="page-header" data-toc-text="0.10.3" id="version-0103">Version 0.10.3<small>2017-10-13</small><a class="anchor" aria-label="anchor" href="#version-0103"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-10-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-3"></a></h3>
+<ul><li>
+<code>globalsOf(..., recursive = TRUE)</code> would result in “Error in match.fun(FUN) : node stack overflow” if one of the globals identified was a function that called itself recursively (either directly or indirectly).</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.0" id="globals-0100">globals 0.10.0<small>2017-04-17</small><a class="anchor" aria-label="anchor" href="#globals-0100"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-10-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-10-0"></a></h4>
+<h2 class="page-header" data-toc-text="0.10.2" id="version-0102">Version 0.10.2<small>2017-08-08</small><a class="anchor" aria-label="anchor" href="#version-0102"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-10-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-2"></a></h3>
+<ul><li>
+<code><a href="../reference/walkAST.html">walkAST()</a></code> could produce error “Cannot walk expression. Unknown object type ‘…’” for objects of type <code>environment</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.10.1" id="version-0101">Version 0.10.1<small>2017-07-02</small><a class="anchor" aria-label="anchor" href="#version-0101"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-10-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-1"></a></h3>
+<ul><li>
+<code><a href="../reference/walkAST.html">walkAST()</a></code> could produce error “Cannot walk expression. Unknown object type ‘…’” for objects of type <code>list</code>, <code>expression</code> and <code>S4</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.10.0" id="version-0100">Version 0.10.0<small>2017-04-17</small><a class="anchor" aria-label="anchor" href="#version-0100"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-10-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-10-0"></a></h3>
 <ul><li><p>Globals that are part of a formula are now identified.</p></li>
-<li><p>findGlobals(…, trace = TRUE) will now show low-level parse information as the abstract syntax tree (AST) is walked.</p></li>
-</ul></div>
-<div class="section level4">
-<h4 id="software-quality-0-10-0">Software Quality<a class="anchor" aria-label="anchor" href="#software-quality-0-10-0"></a></h4>
+<li><p><code>findGlobals(..., trace = TRUE)</code> will now show low-level parse information as the abstract syntax tree (AST) is walked.</p></li>
+</ul><p>SOFTWARE QUALITY:</p>
 <ul><li>Enabled more internal sanity checks.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-10-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-0"></a></h4>
-<ul><li>walkAST() could produce error “Cannot walk expression. Unknown object type ‘nnn’” for expressions of type ‘builtin’, ‘closure’ and ‘special’.</li>
+<div class="section level3">
+<h3 id="bug-fixes-0-10-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-0"></a></h3>
+<ul><li>
+<code><a href="../reference/walkAST.html">walkAST()</a></code> could produce error “Cannot walk expression. Unknown object type ‘nnn’” for expressions of type <code>builtin</code>, <code>closure</code> and <code>special</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.9.0" id="globals-090">globals 0.9.0<small>2017-03-10</small><a class="anchor" aria-label="anchor" href="#globals-090"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-9-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-9-0"></a></h4>
-<ul><li>Added option ‘globals.debug’, which when TRUE enables debugging output.</li>
+<h2 class="page-header" data-toc-text="0.9.0" id="version-090">Version 0.9.0<small>2017-03-10</small><a class="anchor" aria-label="anchor" href="#version-090"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-9-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-9-0"></a></h3>
+<ul><li>Added option <code>globals.debug</code>, which when TRUE enables debugging output.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-9-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-9-0"></a></h4>
-<ul><li><p>globalsOf(…, recursive = TRUE) would in some cases scan an incorrect subset of already identified globals.</p></li>
-<li><p>globalsOf(…, recursive = TRUE) failed to skip objects part of package namespaces that where defined via a local() statement.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.8.0" id="globals-080">globals 0.8.0<small>2017-01-16</small><a class="anchor" aria-label="anchor" href="#globals-080"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-8-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-8-0"></a></h4>
-<ul><li><p>globalsOf() identifies also globals in locally defined functions. This can be disabled with argument recursive = FALSE.</p></li>
-<li><p>findGlobals() now takes both closures (functions) and expressions.</p></li>
+<div class="section level3">
+<h3 id="bug-fixes-0-9-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-9-0"></a></h3>
+<ul><li><p><code>globalsOf(..., recursive = TRUE)</code> would in some cases scan an incorrect subset of already identified globals.</p></li>
+<li><p><code>globalsOf(..., recursive = TRUE)</code> failed to skip objects part of package namespaces that where defined via a <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> statement.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.2" id="globals-072">globals 0.7.2<small>2017-01-09</small><a class="anchor" aria-label="anchor" href="#globals-072"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-7-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-2"></a></h4>
-<ul><li>c(x, list()) where x is a Globals object would give an error reporting that the list does not have named elements.</li>
+<h2 class="page-header" data-toc-text="0.8.0" id="version-080">Version 0.8.0<small>2017-01-16</small><a class="anchor" aria-label="anchor" href="#version-080"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-8-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-8-0"></a></h3>
+<ul><li><p><code><a href="../reference/globalsOf.html">globalsOf()</a></code> identifies also globals in locally defined functions. This can be disabled with argument <code>recursive =    FALSE</code>.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> now takes both closures (functions) and expressions.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.1" id="globals-071">globals 0.7.1<small>2016-10-14</small><a class="anchor" aria-label="anchor" href="#globals-071"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-7-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-1"></a></h4>
-<ul><li>Globals() and as.Globals() now accepts an empty list as input as well.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-7-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-1"></a></h4>
-<ul><li>walkAST(quote( function(x=NULL) 0 )) would give a sanity check error due to the NULL argument. Thank you GitHub user billy34 for reporting on this.</li>
+<h2 class="page-header" data-toc-text="0.7.2" id="version-072">Version 0.7.2<small>2017-01-09</small><a class="anchor" aria-label="anchor" href="#version-072"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-7-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-2"></a></h3>
+<ul><li>
+<code>c(x, list())</code> where <code>x</code> is a <code>Globals</code> object would give an error reporting that the list does not have named elements.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.0" id="globals-070">globals 0.7.0<small>2016-09-09</small><a class="anchor" aria-label="anchor" href="#globals-070"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-7-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-0"></a></h4>
-<ul><li><p>Added walkAST(), which can be used to tweak expressions.</p></li>
-<li><p>Added globalsByName() for locating and retrieving a set of known global variables.</p></li>
-<li><p>Added c(), $&lt;-(), names(), unique() for Globals objects.</p></li>
-<li><p>Improved as.Globals() for lists.</p></li>
+<h2 class="page-header" data-toc-text="0.7.1" id="version-071">Version 0.7.1<small>2016-10-14</small><a class="anchor" aria-label="anchor" href="#version-071"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-7-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-1"></a></h3>
+<ul><li>
+<code><a href="../reference/Globals.html">Globals()</a></code> and <code><a href="../reference/Globals.html">as.Globals()</a></code> now accepts an empty list as input as well.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-7-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-1"></a></h3>
+<ul><li>
+<code>walkAST(quote( function(x=NULL) 0 ))</code> would give a sanity check error due to the NULL argument. Thank you GitHub user ‘billy34’ for reporting on this.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.1" id="globals-061">globals 0.6.1<small>2016-02-03</small><a class="anchor" aria-label="anchor" href="#globals-061"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-6-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-1"></a></h4>
-<ul><li>Now the error message of globalsOf(…, mustExist=TRUE) when it fails to locate a global also gives information on the expression that is problematic.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-6-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-1"></a></h4>
-<ul><li>cleanup() for Globals did not cleanup functions in core package environments named ‘package:&lt;name&gt;’.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.0" id="globals-060">globals 0.6.0<small>2015-12-12</small><a class="anchor" aria-label="anchor" href="#globals-060"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-6-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h4>
-<ul><li>findGlobals() is updated to handle the case where a local variable is overwriting a global one with the same name, e.g. { a &lt;- b; b &lt;- 1 }. Now ‘b’ is correctly identified as a global object. Previously it would have been missed. For backward compatibility, the previous behavior can be obtained using argument method=“conservative”.</li>
+<h2 class="page-header" data-toc-text="0.7.0" id="version-070">Version 0.7.0<small>2016-09-09</small><a class="anchor" aria-label="anchor" href="#version-070"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-7-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-0"></a></h3>
+<ul><li><p>Added <code><a href="../reference/walkAST.html">walkAST()</a></code>, which can be used to tweak expressions.</p></li>
+<li><p>Added <code><a href="../reference/globalsByName.html">globalsByName()</a></code> for locating and retrieving a set of known global variables.</p></li>
+<li><p>Added <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>, <code>$&lt;-()</code>, <code><a href="../reference/Globals.html">names()</a></code>, <code><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique()</a></code> for <code>Globals</code> objects.</p></li>
+<li><p>Improved <code><a href="../reference/Globals.html">as.Globals()</a></code> for lists.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.5.0" id="globals-050">globals 0.5.0<small>2015-10-14</small><a class="anchor" aria-label="anchor" href="#globals-050"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-5-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-5-0"></a></h4>
-<ul><li>globalsOf() now returns attribute ‘where’ specifying where each global object is located.</li>
+<h2 class="page-header" data-toc-text="0.6.1" id="version-061">Version 0.6.1<small>2016-02-03</small><a class="anchor" aria-label="anchor" href="#version-061"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-6-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-1"></a></h3>
+<ul><li>Now the error message of <code>globalsOf(..., mustExist = TRUE)</code> when it fails to locate a global also gives information on the expression that is problematic.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="bug-fixes-0-5-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h4>
-<ul><li>cleanup() now only drops objects that are *located* in one of the “base” packages; previously it would also drop copies of such objects, e.g. FUN &lt;- base::sample.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4.1" id="globals-041">globals 0.4.1<small>2015-10-06</small><a class="anchor" aria-label="anchor" href="#globals-041"></a></h2>
-<div class="section level4">
-<h4 id="bug-fixes-0-4-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1"></a></h4>
-<ul><li>globalsOf() failed to return global variables with value NULL. They were identified but silently dropped.</li>
+<div class="section level3">
+<h3 id="bug-fixes-0-6-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-1"></a></h3>
+<ul><li>
+<code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> for <code>Globals</code> did not cleanup functions in core package environments named <code>package:&lt;name&gt;</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4.0" id="globals-040">globals 0.4.0<small>2015-09-18</small><a class="anchor" aria-label="anchor" href="#globals-040"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-4-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h4>
-<ul><li>findGlobals() and globalsOf() gained argument ‘dotdotdot’.</li>
+<h2 class="page-header" data-toc-text="0.6.0" id="version-060">Version 0.6.0<small>2015-12-12</small><a class="anchor" aria-label="anchor" href="#version-060"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-6-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
+<ul><li>
+<code><a href="../reference/globalsOf.html">findGlobals()</a></code> is updated to handle the case where a local variable is overwriting a global one with the same name, e.g. <code>{ a    &lt;- b; b &lt;- 1 }</code>. Now <code>b</code> is correctly identified as a global object. Previously it would have been missed. For backward compatibility, the previous behavior can be obtained using argument <code>method = "conservative"</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.1" id="globals-031">globals 0.3.1<small>2015-06-11</small><a class="anchor" aria-label="anchor" href="#globals-031"></a></h2>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.0" id="globals-030">globals 0.3.0<a class="anchor" aria-label="anchor" href="#globals-030"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-3-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h4>
-<ul><li>Renamed getGlobals() to globalsOf().</li>
+<h2 class="page-header" data-toc-text="0.5.0" id="version-050">Version 0.5.0<small>2015-10-14</small><a class="anchor" aria-label="anchor" href="#version-050"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-5-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-5-0"></a></h3>
+<ul><li>
+<code><a href="../reference/globalsOf.html">globalsOf()</a></code> now returns attribute <code>where</code> specifying where each global object is located.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-5-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h3>
+<ul><li>
+<code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> now only drops objects that are <em>located</em> in one of the “base” packages; previously it would also drop copies of such objects, e.g. <code>FUN &lt;- base::sample</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.3" id="globals-023">globals 0.2.3<a class="anchor" aria-label="anchor" href="#globals-023"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-2-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-3"></a></h4>
-<ul><li><p>Added [() for Globals.</p></li>
-<li><p>findGlobals() and getGlobals() gained argument ‘substitute’.</p></li>
-<li><p>Added cleanup(…, method=“internals”).</p></li>
+<h2 class="page-header" data-toc-text="0.4.1" id="version-041">Version 0.4.1<small>2015-10-06</small><a class="anchor" aria-label="anchor" href="#version-041"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-4-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1"></a></h3>
+<ul><li>
+<code><a href="../reference/globalsOf.html">globalsOf()</a></code> failed to return global variables with value NULL. They were identified but silently dropped.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.2" id="globals-022">globals 0.2.2<a class="anchor" aria-label="anchor" href="#globals-022"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-2-2">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-2"></a></h4>
-<ul><li>Added Globals class with methods cleanup() and packagesOf(). Added as.Globals() to coerce lists to Globals objects.</li>
+<h2 class="page-header" data-toc-text="0.4.0" id="version-040">Version 0.4.0<small>2015-09-18</small><a class="anchor" aria-label="anchor" href="#version-040"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-4-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
+<ul><li>
+<code><a href="../reference/globalsOf.html">findGlobals()</a></code> and <code><a href="../reference/globalsOf.html">globalsOf()</a></code> gained argument <code>dotdotdot</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.1" id="globals-021">globals 0.2.1<a class="anchor" aria-label="anchor" href="#globals-021"></a></h2>
-<div class="section level4">
-<h4 id="new-features-0-2-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-1"></a></h4>
-<ul><li><p>getGlobals() gained argument ‘mustExist’ for controlling whether to give an error when the corresponding object for an identified global cannot be found or to silently drop the missing global.</p></li>
-<li><p>findGlobals() and getGlobals() gained argument ‘method’ for controlling whether a “conservative” or a “liberal” algorithm for identifying true globals should be used.</p></li>
+<h2 class="page-header" data-toc-text="0.3.1" id="version-031">Version 0.3.1<small>2015-06-11</small><a class="anchor" aria-label="anchor" href="#version-031"></a></h2>
+<ul><li>More test coverage.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.0" id="version-030">Version 0.3.0<a class="anchor" aria-label="anchor" href="#version-030"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-3-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h3>
+<ul><li>Renamed <code>getGlobals()</code> to <code><a href="../reference/globalsOf.html">globalsOf()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.0" id="globals-020">globals 0.2.0<a class="anchor" aria-label="anchor" href="#globals-020"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.3" id="version-023">Version 0.2.3<a class="anchor" aria-label="anchor" href="#version-023"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-2-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-3"></a></h3>
+<ul><li><p>Added <code>[()</code> for <code>Globals</code>.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> and <code>getGlobals()</code> gained argument <code>substitute</code>.</p></li>
+<li><p>Added <code>cleanup(..., method = "internals")</code>.</p></li>
+</ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.1.0" id="globals-010">globals 0.1.0<a class="anchor" aria-label="anchor" href="#globals-010"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.2" id="version-022">Version 0.2.2<a class="anchor" aria-label="anchor" href="#version-022"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-2-2">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-2"></a></h3>
+<ul><li><p>Added <code>Globals</code> class with methods <code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> and <code><a href="../reference/packagesOf.Globals.html">packagesOf()</a></code>.</p></li>
+<li><p>Added <code><a href="../reference/Globals.html">as.Globals()</a></code> to coerce lists to <code>Globals</code> objects.</p></li>
+</ul></div>
 </div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.1" id="version-021">Version 0.2.1<a class="anchor" aria-label="anchor" href="#version-021"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-2-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-1"></a></h3>
+<ul><li><p><code>getGlobals()</code> gained argument <code>mustExist</code> for controlling whether to give an error when the corresponding object for an identified global cannot be found or to silently drop the missing global.</p></li>
+<li><p><code><a href="../reference/globalsOf.html">findGlobals()</a></code> and <code>getGlobals()</code> gained argument <code>method</code> for controlling whether a <code>"conservative"</code> or a <code>"liberal"</code> algorithm for identifying true globals should be used.</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.0" id="version-020">Version 0.2.0<a class="anchor" aria-label="anchor" href="#version-020"></a></h2>
+<ul><li>Moved “globals” functions from an in-house package to this package.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.0" id="version-010">Version 0.1.0<a class="anchor" aria-label="anchor" href="#version-010"></a></h2>
+<ul><li>Created.</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -430,7 +457,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
 </div>
 
       </footer></div>

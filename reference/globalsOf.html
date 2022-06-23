@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9001</span>
       </span>
     </div>
 
@@ -157,10 +157,16 @@
     <h2>Arguments</h2>
     <dl><dt>expr</dt>
 <dd><p>An R expression.</p></dd>
+
+
 <dt>envir</dt>
 <dd><p>The environment from where to search for globals.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Not used.</p></dd>
+
+
 <dt>attributes</dt>
 <dd><p>If TRUE (default), attributes of `expr` are also searched.
 If FALSE, they are not.
@@ -168,41 +174,66 @@ If a character vector, then attributes with matching names are searched.
 Note, the attributes of the attributes elements are not searched, that is,
 attributes are not searched recursively.  Also, attributes are searched
 with `dotdotdot = "ignore".</p></dd>
+
+
 <dt>tweak</dt>
 <dd><p>An optional function that takes an expression
 and returns a tweaked expression.</p></dd>
+
+
 <dt>dotdotdot</dt>
 <dd><p>TBD.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>A character string specifying what type of search algorithm
 to use.</p></dd>
+
+
 <dt>substitute</dt>
 <dd><p>If TRUE, the expression is <code><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute()</a></code>:ed,
 otherwise not.</p></dd>
+
+
 <dt>unlist</dt>
 <dd><p>If TRUE, a list of unique objects is returned.
 If FALSE, a list of <code>length(expr)</code> sublists.</p></dd>
+
+
 <dt>trace</dt>
 <dd><p>TBD.</p></dd>
+
+
 <dt>locals</dt>
 <dd><p>Should globals part of any "local" environment of
 a function be included or not?</p></dd>
+
+
 <dt>mustExist</dt>
 <dd><p>If TRUE, an error is thrown if the object of the
 identified global cannot be located.  Otherwise, the global
 is not returned.</p></dd>
+
+
 <dt>recursive</dt>
 <dd><p>If TRUE, globals that are closures (functions) and that
 exist outside of namespaces ("packages"), will be recursively
 scanned for globals.</p></dd>
+
+
 <dt>skip</dt>
 <dd><p>(internal) A list of globals not to be searched for
 additional globals.  Ignored unless <code>recursive</code> is TRUE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>findGlobals()</code> returns a character vector.
-<code>globalsOf()</code> returns a <a href="Globals.html">Globals</a> object.</p>
+    
+
+<p><code>findGlobals()</code> returns a character vector.</p>
+
+
+<p><code>globalsOf()</code> returns a <a href="Globals.html">Globals</a> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -260,7 +291,7 @@ code inspections.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
 </div>
 
       </footer></div>
