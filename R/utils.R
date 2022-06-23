@@ -61,8 +61,10 @@ isPackageNamespace <- function(env) {
   if (!is.environment(env)) return(FALSE)
   name <- environmentName(env)
   if (name == "base") return(TRUE)
-  packageName <- env$.packageName
-  if (identical(name, packageName)) return(TRUE)
+  if (exists(".packageName", mode = "character", envir = env, inherits = FALSE)) {
+    packageName <- get(".packageName", mode = "character", envir = env, inherits = FALSE)
+    if (identical(name, packageName)) return(TRUE)
+  }
   if (!grepl("^package:", name)) return(FALSE)
   (name %in% search())
 }

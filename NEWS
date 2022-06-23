@@ -1,10 +1,15 @@
 Package: globals
 ================
 
-Version: 0.15.0-9000 [2022-05-09]
+Version: 0.15.0-9001 [2022-06-22]
 
- * ...
- 
+BUG FIXES:
+
+ * cleanup() assumed it was safe to call `env$.packageName` on each
+   scanned environment, but that might not be true. A classed
+   environment could be such that `$()` gives an error, rather than
+   returning something.
+
 
 Version: 0.15.0 [2022-05-08]
 
