@@ -22,18 +22,12 @@
 
 # Revdeps
 
-## Failed to check (8)
+## Failed to check (2)
 
 |package                      |version |error |warning |note |
 |:----------------------------|:-------|:-----|:-------|:----|
-|arkdb                        |?       |      |        |     |
-|ChromSCape                   |?       |      |        |     |
-|insight                      |?       |      |        |     |
 |MineICA                      |?       |      |        |     |
 |[oolong](failures.md#oolong) |0.4.1   |1     |        |     |
-|Prostar                      |?       |      |        |     |
-|Seurat                       |?       |      |        |     |
-|targets                      |?       |      |        |     |
 
 ## New problems (2)
 
@@ -53,7 +47,7 @@
 |AlpsNMR                                                  |3.6.0     |            |        |     |
 |[amapGeocode](problems.md#amapgeocode)                   |0.6.0     |            |        |1    |
 |[apache.sedona](problems.md#apachesedona)                |1.1.1     |            |        |1    |
-|arkdb                                                    |?         |            |        |     |
+|[arkdb](problems.md#arkdb)                               |0.0.15    |            |        |2    |
 |aroma.affymetrix                                         |3.2.0     |            |        |     |
 |[aroma.core](problems.md#aromacore)                      |3.2.2     |            |        |1    |
 |aurin                                                    |0.6.0     |            |        |     |
@@ -83,7 +77,7 @@
 |[catalog](problems.md#catalog)                           |0.1.0     |            |        |1    |
 |censored                                                 |0.1.0     |            |        |     |
 |ceRNAnetsim                                              |1.8.0     |            |        |     |
-|ChromSCape                                               |?         |            |        |     |
+|[ChromSCape](problems.md#chromscape)                     |1.6.0     |            |3       |4    |
 |[civis](problems.md#civis)                               |3.0.0     |            |        |1    |
 |Clustering                                               |1.7.7     |            |        |     |
 |codalm                                                   |0.1.2     |            |        |     |
@@ -189,7 +183,7 @@
 |[infercnv](problems.md#infercnv)                         |1.12.0    |            |        |3    |
 |[inlinedocs](problems.md#inlinedocs)                     |2019.12.5 |            |        |1    |
 |[InPAS](problems.md#inpas)                               |2.4.0     |            |        |1    |
-|insight                                                  |?         |            |        |     |
+|[insight](problems.md#insight)                           |0.17.1    |            |        |1    |
 |[interflex](problems.md#interflex)                       |1.2.6     |            |        |1    |
 |[ipc](problems.md#ipc)                                   |0.1.3     |            |        |1    |
 |[ivmte](problems.md#ivmte)                               |1.4.0     |            |        |1    |
@@ -286,7 +280,7 @@
 |progressr                                                |0.10.1    |            |        |     |
 |projpred                                                 |2.1.2     |            |        |     |
 |[promises](problems.md#promises)                         |1.2.0.1   |            |        |1    |
-|Prostar                                                  |?         |            |        |     |
+|[Prostar](problems.md#prostar)                           |1.28.1    |            |        |2    |
 |protti                                                   |0.3.0     |            |        |     |
 |PSCBS                                                    |0.66.0    |            |        |     |
 |[PUMP](problems.md#pump)                                 |1.0.0     |            |        |1    |
@@ -327,7 +321,7 @@
 |[seer](problems.md#seer)                                 |1.1.7     |            |        |1    |
 |semtree                                                  |0.9.18    |            |        |     |
 |[sentopics](problems.md#sentopics)                       |0.7.1     |            |        |3    |
-|Seurat                                                   |?         |            |        |     |
+|[Seurat](problems.md#seurat)                             |4.1.1     |            |        |2    |
 |[SeuratObject](problems.md#seuratobject)                 |4.1.0     |            |        |1    |
 |shar                                                     |1.3.2     |            |        |     |
 |[shiny](problems.md#shiny)                               |1.7.1     |            |        |1    |
@@ -387,7 +381,7 @@
 |tabnet                                                   |0.3.0     |            |        |     |
 |target                                                   |1.10.0    |            |        |     |
 |[targeted](problems.md#targeted)                         |0.2.0     |            |        |1    |
-|targets                                                  |?         |            |        |     |
+|[targets](problems.md#targets)                           |0.12.1    |            |        |1    |
 |tcensReg                                                 |0.1.7     |            |        |     |
 |tcplfit2                                                 |0.1.3     |            |        |     |
 |tealeaves                                                |1.0.5     |            |        |     |

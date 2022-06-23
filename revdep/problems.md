@@ -67,6 +67,32 @@ Run `revdep_details(, "apache.sedona")` for more info
       All declared Imports should be used.
     ```
 
+# arkdb
+
+<details>
+
+* Version: 0.0.15
+* GitHub: https://github.com/ropensci/arkdb
+* Source code: https://github.com/cran/arkdb
+* Date/Publication: 2022-02-15 10:00:23 UTC
+* Number of recursive dependencies: 95
+
+Run `revdep_details(, "arkdb")` for more info
+
+</details>
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘arrow’
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘arrow’
+    ```
+
 # aroma.core
 
 <details>
@@ -460,6 +486,111 @@ Run `revdep_details(, "catalog")` for more info
 *   checking LazyData ... NOTE
     ```
       'LazyData' is specified without a 'data' directory
+    ```
+
+# ChromSCape
+
+<details>
+
+* Version: 1.6.0
+* GitHub: https://github.com/vallotlab/ChromSCape
+* Source code: https://github.com/cran/ChromSCape
+* Date/Publication: 2022-04-26
+* Number of recursive dependencies: 217
+
+Run `revdep_details(, "ChromSCape")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... WARNING
+    ```
+    '::' or ':::' import not declared from: ‘GenomeInfoDb’
+    ```
+
+*   checking for code/documentation mismatches ... WARNING
+    ```
+    Codoc mismatches from documentation object 'count_coverage':
+    count_coverage
+      Code: function(input, format = "BAM", bins, canonical_chr,
+                     n_smoothBin = 5, ref = "hg38", read_size = 101,
+                     original_bins = NULL)
+      Docs: function(filename, format = "BAM", bins, canonical_chr,
+                     n_smoothBin = 5, ref = "hg38", read_size = 101)
+      Argument names in code not in docs:
+        input original_bins
+      Argument names in docs not in code:
+    ...
+    
+    Codoc mismatches from documentation object 'rawfile_ToBigWig':
+    rawfile_ToBigWig
+      Code: function(input, BigWig_filename, format = "BAM", bin_width =
+                     150, n_smoothBin = 5, ref = "hg38", read_size = 101,
+                     original_bins = NULL)
+      Docs: function(input, BigWig_filename, format = "BAM", bin_width =
+                     150, n_smoothBin = 5, ref = "hg38", read_size = 101)
+      Argument names in code not in docs:
+        original_bins
+    ```
+
+*   checking Rd \usage sections ... WARNING
+    ```
+    Undocumented arguments in documentation object 'generate_coverage_tracks'
+      ‘input_type’
+    
+    Functions with \usage entries need to have the appropriate \alias
+    entries, and all their arguments documented.
+    The \usage entries must correspond to syntactically valid R code.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .BBSoptions
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.2Mb
+      sub-directories of 1Mb or more:
+        data   1.4Mb
+        doc    2.9Mb
+        www    2.0Mb
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    CompareWilcox: no visible binding for global variable ‘annot.’
+    bams_to_matrix_indexes: no visible binding for global variable
+      ‘files_dir_list’
+    enrich_TF_ChEA3_genes: no visible binding for global variable
+      ‘CheA3_TF_nTargets’
+    filter_correlated_cell_scExp: no visible binding for global variable
+      ‘run_tsne’
+    generate_analysis: no visible binding for global variable ‘k’
+    generate_analysis: no visible binding for global variable
+      ‘clusterConsensus’
+    ...
+      ‘merged_bam’
+    Undefined global functions or variables:
+      CheA3_TF_nTargets Component Fri_cyto Gain_or_Loss Gene TF V1 V2
+      absolute_value annot. cluster clusterConsensus cytoBand filename
+      files_dir_list genes group head k merged_bam molecule ncells new_row
+      orientation origin_value percent_active run_tsne sample_id
+      total_counts
+    Consider adding
+      importFrom("utils", "head")
+    to your NAMESPACE file.
+    ```
+
+*   checking Rd files ... NOTE
+    ```
+    prepare_Rd: raw_counts_to_sparse_matrix.Rd:6-8: Dropping empty section \source
     ```
 
 # civis
@@ -1448,14 +1579,14 @@ Run `revdep_details(, "greta")` for more info
 
 ## Newly broken
 
-*   checking re-building of vignette outputs ...sh: line 1: 36841 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/greta/new/greta.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/Rtmp9yXUXp/file182b518e3f51'
+*   checking re-building of vignette outputs ...sh: line 1:  3293 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/greta/new/greta.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpryGISk/file6186eb0fe9f'
     ```
      ERROR
     Error(s) in re-building vignettes:
     --- re-building ‘example_models.Rmd’ using rmarkdown
     
      *** caught illegal operation ***
-    address 0x2b41717358e0, cause 'illegal operand'
+    address 0x2b52164b18e0, cause 'illegal operand'
     
     Traceback:
      1: py_module_import(module, convert = convert)
@@ -1475,14 +1606,14 @@ Run `revdep_details(, "greta")` for more info
 
 ## Newly fixed
 
-*   checking re-building of vignette outputs ...sh: line 1: 32401 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/greta/old/greta.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpGP3qMQ/file17232e5a1811'
+*   checking re-building of vignette outputs ...sh: line 1:  7776 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/greta/old/greta.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpTtRO5J/file601c637520f5'
     ```
      ERROR
     Error(s) in re-building vignettes:
     --- re-building ‘example_models.Rmd’ using rmarkdown
     
      *** caught illegal operation ***
-    address 0x2ba5b0ec78e0, cause 'illegal operand'
+    address 0x2b326946d8e0, cause 'illegal operand'
     
     Traceback:
      1: py_module_import(module, convert = convert)
@@ -1505,7 +1636,7 @@ Run `revdep_details(, "greta")` for more info
 *   checking tests ...
     ```
       Running ‘spelling.R’
-      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60: 28267 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60:  1680 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
     
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
@@ -1742,6 +1873,27 @@ Run `revdep_details(, "InPAS")` for more info
       ‘adjust_proximalCPsByPWM’ ‘calculate_mse’ ‘find_valleyBySpline’
       ‘get_PAscore’ ‘get_PAscore2’ ‘remove_convergentUTR3s’
       ‘search_distalCPs’ ‘search_proximalCPs’
+    ```
+
+# insight
+
+<details>
+
+* Version: 0.17.1
+* GitHub: https://github.com/easystats/insight
+* Source code: https://github.com/cran/insight
+* Date/Publication: 2022-05-13 09:00:02 UTC
+* Number of recursive dependencies: 331
+
+Run `revdep_details(, "insight")` for more info
+
+</details>
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘marginaleffects’
     ```
 
 # interflex
@@ -2484,7 +2636,7 @@ Run `revdep_details(, "pareg")` for more info
 
 ## Newly broken
 
-*   checking examples ...sh: line 1: 21510 Illegal instruction     (core dumped) LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla > 'pareg-Ex.Rout' 2>&1 < 'pareg-Ex.R'
+*   checking examples ...sh: line 1: 46731 Illegal instruction     (core dumped) LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla > 'pareg-Ex.Rout' 2>&1 < 'pareg-Ex.R'
     ```
      ERROR
     Running examples in ‘pareg-Ex.R’ failed
@@ -2509,7 +2661,7 @@ Run `revdep_details(, "pareg")` for more info
     An irrecoverable exception occurred. R is aborting now ...
     ```
 
-*   checking re-building of vignette outputs ...sh: line 1: 25539 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/Rtmp2MT6uj/fileba1b6050e2f5'
+*   checking re-building of vignette outputs ...sh: line 1:  3536 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmphHr4jY/file6cc1e2b948d'
     ```
      ERROR
     Error(s) in re-building vignettes:
@@ -2536,7 +2688,7 @@ Run `revdep_details(, "pareg")` for more info
 
 ## Newly fixed
 
-*   checking examples ...sh: line 1: 21500 Illegal instruction     (core dumped) LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla > 'pareg-Ex.Rout' 2>&1 < 'pareg-Ex.R'
+*   checking examples ...sh: line 1: 46783 Illegal instruction     (core dumped) LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla > 'pareg-Ex.Rout' 2>&1 < 'pareg-Ex.R'
     ```
      ERROR
     Running examples in ‘pareg-Ex.R’ failed
@@ -2561,7 +2713,7 @@ Run `revdep_details(, "pareg")` for more info
     An irrecoverable exception occurred. R is aborting now ...
     ```
 
-*   checking re-building of vignette outputs ...sh: line 1: 29266 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/pareg/old/pareg.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpCm4ECJ/fileb952ee72c6f'
+*   checking re-building of vignette outputs ...sh: line 1:   667 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/pareg/old/pareg.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpamYP4c/file6c9740e25e8d'
     ```
      ERROR
     Error(s) in re-building vignettes:
@@ -2590,7 +2742,7 @@ Run `revdep_details(, "pareg")` for more info
 
 *   checking tests ...
     ```
-      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60: 23479 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60:   511 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
     
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
@@ -3004,6 +3156,58 @@ Run `revdep_details(, "promises")` for more info
 *   checking LazyData ... NOTE
     ```
       'LazyData' is specified without a 'data' directory
+    ```
+
+# Prostar
+
+<details>
+
+* Version: 1.28.1
+* GitHub: https://github.com/samWieczorek/Prostar
+* Source code: https://github.com/cran/Prostar
+* Date/Publication: 2022-05-26
+* Number of recursive dependencies: 259
+
+Run `revdep_details(, "Prostar")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘DAPAR’ ‘DAPARdata’ ‘DT’ ‘R.utils’ ‘XML’ ‘colourpicker’ ‘data.table’
+      ‘future’ ‘highcharter’ ‘htmlwidgets’ ‘later’ ‘promises’
+      ‘rhandsontable’ ‘sass’ ‘shinyAce’ ‘shinyBS’ ‘shinyWidgets’
+      ‘shinycssloaders’ ‘shinyjqui’ ‘shinyjs’ ‘shinythemes’ ‘tibble’
+      ‘webshot’
+      All declared Imports should be used.
+    ```
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘Prostar_UserManual.Rnw’ using Sweave
+    Error: processing vignette 'Prostar_UserManual.Rnw' failed with diagnostics:
+    Running 'texi2dvi' on 'Prostar_UserManual.tex' failed.
+    LaTeX errors:
+    ! LaTeX Error: File `nowidow.sty' not found.
+    
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
+    ...
+    l.189 \RequirePackage
+                         {parnotes}^^M
+    !  ==> Fatal error occurred, no output PDF file produced!
+    --- failed re-building ‘Prostar_UserManual.Rnw’
+    
+    SUMMARY: processing the following file failed:
+      ‘Prostar_UserManual.Rnw’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
 # PUMP
@@ -3557,6 +3761,35 @@ Run `revdep_details(, "sentopics")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 3128 marked UTF-8 strings
+    ```
+
+# Seurat
+
+<details>
+
+* Version: 4.1.1
+* GitHub: https://github.com/satijalab/seurat
+* Source code: https://github.com/cran/Seurat
+* Date/Publication: 2022-05-02 05:40:02 UTC
+* Number of recursive dependencies: 256
+
+Run `revdep_details(, "Seurat")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 14.4Mb
+      sub-directories of 1Mb or more:
+        R      1.3Mb
+        libs  12.4Mb
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘Signac’
     ```
 
 # SeuratObject
@@ -4359,6 +4592,27 @@ Run `revdep_details(, "targeted")` for more info
       installed size is 16.4Mb
       sub-directories of 1Mb or more:
         libs  15.5Mb
+    ```
+
+# targets
+
+<details>
+
+* Version: 0.12.1
+* GitHub: https://github.com/ropensci/targets
+* Source code: https://github.com/cran/targets
+* Date/Publication: 2022-06-03 19:00:02 UTC
+* Number of recursive dependencies: 168
+
+Run `revdep_details(, "targets")` for more info
+
+</details>
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘arrow’
     ```
 
 # text
