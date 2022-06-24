@@ -83,14 +83,29 @@ Run `revdep_details(, "arkdb")` for more info
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking tests ...
     ```
-    Package suggested but not available for checking: ‘arrow’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘arrow’
+      Running ‘spelling.R’
+      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60: 19036 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+    
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 50 lines of output:
+      > test_check("arkdb")
+      [1] "Testing using backend duckdb_connection"
+      
+       *** caught illegal operation ***
+    ...
+      36: doTryCatch(return(expr), name, parentenv, handler)
+      37: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      38: tryCatchList(expr, classes, parentenv, handlers)
+      39: tryCatch(code, testthat_abort_reporter = function(cnd) {    cat(conditionMessage(cnd), "\n")    NULL})
+      40: with_reporter(reporters$multi, lapply(test_paths, test_one_file,     env = env, wrap = wrap))
+      41: test_files(test_dir = test_dir, test_package = test_package,     test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,     env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package)
+      42: test_files(test_dir = path, test_paths = test_paths, test_package = package,     reporter = reporter, load_helpers = load_helpers, env = env,     stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package, parallel = parallel)
+      43: test_dir("testthat", package = package, reporter = reporter,     ..., load_package = "installed")
+      44: test_check("arkdb")
+      An irrecoverable exception occurred. R is aborting now ...
     ```
 
 # aroma.core
@@ -1563,101 +1578,6 @@ Run `revdep_details(, "greed")` for more info
       Note: found 989 marked UTF-8 strings
     ```
 
-# greta
-
-<details>
-
-* Version: 0.4.2
-* GitHub: https://github.com/greta-dev/greta
-* Source code: https://github.com/cran/greta
-* Date/Publication: 2022-03-22 13:00:02 UTC
-* Number of recursive dependencies: 168
-
-Run `revdep_details(, "greta")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ...sh: line 1:  3293 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/greta/new/greta.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpryGISk/file6186eb0fe9f'
-    ```
-     ERROR
-    Error(s) in re-building vignettes:
-    --- re-building ‘example_models.Rmd’ using rmarkdown
-    
-     *** caught illegal operation ***
-    address 0x2b52164b18e0, cause 'illegal operand'
-    
-    Traceback:
-     1: py_module_import(module, convert = convert)
-     2: import(module)
-    ...
-    34: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-    35: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
-    36: vweave_rmarkdown(...)
-    37: engine$weave(file, quiet = quiet, encoding = enc)
-    38: doTryCatch(return(expr), name, parentenv, handler)
-    39: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    40: tryCatchList(expr, classes, parentenv, handlers)
-    41: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }    outputs <- c(outputs, output)}, error = function(e) {    thisOK <<- FALSE    fails <<- c(fails, file)    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
-    42: tools:::buildVignettes(dir = "/c4/home/henrik/repositories/globals/revdep/checks/greta/new/greta.Rcheck/vign_test/greta")
-    An irrecoverable exception occurred. R is aborting now ...
-    ```
-
-## Newly fixed
-
-*   checking re-building of vignette outputs ...sh: line 1:  7776 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/greta/old/greta.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpTtRO5J/file601c637520f5'
-    ```
-     ERROR
-    Error(s) in re-building vignettes:
-    --- re-building ‘example_models.Rmd’ using rmarkdown
-    
-     *** caught illegal operation ***
-    address 0x2b326946d8e0, cause 'illegal operand'
-    
-    Traceback:
-     1: py_module_import(module, convert = convert)
-     2: import(module)
-    ...
-    34: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-    35: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
-    36: vweave_rmarkdown(...)
-    37: engine$weave(file, quiet = quiet, encoding = enc)
-    38: doTryCatch(return(expr), name, parentenv, handler)
-    39: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    40: tryCatchList(expr, classes, parentenv, handlers)
-    41: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }    outputs <- c(outputs, output)}, error = function(e) {    thisOK <<- FALSE    fails <<- c(fails, file)    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
-    42: tools:::buildVignettes(dir = "/c4/home/henrik/repositories/globals/revdep/checks/greta/old/greta.Rcheck/vign_test/greta")
-    An irrecoverable exception occurred. R is aborting now ...
-    ```
-
-## In both
-
-*   checking tests ...
-    ```
-      Running ‘spelling.R’
-      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60:  1680 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
-    
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > options(testthat.progress.max_fails = 100)
-      > library(testthat)
-      > library(greta)
-      
-    ...
-      12: FUN(X[[i]], ...)
-      13: lapply(files, source_file, env = env, chdir = chdir, wrap = wrap)
-      14: source_dir(path, "^helper.*\\.[rR]$", env = env, wrap = FALSE)
-      15: source_test_helpers(".", env)
-      16: test_files_setup_state(test_dir, test_package, load_helpers,     env)
-      17: test_files(test_dir = test_dir, test_package = test_package,     test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,     env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package)
-      18: test_files(test_dir = path, test_paths = test_paths, test_package = package,     reporter = reporter, load_helpers = load_helpers, env = env,     stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package, parallel = parallel)
-      19: test_dir("testthat", package = package, reporter = reporter,     ..., load_package = "installed")
-      20: test_check("greta")
-      An irrecoverable exception occurred. R is aborting now ...
-    ```
-
 # gsynth
 
 <details>
@@ -2502,16 +2422,81 @@ Run `revdep_details(, "mrgsim.parallel")` for more info
 
 </details>
 
+## Newly broken
+
+*   checking dependencies in R code ...sh: line 1: 21833 Illegal instruction     (core dumped) R_DEFAULT_PACKAGES=NULL '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo 2>&1 < '/scratch/henrik/RtmplBWF0s/file459036e11633'
+    ```
+     NOTE
+    
+     *** caught illegal operation ***
+    address 0x2ae254b64267, cause 'illegal operand'
+    
+    Traceback:
+     1: dyn.load(file, DLLpath = DLLpath, ...)
+     2: library.dynam(lib, package, package.lib)
+     3: loadNamespace(p)
+     4: withCallingHandlers(expr, message = function(c) if (inherits(c,     classes)) tryInvokeRestart("muffleMessage"))
+     5: suppressMessages(loadNamespace(p))
+     6: withCallingHandlers(expr, warning = function(w) if (inherits(w,     classes)) tryInvokeRestart("muffleWarning"))
+     7: suppressWarnings(suppressMessages(loadNamespace(p)))
+     8: doTryCatch(return(expr), name, parentenv, handler)
+     9: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    10: tryCatchList(expr, classes, parentenv, handlers)
+    11: tryCatch(suppressWarnings(suppressMessages(loadNamespace(p))),     error = function(e) e)
+    12: tools:::.check_packages_used(package = "mrgsim.parallel")
+    An irrecoverable exception occurred. R is aborting now ...
+    ```
+
+## Newly fixed
+
+*   checking dependencies in R code ...sh: line 1: 21853 Illegal instruction     (core dumped) R_DEFAULT_PACKAGES=NULL '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo 2>&1 < '/scratch/henrik/RtmpF22wed/file454d60227797'
+    ```
+     NOTE
+    
+     *** caught illegal operation ***
+    address 0x2b783029f267, cause 'illegal operand'
+    
+    Traceback:
+     1: dyn.load(file, DLLpath = DLLpath, ...)
+     2: library.dynam(lib, package, package.lib)
+     3: loadNamespace(p)
+     4: withCallingHandlers(expr, message = function(c) if (inherits(c,     classes)) tryInvokeRestart("muffleMessage"))
+     5: suppressMessages(loadNamespace(p))
+     6: withCallingHandlers(expr, warning = function(w) if (inherits(w,     classes)) tryInvokeRestart("muffleWarning"))
+     7: suppressWarnings(suppressMessages(loadNamespace(p)))
+     8: doTryCatch(return(expr), name, parentenv, handler)
+     9: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    10: tryCatchList(expr, classes, parentenv, handlers)
+    11: tryCatch(suppressWarnings(suppressMessages(loadNamespace(p))),     error = function(e) e)
+    12: tools:::.check_packages_used(package = "mrgsim.parallel")
+    An irrecoverable exception occurred. R is aborting now ...
+    ```
+
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking tests ...
     ```
-    Package suggested but not available for checking: ‘arrow’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘arrow’
+      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60: 37427 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+    
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 50 lines of output:
+      parallel simulation: ..................
+      stream: 
+      test-stream: ........................................................
+       *** caught illegal operation ***
+      address 0x2b1ea6bca267, cause 'illegal operand'
+    ...
+      36: doTryCatch(return(expr), name, parentenv, handler)
+      37: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      38: tryCatchList(expr, classes, parentenv, handlers)
+      39: tryCatch(code, testthat_abort_reporter = function(cnd) {    cat(conditionMessage(cnd), "\n")    NULL})
+      40: with_reporter(reporters$multi, lapply(test_paths, test_one_file,     env = env, wrap = wrap))
+      41: test_files(test_dir = test_dir, test_package = test_package,     test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,     env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package)
+      42: test_files(test_dir = path, test_paths = test_paths, test_package = package,     reporter = reporter, load_helpers = load_helpers, env = env,     stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package, parallel = parallel)
+      43: test_dir("testthat", package = package, reporter = reporter,     ..., load_package = "installed")
+      44: test_check("mrgsim.parallel", reporter = "summary")
+      An irrecoverable exception occurred. R is aborting now ...
     ```
 
 # onemapsgapi
@@ -2634,137 +2619,52 @@ Run `revdep_details(, "pareg")` for more info
 
 </details>
 
-## Newly broken
-
-*   checking examples ...sh: line 1: 46731 Illegal instruction     (core dumped) LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla > 'pareg-Ex.Rout' 2>&1 < 'pareg-Ex.R'
-    ```
-     ERROR
-    Running examples in ‘pareg-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: as.data.frame.pareg
-    > ### Title: as.data.frame for an object of class 'pareg'.
-    > ### Aliases: as.data.frame.pareg
-    > 
-    > ### ** Examples
-    > 
-    ...
-     6: tryCatch(import(module), error = clear_error_handler())
-     7: py_resolve_module_proxy(x)
-     8: `$.python.builtin.module`(tf, "cast")
-     9: tf$cast
-    10: cast_float(x)
-    11: .edgenet(x = X, y = Y, gx = G.X, gy = G.Y, lambda = lambda, psigx = psigx,     psigy = psigy, thresh = thresh, maxit = maxit, learning.rate = learning.rate,     family = family)
-    12: fit_func(X, Y, G.X = term_network, lambda = lasso_param, psigx = network_param,     psigy = 0, family = family, maxit = max_iterations, ...)
-    13: fit_func(X, Y, G.X = term_network, lambda = lasso_param, psigx = network_param,     psigy = 0, family = family, maxit = max_iterations, ...)
-    14: pareg(df_genes, df_terms, max_iterations = 10)
-    An irrecoverable exception occurred. R is aborting now ...
-    ```
-
-*   checking re-building of vignette outputs ...sh: line 1:  3536 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmphHr4jY/file6cc1e2b948d'
-    ```
-     ERROR
-    Error(s) in re-building vignettes:
-    --- re-building ‘pareg.Rmd’ using rmarkdown
-    Loading required package: ggplot2
-    ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-    ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-    ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-    ✔ readr   2.1.2     ✔ forcats 0.5.1
-    ✔ purrr   0.3.4     
-    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ...
-    34: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-    35: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
-    36: vweave_rmarkdown(...)
-    37: engine$weave(file, quiet = quiet, encoding = enc)
-    38: doTryCatch(return(expr), name, parentenv, handler)
-    39: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    40: tryCatchList(expr, classes, parentenv, handlers)
-    41: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }    outputs <- c(outputs, output)}, error = function(e) {    thisOK <<- FALSE    fails <<- c(fails, file)    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
-    42: tools:::buildVignettes(dir = "/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/vign_test/pareg")
-    An irrecoverable exception occurred. R is aborting now ...
-    ```
-
-## Newly fixed
-
-*   checking examples ...sh: line 1: 46783 Illegal instruction     (core dumped) LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla > 'pareg-Ex.Rout' 2>&1 < 'pareg-Ex.R'
-    ```
-     ERROR
-    Running examples in ‘pareg-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: as.data.frame.pareg
-    > ### Title: as.data.frame for an object of class 'pareg'.
-    > ### Aliases: as.data.frame.pareg
-    > 
-    > ### ** Examples
-    > 
-    ...
-     6: tryCatch(import(module), error = clear_error_handler())
-     7: py_resolve_module_proxy(x)
-     8: `$.python.builtin.module`(tf, "cast")
-     9: tf$cast
-    10: cast_float(x)
-    11: .edgenet(x = X, y = Y, gx = G.X, gy = G.Y, lambda = lambda, psigx = psigx,     psigy = psigy, thresh = thresh, maxit = maxit, learning.rate = learning.rate,     family = family)
-    12: fit_func(X, Y, G.X = term_network, lambda = lasso_param, psigx = network_param,     psigy = 0, family = family, maxit = max_iterations, ...)
-    13: fit_func(X, Y, G.X = term_network, lambda = lasso_param, psigx = network_param,     psigy = 0, family = family, maxit = max_iterations, ...)
-    14: pareg(df_genes, df_terms, max_iterations = 10)
-    An irrecoverable exception occurred. R is aborting now ...
-    ```
-
-*   checking re-building of vignette outputs ...sh: line 1:   667 Illegal instruction     (core dumped) '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo > '/c4/home/henrik/repositories/globals/revdep/checks/pareg/old/pareg.Rcheck/build_vignettes.log' 2>&1 < '/scratch/henrik/RtmpamYP4c/file6c9740e25e8d'
-    ```
-     ERROR
-    Error(s) in re-building vignettes:
-    --- re-building ‘pareg.Rmd’ using rmarkdown
-    Loading required package: ggplot2
-    ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-    ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-    ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-    ✔ readr   2.1.2     ✔ forcats 0.5.1
-    ✔ purrr   0.3.4     
-    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ...
-    34: knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-    35: rmarkdown::render(file, encoding = encoding, quiet = quiet, envir = globalenv(),     output_dir = getwd(), ...)
-    36: vweave_rmarkdown(...)
-    37: engine$weave(file, quiet = quiet, encoding = enc)
-    38: doTryCatch(return(expr), name, parentenv, handler)
-    39: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    40: tryCatchList(expr, classes, parentenv, handlers)
-    41: tryCatch({    engine$weave(file, quiet = quiet, encoding = enc)    setwd(startdir)    output <- find_vignette_product(name, by = "weave", engine = engine)    if (!have.makefile && vignette_is_tex(output)) {        texi2pdf(file = output, clean = FALSE, quiet = quiet)        output <- find_vignette_product(name, by = "texi2pdf",             engine = engine)    }    outputs <- c(outputs, output)}, error = function(e) {    thisOK <<- FALSE    fails <<- c(fails, file)    message(gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",         file, conditionMessage(e)))})
-    42: tools:::buildVignettes(dir = "/c4/home/henrik/repositories/globals/revdep/checks/pareg/old/pareg.Rcheck/vign_test/pareg")
-    An irrecoverable exception occurred. R is aborting now ...
-    ```
-
 ## In both
 
-*   checking tests ...
+*   checking whether package ‘pareg’ can be installed ... ERROR
     ```
-      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60:   511 Illegal instruction     (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
-    
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 50 lines of output:
-      Traceback:
-       1: py_module_import(module, convert = convert)
-       2: import(module)
-       3: doTryCatch(return(expr), name, parentenv, handler)
-       4: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-    ...
-      42: doTryCatch(return(expr), name, parentenv, handler)
-      43: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      44: tryCatchList(expr, classes, parentenv, handlers)
-      45: tryCatch(code, testthat_abort_reporter = function(cnd) {    cat(conditionMessage(cnd), "\n")    NULL})
-      46: with_reporter(reporters$multi, lapply(test_paths, test_one_file,     env = env, wrap = wrap))
-      47: test_files(test_dir = test_dir, test_package = test_package,     test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,     env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package)
-      48: test_files(test_dir = path, test_paths = test_paths, test_package = package,     reporter = reporter, load_helpers = load_helpers, env = env,     stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     wrap = wrap, load_package = load_package, parallel = parallel)
-      49: test_dir("testthat", package = package, reporter = reporter,     ..., load_package = "installed")
-      50: test_check("pareg")
-      An irrecoverable exception occurred. R is aborting now ...
+    Installation failed.
+    See ‘/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/00install.out’ for details.
     ```
 
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘pareg’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘Biostrings’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘pareg’
+* removing ‘/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/pareg’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘pareg’ ...
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘Biostrings’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘pareg’
+* removing ‘/c4/home/henrik/repositories/globals/revdep/checks/pareg/old/pareg.Rcheck/pareg’
+
+
+```
 # parsnip
 
 <details>
@@ -2976,11 +2876,6 @@ Run `revdep_details(, "pointblank")` for more info
 </details>
 
 ## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘arrow’
-    ```
 
 *   checking data for non-ASCII characters ... NOTE
     ```
@@ -3300,27 +3195,6 @@ Run `revdep_details(, "RAINBOWR")` for more info
       installed size is 37.8Mb
       sub-directories of 1Mb or more:
         libs  36.6Mb
-    ```
-
-# raveio
-
-<details>
-
-* Version: 0.0.7
-* GitHub: https://github.com/beauchamplab/raveio
-* Source code: https://github.com/cran/raveio
-* Date/Publication: 2022-06-20 18:20:01 UTC
-* Number of recursive dependencies: 134
-
-Run `revdep_details(, "raveio")` for more info
-
-</details>
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘arrow’
     ```
 
 # recipes
@@ -4111,12 +3985,57 @@ Run `revdep_details(, "sparklyr")` for more info
 
 </details>
 
-## In both
+## Newly broken
 
-*   checking package dependencies ... NOTE
+*   checking dependencies in R code ...sh: line 1: 36840 Illegal instruction     (core dumped) R_DEFAULT_PACKAGES=NULL '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo 2>&1 < '/scratch/henrik/RtmpKpyzKk/file445440d70b11'
     ```
-    Package suggested but not available for checking: ‘arrow’
+     NOTE
+    
+     *** caught illegal operation ***
+    address 0x2b5653710267, cause 'illegal operand'
+    
+    Traceback:
+     1: dyn.load(file, DLLpath = DLLpath, ...)
+     2: library.dynam(lib, package, package.lib)
+     3: loadNamespace(p)
+     4: withCallingHandlers(expr, message = function(c) if (inherits(c,     classes)) tryInvokeRestart("muffleMessage"))
+     5: suppressMessages(loadNamespace(p))
+     6: withCallingHandlers(expr, warning = function(w) if (inherits(w,     classes)) tryInvokeRestart("muffleWarning"))
+     7: suppressWarnings(suppressMessages(loadNamespace(p)))
+     8: doTryCatch(return(expr), name, parentenv, handler)
+     9: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    10: tryCatchList(expr, classes, parentenv, handlers)
+    11: tryCatch(suppressWarnings(suppressMessages(loadNamespace(p))),     error = function(e) e)
+    12: tools:::.check_packages_used(package = "sparklyr")
+    An irrecoverable exception occurred. R is aborting now ...
     ```
+
+## Newly fixed
+
+*   checking dependencies in R code ...sh: line 1: 35591 Illegal instruction     (core dumped) R_DEFAULT_PACKAGES=NULL '/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/R' --vanilla --no-echo 2>&1 < '/scratch/henrik/RtmpZHf1GA/file424f2b54f8c2'
+    ```
+     NOTE
+    
+     *** caught illegal operation ***
+    address 0x2b0ae1b3a267, cause 'illegal operand'
+    
+    Traceback:
+     1: dyn.load(file, DLLpath = DLLpath, ...)
+     2: library.dynam(lib, package, package.lib)
+     3: loadNamespace(p)
+     4: withCallingHandlers(expr, message = function(c) if (inherits(c,     classes)) tryInvokeRestart("muffleMessage"))
+     5: suppressMessages(loadNamespace(p))
+     6: withCallingHandlers(expr, warning = function(w) if (inherits(w,     classes)) tryInvokeRestart("muffleWarning"))
+     7: suppressWarnings(suppressMessages(loadNamespace(p)))
+     8: doTryCatch(return(expr), name, parentenv, handler)
+     9: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+    10: tryCatchList(expr, classes, parentenv, handlers)
+    11: tryCatch(suppressWarnings(suppressMessages(loadNamespace(p))),     error = function(e) e)
+    12: tools:::.check_packages_used(package = "sparklyr")
+    An irrecoverable exception occurred. R is aborting now ...
+    ```
+
+## In both
 
 *   checking installed package size ... NOTE
     ```
