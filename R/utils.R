@@ -61,8 +61,10 @@ isPackageNamespace <- function(env) {
   if (!is.environment(env)) return(FALSE)
   name <- environmentName(env)
   if (name == "base") return(TRUE)
-  packageName <- env$.packageName
-  if (identical(name, packageName)) return(TRUE)
+  if (exists(".packageName", mode = "character", envir = env, inherits = FALSE)) {
+    packageName <- get(".packageName", mode = "character", envir = env, inherits = FALSE)
+    if (identical(name, packageName)) return(TRUE)
+  }
   if (!grepl("^package:", name)) return(FALSE)
   (name %in% search())
 }
@@ -194,14 +196,6 @@ getOption <- local({
     if (missing(default) || match(x, table = names(.Options), nomatch = 0L) > 0L) go(x) else default
   }
 })
-
-stopf <- function(fmt, ..., call. = TRUE, domain = NULL) {  #nolint
-  stop(sprintf(fmt, ...), call. = call., domain = domain)
-}
-
-warnf <- function(fmt, ..., call. = TRUE, domain = NULL) {  #nolint
-  warning(sprintf(fmt, ...), call. = call., domain = domain)
-}
 
 stop_if_not <- function(...) {
   res <- list(...)
