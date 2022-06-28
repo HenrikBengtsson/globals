@@ -114,13 +114,14 @@ assign_Globals <- function(x, name, value) {
     }
   }
 
+  attr(x, "where") <- where
+
   ## Avoid call this function recursively
   class <- class(x)
   class(x) <- NULL
   x[[name]] <- value
   class(x) <- class
 
-  attr(x, "where") <- where
   invisible(x)
 }
 
@@ -172,8 +173,8 @@ c.Globals <- function(x, ...) {
     x <- c(x, g)
   }
 
-  class(x) <- clazz
   attr(x, "where") <- where
+  class(x) <- clazz
 
   stop_if_not(
     length(where) == length(x),

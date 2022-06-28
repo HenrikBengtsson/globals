@@ -1,5 +1,20 @@
 source("incl/start.R")
 
+assert_attributes <- function(globals) {
+  attrs <- attributes(globals)
+  names <- names(attrs)
+  stopifnot(
+    length(attrs) >= 2L,
+    "class" %in% names,
+    "where" %in% names,
+    ## 'where' and 'class' should be the last two (reproducibility)
+    names[length(names) - 1L] == "where",
+    names[length(names)     ] == "class",
+    inherits(globals, "Globals")
+  )
+  invisible(TRUE)
+}
+
 a <- 1
 b <- 2
 
@@ -11,18 +26,19 @@ globals <- globals0
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == c("a", "rnorm")),
   all(names(globals) == names(where))
 )
-
 message("*** Globals() - names ...")
 
 globals <- globals0
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals0))),
@@ -33,6 +49,7 @@ names(globals)[1] <- "A"
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == c("A", names(globals0)[-1])),
@@ -47,6 +64,7 @@ globals <- globals0[1]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 1L,
   length(where) == length(globals),
   all(names(globals) == c("a")),
@@ -57,6 +75,7 @@ globals <- globals0[2]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 1L,
   length(where) == length(globals),
   all(names(globals) == c("rnorm")),
@@ -67,6 +86,7 @@ globals <- globals0[2:1]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == c("rnorm", "a")),
@@ -78,6 +98,7 @@ globals <- rev(globals0)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == rev(names(globals0))),
@@ -95,6 +116,7 @@ globals$a <- globals0["a"]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == names(globals0)),
@@ -107,6 +129,7 @@ globals[["a"]] <- globals0["a"]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == names(globals0)),
@@ -119,6 +142,7 @@ globals$b <- globals0["a"]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 3L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals0), "b")),
@@ -131,6 +155,7 @@ globals[["b"]] <- globals0["a"]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 3L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals0), "b")),
@@ -143,6 +168,7 @@ globals$a <- NULL
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 1L,
   length(where) == length(globals),
   all(names(globals) == names(globals0)[-1]),
@@ -155,6 +181,7 @@ globals$a <- 1:2
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == names(globals0)),
@@ -173,6 +200,7 @@ globals <- c(globals_a, globals_b)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 4L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals_a), names(globals_b))),
@@ -185,6 +213,7 @@ globals <- c(globals_a, globals_b)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 4L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals_a), names(globals_b))),
@@ -197,6 +226,7 @@ globals <- c(globals_a, globals_b)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 2L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals_a), names(globals_b))),
@@ -208,6 +238,7 @@ globals <- c(globals_a, b = 1, c = letters)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 4L,
   length(where) == length(globals),
   all(names(globals) == c(names(globals_a), "b", "c")),
@@ -223,6 +254,7 @@ globals <- globals0[c(1:2, 1:2, 1:2)]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 6L,
   length(where) == length(globals),
   all(names(globals) == rep(names(globals0), times = 3L)),
@@ -233,6 +265,7 @@ globals <- unique(globals)
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == length(globals0),
   length(where) == length(globals),
   all(names(globals) == names(globals0)),
@@ -245,15 +278,23 @@ message("*** Globals() - unique ... DONE")
 message("*** Globals() - coercion ...")
 
 globals <- as.Globals(globals0)
-stopifnot(identical(globals, globals0))
+stopifnot(
+  assert_attributes(globals),
+  identical(globals, globals0)
+)
+
 
 globals <- as.Globals(unclass(globals0))
-stopifnot(identical(globals, globals0))
+stopifnot(
+  assert_attributes(globals),
+  identical(globals, globals0)
+)
 
 globals_t <- unclass(globals0)
 attr(globals_t, "where") <- NULL
 globals <- as.Globals(globals_t)
 stopifnot(
+  assert_attributes(globals),
   length(globals) == length(globals0),
   names(globals) == names(globals0)
 )
@@ -264,8 +305,22 @@ message("*** Globals() - coercion ... DONE")
 message("*** Globals() - empty ...")
 
 globals <- Globals()
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 0L
+)
+
 globals <- Globals(list())
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 0L
+)
+
 globals <- as.Globals(list())
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 0L
+)
 
 message("*** Globals() - empty ... DONE")
 
@@ -279,6 +334,7 @@ globals <- as.Globals(list(a = NULL))
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 1L,
   length(where) == length(globals),
   all(names(where) == names(globals)),
@@ -291,6 +347,7 @@ globals <- c(Globals(), list(a = NULL))
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
+  assert_attributes(globals),
   length(globals) == 1L,
   length(where) == length(globals),
   all(names(where) == names(globals)),
