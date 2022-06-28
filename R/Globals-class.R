@@ -95,7 +95,8 @@ as.Globals.list <- function(x, ...) {
 
 assign_Globals <- function(x, name, value) {
   where <- attr(x, "where", exact = TRUE)
-
+  stop_if_not(!is.null(where))
+  
   ## Remove an element?
   if (is.null(value)) {
     where[[name]] <- NULL
