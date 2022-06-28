@@ -1,6 +1,8 @@
 # Version (development version)
 
-* ...
+## New Features
+
+* Add `[[<-` to `Globals`, analogously to `$<-`.
 
 
 # Version 0.15.1 [2022-06-24]

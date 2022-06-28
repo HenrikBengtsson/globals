@@ -103,7 +103,31 @@ stopifnot(
 )
 
 globals <- globals0
+globals[["a"]] <- globals0["a"]
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 2L,
+  length(where) == length(globals),
+  all(names(globals) == names(globals0)),
+  all(names(globals) == names(where)),
+  identical(globals, globals0)
+)
+
+globals <- globals0
 globals$b <- globals0["a"]
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  length(globals) == 3L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globals0), "b")),
+  all(names(globals) == names(where)),
+  identical(globals$b, globals0$a)
+)
+
+globals <- globals0
+globals[["b"]] <- globals0["a"]
 str(globals)
 where <- attr(globals, "where")
 stopifnot(
