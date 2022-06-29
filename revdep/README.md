@@ -10,27 +10,29 @@
 |collate  |en_US.UTF-8                                             |
 |ctype    |en_US.UTF-8                                             |
 |tz       |America/Los_Angeles                                     |
-|date     |2022-06-28                                              |
+|date     |2022-06-29                                              |
 |pandoc   |2.18 @ /software/c4/cbi/software/pandoc-2.18/bin/pandoc |
 
 # Dependencies
 
 |package   |old    |new         |Δ  |
 |:---------|:------|:-----------|:--|
-|globals   |0.15.1 |0.15.1-9002 |*  |
+|globals   |0.15.1 |0.15.1-9004 |*  |
 |codetools |0.2-18 |0.2-18      |   |
 
 # Revdeps
 
-## Failed to check (3)
+## Failed to check (5)
 
 |package                      |version |error |warning |note |
 |:----------------------------|:-------|:-----|:-------|:----|
-|[bonsai](failures.md#bonsai) |0.1.0   |1     |        |     |
+|ChromSCape                   |?       |      |        |     |
 |MineICA                      |?       |      |        |     |
 |[oolong](failures.md#oolong) |0.4.1   |1     |        |     |
+|Prostar                      |?       |      |        |     |
+|scDiffCom                    |?       |      |        |     |
 
-## All (371)
+## All (374)
 
 |package                                                  |version   |error |warning |note |
 |:--------------------------------------------------------|:---------|:-----|:-------|:----|
@@ -65,14 +67,14 @@
 |[blavaan](problems.md#blavaan)                           |0.4-3     |      |        |3    |
 |[blockCV](problems.md#blockcv)                           |2.1.4     |      |        |2    |
 |bolasso                                                  |0.2.0     |      |        |     |
-|[bonsai](failures.md#bonsai)                             |0.1.0     |1     |        |     |
+|bonsai                                                   |0.1.0     |      |        |     |
 |[brms](problems.md#brms)                                 |2.17.0    |      |        |2    |
 |[broom.mixed](problems.md#broommixed)                    |0.2.9.4   |      |        |1    |
 |butcher                                                  |0.2.0     |      |        |     |
 |[catalog](problems.md#catalog)                           |0.1.0     |      |        |1    |
 |censored                                                 |0.1.0     |      |        |     |
 |ceRNAnetsim                                              |1.8.0     |      |        |     |
-|[ChromSCape](problems.md#chromscape)                     |1.6.0     |      |3       |4    |
+|ChromSCape                                               |?         |      |        |     |
 |[civis](problems.md#civis)                               |3.0.0     |      |        |1    |
 |Clustering                                               |1.7.7     |      |        |     |
 |codalm                                                   |0.1.2     |      |        |     |
@@ -168,6 +170,7 @@
 |[healthyR.ts](problems.md#healthyrts)                    |0.2.0     |      |        |1    |
 |hoopR                                                    |1.8.0     |      |        |     |
 |hwep                                                     |0.0.2     |      |        |     |
+|IDEAFilter                                               |0.1.2     |      |        |     |
 |idmodelr                                                 |0.3.2     |      |        |     |
 |IFAA                                                     |1.0.6     |      |        |     |
 |iml                                                      |0.11.0    |      |        |     |
@@ -189,6 +192,7 @@
 |[kernelboot](problems.md#kernelboot)                     |0.1.7     |      |        |1    |
 |kesernetwork                                             |0.1.0     |      |        |     |
 |[keyATM](problems.md#keyatm)                             |0.4.1     |      |        |1    |
+|kmscv                                                    |0.1.0     |      |        |     |
 |[lava](problems.md#lava)                                 |1.6.10    |      |        |1    |
 |ldaPrototype                                             |0.3.1     |      |        |     |
 |ldsr                                                     |0.0.2     |      |        |     |
@@ -223,7 +227,7 @@
 |[mlr3shiny](problems.md#mlr3shiny)                       |0.2.0     |      |        |1    |
 |mlr3spatial                                              |0.1.2     |      |        |     |
 |[mmaqshiny](problems.md#mmaqshiny)                       |1.0.0     |      |        |3    |
-|modelsummary                                             |0.11.1    |      |        |     |
+|modelsummary                                             |1.0.0     |      |        |     |
 |modeltime                                                |1.2.2     |      |        |     |
 |[modeltime.ensemble](problems.md#modeltimeensemble)      |1.0.1     |      |        |1    |
 |[modeltime.gluonts](problems.md#modeltimegluonts)        |0.1.0     |      |        |1    |
@@ -243,6 +247,7 @@
 |nlrx                                                     |0.4.3     |      |        |     |
 |NMproject                                                |0.6.7     |      |        |     |
 |nomnoml                                                  |0.2.5     |      |        |     |
+|OBL                                                      |0.1.0     |      |        |     |
 |[onemapsgapi](problems.md#onemapsgapi)                   |1.0.0     |      |        |1    |
 |[oolong](failures.md#oolong)                             |0.4.1     |1     |        |     |
 |[OOS](problems.md#oos)                                   |1.0.0     |      |        |1    |
@@ -274,7 +279,7 @@
 |progressr                                                |0.10.1    |      |        |     |
 |projpred                                                 |2.1.2     |      |        |     |
 |[promises](problems.md#promises)                         |1.2.0.1   |      |        |1    |
-|[Prostar](problems.md#prostar)                           |1.28.1    |      |        |2    |
+|Prostar                                                  |?         |      |        |     |
 |protti                                                   |0.3.0     |      |        |     |
 |PSCBS                                                    |0.66.0    |      |        |     |
 |[PUMP](problems.md#pump)                                 |1.0.0     |      |        |1    |
@@ -309,7 +314,7 @@
 |[sapfluxnetr](problems.md#sapfluxnetr)                   |0.1.3     |      |        |1    |
 |[scanMiRApp](problems.md#scanmirapp)                     |1.2.0     |      |1       |1    |
 |[sccomp](problems.md#sccomp)                             |1.0.0     |      |        |5    |
-|[scDiffCom](problems.md#scdiffcom)                       |0.1.0     |      |        |1    |
+|scDiffCom                                                |?         |      |        |     |
 |SCtools                                                  |0.3.2.1   |      |        |     |
 |[sctransform](problems.md#sctransform)                   |0.3.3     |      |        |1    |
 |[sdmApp](problems.md#sdmapp)                             |0.0.2     |      |        |1    |

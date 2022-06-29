@@ -391,25 +391,6 @@ Run `revdep_details(, "blockCV")` for more info
     Package unavailable to check Rd xrefs: ‘biomod2’
     ```
 
-# bonsai
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/tidymodels/bonsai
-* Source code: https://github.com/cran/bonsai
-* Date/Publication: 2022-06-23 07:20:02 UTC
-* Number of recursive dependencies: 122
-
-Run `revdep_details(, "bonsai")` for more info
-
-</details>
-
-## In both
-
-*   R CMD check timed out
-    
-
 # brms
 
 <details>
@@ -479,111 +460,6 @@ Run `revdep_details(, "catalog")` for more info
 *   checking LazyData ... NOTE
     ```
       'LazyData' is specified without a 'data' directory
-    ```
-
-# ChromSCape
-
-<details>
-
-* Version: 1.6.0
-* GitHub: https://github.com/vallotlab/ChromSCape
-* Source code: https://github.com/cran/ChromSCape
-* Date/Publication: 2022-04-26
-* Number of recursive dependencies: 217
-
-Run `revdep_details(, "ChromSCape")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... WARNING
-    ```
-    '::' or ':::' import not declared from: ‘GenomeInfoDb’
-    ```
-
-*   checking for code/documentation mismatches ... WARNING
-    ```
-    Codoc mismatches from documentation object 'count_coverage':
-    count_coverage
-      Code: function(input, format = "BAM", bins, canonical_chr,
-                     n_smoothBin = 5, ref = "hg38", read_size = 101,
-                     original_bins = NULL)
-      Docs: function(filename, format = "BAM", bins, canonical_chr,
-                     n_smoothBin = 5, ref = "hg38", read_size = 101)
-      Argument names in code not in docs:
-        input original_bins
-      Argument names in docs not in code:
-    ...
-    
-    Codoc mismatches from documentation object 'rawfile_ToBigWig':
-    rawfile_ToBigWig
-      Code: function(input, BigWig_filename, format = "BAM", bin_width =
-                     150, n_smoothBin = 5, ref = "hg38", read_size = 101,
-                     original_bins = NULL)
-      Docs: function(input, BigWig_filename, format = "BAM", bin_width =
-                     150, n_smoothBin = 5, ref = "hg38", read_size = 101)
-      Argument names in code not in docs:
-        original_bins
-    ```
-
-*   checking Rd \usage sections ... WARNING
-    ```
-    Undocumented arguments in documentation object 'generate_coverage_tracks'
-      ‘input_type’
-    
-    Functions with \usage entries need to have the appropriate \alias
-    entries, and all their arguments documented.
-    The \usage entries must correspond to syntactically valid R code.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
-*   checking for hidden files and directories ... NOTE
-    ```
-    Found the following hidden files and directories:
-      .BBSoptions
-    These were most likely included in error. See section ‘Package
-    structure’ in the ‘Writing R Extensions’ manual.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  8.2Mb
-      sub-directories of 1Mb or more:
-        data   1.4Mb
-        doc    2.9Mb
-        www    2.0Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    CompareWilcox: no visible binding for global variable ‘annot.’
-    bams_to_matrix_indexes: no visible binding for global variable
-      ‘files_dir_list’
-    enrich_TF_ChEA3_genes: no visible binding for global variable
-      ‘CheA3_TF_nTargets’
-    filter_correlated_cell_scExp: no visible binding for global variable
-      ‘run_tsne’
-    generate_analysis: no visible binding for global variable ‘k’
-    generate_analysis: no visible binding for global variable
-      ‘clusterConsensus’
-    ...
-      ‘merged_bam’
-    Undefined global functions or variables:
-      CheA3_TF_nTargets Component Fri_cyto Gain_or_Loss Gene TF V1 V2
-      absolute_value annot. cluster clusterConsensus cytoBand filename
-      files_dir_list genes group head k merged_bam molecule ncells new_row
-      orientation origin_value percent_active run_tsne sample_id
-      total_counts
-    Consider adding
-      importFrom("utils", "head")
-    to your NAMESPACE file.
-    ```
-
-*   checking Rd files ... NOTE
-    ```
-    prepare_Rd: raw_counts_to_sparse_matrix.Rd:6-8: Dropping empty section \source
     ```
 
 # civis
@@ -1938,7 +1814,7 @@ Run `revdep_details(, "lidR")` for more info
 
 *   checking tests ...
     ```
-      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60: 96973 Aborted                 (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/bin/BATCH: line 60: 14073 Aborted                 (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
     
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
@@ -1950,7 +1826,7 @@ Run `revdep_details(, "lidR")` for more info
       > test_check("lidR")
       Tests using raster: terra 
       Tests using future: TRUE 
-      Tests using OpenMP thread: 32 
+      Tests using OpenMP thread: 16 
       OGR: Unsupported geometry type
       OGR: Unsupported geometry type
       terminate called after throwing an instance of 'std::length_error'
@@ -2852,58 +2728,6 @@ Run `revdep_details(, "promises")` for more info
       'LazyData' is specified without a 'data' directory
     ```
 
-# Prostar
-
-<details>
-
-* Version: 1.28.1
-* GitHub: https://github.com/samWieczorek/Prostar
-* Source code: https://github.com/cran/Prostar
-* Date/Publication: 2022-05-26
-* Number of recursive dependencies: 259
-
-Run `revdep_details(, "Prostar")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘DAPAR’ ‘DAPARdata’ ‘DT’ ‘R.utils’ ‘XML’ ‘colourpicker’ ‘data.table’
-      ‘future’ ‘highcharter’ ‘htmlwidgets’ ‘later’ ‘promises’
-      ‘rhandsontable’ ‘sass’ ‘shinyAce’ ‘shinyBS’ ‘shinyWidgets’
-      ‘shinycssloaders’ ‘shinyjqui’ ‘shinyjs’ ‘shinythemes’ ‘tibble’
-      ‘webshot’
-      All declared Imports should be used.
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Prostar_UserManual.Rnw’ using Sweave
-    Error: processing vignette 'Prostar_UserManual.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'Prostar_UserManual.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `nowidow.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    ...
-    l.189 \RequirePackage
-                         {parnotes}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘Prostar_UserManual.Rnw’
-    
-    SUMMARY: processing the following file failed:
-      ‘Prostar_UserManual.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # PUMP
 
 <details>
@@ -3288,29 +3112,6 @@ Run `revdep_details(, "sccomp")` for more info
 *   checking for GNU extensions in Makefiles ... NOTE
     ```
     GNU make is a SystemRequirements.
-    ```
-
-# scDiffCom
-
-<details>
-
-* Version: 0.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/scDiffCom
-* Date/Publication: 2021-08-17 07:20:05 UTC
-* Number of recursive dependencies: 248
-
-Run `revdep_details(, "scDiffCom")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘future’ ‘utils’
-      All declared Imports should be used.
     ```
 
 # sctransform
