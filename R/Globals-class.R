@@ -156,10 +156,16 @@ assign_Globals <- function(x, name, value) {
 
   class <- class(x)
   class(x) <- NULL
+  attr(x, "where") <- NULL
   
   for (kk in seq_along(value)) {
     name <- names[kk]
-    x[[name]] <- value[[kk]]
+    value_kk <- value[[kk]]
+    if (is.null(value_kk)) {
+      x[name] <- list(NULL)
+    } else {
+      x[[name]] <- value_kk
+    }
     x_where[[name]] <- where[[kk]]
   }
 

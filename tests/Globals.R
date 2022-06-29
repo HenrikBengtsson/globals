@@ -111,6 +111,7 @@ message("*** Globals() - subsetting ... DONE")
 
 message("*** Globals() - subsetted assignment ...")
 
+message("1.")
 globals <- globals0
 globals$a <- globals0["a"]
 str(globals)
@@ -124,6 +125,7 @@ stopifnot(
   identical(globals, globals0)
 )
 
+message("2.")
 globals <- globals0
 globals[["a"]] <- globals0["a"]
 str(globals)
@@ -137,6 +139,7 @@ stopifnot(
   identical(globals, globals0)
 )
 
+message("3.")
 globals <- globals0
 globals$b <- globals0["a"]
 str(globals)
@@ -150,6 +153,7 @@ stopifnot(
   identical(globals$b, globals0$a)
 )
 
+message("4.")
 globals <- globals0
 globals[["b"]] <- globals0["a"]
 str(globals)
@@ -163,6 +167,7 @@ stopifnot(
   identical(globals$b, globals0$a)
 )
 
+message("5.")
 globals <- globals0
 globals["b"] <- globals0["a"]
 str(globals)
@@ -176,6 +181,7 @@ stopifnot(
   identical(globals$b, globals0$a)
 )
 
+message("6.")
 globals <- globals0
 globals["b"] <- list(globals0[["a"]])
 str(globals)
@@ -189,6 +195,7 @@ stopifnot(
   identical(globals$b, globals0$a)
 )
 
+message("7.")
 globals <- globals0
 globals$a <- NULL
 str(globals)
@@ -202,6 +209,7 @@ stopifnot(
   is.null(globals$a)
 )
 
+message("8.")
 globals <- globals0
 globals$a <- 1:2
 str(globals)
@@ -215,7 +223,7 @@ stopifnot(
   identical(globals$a, 1:2)
 )
 
-
+message("9.")
 globals <- globals0
 globals[c("b", "a")] <- list(1:3, 42)
 str(globals)
@@ -228,6 +236,19 @@ stopifnot(
   all(names(globals) == names(where)),
   identical(globals$b, 1:3),
   identical(globals$a, 42)
+)
+
+message("10.")
+globals <- Globals()
+globals["empty"] <- list(NULL)
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 1L,
+  length(where) == length(globals),
+  all(names(globals) == "empty"),
+  is.null(globals[["empty"]])
 )
 
 
