@@ -2,7 +2,13 @@
 
 ## New Features
 
-* Add `[[<-` to `Globals`, analogously to `$<-`.
+* Add `[[<-` and `[<-` for `Globals`, to complement `$<-`.
+
+## Reproducibility
+
+* All functions modifying a `Globals` object guarantees that the
+  'where' and the 'class' attributes are always the last two
+  attributes and in that order.
 
 
 # Version 0.15.1 [2022-06-24]
