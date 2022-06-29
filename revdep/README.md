@@ -17,7 +17,7 @@
 
 |package   |old    |new         |Δ  |
 |:---------|:------|:-----------|:--|
-|globals   |0.15.1 |0.15.1-9004 |*  |
+|globals   |0.15.1 |0.15.1-9005 |*  |
 |codetools |0.2-18 |0.2-18      |   |
 
 # Revdeps
@@ -32,7 +32,7 @@
 |Prostar                      |?       |      |        |     |
 |scDiffCom                    |?       |      |        |     |
 
-## All (374)
+## All (375)
 
 |package                                                  |version   |error |warning |note |
 |:--------------------------------------------------------|:---------|:-----|:-------|:----|
@@ -299,7 +299,7 @@
 |[remiod](problems.md#remiod)                             |1.0.0     |      |        |1    |
 |reproducible                                             |1.2.8     |      |        |     |
 |resourcer                                                |1.2.0     |      |        |     |
-|reval                                                    |3.0-0     |      |        |     |
+|reval                                                    |3.1-0     |      |        |     |
 |[rgee](problems.md#rgee)                                 |1.1.3     |      |        |2    |
 |[robotstxt](problems.md#robotstxt)                       |0.7.13    |      |        |2    |
 |robust2sls                                               |0.2.0     |      |        |     |
@@ -406,6 +406,7 @@
 |[viewpoly](problems.md#viewpoly)                         |0.2.0     |      |        |1    |
 |[vip](problems.md#vip)                                   |0.3.2     |      |        |1    |
 |[vmeasur](problems.md#vmeasur)                           |0.1.4     |      |1       |     |
+|wildmeta                                                 |0.2.0     |      |        |     |
 |workflows                                                |0.2.6     |      |        |     |
 |workflowsets                                             |0.2.1     |      |        |     |
 |[wru](problems.md#wru)                                   |1.0.0     |      |        |2    |

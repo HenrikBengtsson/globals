@@ -25,6 +25,8 @@ Creating a new generic function for ‘eval’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmax’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmin’ in package ‘BiocGenerics’
 ...
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG -I../inst/include/ -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I/usr/local/include   -fpic  -g -O2  -c pool_size_factors.cpp -o pool_size_factors.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG -I../inst/include/ -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I/usr/local/include   -fpic  -g -O2  -c sum_counts.cpp -o sum_counts.o
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG -I../inst/include/ -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I/usr/local/include   -fpic  -g -O2  -c utils.cpp -o utils.o
 g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/lib64 -o scuttle.so RcppExports.o cumulative_prop.o downsample_counts.o fit_linear_model.o pool_size_factors.o sum_counts.o utils.o -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lRlapack -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lRblas -lgfortran -lm -lquadmath -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lR
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
@@ -33,8 +35,6 @@ g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DN
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c smooth_gaussian_kernel.cpp -o smooth_gaussian_kernel.o
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c utils.cpp -o utils.o
 g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/lib64 -o batchelor.so RcppExports.o adjust_shift_variance.o find_mutual_nns.o smooth_gaussian_kernel.o utils.o -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lR
-g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/BH/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/dqrng/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/scuttle/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/BH/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/dqrng/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/scuttle/include' -I/usr/local/include   -fpic  -g -O2  -c choose_effect_size.cpp -o choose_effect_size.o
 
 
 * installing *binary* package ‘base64enc’ ...
@@ -48,16 +48,16 @@ g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DN
 ** R
 ** inst
 ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
 *** installing help indices
 ** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (scater)
-* installing *source* package ‘scran’ ...
-** using staged installation
-** libs
 
 
 ```
@@ -75,6 +75,8 @@ Creating a new generic function for ‘eval’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmax’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmin’ in package ‘BiocGenerics’
 ...
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG -I../inst/include/ -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I/usr/local/include   -fpic  -g -O2  -c pool_size_factors.cpp -o pool_size_factors.o
+g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG -I../inst/include/ -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I/usr/local/include   -fpic  -g -O2  -c sum_counts.cpp -o sum_counts.o
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG -I../inst/include/ -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I/usr/local/include   -fpic  -g -O2  -c utils.cpp -o utils.o
 g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/lib64 -o scuttle.so RcppExports.o cumulative_prop.o downsample_counts.o fit_linear_model.o pool_size_factors.o sum_counts.o utils.o -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lRlapack -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lRblas -lgfortran -lm -lquadmath -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lR
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
@@ -83,8 +85,6 @@ g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DN
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c smooth_gaussian_kernel.cpp -o smooth_gaussian_kernel.o
 g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I/usr/local/include   -fpic  -g -O2  -c utils.cpp -o utils.o
 g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/lib64 -o batchelor.so RcppExports.o adjust_shift_variance.o find_mutual_nns.o smooth_gaussian_kernel.o utils.o -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lR
-g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/BH/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/dqrng/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/scuttle/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/Rcpp/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/beachmat/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/BH/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/dqrng/include' -I'/c4/home/henrik/repositories/globals/revdep/library/ChromSCape/scuttle/include' -I/usr/local/include   -fpic  -g -O2  -c choose_effect_size.cpp -o choose_effect_size.o
 
 
 * installing *binary* package ‘base64enc’ ...
@@ -98,16 +98,16 @@ g++ -std=gnu++11 -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DN
 ** R
 ** inst
 ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
 *** installing help indices
 ** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (scater)
-* installing *source* package ‘scran’ ...
-** using staged installation
-** libs
 
 
 ```
@@ -161,16 +161,16 @@ gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/l
 * installing *binary* package ‘BH’ ...
 * DONE (BH)
 ...
-** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (annotate)
-* installing *source* package ‘AnnotationForge’ ...
+* DONE (AnnotationForge)
+* installing *source* package ‘BiocFileCache’ ...
 ** using staged installation
 ** R
 ** inst
+** byte-compile and prepare package for lazy loading
 
 
 ```
@@ -211,16 +211,16 @@ gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/l
 * installing *binary* package ‘BH’ ...
 * DONE (BH)
 ...
-** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (annotate)
-* installing *source* package ‘AnnotationForge’ ...
+* DONE (AnnotationForge)
+* installing *source* package ‘BiocFileCache’ ...
 ** using staged installation
 ** R
 ** inst
+** byte-compile and prepare package for lazy loading
 
 
 ```
@@ -347,7 +347,7 @@ in method for ‘plotMzDelta’ with signature ‘"mzRramp"’: no definition fo
 * DONE (DAPAR)
 
 The downloaded source packages are in
-	‘/scratch/henrik/733305/RtmpoKYusr/downloaded_packages’
+	‘/scratch/henrik/733445/RtmpGBE9Fc/downloaded_packages’
 
 
 ```
@@ -397,7 +397,7 @@ in method for ‘plotMzDelta’ with signature ‘"mzRramp"’: no definition fo
 * DONE (DAPAR)
 
 The downloaded source packages are in
-	‘/scratch/henrik/733305/RtmpoKYusr/downloaded_packages’
+	‘/scratch/henrik/733445/RtmpGBE9Fc/downloaded_packages’
 
 
 ```
@@ -451,16 +451,16 @@ g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -
 * installing *source* package ‘BiocGenerics’ ...
 ** using staged installation
 ...
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (biomaRt)
-* installing *source* package ‘scran’ ...
-** using staged installation
-** libs
-installing to /c4/home/henrik/repositories/globals/revdep/library/scDiffCom/00LOCK-scran/00new/scran/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
+* DONE (scran)
+* installing *binary* package ‘Seurat’ ...
+* DONE (Seurat)
+* installing *binary* package ‘ontoProc’ ...
+* DONE (ontoProc)
+* installing *binary* package ‘SingleCellSignalR’ ...
+* DONE (SingleCellSignalR)
+
+The downloaded source packages are in
+	‘/scratch/henrik/733445/RtmpcePRC4/downloaded_packages’
 
 
 ```
@@ -501,16 +501,16 @@ g++ -std=gnu++11 -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -
 * installing *source* package ‘BiocGenerics’ ...
 ** using staged installation
 ...
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (biomaRt)
-* installing *source* package ‘scran’ ...
-** using staged installation
-** libs
-installing to /c4/home/henrik/repositories/globals/revdep/library/scDiffCom/00LOCK-scran/00new/scran/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
+* DONE (scran)
+* installing *binary* package ‘Seurat’ ...
+* DONE (Seurat)
+* installing *binary* package ‘ontoProc’ ...
+* DONE (ontoProc)
+* installing *binary* package ‘SingleCellSignalR’ ...
+* DONE (SingleCellSignalR)
+
+The downloaded source packages are in
+	‘/scratch/henrik/733445/RtmpcePRC4/downloaded_packages’
 
 
 ```
