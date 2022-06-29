@@ -217,8 +217,8 @@ c.Globals <- function(x, ...) {
       if (is.null(name)) {
         stopf("Can only append named objects to Globals list: %s", sQuote(mode(g)))
       }
-      g <- structure(list(g), names = name)
       e <- environment_of(g)
+      g <- structure(list(g), names = name)
       w <- structure(list(e), names = name)
     }
     where <- c(where, w)
