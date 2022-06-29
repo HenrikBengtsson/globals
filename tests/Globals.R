@@ -308,6 +308,18 @@ stopifnot(
   all(names(globals) == names(where))
 )
 
+
+globals <- Globals()
+globals_1 <- c(globals, fcn = median)
+str(globals_1)
+
+globals_2 <- globals
+globals_2$fcn <- median
+str(globals_2)
+
+stopifnot(identical(globals_2, globals_1))
+
+
 message("*** Globals() - combining ... DONE")
 
 

@@ -10,6 +10,11 @@
   'where' and the 'class' attributes are always the last two
   attributes and in that order.
 
+## Bug Fixes
+
+* `c()` for `Globals` would lose the `where` environment for any
+  functions appended.
+  
 
 # Version 0.15.1 [2022-06-24]
 
