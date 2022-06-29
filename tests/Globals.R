@@ -164,6 +164,32 @@ stopifnot(
 )
 
 globals <- globals0
+globals["b"] <- globals0["a"]
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 3L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globals0), "b")),
+  all(names(globals) == names(where)),
+  identical(globals$b, globals0$a)
+)
+
+globals <- globals0
+globals["b"] <- list(globals0[["a"]])
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 3L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globals0), "b")),
+  all(names(globals) == names(where)),
+  identical(globals$b, globals0$a)
+)
+
+globals <- globals0
 globals$a <- NULL
 str(globals)
 where <- attr(globals, "where")
@@ -188,6 +214,22 @@ stopifnot(
   all(names(globals) == names(where)),
   identical(globals$a, 1:2)
 )
+
+
+globals <- globals0
+globals[c("b", "a")] <- list(1:3, 42)
+str(globals)
+where <- attr(globals, "where")
+stopifnot(
+  assert_attributes(globals),
+  length(globals) == 3L,
+  length(where) == length(globals),
+  all(names(globals) == c(names(globals0), "b")),
+  all(names(globals) == names(where)),
+  identical(globals$b, 1:3),
+  identical(globals$a, 42)
+)
+
 
 message("*** Globals() - subsetted assignment ... DONE")
 

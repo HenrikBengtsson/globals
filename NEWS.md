@@ -2,7 +2,7 @@
 
 ## New Features
 
-* Add `[[<-` to `Globals`, analogously to `$<-`.
+* Add `[[<-` and `[<-` for `Globals`, to complement `$<-`.
 
 ## Reproducibility
 
