@@ -6,8 +6,8 @@
 
 ## Reproducibility
 
-* All functions modifying a `Globals` object guarantees that the
-  'where' and the 'class' attributes are always the last two
+* All functions modifying a `Globals` object guarantee that the
+  `where` and the `class` attributes are always the last two
   attributes and in that order.
 
 ## Bug Fixes
