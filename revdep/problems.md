@@ -2047,14 +2047,14 @@ Run `revdep_details(, "lidR")` for more info
 
 *   checking tests ...
     ```
-      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/bin/BATCH: line 60: 147221 Segmentation fault      (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+      Running ‘testthat.R’/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/bin/BATCH: line 60: 32138 Segmentation fault      (core dumped) ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
     
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 50 lines of output:
       
       Traceback:
-       1: .External(list(name = "CppMethod__invoke_notvoid", address = <pointer: 0x2341540>,     dll = list(name = "Rcpp", path = "/c4/home/henrik/repositories/globals/revdep/library/lidR/Rcpp/libs/Rcpp.so",         dynamicLookup = TRUE, handle = <pointer: 0x4125100>,         info = <pointer: 0x3b9fdc0>), numParameters = -1L), <pointer: 0x63f58b0>,     <pointer: 0x63f6d80>, .pointer, ...)
+       1: .External(list(name = "CppMethod__invoke_notvoid", address = <pointer: 0x208bde0>,     dll = list(name = "Rcpp", path = "/c4/home/henrik/repositories/globals/revdep/library/lidR/Rcpp/libs/Rcpp.so",         dynamicLookup = TRUE, handle = <pointer: 0x3e368e0>,         info = <pointer: 0x386b580>), numParameters = -1L), <pointer: 0x5e08ef0>,     <pointer: 0x2f3fc20>, .pointer, ...)
        2: x@ptr$set_crs(value)
        3: .local(x, ..., value)
     ...

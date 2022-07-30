@@ -67,16 +67,16 @@ g++ -std=gnu++14 -shared -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -
 * installing *binary* package ‘BH’ ...
 * DONE (BH)
 ...
-* installing *source* package ‘minfi’ ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (GenomicFeatures)
+* installing *source* package ‘bumphunter’ ...
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
 
 
 ```
@@ -117,16 +117,16 @@ g++ -std=gnu++14 -shared -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -
 * installing *binary* package ‘BH’ ...
 * DONE (BH)
 ...
-* installing *source* package ‘minfi’ ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (GenomicFeatures)
+* installing *source* package ‘bumphunter’ ...
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
 
 
 ```
