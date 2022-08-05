@@ -62,7 +62,7 @@
    variable.
 
  * Now `findGlobals(function(x) x[1] <- 0)` identifies `x` as a global
-   variable.  Same for other variants like `x[[1]] <- 0` and x$a <- 0.
+   variable.  Same for other variants like `x[[1]] <- 0` and `x$a <- 0`.
 
  * Now `findGlobals(function(z) x <- z$x)` identifies `x` as a global
    variable.
