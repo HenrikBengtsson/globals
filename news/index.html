@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.1-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.0-9000</span>
       </span>
     </div>
 
@@ -123,6 +123,22 @@
 <h2 class="page-header" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
 <ul><li>…</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.16.0" id="version-0160">Version 0.16.0<a class="anchor" aria-label="anchor" href="#version-0160"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-16-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-16-0"></a></h3>
+<ul><li>Add <code>[[&lt;-</code> and <code>[&lt;-</code> for <code>Globals</code>, to complement <code>$&lt;-</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="reproducibility-0-16-0">Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility-0-16-0"></a></h3>
+<ul><li>All functions modifying a <code>Globals</code> object guarantee that the <code>where</code> and the <code>class</code> attributes are always the last two attributes and in that order.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-16-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-16-0"></a></h3>
+<ul><li>
+<code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> for <code>Globals</code> would lose the <code>where</code> environment for any functions appended.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.15.1" id="version-0151">Version 0.15.1<small>2022-06-24</small><a class="anchor" aria-label="anchor" href="#version-0151"></a></h2>
 <div class="section level3">
@@ -461,7 +477,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
 </div>
 
       </footer></div>
