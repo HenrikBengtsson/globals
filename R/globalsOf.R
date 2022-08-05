@@ -225,7 +225,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     debug && mdebug("- dotdotdots: <none>")
   }
 
-  globals <- structure(list(), class = c("Globals", "list"))
+  globals <- list()
   where <- list()
   for (kk in seq_along(names)) {
     name <- names[kk]
@@ -271,6 +271,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
   )
 
   attr(globals, "where") <- where
+  class(globals) <- c("Globals", class(globals))
 
   debug && mdebug("globalsByName(<%d names>, mustExist = %s) ... DONE",
                   nnames, mustExist)

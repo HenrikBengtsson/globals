@@ -50,19 +50,27 @@ Globals <- function(object = list(), ...) {
 as.Globals <- function(x, ...) UseMethod("as.Globals")
 
 #' @export
+as.Globals.default <- function(x, ...) {
+  stopf("Don't know how to coerce a %s to Globals", class(x)[1])
+}
+
+#' @export
 as.Globals.Globals <- function(x, ...) x
 
 #' @export
 as.Globals.list <- function(x, ...) {
-  ## Use the globals environments as the locals?
-  ## (with emptyenv() as the fallback)
-  where <- attr(x, "where", exact = TRUE)
-  if (is.null(where)) {
-    where <- lapply(x, FUN = environment_of)
-    names(where) <- names(x)
-    attr(x, "where") <- where
+  if (length(x) > 0L) {
+    stop_if_not(!is.null(names(x)))
+  
+    ## Use the globals environments as the locals?
+    ## (with emptyenv() as the fallback)
+    where <- attr(x, "where", exact = TRUE)
+    if (is.null(where)) {
+      where <- lapply(x, FUN = environment_of)
+      names(where) <- names(x)
+      attr(x, "where") <- where
+    }
   }
-
   Globals(x, ...)
 }
 
@@ -93,13 +101,13 @@ as.Globals.list <- function(x, ...) {
 }
 
 
-#' @export
-`$<-.Globals` <- function(x, name, value) {
+assign_Globals <- function(x, name, value) {
+  stop_if_not(is.character(name), !is.na(name), nchar(name) > 0L)
   where <- attr(x, "where", exact = TRUE)
-
+  stop_if_not(!is.null(where))
+  
   ## Remove an element?
   if (is.null(value)) {
-    x[[name]] <- NULL
     where[[name]] <- NULL
   } else {
     ## Value must be Globals object of length one
@@ -108,18 +116,79 @@ as.Globals.list <- function(x, ...) {
         stopf("Cannot assign Globals object of length different than one: %s",
              length(value))
       }
-      x[[name]] <- value[[1]]
       where[[name]] <- attr(value, "where", exact = TRUE)[[1]]
+      value <- value[[1]]
     } else {
-      x[[name]] <- value
       where[[name]] <- environment_of(value)
     }
   }
 
   attr(x, "where") <- where
+
+  ## Avoid call this function recursively
+  class <- class(x)
+  class(x) <- NULL
+  x[[name]] <- value
+  class(x) <- class
+
   invisible(x)
 }
 
+
+#' @export
+`[<-.Globals` <- function(x, names, value) {
+  stop_if_not(
+    length(names) == length(value),
+    is.character(names), !anyNA(names), all(nchar(names) > 0)
+  )
+
+  if (inherits(value, "Globals")) {
+    where <- attr(value, "where")
+  } else if (is.list(value)) {
+    where <- lapply(value, FUN = environment_of)
+  } else {
+    stopf("Unsupported class of 'value': %s", class(value)[1])
+  }
+  stop_if_not(length(where) == length(value))
+
+  x_where <- attr(x, "where", exact = TRUE)
+  stop_if_not(!is.null(x_where))
+
+  class <- class(x)
+  class(x) <- NULL
+  attr(x, "where") <- NULL
+  
+  for (kk in seq_along(value)) {
+    name <- names[kk]
+    value_kk <- value[[kk]]
+    if (is.null(value_kk)) {
+      x[name] <- list(NULL)
+    } else {
+      x[[name]] <- value_kk
+    }
+    x_where[[name]] <- where[[kk]]
+  }
+
+  stop_if_not(length(x_where) == length(x))
+
+  attr(x, "where") <- x_where
+  class(x) <- class
+
+  invisible(x)
+}
+
+
+#' @export
+`$<-.Globals` <- function(x, name, value) {
+  x <- assign_Globals(x, name = name, value = value)
+  invisible(x)
+}
+
+#' @export
+`[[<-.Globals` <- function(x, name, value) {
+  x <- assign_Globals(x, name = name, value = value)
+  invisible(x)
+}
 
 
 #' @export
@@ -148,16 +217,16 @@ c.Globals <- function(x, ...) {
       if (is.null(name)) {
         stopf("Can only append named objects to Globals list: %s", sQuote(mode(g)))
       }
-      g <- structure(list(g), names = name)
       e <- environment_of(g)
+      g <- structure(list(g), names = name)
       w <- structure(list(e), names = name)
     }
     where <- c(where, w)
     x <- c(x, g)
   }
 
-  class(x) <- clazz
   attr(x, "where") <- where
+  class(x) <- clazz
 
   stop_if_not(
     length(where) == length(x),

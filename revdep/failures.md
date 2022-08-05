@@ -1,3 +1,22 @@
+# bonsai
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/tidymodels/bonsai
+* Source code: https://github.com/cran/bonsai
+* Date/Publication: 2022-06-23 07:20:02 UTC
+* Number of recursive dependencies: 124
+
+Run `revdep_details(, "bonsai")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+    
+
 # MineICA
 
 <details>
@@ -25,16 +44,16 @@ Creating a new generic function for ‘eval’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmax’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmin’ in package ‘BiocGenerics’
 ...
-Creating a generic function for ‘eapply’ from package ‘base’ in package ‘AnnotationDbi’
-Creating a generic function for ‘exists’ from package ‘base’ in package ‘AnnotationDbi’
-Creating a generic function for ‘sample’ from package ‘base’ in package ‘AnnotationDbi’
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c IRanges_stubs.c -o IRanges_stubs.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c R_init_GenomicAlignments.c -o R_init_GenomicAlignments.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c S4Vectors_stubs.c -o S4Vectors_stubs.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c cigar_utils.c -o cigar_utils.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c coordinate_mapping_methods.c -o coordinate_mapping_methods.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c encodeOverlaps_methods.c -o encodeOverlaps_methods.o
-gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/lib64 -o GenomicAlignments.so IRanges_stubs.o R_init_GenomicAlignments.o S4Vectors_stubs.o cigar_utils.o coordinate_mapping_methods.o encodeOverlaps_methods.o -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lR
+gcc -shared -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -L/usr/local/lib64 -o rtracklayer.so S4Vectors_stubs.o IRanges_stubs.o XVector_stubs.o R_init_rtracklayer.o readGFF.o bbiHelper.o bigWig.o bigBedHelper.o bigBed.o chain_io.o twoBit.o handlers.o utils.o ucsc/memgfx.o ucsc/aliType.o ucsc/binRange.o ucsc/htmlColor.o ucsc/sqlList.o ucsc/tokenizer.o ucsc/asParse.o ucsc/basicBed.o ucsc/bigBed.o ucsc/bPlusTree.o ucsc/bbiRead.o ucsc/bbiWrite.o ucsc/bwgCreate.o ucsc/bwgQuery.o ucsc/cirTree.o ucsc/common.o ucsc/dnaseq.o ucsc/dnautil.o ucsc/errAbort.o ucsc/hash.o ucsc/linefile.o ucsc/localmem.o ucsc/sqlNum.o ucsc/zlibFace.o ucsc/dystring.o ucsc/hmmstats.o ucsc/obscure.o ucsc/pipeline.o ucsc/rangeTree.o ucsc/rbTree.o ucsc/memalloc.o ucsc/dlist.o ucsc/hex.o ucsc/filePath.o ucsc/htmlPage.o ucsc/udc.o ucsc/net.o ucsc/bits.o ucsc/twoBit.o ucsc/_cheapcgi.o ucsc/internet.o ucsc/https.o ucsc/base64.o ucsc/verbose.o ucsc/os.o ucsc/wildcmp.o ucsc/_portimpl.o -lz -pthread -lssl -lcrypto -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -lR
+Creating a generic function for ‘offset’ from package ‘stats’ in package ‘rtracklayer’
+g++ -std=gnu++14 -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c half_range_mode.cpp -o half_range_mode.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c init.c -o init.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c nd.c -o nd.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c pAUC.c -o pAUC.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c rowPAUCs.c -o rowPAUCs.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c rowttests.c -o rowttests.o
+gfortran -fno-optimize-sibling-calls  -fpic  -g -O2  -c ttest.f -o ttest.o
+g++ -std=gnu++14 -shared -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -L/usr/local/lib64 -o genefilter.so half_range_mode.o init.o nd.o pAUC.o rowPAUCs.o rowttests.o ttest.o -lgfortran -lm -lquadmath -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -lR
 
 
 * installing *binary* package ‘assertthat’ ...
@@ -48,16 +67,16 @@ gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/l
 * installing *binary* package ‘BH’ ...
 * DONE (BH)
 ...
-** checking absolute paths in shared objects and dynamic libraries
+** installing vignettes
+** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (GenomicAlignments)
-* installing *binary* package ‘readr’ ...
-* DONE (readr)
-* installing *binary* package ‘tidyr’ ...
-* DONE (tidyr)
-* installing *binary* package ‘viridis’ ...
-* DONE (viridis)
+* DONE (GenomicFeatures)
+* installing *source* package ‘bumphunter’ ...
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
 
 
 ```
@@ -75,16 +94,16 @@ Creating a new generic function for ‘eval’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmax’ in package ‘BiocGenerics’
 Creating a new generic function for ‘pmin’ in package ‘BiocGenerics’
 ...
-Creating a generic function for ‘eapply’ from package ‘base’ in package ‘AnnotationDbi’
-Creating a generic function for ‘exists’ from package ‘base’ in package ‘AnnotationDbi’
-Creating a generic function for ‘sample’ from package ‘base’ in package ‘AnnotationDbi’
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c IRanges_stubs.c -o IRanges_stubs.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c R_init_GenomicAlignments.c -o R_init_GenomicAlignments.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c S4Vectors_stubs.c -o S4Vectors_stubs.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c cigar_utils.c -o cigar_utils.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c coordinate_mapping_methods.c -o coordinate_mapping_methods.o
-gcc -I"/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/include" -DNDEBUG  -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/S4Vectors/include' -I'/c4/home/henrik/repositories/globals/revdep/library/MineICA/IRanges/include' -I/usr/local/include   -fpic  -g -O2  -c encodeOverlaps_methods.c -o encodeOverlaps_methods.o
-gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/lib64 -o GenomicAlignments.so IRanges_stubs.o R_init_GenomicAlignments.o S4Vectors_stubs.o cigar_utils.o coordinate_mapping_methods.o encodeOverlaps_methods.o -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -lR
+gcc -shared -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -L/usr/local/lib64 -o rtracklayer.so S4Vectors_stubs.o IRanges_stubs.o XVector_stubs.o R_init_rtracklayer.o readGFF.o bbiHelper.o bigWig.o bigBedHelper.o bigBed.o chain_io.o twoBit.o handlers.o utils.o ucsc/memgfx.o ucsc/aliType.o ucsc/binRange.o ucsc/htmlColor.o ucsc/sqlList.o ucsc/tokenizer.o ucsc/asParse.o ucsc/basicBed.o ucsc/bigBed.o ucsc/bPlusTree.o ucsc/bbiRead.o ucsc/bbiWrite.o ucsc/bwgCreate.o ucsc/bwgQuery.o ucsc/cirTree.o ucsc/common.o ucsc/dnaseq.o ucsc/dnautil.o ucsc/errAbort.o ucsc/hash.o ucsc/linefile.o ucsc/localmem.o ucsc/sqlNum.o ucsc/zlibFace.o ucsc/dystring.o ucsc/hmmstats.o ucsc/obscure.o ucsc/pipeline.o ucsc/rangeTree.o ucsc/rbTree.o ucsc/memalloc.o ucsc/dlist.o ucsc/hex.o ucsc/filePath.o ucsc/htmlPage.o ucsc/udc.o ucsc/net.o ucsc/bits.o ucsc/twoBit.o ucsc/_cheapcgi.o ucsc/internet.o ucsc/https.o ucsc/base64.o ucsc/verbose.o ucsc/os.o ucsc/wildcmp.o ucsc/_portimpl.o -lz -pthread -lssl -lcrypto -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -lR
+Creating a generic function for ‘offset’ from package ‘stats’ in package ‘rtracklayer’
+g++ -std=gnu++14 -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c half_range_mode.cpp -o half_range_mode.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c init.c -o init.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c nd.c -o nd.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c pAUC.c -o pAUC.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c rowPAUCs.c -o rowPAUCs.o
+gcc -I"/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -c rowttests.c -o rowttests.o
+gfortran -fno-optimize-sibling-calls  -fpic  -g -O2  -c ttest.f -o ttest.o
+g++ -std=gnu++14 -shared -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -L/usr/local/lib64 -o genefilter.so half_range_mode.o init.o nd.o pAUC.o rowPAUCs.o rowttests.o ttest.o -lgfortran -lm -lquadmath -L/software/c4/cbi/software/R-4.2.1-gcc10/lib64/R/lib -lR
 
 
 * installing *binary* package ‘assertthat’ ...
@@ -98,16 +117,16 @@ gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/l
 * installing *binary* package ‘BH’ ...
 * DONE (BH)
 ...
-** checking absolute paths in shared objects and dynamic libraries
+** installing vignettes
+** testing if installed package can be loaded from temporary location
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
-* DONE (GenomicAlignments)
-* installing *binary* package ‘readr’ ...
-* DONE (readr)
-* installing *binary* package ‘tidyr’ ...
-* DONE (tidyr)
-* installing *binary* package ‘viridis’ ...
-* DONE (viridis)
+* DONE (GenomicFeatures)
+* installing *source* package ‘bumphunter’ ...
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
 
 
 ```
@@ -119,7 +138,7 @@ gcc -shared -L/software/c4/cbi/software/R-4.2.0-gcc10/lib64/R/lib -L/usr/local/l
 * GitHub: https://github.com/chainsawriot/oolong
 * Source code: https://github.com/cran/oolong
 * Date/Publication: 2021-11-09 10:20:11 UTC
-* Number of recursive dependencies: 151
+* Number of recursive dependencies: 152
 
 Run `revdep_details(, "oolong")` for more info
 
@@ -172,66 +191,6 @@ Error in normalize(self$components, "l1") :
   could not find function "normalize"
 ERROR: lazydata failed for package ‘oolong’
 * removing ‘/c4/home/henrik/repositories/globals/revdep/checks/oolong/old/oolong.Rcheck/oolong’
-
-
-```
-# pareg
-
-<details>
-
-* Version: 1.0.0
-* GitHub: https://github.com/cbg-ethz/pareg
-* Source code: https://github.com/cran/pareg
-* Date/Publication: 2022-04-26
-* Number of recursive dependencies: 258
-
-Run `revdep_details(, "pareg")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘pareg’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘pareg’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘Biostrings’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘pareg’
-* removing ‘/c4/home/henrik/repositories/globals/revdep/checks/pareg/new/pareg.Rcheck/pareg’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘pareg’ ...
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘Biostrings’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘pareg’
-* removing ‘/c4/home/henrik/repositories/globals/revdep/checks/pareg/old/pareg.Rcheck/pareg’
 
 
 ```

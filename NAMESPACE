@@ -2,8 +2,11 @@
 
 S3method("$<-",Globals)
 S3method("[",Globals)
+S3method("[<-",Globals)
+S3method("[[<-",Globals)
 S3method("names<-",Globals)
 S3method(as.Globals,Globals)
+S3method(as.Globals,default)
 S3method(as.Globals,list)
 S3method(c,Globals)
 S3method(cleanup,Globals)
