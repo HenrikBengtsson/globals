@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.0-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.0-9001</span>
       </span>
     </div>
 
@@ -121,10 +121,14 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
-<ul><li>…</li>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>
+<code><a href="../reference/packagesOf.Globals.html">packagesOf()</a></code> for <code>Globals</code> failed to return the package of the globals if the global don’t have a closure, e.g. <code><a href="https://rdrr.io/r/base/Constants.html" class="external-link">base::pi</a></code> and <code><a href="https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html" class="external-link">data.table::.N</a></code>.</li>
 </ul></div>
+</div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.16.0" id="version-0160">Version 0.16.0<a class="anchor" aria-label="anchor" href="#version-0160"></a></h2>
+<h2 class="page-header" data-toc-text="0.16.0" id="version-0160">Version 0.16.0<small>2022-08-05</small><a class="anchor" aria-label="anchor" href="#version-0160"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-16-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-16-0"></a></h3>
 <ul><li>Add <code>[[&lt;-</code> and <code>[&lt;-</code> for <code>Globals</code>, to complement <code>$&lt;-</code>.</li>
@@ -165,7 +169,7 @@
 <div class="section level3">
 <h3 id="new-features-0-14-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-14-0"></a></h3>
 <ul><li><p>Now <code>findGlobals(function(x) x &lt;- x)</code> identifies <code>x</code> as a global variable.</p></li>
-<li><p>Now <code>findGlobals(function(x) x[1] &lt;- 0)</code> identifies <code>x</code> as a global variable. Same for other variants like <code>x[[1]] &lt;- 0</code> and x$a &lt;- 0.</p></li>
+<li><p>Now <code>findGlobals(function(x) x[1] &lt;- 0)</code> identifies <code>x</code> as a global variable. Same for other variants like <code>x[[1]] &lt;- 0</code> and <code>x$a &lt;- 0</code>.</p></li>
 <li><p>Now <code>findGlobals(function(z) x &lt;- z$x)</code> identifies <code>x</code> as a global variable.</p></li>
 <li><p>Now <code>findGlobals(quote({ f &lt;- function(x) x; x }))</code> identifies <code>x</code> as a global variable. Previously, the <code>x</code> of the function would hide the global <code>x</code>.</p></li>
 </ul></div>
