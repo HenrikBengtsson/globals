@@ -3,7 +3,7 @@
 ## Bug Fixes
 
  * `packagesOf()` for `Globals` failed to return the package of the
-   globals if the global don't have a closure, e.g. `base::pi`
+   globals if the global doesn't have a closure, e.g. `base::pi`
    and `data.table::.N`.
 
 
