@@ -1,19 +1,28 @@
+# Version 0.16.1 [2022-08-28]
+
+## Bug Fixes
+
+ * `packagesOf()` for `Globals` failed to return the package of the
+   globals if the global doesn't have a closure, e.g. `base::pi`
+   and `data.table::.N`.
+
+
 # Version 0.16.0 [2022-08-05]
 
 ## New Features
 
-* Add `[[<-` and `[<-` for `Globals`, to complement `$<-`.
+ * Add `[[<-` and `[<-` for `Globals`, to complement `$<-`.
 
 ## Reproducibility
 
-* All functions modifying a `Globals` object guarantee that the
-  `where` and the `class` attributes are always the last two
-  attributes and in that order.
+ * All functions modifying a `Globals` object guarantee that the
+   `where` and the `class` attributes are always the last two
+   attributes and in that order.
 
 ## Bug Fixes
 
-* `c()` for `Globals` would lose the `where` environment for any
-  functions appended.
+ * `c()` for `Globals` would lose the `where` environment for any
+   functions appended.
   
 
 # Version 0.15.1 [2022-06-24]
@@ -57,7 +66,7 @@
    variable.
 
  * Now `findGlobals(function(x) x[1] <- 0)` identifies `x` as a global
-   variable.  Same for other variants like `x[[1]] <- 0` and x$a <- 0.
+   variable.  Same for other variants like `x[[1]] <- 0` and `x$a <- 0`.
 
  * Now `findGlobals(function(z) x <- z$x)` identifies `x` as a global
    variable.

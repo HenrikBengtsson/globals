@@ -11,11 +11,31 @@ packagesOf <- function(...) UseMethod("packagesOf")
 #' @aliases packagesOf
 #' @export
 packagesOf.Globals <- function(globals, ...) {
-  ## Scan 'globals' for which packages needs to be loaded.
-  ## This information is in the environment name of the objects.
-  pkgs <- vapply(globals, FUN = function(obj) {
-    environmentName(environment_of(obj))
-  }, FUN.VALUE = "", USE.NAMES = FALSE)
+  ## Scan 'globals' for which packages they are from.  This information is
+  ## in the name of the environment as given by the 'where' attribute with
+  ## a fallback to the global object.
+  
+  where <- attr(globals, "where")
+  pkgs <- rep(NA_character_, times = length(globals))
+  for (kk in seq_along(globals)) {
+    obj <- globals[[kk]]
+    env <- environment_of(obj)
+    
+    ## If not found, it could be an object in package without a closure
+    if (identical(env, emptyenv())) {
+      w <- where[[kk]]
+      if (is.environment(w)) {
+        pkg <- environmentName(w)
+        if (grepl("^package:", pkg)) pkg <- sub("^package:", "", pkg)
+      } else {
+        pkg <- environmentName(env)
+      }
+    } else {
+      pkg <- environmentName(env)
+    }
+    
+    pkgs[kk] <- pkg
+  }
 
   ## Drop "missing" packages, e.g. globals in globalenv().
   pkgs <- pkgs[nzchar(pkgs)]
@@ -34,3 +54,4 @@ packagesOf.Globals <- function(globals, ...) {
 
   pkgs
 } # packagesOf()
+

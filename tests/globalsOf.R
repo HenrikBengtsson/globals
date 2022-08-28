@@ -195,7 +195,10 @@ assert_identical_sets(names(globals), c("{", "<-", "c", "d", "+"))
 
 pkgs <- packagesOf(globals)
 print(pkgs)
-stopifnot(length(pkgs) == 0L)
+stopifnot(
+  length(pkgs) == 1L,
+  identical(pkgs, c("base"))
+)
 
 globals <- cleanup(globals)
 str(globals)
@@ -205,6 +208,17 @@ pkgs <- packagesOf(globals)
 print(pkgs)
 stopifnot(length(pkgs) == 0L)
 
+globals <- globalsOf(quote(pi))
+stopifnot(
+  length(globals) == 1L,
+  identical(names(globals), "pi")
+)
+pkgs <- packagesOf(globals)
+print(pkgs)
+stopifnot(
+  length(pkgs) == 1L,
+  identical(pkgs, c("base"))
+)
 
 message("*** globalsOf() and package functions:")
 foo <- globals::Globals
