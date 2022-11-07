@@ -21,7 +21,7 @@ jobs:
           - { r: "release", pkg: "doFuture"          }
           - { r: "release", pkg: "future.apply"      }
           - { r: "release", pkg: "furrr"             }
-          - { r: "release", pkg: "furrr"             , url: https://github.com/DavisVaughan/furrr/archive/refs/heads/main.zip }
+          - { r: "release", pkg: "furrr"             , url: "https://github.com/DavisVaughan/furrr/archive/refs/heads/main.zip" }
           - { r: "release", pkg: "doFuture"          , plan: multisession, label: multisession }
           - { r: "release", pkg: "future.apply"      , plan: multisession, label: multisession }
           - { r: "release", pkg: "furrr"             , plan: multisession, label: multisession }
