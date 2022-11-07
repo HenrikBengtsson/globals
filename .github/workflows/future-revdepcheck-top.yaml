@@ -21,6 +21,7 @@ jobs:
           - { r: "release", pkg: "doFuture"          }
           - { r: "release", pkg: "future.apply"      }
           - { r: "release", pkg: "furrr"             }
+          - { r: "release", pkg: "furrr"             , url: https://github.com/DavisVaughan/furrr/archive/refs/heads/main.zip }
           - { r: "release", pkg: "doFuture"          , plan: multisession, label: multisession }
           - { r: "release", pkg: "future.apply"      , plan: multisession, label: multisession }
           - { r: "release", pkg: "furrr"             , plan: multisession, label: multisession }
@@ -91,7 +92,28 @@ jobs:
 
       - name: Check reverse dependency package
         run: |
-          url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos='https://cloud.r-project.org', type='source'))")
+          pkgname <- "${{ matrix.config.pkg }}"
+          url <- "${{ matrix.config.url }}"
+          if (nzchar(url)) {
+              tarball <- basename(url)
+              utils::download.file(url, destfile = tarball, mode = "wb")
+              target <- tempdir()
+              utils::unzip(tarball, exdir = target)
+              tarball <- file.path(target, dir(target, all.files = FALSE))
+              stopifnot(utils::file_test("-d", tarball))
+          } else {
+              url <- remotes:::download_version_url("${{ matrix.config.pkg }}", version = NULL, repos = "https://cloud.r-project.org", type = "source")
+              tarball <- basename(url)
+              utils::download.file(url, destfile = tarball, mode = "wb")
+          }
+          rcmdcheck::rcmdcheck(
+            tarball,
+            args = c("--no-manual", "--as-cran"),
+            error_on = "note",
+            check_dir = "check"
+          )
+        shell: Rscript {0}
+        
           wget "$url"
           R CMD check --no-manual --as-cran "$(basename "$url")"
 
