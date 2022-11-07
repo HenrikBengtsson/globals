@@ -4,9 +4,6 @@
 #' @param atomic,name,call,pairlist single-argument function that takes an
 #'        atomic, name, call and pairlist expression, respectively. Have to
 #'        return a valid R expression.
-#' @param name single-argument function that takes a name expression.
-#' @param call single-argument function that takes a call expression.
-#' @param pairlist single-argument function that takes a pairlist expression.
 #' @param substitute If TRUE, \code{expr} is
 #'        \code{\link[base]{substitute}()}:ed.
 #'

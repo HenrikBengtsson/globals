@@ -20,12 +20,6 @@ walkAST(
 atomic, name, call and pairlist expression, respectively. Have to
 return a valid R expression.}
 
-\item{name}{single-argument function that takes a name expression.}
-
-\item{call}{single-argument function that takes a call expression.}
-
-\item{pairlist}{single-argument function that takes a pairlist expression.}
-
 \item{substitute}{If TRUE, \code{expr} is
 \code{\link[base]{substitute}()}:ed.}
 }

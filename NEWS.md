@@ -1,6 +1,8 @@
 # Version (development version)
 
- * ...
+## Documentation
+
+ * Drop duplicated arguments from `help("walkAST")`.
  
 
 # Version 0.16.1 [2022-08-28]
