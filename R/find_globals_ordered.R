@@ -1,6 +1,9 @@
 #' @importFrom codetools walkCode
 find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character(), class = character(), trace = FALSE) {
   selfassign <- getOption("globals.selfassign", TRUE)
+
+  ## Identified objects are recorded in (name, class), which
+  ## are located in this executation environment
   
   enter_local <- function(type, v, e, w) {
     hardcoded_locals <- names(w$env)
@@ -46,7 +49,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
     if (trace) trace_printf("Add %s variable %s\n", sQuote("local"), sQuote(v))
     class <<- c(class, "local")
     name <<- c(name, v)
-  }
+  } ## enter_local()
 
   enter_global <- function(type, v, e, w) {
     hardcoded_locals <- names(w$env)
@@ -113,13 +116,17 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
           }
         }
       } else {
-        if (trace) trace_printf("a function not of interest\n")
+        if (trace) trace_printf("=> A function, but not of interest\n")
       }
     } else {
-      if (trace) trace_printf("nothing to else to explore\n")
+      if (trace) trace_printf("=> Nothing to else to explore\n")
     }
-  }
+  } ## enter_global()
 
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Main
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (trace) {
     trace_msg <- trace_enter("find_globals_ordered()")
     on.exit(trace_exit(trace_msg))
@@ -173,6 +180,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
     }
   } else {
     if (trace) trace_printf("type = call\n")
+    if (trace) trace_printf("Convert to an anonymous function:\n")
     fun <- as_function(expr, envir = envir, ...)
     if (trace) trace_print(fun)
     w <- make_usage_collector(fun, name = "<anonymous>",
