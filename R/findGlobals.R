@@ -82,7 +82,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       trace_msg <- trace_enter("enter_local(type=%s, v=%s)", sQuote(type), sQuote(v))
       trace_printf("before:\n")
       trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
-      trace_printf("hardcoded locals: %s\n", paste(sQuote(hardcoded_locals), collapse = ", "))
+      trace_printf("hardcoded locals: [n=%d] %s\n", length(hardcoded_locals), paste(sQuote(hardcoded_locals), collapse = ", "))
       on.exit(local({
         trace_printf("after:\n")
         trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
@@ -103,7 +103,8 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       rhs <- e[[3]]
       globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = rhs, envir = w$env, dotdotdot = "ignore", trace = trace)
       if (trace) {
-        trace_printf("RHS globals: %s\n", paste(sQuote(globals), collapse = ", "))
+        trace_printf("RHS globals: [n=%d] %s\n", length(globals), paste(sQuote(globals), collapse = ", "))
+        trace_printf("hardcoded locals: [n=%d] %s\n", length(w$env), paste(sQuote(names(w$env)), collapse = ", "))
       }
 
       if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
@@ -127,7 +128,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       trace_msg <- trace_enter("enter_global(type=%s, v=%s)", sQuote(type), sQuote(v))
       trace_printf("before:\n")
       trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
-      trace_printf("hardcoded locals: %s\n", paste(sQuote(hardcoded_locals), collapse = ", "))
+      trace_printf("hardcoded locals: [n=%d] %s\n", length(hardcoded_locals), paste(sQuote(hardcoded_locals), collapse = ", "))
       on.exit(local({
         trace_printf("after:\n")
         trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
@@ -316,13 +317,13 @@ call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "erro
   })
 
   if (trace) {
-    trace_printf("globals: %s\n", paste(sQuote(globals), collapse = ", "))
+    trace_printf("globals: [n=%d] %s\n", length(globals), paste(sQuote(globals), collapse = ", "))
   }
 
   if (length(dotdotdots) > 0L) {
     dotdotdots <- unique(dotdotdots)
     if (trace) {
-      trace_printf("dotdotdots: %s\n", paste(sQuote(dotdotdots), collapse = ", "))
+      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), paste(sQuote(dotdotdots), collapse = ", "))
     }
     globals <- c(globals, dotdotdots)
   }
@@ -498,7 +499,7 @@ collect_usage_function <- function(fun, name, w, trace = FALSE) {
   w$name <- c(w$name, name)
   parnames <- names(formals)
   if (trace) {
-    trace_printf("parnames: %s\n", paste(sQuote(parnames), collapse = ", "))
+    trace_printf("parnames: [n=%d] %s\n", length(parnames), paste(sQuote(parnames), collapse = ", "))
   }
 
   formals_clean <- drop_missing_formals(formals)
@@ -506,8 +507,8 @@ collect_usage_function <- function(fun, name, w, trace = FALSE) {
   locals <- findLocalsList(formals_clean)
   
   if (trace) {
-    trace_printf("formals_clean: %s\n", paste(sQuote(formals_clean), collapse = ", "))
-    trace_printf("locals: %s\n", paste(sQuote(locals), collapse = ", "))
+    trace_printf("formals_clean: [n=%d] %s\n", length(formals_clean), paste(sQuote(formals_clean), collapse = ", "))
+    trace_printf("locals: [n=%d] %s\n", length(locals), paste(sQuote(locals), collapse = ", "))
   }
 
   ## Hardcode locals?
@@ -519,7 +520,7 @@ collect_usage_function <- function(fun, name, w, trace = FALSE) {
   }
 
   if (trace) {
-    trace_printf("hardcoded locals: %s\n", paste(sQuote(names(w$env)), collapse = ", "))
+    trace_printf("hardcoded locals: [n=%d] %s\n", length(w$env), paste(sQuote(names(w$env)), collapse = ", "))
   }
 
   for (a in formals_clean) {
