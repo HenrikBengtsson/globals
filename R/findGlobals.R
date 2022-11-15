@@ -165,7 +165,7 @@ collect_usage_function <- function(fun, name, w, trace = FALSE) {
   w$name <- c(w$name, name)
   parnames <- names(formals)
   if (trace) {
-    trace_printf("parnames: [n=%d] %s\n", length(parnames), paste(sQuote(parnames), collapse = ", "))
+    trace_printf("parnames: [n=%d] %s\n", length(parnames), commaq(parnames))
   }
 
   formals_clean <- drop_missing_formals(formals)
@@ -173,20 +173,20 @@ collect_usage_function <- function(fun, name, w, trace = FALSE) {
   locals <- findLocalsList(formals_clean)
   
   if (trace) {
-    trace_printf("formals_clean: [n=%d] %s\n", length(formals_clean), paste(sQuote(formals_clean), collapse = ", "))
-    trace_printf("locals: [n=%d] %s\n", length(locals), paste(sQuote(locals), collapse = ", "))
+    trace_printf("formals_clean: [n=%d] %s\n", length(formals_clean), commaq(formals_clean))
+    trace_printf("locals: [n=%d] %s\n", length(locals), commaq(locals))
   }
 
   ## Hardcode locals?
   hardcoded_locals <- c(parnames, locals)
   if (length(hardcoded_locals) > 0) {
-    if (trace) trace_printf("Add hardcoded local variables %s", paste(sQuote(hardcoded_locals), collapse = ", "))
+    if (trace) trace_printf("Add hardcoded local variables %s", commaq(hardcoded_locals))
     w$env <- new.env(hash = TRUE, parent = w$env)
     for (n in hardcoded_locals) assign(n, TRUE, w$env)
   }
 
   if (trace) {
-    trace_printf("hardcoded locals: [n=%d] %s\n", length(w$env), paste(sQuote(names(w$env)), collapse = ", "))
+    trace_printf("hardcoded locals: [n=%d] %s\n", length(w$env), commaq(names(w$env)))
   }
 
   for (a in formals_clean) {

@@ -40,13 +40,13 @@ call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "erro
   })
 
   if (trace) {
-    trace_printf("globals: [n=%d] %s\n", length(globals), paste(sQuote(globals), collapse = ", "))
+    trace_printf("globals: [n=%d] %s\n", length(globals), commaq(globals))
   }
 
   if (length(dotdotdots) > 0L) {
     dotdotdots <- unique(dotdotdots)
     if (trace) {
-      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), paste(sQuote(dotdotdots), collapse = ", "))
+      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), commaq(dotdotdots))
     }
     globals <- c(globals, dotdotdots)
   }
@@ -97,13 +97,13 @@ call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "erro
   })
 
   if (trace) {
-    trace_printf("globals: [n=%d] %s\n", length(globals), paste(sQuote(globals), collapse = ", "))
+    trace_printf("globals: [n=%d] %s\n", length(globals), commaq(globals))
   }
 
   if (length(dotdotdots) > 0L) {
     dotdotdots <- unique(dotdotdots)
     if (trace) {
-      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), paste(sQuote(dotdotdots), collapse = ", "))
+      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), commaq(dotdotdots))
     }
     globals <- c(globals, dotdotdots)
   }

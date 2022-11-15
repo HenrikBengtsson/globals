@@ -11,7 +11,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       trace_msg <- trace_enter("enter_local(type=%s, v=%s)", sQuote(type), sQuote(v))
       trace_printf("before:\n")
       trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
-      trace_printf("hardcoded locals: [n=%d] %s\n", length(hardcoded_locals), paste(sQuote(hardcoded_locals), collapse = ", "))
+      trace_printf("hardcoded locals: [n=%d] %s\n", length(hardcoded_locals), commaq(hardcoded_locals))
       on.exit(local({
         trace_printf("after:\n")
         trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
@@ -32,8 +32,8 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       rhs <- e[[3]]
       globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = rhs, envir = w$env, dotdotdot = "ignore", trace = trace)
       if (trace) {
-        trace_printf("RHS globals: [n=%d] %s\n", length(globals), paste(sQuote(globals), collapse = ", "))
-        trace_printf("hardcoded locals: [n=%d] %s\n", length(w$env), paste(sQuote(names(w$env)), collapse = ", "))
+        trace_printf("RHS globals: [n=%d] %s\n", length(globals), commaq(globals))
+        trace_printf("hardcoded locals: [n=%d] %s\n", length(w$env), commaq(names(w$env)))
       }
 
       if (length(rhs) == 3 && globals[1] %in% c("::", ":::")) {
@@ -57,7 +57,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
       trace_msg <- trace_enter("enter_global(type=%s, v=%s)", sQuote(type), sQuote(v))
       trace_printf("before:\n")
       trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
-      trace_printf("hardcoded locals: [n=%d] %s\n", length(hardcoded_locals), paste(sQuote(hardcoded_locals), collapse = ", "))
+      trace_printf("hardcoded locals: [n=%d] %s\n", length(hardcoded_locals), commaq(hardcoded_locals))
       on.exit(local({
         trace_printf("after:\n")
         trace_print(data.frame(name=name, class=class, stringsAsFactors = FALSE))
@@ -93,7 +93,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
         for (kk in 2:length(e)) {
           globals <- call_find_globals_with_dotdotdot(find_globals_ordered, expr = e[[kk]], envir = w$env, dotdotdot = formula_dotdotdot, trace = trace)
           if (length(globals) > 0) {
-            if (trace) trace_printf("Add %s variables %s\n", sQuote("global"), paste(sQuote(globals), collapse = ", "))
+            if (trace) trace_printf("Add %s variables %s\n", sQuote("global"), commaq(globals))
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
           }
@@ -110,7 +110,7 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
           ## an assignment function, e.g. `[<-` and `names<-`
           globals <- find_globals_ordered(expr = lhs, envir = w$env, dotdotdot = dotdotdot, name = hardcoded_locals, class = rep("local", times = length(hardcoded_locals)), trace = trace)
           if (length(globals) > 0) {
-            if (trace) trace_printf("Add %s variables %s\n", sQuote("global"), paste(sQuote(globals), collapse = ", "))
+            if (trace) trace_printf("Add %s variables %s\n", sQuote("global"), commaq(globals))
             class <<- c(class, rep("global", times = length(globals)))
             name <<- c(name, globals)
           }
@@ -166,13 +166,13 @@ find_globals_ordered <- function(expr, envir, dotdotdot, ..., name = character()
         e <- expr[[kk]]
         globals <- find_globals_ordered(expr = e, envir = envir, dotdotdot = dotdotdot, ..., trace = trace)
         if (length(globals) > 0) {
-          if (trace) trace_printf("Add %s variable %s\n", sQuote("global"), paste(sQuote(globals), collapse = ", "))
+          if (trace) trace_printf("Add %s variable %s\n", sQuote("global"), commaq(globals))
           class <- c(class, rep("global", times = length(globals)))
           name <- c(name, globals)
         }
         locals <- codetools::findLocals(e)
         if (length(locals) > 0) {
-          if (trace) trace_printf("Add %s variable %s\n", sQuote("local"), paste(sQuote(locals), collapse = ", "))
+          if (trace) trace_printf("Add %s variable %s\n", sQuote("local"), commaq(locals))
           class <- c(class, rep("locals", times = length(locals)))
           name <- c(name, locals)
         }
@@ -251,13 +251,13 @@ call_find_globals_with_dotdotdot <- function(FUN, expr, envir, dotdotdot = "erro
   })
 
   if (trace) {
-    trace_printf("globals: [n=%d] %s\n", length(globals), paste(sQuote(globals), collapse = ", "))
+    trace_printf("globals: [n=%d] %s\n", length(globals), commaq(globals))
   }
 
   if (length(dotdotdots) > 0L) {
     dotdotdots <- unique(dotdotdots)
     if (trace) {
-      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), paste(sQuote(dotdotdots), collapse = ", "))
+      trace_printf("dotdotdots: [n=%d] %s\n", length(dotdotdot), commaq(dotdotdots))
     }
     globals <- c(globals, dotdotdots)
   }
