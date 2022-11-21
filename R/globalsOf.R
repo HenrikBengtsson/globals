@@ -219,7 +219,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     dotdotdots <- unique(names[idxs])
     names <- names[-idxs]
     idxs <- NULL
-    debug && mdebug("- dotdotdots: %s", paste(sQuote(dotdotdots), collapse = ", "))
+    debug && mdebug("- dotdotdots: %s", commaq(dotdotdots))
   } else {
     dotdotdots <- NULL
     debug && mdebug("- dotdotdots: <none>")

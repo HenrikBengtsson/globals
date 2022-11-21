@@ -1,3 +1,10 @@
+# Version 0.16.2 [2022-11-21]
+
+## Documentation
+
+ * Drop duplicated arguments from `help("walkAST")`.
+ 
+
 # Version 0.16.1 [2022-08-28]
 
 ## Bug Fixes

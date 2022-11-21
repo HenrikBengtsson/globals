@@ -21,6 +21,7 @@ jobs:
           - { r: "release", pkg: "doFuture"          }
           - { r: "release", pkg: "future.apply"      }
           - { r: "release", pkg: "furrr"             }
+##          - { r: "release", pkg: "furrr"             , label: "furrr devel", url: "https://github.com/DavisVaughan/furrr/archive/refs/heads/main.zip" }
           - { r: "release", pkg: "doFuture"          , plan: multisession, label: multisession }
           - { r: "release", pkg: "future.apply"      , plan: multisession, label: multisession }
           - { r: "release", pkg: "furrr"             , plan: multisession, label: multisession }
@@ -40,15 +41,17 @@ jobs:
       R_FUTURE_RNG_ONMISUSE: error
       R_FUTURE_PLAN: ${{ matrix.config.plan }}
       R_FUTURE_GLOBALS_KEEPWHERE: ${{ matrix.config.globals_keepWhere }}
+      ## Check as on CRAN (where applicable)
+      NOT_CRAN: false
       
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
-
-      - uses: r-lib/actions/setup-pandoc@master
 
       - name: Query dependencies
         run: |
@@ -59,7 +62,7 @@ jobs:
 
       - name: Cache R packages
         if: runner.os != 'Windows'
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
@@ -91,13 +94,31 @@ jobs:
 
       - name: Check reverse dependency package
         run: |
-          url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos='https://cloud.r-project.org', type='source'))")
-          wget "$url"
-          R CMD check --no-manual --as-cran "$(basename "$url")"
-
+          pkgname <- "${{ matrix.config.pkg }}"
+          url <- "${{ matrix.config.url }}"
+          if (nzchar(url)) {
+              tarball <- basename(url)
+              utils::download.file(url, destfile = tarball, mode = "wb")
+              target <- tempdir()
+              utils::unzip(tarball, exdir = target)
+              tarball <- file.path(target, dir(target, all.files = FALSE))
+              stopifnot(utils::file_test("-d", tarball))
+          } else {
+              url <- remotes:::download_version_url("${{ matrix.config.pkg }}", version = NULL, repos = "https://cloud.r-project.org", type = "source")
+              tarball <- basename(url)
+              utils::download.file(url, destfile = tarball, mode = "wb")
+          }
+          rcmdcheck::rcmdcheck(
+            tarball,
+            args = c("--no-manual", "--as-cran"),
+            error_on = "note",
+            check_dir = "check"
+          )
+        shell: Rscript {0}
+        
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-revdep${{ matrix.config.pkg }}-results
           path: ${{ matrix.config.pkg }}.Rcheck
