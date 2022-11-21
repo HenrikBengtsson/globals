@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.1-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9000</span>
       </span>
     </div>
 
@@ -124,15 +124,22 @@
 <ul><li>…</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.16.1" id="version-0161">Version 0.16.1<small>2022-08-28</small><a class="anchor" aria-label="anchor" href="#version-0161"></a></h2>
+<h2 class="page-header" data-toc-text="0.16.2" id="version-0162-2022-11-21">Version 0.16.2 [2022-11-21]<small>2022-11-21</small><a class="anchor" aria-label="anchor" href="#version-0162-2022-11-21"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-0-16-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-16-1"></a></h3>
-<ul><li>
-<code><a href="../reference/packagesOf.Globals.html">packagesOf()</a></code> for <code>Globals</code> failed to return the package of the globals if the global doesn’t have a closure, e.g. <code><a href="https://rdrr.io/r/base/Constants.html" class="external-link">base::pi</a></code> and <code><a href="https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html" class="external-link">data.table::.N</a></code>.</li>
+<h3 id="documentation-0-16-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-16-2"></a></h3>
+<ul><li>Drop duplicated arguments from <code><a href="../reference/walkAST.html">help("walkAST")</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.16.0" id="version-0160">Version 0.16.0<small>2022-08-05</small><a class="anchor" aria-label="anchor" href="#version-0160"></a></h2>
+<h2 class="page-header" data-toc-text="0.16.1" id="version-0161-2022-08-28">Version 0.16.1 [2022-08-28]<small>2022-08-28</small><a class="anchor" aria-label="anchor" href="#version-0161-2022-08-28"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-16-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-16-1"></a></h3>
+<ul><li>
+<code><a href="../reference/packagesOf.Globals.html">packagesOf()</a></code> for <code>Globals</code> failed to return the package of the globals if the global doesn’t have a closure, e.g. <code><a href="https://rdrr.io/r/base/Constants.html" class="external-link">base::pi</a></code> and <code>data.table::.N</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.16.0" id="version-0160-2022-08-05">Version 0.16.0 [2022-08-05]<small>2022-08-05</small><a class="anchor" aria-label="anchor" href="#version-0160-2022-08-05"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-16-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-16-0"></a></h3>
 <ul><li>Add <code>[[&lt;-</code> and <code>[&lt;-</code> for <code>Globals</code>, to complement <code>$&lt;-</code>.</li>
@@ -148,7 +155,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.15.1" id="version-0151">Version 0.15.1<small>2022-06-24</small><a class="anchor" aria-label="anchor" href="#version-0151"></a></h2>
+<h2 class="page-header" data-toc-text="0.15.1" id="version-0151-2022-06-24">Version 0.15.1 [2022-06-24]<small>2022-06-24</small><a class="anchor" aria-label="anchor" href="#version-0151-2022-06-24"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-15-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-15-1"></a></h3>
 <ul><li>
@@ -156,7 +163,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.15.0" id="version-0150">Version 0.15.0<small>2022-05-09</small><a class="anchor" aria-label="anchor" href="#version-0150"></a></h2>
+<h2 class="page-header" data-toc-text="0.15.0" id="version-0150-2022-05-08">Version 0.15.0 [2022-05-08]<small>2022-05-09</small><a class="anchor" aria-label="anchor" href="#version-0150-2022-05-08"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-15-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-15-0"></a></h3>
 <ul><li><p><code><a href="../reference/globalsOf.html">globalsOf()</a></code> gained argument <code>locals</code>, which controls whether globals that exist in “local” environments of a function should be considered or not, e.g. in <code>f &lt;- local({ a &lt;- 1; function() a })</code>, should <code>a</code> be considered a global of <code>f()</code> or not. For backward compatibility reasons, the default is <code>locals = TRUE</code>, but this might become <code>locals = FALSE</code> in a later release.</p></li>
@@ -169,7 +176,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.14.0" id="version-0140">Version 0.14.0<small>2020-11-22</small><a class="anchor" aria-label="anchor" href="#version-0140"></a></h2>
+<h2 class="page-header" data-toc-text="0.14.0" id="version-0140-2020-11-22">Version 0.14.0 [2020-11-22]<small>2020-11-22</small><a class="anchor" aria-label="anchor" href="#version-0140-2020-11-22"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-14-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-14-0"></a></h3>
 <ul><li><p>Now <code>findGlobals(function(x) x &lt;- x)</code> identifies <code>x</code> as a global variable.</p></li>
@@ -179,7 +186,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.13.1" id="version-0131">Version 0.13.1<small>2020-10-11</small><a class="anchor" aria-label="anchor" href="#version-0131"></a></h2>
+<h2 class="page-header" data-toc-text="0.13.1" id="version-0131-2020-10-11">Version 0.13.1 [2020-10-11]<small>2020-10-11</small><a class="anchor" aria-label="anchor" href="#version-0131-2020-10-11"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-13-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-1"></a></h3>
 <ul><li><p><code><a href="../reference/globalsOf.html">globalsOf()</a></code> could produce “Error in vapply(where, FUN = envname, FUN.VALUE = NA_character_, USE.NAMES = FALSE) : values must be length 1, but FUN(X[[2]]) result is length 10”. This would happen if for instance argument <code>envir</code> has attributes set.</p></li>
@@ -189,7 +196,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.13.0" id="version-0130">Version 0.13.0<small>2020-09-17</small><a class="anchor" aria-label="anchor" href="#version-0130"></a></h2>
+<h2 class="page-header" data-toc-text="0.13.0" id="version-0130-2020-09-16">Version 0.13.0 [2020-09-16]<small>2020-09-17</small><a class="anchor" aria-label="anchor" href="#version-0130-2020-09-16"></a></h2>
 <div class="section level3">
 <h3 id="significant-changes-0-13-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-13-0"></a></h3>
 <ul><li><p><code>findGlobals(expr)</code> now also scans any attributes of <code>expr</code> for globals, e.g. <code><a href="https://purrr.tidyverse.org/reference/partial.html" class="external-link">purrr::partial()</a></code> puts the original function in attribute <code>body</code>. Argument <code>attributes</code> controls which attributes, if any, should be scanned. Default is to scan all attributes.</p></li>
@@ -213,7 +220,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.5" id="version-0125">Version 0.12.5<small>2019-12-07</small><a class="anchor" aria-label="anchor" href="#version-0125"></a></h2>
+<h2 class="page-header" data-toc-text="0.12.5" id="version-0125-2019-12-07">Version 0.12.5 [2019-12-07]<small>2019-12-07</small><a class="anchor" aria-label="anchor" href="#version-0125-2019-12-07"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-12-5">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-5"></a></h3>
 <ul><li>
@@ -221,7 +228,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.4" id="version-0124">Version 0.12.4<small>2018-10-11</small><a class="anchor" aria-label="anchor" href="#version-0124"></a></h2>
+<h2 class="page-header" data-toc-text="0.12.4" id="version-0124-2018-10-11">Version 0.12.4 [2018-10-11]<small>2018-10-11</small><a class="anchor" aria-label="anchor" href="#version-0124-2018-10-11"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-12-4">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-12-4"></a></h3>
 <ul><li>
@@ -229,7 +236,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.3" id="version-0123">Version 0.12.3<small>2018-09-17</small><a class="anchor" aria-label="anchor" href="#version-0123"></a></h2>
+<h2 class="page-header" data-toc-text="0.12.3" id="version-0123-2018-09-16">Version 0.12.3 [2018-09-16]<small>2018-09-17</small><a class="anchor" aria-label="anchor" href="#version-0123-2018-09-16"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-12-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-3"></a></h3>
 <ul><li>
@@ -241,7 +248,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.2" id="version-0122">Version 0.12.2<small>2018-08-25</small><a class="anchor" aria-label="anchor" href="#version-0122"></a></h2>
+<h2 class="page-header" data-toc-text="0.12.2" id="version-0122-2018-08-25">Version 0.12.2 [2018-08-25]<small>2018-08-25</small><a class="anchor" aria-label="anchor" href="#version-0122-2018-08-25"></a></h2>
 <div class="section level3">
 <h3 id="performance-0-12-2">Performance<a class="anchor" aria-label="anchor" href="#performance-0-12-2"></a></h3>
 <ul><li>
@@ -258,14 +265,14 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.1" id="version-0121">Version 0.12.1<small>2018-06-25</small><a class="anchor" aria-label="anchor" href="#version-0121"></a></h2>
+<h2 class="page-header" data-toc-text="0.12.1" id="version-0121-2018-06-24">Version 0.12.1 [2018-06-24]<small>2018-06-25</small><a class="anchor" aria-label="anchor" href="#version-0121-2018-06-24"></a></h2>
 <div class="section level3">
 <h3 id="performance-0-12-1">Performance<a class="anchor" aria-label="anchor" href="#performance-0-12-1"></a></h3>
 <ul><li>globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> is now significantly faster for elements that are long lists with many elements of basic data types. This is because elements of such basic data type cannot contain globals and can therefore be skipped early in the search for globals.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.12.0" id="version-0120">Version 0.12.0<small>2018-06-12</small><a class="anchor" aria-label="anchor" href="#version-0120"></a></h2>
+<h2 class="page-header" data-toc-text="0.12.0" id="version-0120-2018-06-12">Version 0.12.0 [2018-06-12]<small>2018-06-12</small><a class="anchor" aria-label="anchor" href="#version-0120-2018-06-12"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-12-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-0"></a></h3>
 <ul><li>Now globals::<code><a href="../reference/globalsOf.html">findGlobals()</a></code> identifies <code>a</code> as a global also when it is part of LHS expressions of type <code>a[1] &lt;- ...</code> and <code>names(a)    &lt;- ...</code>.</li>
@@ -277,7 +284,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.11.0" id="version-0110">Version 0.11.0<small>2018-01-10</small><a class="anchor" aria-label="anchor" href="#version-0110"></a></h2>
+<h2 class="page-header" data-toc-text="0.11.0" id="version-0110-2018-01-09">Version 0.11.0 [2018-01-09]<small>2018-01-10</small><a class="anchor" aria-label="anchor" href="#version-0110-2018-01-09"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-11-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-11-0"></a></h3>
 <ul><li>Now <code><a href="../reference/globalsOf.html">findGlobals()</a></code> identifies <code>x</code> as a global variable in <code>x &lt;- x + 1</code> and likewise for <code>x + 1 -&gt; x</code>. Note that ditto using <code>&lt;&lt;-</code> and <code>-&gt;&gt;</code> was already identifying <code>x</code> as a global.</li>
@@ -289,7 +296,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.3" id="version-0103">Version 0.10.3<small>2017-10-13</small><a class="anchor" aria-label="anchor" href="#version-0103"></a></h2>
+<h2 class="page-header" data-toc-text="0.10.3" id="version-0103-2017-10-12">Version 0.10.3 [2017-10-12]<small>2017-10-13</small><a class="anchor" aria-label="anchor" href="#version-0103-2017-10-12"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-10-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-3"></a></h3>
 <ul><li>
@@ -297,7 +304,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.2" id="version-0102">Version 0.10.2<small>2017-08-08</small><a class="anchor" aria-label="anchor" href="#version-0102"></a></h2>
+<h2 class="page-header" data-toc-text="0.10.2" id="version-0102-2017-08-08">Version 0.10.2 [2017-08-08]<small>2017-08-08</small><a class="anchor" aria-label="anchor" href="#version-0102-2017-08-08"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-10-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-2"></a></h3>
 <ul><li>
@@ -305,7 +312,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.1" id="version-0101">Version 0.10.1<small>2017-07-02</small><a class="anchor" aria-label="anchor" href="#version-0101"></a></h2>
+<h2 class="page-header" data-toc-text="0.10.1" id="version-0101-2017-07-01">Version 0.10.1 [2017-07-01]<small>2017-07-02</small><a class="anchor" aria-label="anchor" href="#version-0101-2017-07-01"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-10-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-1"></a></h3>
 <ul><li>
@@ -313,7 +320,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.10.0" id="version-0100">Version 0.10.0<small>2017-04-17</small><a class="anchor" aria-label="anchor" href="#version-0100"></a></h2>
+<h2 class="page-header" data-toc-text="0.10.0" id="version-0100-2017-04-16">Version 0.10.0 [2017-04-16]<small>2017-04-17</small><a class="anchor" aria-label="anchor" href="#version-0100-2017-04-16"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-10-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-10-0"></a></h3>
 <ul><li><p>Globals that are part of a formula are now identified.</p></li>
@@ -328,7 +335,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.9.0" id="version-090">Version 0.9.0<small>2017-03-10</small><a class="anchor" aria-label="anchor" href="#version-090"></a></h2>
+<h2 class="page-header" data-toc-text="0.9.0" id="version-090-2017-03-09">Version 0.9.0 [2017-03-09]<small>2017-03-10</small><a class="anchor" aria-label="anchor" href="#version-090-2017-03-09"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-9-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-9-0"></a></h3>
 <ul><li>Added option <code>globals.debug</code>, which when TRUE enables debugging output.</li>
@@ -340,7 +347,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.8.0" id="version-080">Version 0.8.0<small>2017-01-16</small><a class="anchor" aria-label="anchor" href="#version-080"></a></h2>
+<h2 class="page-header" data-toc-text="0.8.0" id="version-080-2017-01-14">Version 0.8.0 [2017-01-14]<small>2017-01-16</small><a class="anchor" aria-label="anchor" href="#version-080-2017-01-14"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-8-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-8-0"></a></h3>
 <ul><li><p><code><a href="../reference/globalsOf.html">globalsOf()</a></code> identifies also globals in locally defined functions. This can be disabled with argument <code>recursive =    FALSE</code>.</p></li>
@@ -348,7 +355,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.2" id="version-072">Version 0.7.2<small>2017-01-09</small><a class="anchor" aria-label="anchor" href="#version-072"></a></h2>
+<h2 class="page-header" data-toc-text="0.7.2" id="version-072-2016-12-28">Version 0.7.2 [2016-12-28]<small>2017-01-09</small><a class="anchor" aria-label="anchor" href="#version-072-2016-12-28"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-7-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-2"></a></h3>
 <ul><li>
@@ -356,7 +363,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.1" id="version-071">Version 0.7.1<small>2016-10-14</small><a class="anchor" aria-label="anchor" href="#version-071"></a></h2>
+<h2 class="page-header" data-toc-text="0.7.1" id="version-071-2016-10-13">Version 0.7.1 [2016-10-13]<small>2016-10-14</small><a class="anchor" aria-label="anchor" href="#version-071-2016-10-13"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-7-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-1"></a></h3>
 <ul><li>
@@ -369,7 +376,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.0" id="version-070">Version 0.7.0<small>2016-09-09</small><a class="anchor" aria-label="anchor" href="#version-070"></a></h2>
+<h2 class="page-header" data-toc-text="0.7.0" id="version-070-2016-09-08">Version 0.7.0 [2016-09-08]<small>2016-09-09</small><a class="anchor" aria-label="anchor" href="#version-070-2016-09-08"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-7-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-0"></a></h3>
 <ul><li><p>Added <code><a href="../reference/walkAST.html">walkAST()</a></code>, which can be used to tweak expressions.</p></li>
@@ -379,7 +386,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.1" id="version-061">Version 0.6.1<small>2016-02-03</small><a class="anchor" aria-label="anchor" href="#version-061"></a></h2>
+<h2 class="page-header" data-toc-text="0.6.1" id="version-061-2016-01-31">Version 0.6.1 [2016-01-31]<small>2016-02-03</small><a class="anchor" aria-label="anchor" href="#version-061-2016-01-31"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-6-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-1"></a></h3>
 <ul><li>Now the error message of <code>globalsOf(..., mustExist = TRUE)</code> when it fails to locate a global also gives information on the expression that is problematic.</li>
@@ -391,7 +398,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.6.0" id="version-060">Version 0.6.0<small>2015-12-12</small><a class="anchor" aria-label="anchor" href="#version-060"></a></h2>
+<h2 class="page-header" data-toc-text="0.6.0" id="version-060-2015-12-12">Version 0.6.0 [2015-12-12]<small>2015-12-12</small><a class="anchor" aria-label="anchor" href="#version-060-2015-12-12"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-6-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
 <ul><li>
@@ -399,7 +406,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.5.0" id="version-050">Version 0.5.0<small>2015-10-14</small><a class="anchor" aria-label="anchor" href="#version-050"></a></h2>
+<h2 class="page-header" data-toc-text="0.5.0" id="version-050-2015-10-13">Version 0.5.0 [2015-10-13]<small>2015-10-14</small><a class="anchor" aria-label="anchor" href="#version-050-2015-10-13"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-5-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-5-0"></a></h3>
 <ul><li>
@@ -412,7 +419,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4.1" id="version-041">Version 0.4.1<small>2015-10-06</small><a class="anchor" aria-label="anchor" href="#version-041"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.1" id="version-041-2015-10-05">Version 0.4.1 [2015-10-05]<small>2015-10-06</small><a class="anchor" aria-label="anchor" href="#version-041-2015-10-05"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-4-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1"></a></h3>
 <ul><li>
@@ -420,7 +427,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4.0" id="version-040">Version 0.4.0<small>2015-09-18</small><a class="anchor" aria-label="anchor" href="#version-040"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.0" id="version-040-2015-09-12">Version 0.4.0 [2015-09-12]<small>2015-09-18</small><a class="anchor" aria-label="anchor" href="#version-040-2015-09-12"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-4-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
 <ul><li>
@@ -428,18 +435,18 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.1" id="version-031">Version 0.3.1<small>2015-06-11</small><a class="anchor" aria-label="anchor" href="#version-031"></a></h2>
+<h2 class="page-header" data-toc-text="0.3.1" id="version-031-2015-06-10">Version 0.3.1 [2015-06-10]<small>2015-06-11</small><a class="anchor" aria-label="anchor" href="#version-031-2015-06-10"></a></h2>
 <ul><li>More test coverage.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.0" id="version-030">Version 0.3.0<a class="anchor" aria-label="anchor" href="#version-030"></a></h2>
+<h2 class="page-header" data-toc-text="0.3.0" id="version-030-2015-06-08">Version 0.3.0 [2015-06-08]<a class="anchor" aria-label="anchor" href="#version-030-2015-06-08"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-3-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h3>
 <ul><li>Renamed <code>getGlobals()</code> to <code><a href="../reference/globalsOf.html">globalsOf()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.3" id="version-023">Version 0.2.3<a class="anchor" aria-label="anchor" href="#version-023"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.3" id="version-023-2015-06-08">Version 0.2.3 [2015-06-08]<a class="anchor" aria-label="anchor" href="#version-023-2015-06-08"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-2-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-3"></a></h3>
 <ul><li><p>Added <code>[()</code> for <code>Globals</code>.</p></li>
@@ -448,7 +455,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.2" id="version-022">Version 0.2.2<a class="anchor" aria-label="anchor" href="#version-022"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.2" id="version-022-2015-05-20">Version 0.2.2 [2015-05-20]<a class="anchor" aria-label="anchor" href="#version-022-2015-05-20"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-2-2">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-2"></a></h3>
 <ul><li><p>Added <code>Globals</code> class with methods <code><a href="../reference/cleanup.Globals.html">cleanup()</a></code> and <code><a href="../reference/packagesOf.Globals.html">packagesOf()</a></code>.</p></li>
@@ -456,7 +463,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.1" id="version-021">Version 0.2.1<a class="anchor" aria-label="anchor" href="#version-021"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.1" id="version-021-2015-05-20">Version 0.2.1 [2015-05-20]<a class="anchor" aria-label="anchor" href="#version-021-2015-05-20"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-2-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-1"></a></h3>
 <ul><li><p><code>getGlobals()</code> gained argument <code>mustExist</code> for controlling whether to give an error when the corresponding object for an identified global cannot be found or to silently drop the missing global.</p></li>
@@ -464,11 +471,11 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.0" id="version-020">Version 0.2.0<a class="anchor" aria-label="anchor" href="#version-020"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.0" id="version-020-2015-05-19">Version 0.2.0 [2015-05-19]<a class="anchor" aria-label="anchor" href="#version-020-2015-05-19"></a></h2>
 <ul><li>Moved “globals” functions from an in-house package to this package.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.1.0" id="version-010">Version 0.1.0<a class="anchor" aria-label="anchor" href="#version-010"></a></h2>
+<h2 class="page-header" data-toc-text="0.1.0" id="version-010-2015-02-07">Version 0.1.0 [2015-02-07]<a class="anchor" aria-label="anchor" href="#version-010-2015-02-07"></a></h2>
 <ul><li>Created.</li>
 </ul></div>
   </div>
@@ -485,7 +492,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9004.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
@@ -497,7 +504,6 @@
     
     apiKey: 'aa6e02fc501886fb0f7c91ac4e300456',
     indexName: 'futureverse',
-    algoliaOptions: { 'facetFilters': ['project:globals'] },
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {
