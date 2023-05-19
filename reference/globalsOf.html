@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9001</span>
       </span>
     </div>
 
@@ -270,13 +270,13 @@ code inspections.</p></div>
 <span class="r-in"><span><span class="va">globalsC</span> <span class="op">&lt;-</span> <span class="fu">globalsOf</span><span class="op">(</span><span class="va">expr</span>, method <span class="op">=</span> <span class="st">"conservative"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> bad assignment: ‘2 &lt;- 1’</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">globalsC</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in print(globalsC):</span> object 'globalsC' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'globalsC' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Will identify 'b'</span></span></span>
 <span class="r-in"><span><span class="va">globalsL</span> <span class="op">&lt;-</span> <span class="fu">globalsOf</span><span class="op">(</span><span class="va">expr</span>, method <span class="op">=</span> <span class="st">"liberal"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> bad assignment: ‘2 &lt;- 1’</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">globalsL</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in print(globalsL):</span> object 'globalsL' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'globalsL' not found</span>
 </code></pre></div>
     </div>
   </div>
@@ -291,7 +291,7 @@ code inspections.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
