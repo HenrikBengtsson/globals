@@ -76,17 +76,18 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
 
   if (length(dotdotdots) > 0L) {
     for (name in dotdotdots) {
-      if (exists(name, envir = envir, inherits = TRUE)) {
-        where[[name]] <- where(name, envir = envir, inherits = TRUE)
-        ## FIXME: If '...' in environment 'envir' specifies
-        ## non-existing symbols, then we must not call list(...), because
-        ## that will produce an "object not found" error.
-        ## /HB 2023-05-19
-        expr <- substitute(list(arg), list(arg = as.name(name)))
-        ddd <- eval(expr, envir = envir, enclos = envir)
-      } else {
-        where[name] <- list(NULL)
-        ddd <- NA
+      where[name] <- list(NULL)
+      ddd <- NA
+      if (name == "...") {
+        if (exists("...", envir = envir, inherits = TRUE)) {
+          where[["..."]] <- where("...", envir = envir, inherits = TRUE)
+          ## FIXME: If '...' in environment 'envir' specifies
+          ## non-existing symbols, then we must not call list(...), because
+          ## that will produce an "object not found" error.
+          ## /HB 2023-05-19
+          expr <- substitute(list(arg), list(arg = as.name("...")))
+          ddd <- eval(expr, envir = envir, enclos = envir)
+        }
       }
       class(ddd) <- c("DotDotDotList", class(ddd))
       globals[[name]] <- ddd

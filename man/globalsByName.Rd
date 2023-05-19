@@ -59,10 +59,16 @@ globals <- g(3.14, 1L, b = 2L, c = 3L)
 str(globals)
 
 
-h <- function(x = 42) {
-  globalsByName("...")
+h <- function(x = 42, ...) {
+  globalsByName("..2")
 }
 
 globals <- h()
+str(globals)
+
+globals <- g(3.14)
+str(globals)
+
+globals <- g(3.14, 1L, b = 2L, c = 3L)
 str(globals)
 }
