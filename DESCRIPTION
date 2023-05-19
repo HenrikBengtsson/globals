@@ -1,5 +1,5 @@
 Package: globals
-Version: 0.16.2-9001
+Version: 0.16.2-9002
 Depends:
     R (>= 3.1.2)
 Imports:
@@ -21,3 +21,4 @@ ByteCompile: TRUE
 URL: https://globals.futureverse.org, https://github.com/HenrikBengtsson/globals
 BugReports: https://github.com/HenrikBengtsson/globals/issues
 RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)

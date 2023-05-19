@@ -1,13 +1,26 @@
 #' Locates and retrieves a set of global variables by their names
 #'
 #' @param names A character vector of global variable names.
+#'
 #' @param envir The environment from where to search for globals.
+#"
 #' @param mustExist If TRUE, an error is thrown if the object of the
 #'        identified global cannot be located.  Otherwise, the global
 #'        is not returned.
+#'
 #' @param ... Not used.
 #'
+#' @section Special "argument" globals:
+#' If `names` specifies `"..."`, `"..1"`,  `"..2"`, ..., then they
+#' are interpreted as arguments `...`, `..1`, `..2`, ..., respectively.
+#' If specified, then the corresponding elements in the results are
+#' lists of class `DotDotDotList` comprising the value of the latter.
+#' If the special argument does not exist, then the value is `NA`, and
+#' the corresponding `where` attributes is `NULL`.
+#'
 #' @return A \link{Globals} object.
+#'
+#' @example incl/globalsByName.R
 #'
 #' @export
 globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,

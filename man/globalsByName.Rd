@@ -23,3 +23,46 @@ A \link{Globals} object.
 \description{
 Locates and retrieves a set of global variables by their names
 }
+\section{Special "argument" globals}{
+
+If \code{names} specifies \code{"..."}, \code{"..1"},  \code{"..2"}, ..., then they
+are interpreted as arguments \code{...}, \code{..1}, \code{..2}, ..., respectively.
+If specified, then the corresponding elements in the results are
+lists of class \code{DotDotDotList} comprising the value of the latter.
+If the special argument does not exist, then the value is \code{NA}, and
+the corresponding \code{where} attributes is \code{NULL}.
+}
+
+\examples{
+f <- function(x = 42, ...) {
+  globalsByName("x")
+}
+
+globals <- f()
+str(globals)
+
+globals <- f(3.14)
+str(globals)
+
+
+g <- function(x = 42, ...) {
+  globalsByName("...")
+}
+
+globals <- g()
+str(globals)
+
+globals <- g(3.14)
+str(globals)
+
+globals <- g(3.14, 1L, b = 2L, c = 3L)
+str(globals)
+
+
+h <- function(x = 42) {
+  globalsByName("...")
+}
+
+globals <- h()
+str(globals)
+}
