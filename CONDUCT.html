@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9002</span>
       </span>
     </div>
 
@@ -47,9 +47,6 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://BiocParallel.FutureParam.futureverse.org" class="external-link">BiocParallel.FutureParam</a>
-    </li>
-    <li>
       <a href="https://doFuture.futureverse.org" class="external-link">doFuture</a>
     </li>
     <li>
@@ -81,6 +78,12 @@
     </li>
     <li>
       <a href="https://progressr.futureverse.org" class="external-link">progressr</a>
+    </li>
+    <li>
+      <a href="https://BiocParallel.FutureParam.futureverse.org" class="external-link">BiocParallel.FutureParam (experimental)</a>
+    </li>
+    <li>
+      <a href="https://future.tools.futureverse.org" class="external-link">future.tools (experimental)</a>
     </li>
     <li>
       <a href="https://future.mapreduce.futureverse.org" class="external-link">future.mapreduce (experimental)</a>
@@ -201,7 +204,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9005.</p>
 </div>
 
       </footer></div>
@@ -213,6 +216,7 @@
     
     apiKey: 'aa6e02fc501886fb0f7c91ac4e300456',
     indexName: 'futureverse',
+    algoliaOptions: { 'facetFilters': ['project:globals'] },
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

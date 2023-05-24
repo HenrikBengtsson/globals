@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9002</span>
       </span>
     </div>
 
@@ -47,9 +47,6 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="https://BiocParallel.FutureParam.futureverse.org" class="external-link">BiocParallel.FutureParam</a>
-    </li>
-    <li>
       <a href="https://doFuture.futureverse.org" class="external-link">doFuture</a>
     </li>
     <li>
@@ -81,6 +78,12 @@
     </li>
     <li>
       <a href="https://progressr.futureverse.org" class="external-link">progressr</a>
+    </li>
+    <li>
+      <a href="https://BiocParallel.FutureParam.futureverse.org" class="external-link">BiocParallel.FutureParam (experimental)</a>
+    </li>
+    <li>
+      <a href="https://future.tools.futureverse.org" class="external-link">future.tools (experimental)</a>
     </li>
     <li>
       <a href="https://future.mapreduce.futureverse.org" class="external-link">future.mapreduce (experimental)</a>
@@ -154,7 +157,113 @@ is not returned.</p></dd>
 
 <p>A <a href="Globals.html">Globals</a> object.</p>
     </div>
+    <div id="special-argument-globals">
+    <h2>Special "argument" globals</h2>
+    
 
+<p>If <code>names</code> specifies <code>"..."</code>, <code>"..1"</code>,  <code>"..2"</code>, ..., then they
+are interpreted as arguments <code>...</code>, <code>..1</code>, <code>..2</code>, ..., respectively.
+If specified, then the corresponding elements in the results are
+lists of class <code>DotDotDotList</code> comprising the value of the latter.
+If the special argument does not exist, then the value is <code>NA</code>, and
+the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
+    </div>
+
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">42</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">globalsByName</span><span class="op">(</span><span class="st">"x"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ x: num 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x:&lt;environment: 0x5607d7caa578&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ x: num 3.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x:&lt;environment: 0x5607d7eef6b0&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">42</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">globalsByName</span><span class="op">(</span><span class="st">"..."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x5607d811cf68&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x5607d82aaa38&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span>, <span class="fl">1L</span>, b <span class="op">=</span> <span class="fl">2L</span>, c <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...:List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$  : int 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ b: int 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ c: int 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x5607d8492460&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">42</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">globalsByName</span><span class="op">(</span><span class="st">"..2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">h</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ..2: 'DotDotDotList' logi NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x5607d5043298&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ..2: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x5607d448b888&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span>, <span class="fl">1L</span>, b <span class="op">=</span> <span class="fl">2L</span>, c <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...:List of 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$  : int 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ b: int 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ c: int 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x5607d2465320&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -167,7 +276,7 @@ is not returned.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7</p> and <a href="https://github.com/HenrikBengtsson/pkgdown.extras/">pkgdown.extras</a> 0.0.0.9005.</p>
 </div>
 
       </footer></div>
@@ -179,6 +288,7 @@ is not returned.</p></dd>
     
     apiKey: 'aa6e02fc501886fb0f7c91ac4e300456',
     indexName: 'futureverse',
+    algoliaOptions: { 'facetFilters': ['project:globals'] },
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {
