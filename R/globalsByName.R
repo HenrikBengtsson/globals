@@ -75,7 +75,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
   }
 
   if (length(dotdotdots) > 0L) {
-    for (name in dotdotdots) {
+    for (name in c("...", dotdotdots)) {
       where[name] <- list(NULL)
       ddd <- NA
       if (name == "...") {
