@@ -18,7 +18,9 @@ is not returned.}
 \item{...}{Not used.}
 }
 \value{
-A \link{Globals} object.
+A \link{Globals} object with \code{length(names)} elements and
+an attribute \code{where} with \code{length(names)} elements.
+Both of sets of elements are named after \code{names}.
 }
 \description{
 Locates and retrieves a set of global variables by their names

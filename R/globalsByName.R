@@ -18,7 +18,9 @@
 #' If the special argument does not exist, then the value is `NA`, and
 #' the corresponding `where` attributes is `NULL`.
 #'
-#' @return A \link{Globals} object.
+#' @return A \link{Globals} object with `length(names)` elements and
+#' an attribute `where` with `length(names)` elements.
+#' Both of sets of elements are named after `names`.
 #'
 #' @example incl/globalsByName.R
 #'
@@ -26,8 +28,9 @@
 globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
                           ...) {
   names <- as.character(names)
-
   nnames <- length(names)
+  
+  namesOrg <- names
 
   debug <- getOption("globals.debug", FALSE)
   if (debug) {
@@ -73,6 +76,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
       }
     }
   }
+#  stop_if_not(identical(names(globals), names))
 
   if (length(dotdotdots) > 0L) {
     for (name in c("...", dotdotdots)) {
@@ -93,7 +97,8 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
       globals[[name]] <- ddd
     }
   }
-
+  stop_if_not(identical(names(globals), namesOrg))
+  
   stop_if_not(
     is.list(where),
     length(where) == length(globals),
