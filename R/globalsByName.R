@@ -53,8 +53,8 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     debug && mdebug("- dotdotdots: <none>")
   }
 
-  globals <- list()
-  where <- list()
+  globals <- structure(list(), names = character(0))
+  where <- structure(list(), names = character(0))
   for (kk in seq_along(names)) {
     name <- names[kk]
     debug && mdebug("- locating #%d (%s)", kk, sQuote(name))
@@ -79,7 +79,7 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
 #  stop_if_not(identical(names(globals), names))
 
   if (length(dotdotdots) > 0L) {
-    for (name in c("...", dotdotdots)) {
+    for (name in dotdotdots) {
       where[name] <- list(NULL)
       ddd <- NA
       if (name == "...") {
@@ -97,7 +97,10 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
       globals[[name]] <- ddd
     }
   }
-  stop_if_not(identical(names(globals), namesOrg))
+  stop_if_not(
+    length(names(globals)) == nnames,
+    all(names(globals) %in% namesOrg)
+  )
   
   stop_if_not(
     is.list(where),
