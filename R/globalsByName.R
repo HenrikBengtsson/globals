@@ -18,9 +18,9 @@
 #' If the special argument does not exist, then the value is `NA`, and
 #' the corresponding `where` attributes is `NULL`.
 #'
-#' @return A \link{Globals} object with `length(names)` elements and
-#' an attribute `where` with `length(names)` elements.
-#' Both of sets of elements are named after `names`.
+#' @return A \link{Globals} object of named elements and an attribute
+#' `where` with named elements. Both of sets have names according to
+#' `names`.
 #'
 #' @example incl/globalsByName.R
 #'
@@ -53,8 +53,8 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
     debug && mdebug("- dotdotdots: <none>")
   }
 
-  globals <- structure(list(), names = character(0))
-  where <- structure(list(), names = character(0))
+  globals <- structure(vector("list", length = nnames), names = namesOrg)
+  where <- structure(vector("list", length = nnames), names = namesOrg)
   for (kk in seq_along(names)) {
     name <- names[kk]
     debug && mdebug("- locating #%d (%s)", kk, sQuote(name))
@@ -76,7 +76,6 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
       }
     }
   }
-#  stop_if_not(identical(names(globals), names))
 
   if (length(dotdotdots) > 0L) {
     for (name in dotdotdots) {
@@ -99,7 +98,8 @@ globalsByName <- function(names, envir = parent.frame(), mustExist = TRUE,
   }
   stop_if_not(
     length(names(globals)) == nnames,
-    all(names(globals) %in% namesOrg)
+    all(names(globals) %in% namesOrg),
+    identical(names(globals), namesOrg)
   )
   
   stop_if_not(
