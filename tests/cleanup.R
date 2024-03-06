@@ -38,6 +38,31 @@ globals <- cleanup(globals)
 str(globals)
 assert_identical_sets(names(globals), expected)
 
+
+message("- cleanup() with missing globals")
+rm(list = "b")
+expr <- quote(a <- b)
+print(expr)
+globals <- globalsOf(expr, mustExist = FALSE)
+str(globals)
+stopifnot(identical(names(globals), c("<-", "b")))
+
+
+message("- cleanup(globals) with missing globals")
+pruned <- cleanup(globals)
+str(pruned)
+stopifnot(length(pruned) == 0L)
+
+message("- cleanup(globals, drop = 'missing') with missing globals")
+pruned <- cleanup(globals, drop = "missing")
+str(pruned)
+stopifnot(identical(names(pruned), c("<-")))
+
+message("- cleanup(globals, drop = 'base-packages') with missing globals")
+pruned <- cleanup(globals, drop = "base-packages")
+str(pruned)
+stopifnot(identical(names(pruned), c("b")))
+
 message("*** cleanup() ... DONE")
 
 source("incl/end.R")

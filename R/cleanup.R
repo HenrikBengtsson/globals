@@ -84,9 +84,8 @@ cleanup.Globals <- function(globals, drop = c("missing", "base-packages", "nativ
       next
     }
     
-
     ## Is the the global a non-exported package object?
-    is_private <- !is_exported && exists(name, envir = env)
+    is_private <- !is_exported && !is.null(env) && exists(name, envir = env)
 
     ## Example: base::.C_R_addTaskCallback
     if ((is_exported || is_private) &&
