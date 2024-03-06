@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9005</span>
       </span>
     </div>
 
@@ -158,9 +158,9 @@ is not returned.</p></dd>
     <h2>Value</h2>
     
 
-<p>A <a href="Globals.html">Globals</a> object with <code>length(names)</code> elements and
-an attribute <code>where</code> with <code>length(names)</code> elements.
-Both of sets of elements are named after <code>names</code>.</p>
+<p>A <a href="Globals.html">Globals</a> object of named elements and an attribute
+<code>where</code> with named elements. Both of sets have names according to
+<code>names</code>.</p>
     </div>
     <div id="special-argument-globals">
     <h2>Special "argument" globals</h2>
@@ -185,7 +185,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ x: num 42</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x:&lt;environment: 0x559ac9133000&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x:&lt;environment: 0x557ea44f0ac0&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></span>
@@ -193,7 +193,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ x: num 3.14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x:&lt;environment: 0x559ac93e8498&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x:&lt;environment: 0x557ea474f278&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -207,7 +207,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x559ac9656380&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x557ea4a02478&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></span>
@@ -216,7 +216,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x559ac983bc70&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x557ea4c398e0&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span>, <span class="fl">1L</span>, b <span class="op">=</span> <span class="fl">2L</span>, c <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
@@ -228,7 +228,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ c: int 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x559ac9d48188&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x557ea5026ba8&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -236,12 +236,14 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-in"><span>  <span class="fu">globalsByName</span><span class="op">(</span><span class="st">"..2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">h</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">h</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3.14</span>, a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">globals</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ..2: 'DotDotDotList' logi NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ..2:List of 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : num 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ..2: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ..2:&lt;environment: 0x557ea55db3d8&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></span>
@@ -250,7 +252,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ ...: list()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x559aca4a4808&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x557ea58dd348&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">globals</span> <span class="op">&lt;-</span> <span class="fu">g</span><span class="op">(</span><span class="fl">3.14</span>, <span class="fl">1L</span>, b <span class="op">=</span> <span class="fl">2L</span>, c <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
@@ -262,7 +264,7 @@ the corresponding <code>where</code> attributes is <code>NULL</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ c: int 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr [1:2] "DotDotDotList" "list"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "where")=List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x559aca65d880&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ ...:&lt;environment: 0x557ea5a9c740&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr [1:2] "Globals" "list"</span>
 </code></pre></div>
     </div>
