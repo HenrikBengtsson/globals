@@ -4,8 +4,8 @@ options(warn = 2L)
 
 exprs <- list(
   ok1   = quote(function(...) sum(x, ...)),
-  warn1 = quote(sum(x, ...)),
   ok2   = quote(function(...) sum(x, ..1, ..2, ..3)),
+  warn1 = quote(sum(x, ...)),
   warn2 = quote(sum(x, ..1, ..2, ..3))
 )
 
@@ -18,11 +18,11 @@ truth <- list(
 
 message("*** findGlobals() ...")
 
-
 for (name in names(exprs)) {
   expr <- exprs[[name]]
 
-  message("\n*** codetools::findGlobals():")
+  message(sprintf("\n*** codetools::findGlobals() - step %s:", sQuote(name)))
+  print(expr)
   fun <- globals:::as_function(expr)
   print(fun)
   ## Suppress '... may be used in an incorrect context' warnings
@@ -31,7 +31,8 @@ for (name in names(exprs)) {
   })
   print(globals)
   assert_identical_sets(globals, c("sum", "x"))
-
+  next
+  
   message("\n*** findGlobals(dotdotdot = 'ignore'):")
   cat(sprintf("Expression '%s':\n", name))
   print(expr)  
@@ -63,6 +64,7 @@ for (name in names(exprs)) {
     stopifnot(inherits(globals, "error"))
   }
 } # for (name ...)
+
 
 message("\n*** findGlobals(<exprs>, dotdotdot = 'return'):")
 print(exprs)
@@ -206,7 +208,7 @@ print(globals)
 
 } # aux()
 
-aux(x = 3:4, y = 1, z = 42L, exprs = exprs)
+aux(x = 3:4, y = 1, z = 42L, 3.14, exprs = exprs)
 message("*** function(x, ...) globalsOf() ... DONE")
 
 

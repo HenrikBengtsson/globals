@@ -27,7 +27,7 @@ h <- function(x = 42, ...) {
   globalsByName("..2")
 }
 
-globals <- h()
+globals <- h(x = 3.14, a = 1, b = 2)
 str(globals)
 
 globals <- g(3.14)

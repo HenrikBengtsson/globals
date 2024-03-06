@@ -18,9 +18,9 @@ is not returned.}
 \item{...}{Not used.}
 }
 \value{
-A \link{Globals} object with \code{length(names)} elements and
-an attribute \code{where} with \code{length(names)} elements.
-Both of sets of elements are named after \code{names}.
+A \link{Globals} object of named elements and an attribute
+\code{where} with named elements. Both of sets have names according to
+\code{names}.
 }
 \description{
 Locates and retrieves a set of global variables by their names
@@ -65,7 +65,7 @@ h <- function(x = 42, ...) {
   globalsByName("..2")
 }
 
-globals <- h()
+globals <- h(x = 3.14, a = 1, b = 2)
 str(globals)
 
 globals <- g(3.14)

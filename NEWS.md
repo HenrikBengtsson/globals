@@ -1,6 +1,9 @@
 # Version (development version)
 
- * ...
+## Bug Fixes
+
+ * `globalsByName()`, and therefore also `globalsOf()`, did not
+   support special arguments `..1`, `..2`, etc.
  
 
 # Version 0.16.2 [2022-11-21]
