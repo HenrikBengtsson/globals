@@ -1,8 +1,8 @@
-# CRAN submission globals 0.16.2
+# CRAN submission globals 0.16.3
 
-on 2022-11-21
+on 2024-03-07
 
-I've verified this submission has no negative impact on any of the 411 first- and second-order reverse package dependencies available on CRAN (n = 386) and Bioconductor (n = 25).
+I've verified this submission has no negative impact on any of the 533 first- and second-order reverse package dependencies available on CRAN (n = 501) and Bioconductor (n = 31).
 
 Thanks in advance
 
@@ -15,11 +15,11 @@ The package has been verified using `R CMD check --as-cran` on:
 
 | R version     | GitHub | R-hub  | mac/win-builder |
 | ------------- | ------ | ------ | --------------- |
-| 3.4.x         | L      |        |                 |
-| 4.0.x         | L      |        |                 |
-| 4.1.x         | L M W  |        |                 |
-| 4.2.x         | L M W  | L M W  | M1 W            |
-| devel         | L M W  | L      |    W            |
+| 3.5.x         | L      |        |                 |
+| 4.1.x         | L      |        |                 |
+| 4.2.x         | L   W  |        |    W            |
+| 4.3.x         | L M W  | L M W  | M1 W            |
+| devel         | L   W  | L      |    W            |
 
 *Legend: OS: L = Linux, M = macOS, M1 = macOS M1, W = Windows*
 
@@ -31,7 +31,6 @@ res <- rhub::check(platforms = c(
   "debian-clang-devel", 
   "fedora-gcc-devel",
   "debian-gcc-patched", 
-  "macos-highsierra-release-cran",
   "windows-x86_64-release"
 ))
 print(res)
@@ -40,48 +39,76 @@ print(res)
 gives
 
 ```
-── globals 0.16.2: OK
+── globals 0.16.3: OK
 
-  Build ID:   globals_0.16.2.tar.gz-3ef9ef74984242d69e4c2db19c872a73
+  Build ID:   globals_0.16.3.tar.gz-a10e60dbad7d4556b1d12030972a0c8d
   Platform:   Debian Linux, R-devel, clang, ISO-8859-15 locale
-  Submitted:  6m 27.8s ago
-  Build time: 6m 16.2s
+  Submitted:  5m 35s ago
+  Build time: 5m 31.3s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.16.2: OK
+── globals 0.16.3: OK
 
-  Build ID:   globals_0.16.2.tar.gz-db2de2b5b6504cd59730a0878d3fe841
+  Build ID:   globals_0.16.3.tar.gz-e327dcdee70048cf9b0605088d22ad66
   Platform:   Fedora Linux, R-devel, GCC
-  Submitted:  6m 27.8s ago
-  Build time: 4m 7.3s
+  Submitted:  5m 35s ago
+  Build time: 3m 57.7s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.16.2: OK
+── globals 0.16.3: OK
 
-  Build ID:   globals_0.16.2.tar.gz-06c50c36d9d1497d93e3183762152886
+  Build ID:   globals_0.16.3.tar.gz-1c0bb85379b44920bdedde4805ecb350
   Platform:   Debian Linux, R-patched, GCC
-  Submitted:  6m 27.8s ago
-  Build time: 5m 53.1s
+  Submitted:  5m 35s ago
+  Build time: 5m 14.9s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-── globals 0.16.2: OK
+── globals 0.16.3: OK
 
-  Build ID:   globals_0.16.2.tar.gz-e6456429b06c447a8259cb5e6748d207
-  Platform:   macOS 10.13.6 High Sierra, R-release, CRAN's setup
-  Submitted:  6m 27.8s ago
-  Build time: 1m 29.2s
-
-0 errors ✔ | 0 warnings ✔ | 0 notes ✔
-
-── globals 0.16.2: OK
-
-  Build ID:   globals_0.16.2.tar.gz-d9a8c0ff41d2429d838f6aa330b45e56
+  Build ID:   globals_0.16.3.tar.gz-bc7155e5d2d84c6e91b5c72eed8c2863
   Platform:   Windows Server 2022, R-release, 32/64 bit
-  Submitted:  6m 27.9s ago
-  Build time: 2m 32.4s
+  Submitted:  5m 35s ago
+  Build time: 2m 32.5s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+> res
+
+── globals 0.16.3: OK
+
+  Build ID:   globals_0.16.3.tar.gz-a10e60dbad7d4556b1d12030972a0c8d
+  Platform:   Debian Linux, R-devel, clang, ISO-8859-15 locale
+  Submitted:  17m 34s ago
+  Build time: 5m 31.3s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+── globals 0.16.3: OK
+
+  Build ID:   globals_0.16.3.tar.gz-e327dcdee70048cf9b0605088d22ad66
+  Platform:   Fedora Linux, R-devel, GCC
+  Submitted:  17m 34s ago
+  Build time: 3m 57.7s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+── globals 0.16.3: OK
+
+  Build ID:   globals_0.16.3.tar.gz-1c0bb85379b44920bdedde4805ecb350
+  Platform:   Debian Linux, R-patched, GCC
+  Submitted:  17m 34s ago
+  Build time: 5m 14.9s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+── globals 0.16.3: OK
+
+  Build ID:   globals_0.16.3.tar.gz-bc7155e5d2d84c6e91b5c72eed8c2863
+  Platform:   Windows Server 2022, R-release, 32/64 bit
+  Submitted:  17m 34s ago
+  Build time: 2m 32.5s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```

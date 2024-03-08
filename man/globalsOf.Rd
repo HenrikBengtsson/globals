@@ -39,7 +39,7 @@ globalsOf(
 
 \item{\dots}{Not used.}
 
-\item{attributes}{If TRUE (default), attributes of `expr` are also searched.
+\item{attributes}{If TRUE (default), attributes of \code{expr} are also searched.
 If FALSE, they are not.
 If a character vector, then attributes with matching names are searched.
 Note, the attributes of the attributes elements are not searched, that is,

@@ -1,3 +1,16 @@
+# Version 0.16.3 [2024-03-07]
+
+## Bug Fixes
+
+ * `globalsByName()`, and therefore also `globalsOf()`, did not
+   support special arguments `..1`, `..2`, etc.
+
+ * `cleanup(globals, drop)` on a `Globals` object with non-existing
+   globals and where `drop` did _not_ specify `"missing"` would throw
+   an `Error in exists(name, envir = env) : use of NULL environment is
+   defunct`.  Now the non-existing ("missing") globals are preserved.
+ 
+
 # Version 0.16.2 [2022-11-21]
 
 ## Documentation

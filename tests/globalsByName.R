@@ -46,6 +46,17 @@ str(globals)
 assert_identical_sets(names(globals), c("a", "x", "..."))
 assert_identical_sets(names(globals[["..."]]), c("y", "z"))
 
+## And '..1', '..2', etc.
+myGlobals <- function(x, ...) {
+  globalsByName(c("a", "x", "..1", "..2"))
+}
+globals <- myGlobals(x = 2, y = 3, 4)
+str(globals)
+assert_identical_sets(names(globals), c("a", "x", "..1", "..2"))
+stopifnot(
+  globals[["..1"]] == 3,
+  globals[["..2"]] == 4
+)
 
 ## BUG FIX: Assert that '...' does not have to be specified at the end
 myGlobals <- function(x, ...) {
