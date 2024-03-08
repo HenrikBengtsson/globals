@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">globals</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.2-9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.16.3</span>
       </span>
     </div>
 
@@ -126,9 +126,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="0.16.3" id="version-0163-2024-03-07">Version 0.16.3 [2024-03-07]<small>2024-03-07</small><a class="anchor" aria-label="anchor" href="#version-0163-2024-03-07"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-16-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-16-3"></a></h3>
 <ul><li><p><code><a href="../reference/globalsByName.html">globalsByName()</a></code>, and therefore also <code><a href="../reference/globalsOf.html">globalsOf()</a></code>, did not support special arguments <code>..1</code>, <code>..2</code>, etc.</p></li>
 <li><p><code>cleanup(globals, drop)</code> on a <code>Globals</code> object with non-existing globals and where <code>drop</code> did <em>not</em> specify <code>"missing"</code> would throw an <code>Error in exists(name, envir = env) : use of NULL environment is    defunct</code>. Now the non-existing (“missing”) globals are preserved.</p></li>
 </ul></div>
